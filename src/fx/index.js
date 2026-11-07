@@ -255,12 +255,16 @@ import * as ui_exclamation from "./ui/exclamation.js";
 import * as ui_health_bar_hit from "./ui/health-bar-hit.js";
 import * as ui_heart_lost from "./ui/heart-lost.js";
 import * as ui_level_up from "./ui/level-up.js";
+import * as ui_loadout_card from "./ui/loadout-card.js";
+import * as ui_loadout_panel from "./ui/loadout-panel.js";
 import * as ui_panel from "./ui/panel.js";
 import * as ui_quest_complete from "./ui/quest-complete.js";
+import * as ui_skill_node from "./ui/skill-node.js";
 import * as ui_skill_ready from "./ui/skill-ready.js";
 import * as ui_skill_slot from "./ui/skill-slot.js";
 import * as ui_status_bar from "./ui/status-bar.js";
 import * as ui_toast from "./ui/toast.js";
+import * as ui_touch_action_button from "./ui/touch-action-button.js";
 import * as ui_xp_bar_fill from "./ui/xp-bar-fill.js";
 import * as pickups_cash_coin from "./pickups/cash-coin.js";
 import * as pickups_chest_open from "./pickups/chest-open.js";
@@ -602,12 +606,16 @@ export const effects = {
   "ui/health-bar-hit": ui_health_bar_hit,
   "ui/heart-lost": ui_heart_lost,
   "ui/level-up": ui_level_up,
+  "ui/loadout-card": ui_loadout_card,
+  "ui/loadout-panel": ui_loadout_panel,
   "ui/panel": ui_panel,
   "ui/quest-complete": ui_quest_complete,
+  "ui/skill-node": ui_skill_node,
   "ui/skill-ready": ui_skill_ready,
   "ui/skill-slot": ui_skill_slot,
   "ui/status-bar": ui_status_bar,
   "ui/toast": ui_toast,
+  "ui/touch-action-button": ui_touch_action_button,
   "ui/xp-bar-fill": ui_xp_bar_fill,
   "pickups/cash-coin": pickups_cash_coin,
   "pickups/chest-open": pickups_chest_open,
@@ -947,12 +955,16 @@ export const provenance = {
   "ui/health-bar-hit": "original",
   "ui/heart-lost": "original",
   "ui/level-up": "original",
+  "ui/loadout-card": "new",
+  "ui/loadout-panel": "new",
   "ui/panel": "new",
   "ui/quest-complete": "original",
+  "ui/skill-node": "new",
   "ui/skill-ready": "new",
   "ui/skill-slot": "new",
   "ui/status-bar": "new",
   "ui/toast": "new",
+  "ui/touch-action-button": "new",
   "ui/xp-bar-fill": "new",
   "pickups/cash-coin": "new",
   "pickups/chest-open": "original",

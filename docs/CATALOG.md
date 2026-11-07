@@ -1,6 +1,6 @@
 # Catalog
 
-342 effects in 30 categories: 244 original and 98 new. Every one is a file in
+346 effects in 30 categories: 244 original and 102 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -404,12 +404,16 @@ level ups, numbers, toasts, countdowns.
 | Health bar hit | `ui/health-bar-hit` | original | effect | one-shot 2s | 160×64 | A segmented health bar takes a hit: it jolts and dips, the lost chunk flashes white and sheds chips, holds, then drains away behind a sparking edge. |
 | Heart lost | `ui/heart-lost` | original | effect | one-shot 1.5s | 96×88 | A HUD heart is hit: it flashes white and jolts, a crack runs down it, it splits into two halves that tumble away, leaving an empty socket that fades. |
 | Level up | `ui/level-up` | original | effect | one-shot 3.2s | 176×138 | Gold gathers at the feet and bursts up as a pillar of light round the hero; rings climb it, LEVEL UP! drops in letter by letter, a shine sweeps it, sparkles twinkle. |
+| Loadout card | `ui/loadout-card` | new | effect | loop 2.4s | 240×112 | A chamfered steel inventory card: illustrated weapon or spell, rarity inlay, amber selection, equipped checkmark and a quiet rim glint. Optional text for native font overlays. |
+| Loadout panel | `ui/loadout-panel` | new | effect | loop 2.4s | 352×252 | A matching backpack panel: black steel frame, slanted tabs, item sockets, equipped details and an amber selected slot. Hide contents for a background with native text overlays. |
 | HUD panel | `ui/panel` | new | effect | loop 2.4s | 340×100 | A reusable pixel HUD plate: dark rounded body, lit rim, shaded base, a thin gold inner frame and two corner brackets. Sized from options, it backs bars, hotbars and dialog cards. |
 | Quest complete | `ui/quest-complete` | original | effect | one-shot 2.6s | 204×92 | A stitched ribbon unrolls from the middle, QUEST COMPLETE types on letter by letter, a gold seal stamps down and ticks, stars pop; then it all rolls away. |
+| Skill node | `ui/skill-node` | new | effect | loop 2.4s | 92×92 | An illustrated chamfered skill tile: sword, flame, ice crystal, lightning, healing, meteor or arcane gem. Selection brackets, mana pips, cooldown, pressed and disabled states. |
 | Skill ready | `ui/skill-ready` | new | effect | one-shot 2.6s | 136×140 | A hotbar skill's cooldown unwinds to the last second, then the slot flashes white, fires a ring of light and pops READY underneath with a clean shine. |
 | HUD skill slot | `ui/skill-slot` | new | effect | loop 2.4s | 52×60 | A pixel hotbar slot: HUD plate, gold keycap, 10x10 spell icon, name, dithered cooldown curtain and a no-mana state. One shared frame; only the icon palette changes. |
 | HUD status bar | `ui/status-bar` | new | effect | loop 2.4s | 320×24 | A segmented HUD bar: dark outline, hard ramp fill, lit rim, cell dividers, white-hot leading edge. Label and value sit inside; tone picks the hp, mp, xp, boss or gold ramp. |
 | HUD toast | `ui/toast` | new | effect | one-shot 1.7s | 180×30 | A small pickup or status toast: a dark pixel plate, a gold rim, one mini-font line. It slides in, holds, slides out and ends empty. |
+| Touch action button | `ui/touch-action-button` | new | effect | loop 2.4s | 96×96 | A dark fantasy action button: steel bevel, amber trim, sword, winged boot, dodge afterimage, bag, pause or resume, with pressed, disabled and clockwise cooldown states. |
 | XP bar fill | `ui/xp-bar-fill` | new | effect | one-shot 2.45s | 208×76 | An XP bar tops up: the level badge pops onto the plate, the bar races for the next level behind a white-hot edge that sheds sparks, then it shines and folds away. |
 
 ## pickups
