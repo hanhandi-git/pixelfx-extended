@@ -7,9 +7,9 @@
 | `ui/touch-action-button` | 攻击、疾行、闪避、背包、暂停、继续 | `icon: attack/quick/dodge/bag/pause/resume`；`pressed`、`disabled`、`flash`、`cooldown`、`badge`、`key` |
 | `ui/skill-node` | 技能槽 / 选择技能 | `icon: slash/fire/frost/bolt/mend/meteor/burst/none`；`selected`、`pressed`、`disabled`、`cooldown`、`cdText`、`mana`、`level` |
 | `ui/loadout-card` | 装备与法术卡片 | `glyph: blade/staff/bow/orb` 或上述技能图标；`rarity: common/rare/epic/legendary`；`selected`、`equipped`；`title`、`type`、`level`、`detail` |
-| `ui/loadout-panel` | 背包面板底图 / 布局示例 | `contents: false` 清空示例内容；`title: ""` 留给游戏叠字；`selected: 0..5` |
+| `ui/loadout-panel` | 背包面板底图 / 布局示例 | `contents: false` 清空示例内容；`frameOnly: true` 只输出钢框；`title: ""` 留给游戏叠字；`selected: 0..5` |
 
-共用 `palette` 可换色。`cooldown` 是剩余比例，`1` 全部遮罩、`0` 可用，遮罩从正上方顺时针绘制；游戏应每帧传入 `remaining / duration`。`mana` 是 0..1；设为 `false` 或 `0` 显示缺蓝标记。文字可清空，中文和日文使用游戏的 HTML / Canvas 字体叠加，避免用素材库的 ASCII 像素字体显示设置项。
+共用 `palette` 可换色。`cooldown` 是剩余比例，`1` 全部遮罩、`0` 可用，遮罩从正上方顺时针绘制；游戏应每帧传入 `remaining / duration`。`mana` 是 0..1；设为 `false` 或 `0` 显示缺蓝标记。文字可清空。ember-echo 画布 HUD / banner / toast / quest-complete 等走 `FONTS` 的 **han5（5×5）/ han7（7×7）** 与拉丁 mini/big 混排；设置面板仍用 HTML 字体。补字后运行 `npm run font:han`（需 Python PIL）。
 
 ## 导出与预览
 

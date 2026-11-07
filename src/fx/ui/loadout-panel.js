@@ -6,11 +6,11 @@ export const meta = {
   desc: "A matching backpack panel: black steel frame, slanted tabs, item sockets, equipped details and an amber selected slot. Hide contents for a background with native text overlays.",
   tags: ["ui", "inventory", "backpack", "panel", "equipment", "loop"],
   size: [352, 252], origin: [176, 126], duration: 2.4, loop: true, fps: 30, bg: "dark",
-  options: { contents: true, title: "SATCHEL", selected: 0, palette: null, seed: 12 },
+  options: { contents: true, frameOnly: false, title: "SATCHEL", selected: 0, palette: null, seed: 12 },
 };
 const panels = new Map();
 export function draw(p, t, o) {
-  const C = tone("bag", o.palette), key = JSON.stringify([o.contents, o.title, o.selected, C]);
+  const C = tone("bag", o.palette), key = JSON.stringify([o.contents, o.frameOnly, o.title, o.selected, C]);
   let image = panels.get(key);
   if (!image) {
     const frame = createFrame(...meta.size);
@@ -25,6 +25,7 @@ export function draw(p, t, o) {
 function paint(p, o) {
   const C = tone("bag", o.palette), x = -164, y = -112;
   cutPlate(p, x, y, 328, 224, C, false);
+  if (o.frameOnly) return;
   p.poly([[x + 9, y - 4], [x + 113, y - 4], [x + 105, y + 19], [x + 1, y + 19]], INK);
   p.line(x + 10, y - 3, x + 111, y - 3, SILVER[4]);
   p.line(x + 2, y + 18, x + 103, y + 18, SILVER[2]);
