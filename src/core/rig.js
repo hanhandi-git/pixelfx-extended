@@ -139,10 +139,11 @@ function solve(pose) {
 }
 
 // ---- drawing: every part goes through one depth buffer
-const BW = 300, BH = 240, OX = 150, OY = 180; // the scratch grid, big enough for a raised scythe; feet at (OX, OY)
+const BW = 600, BH = 480, OX = 300, OY = 360; // the scratch grid, big enough for a raised scythe; feet at (OX, OY)
 const Zb = new Float32Array(BW * BH), Tone = new Float32Array(BW * BH), Part = new Int8Array(BW * BH), Mat = new Int8Array(BW * BH), Fr = new Int8Array(BW * BH), LX = new Float32Array(BW * BH), LY = new Float32Array(BW * BH), Col = new Uint32Array(BW * BH);
 const touched = [];
 const LIGHT = unit([-0.55, 0.72, 0.5]);
+let rasterDensity = 1;
 let clipBody = false, clipWeapon = false, curFrameIndex = 0, curDim = 0, onlyPart = 0;
 const FRAME_IDS = ["pelvis", "waist", "chest", "head", "neck", "upperN", "foreN", "upperF", "foreF", "thighN", "shinN", "thighF", "shinF", "footN", "footF"];
 function plot(i, z, tone, part, mat, wx, wy, color) {
@@ -159,12 +160,13 @@ function plot(i, z, tone, part, mat, wx, wy, color) {
   Col[i] = color;
 }
 function sphere(c, r, part, mat) {
-  const x0 = Math.floor(c[0] - r), x1 = Math.ceil(c[0] + r), y0 = Math.floor(c[1] - r), y1 = Math.ceil(c[1] + r);
-  for (let wy = y0; wy <= y1; wy++)
-    for (let wx = x0; wx <= x1; wx++) {
+  const Q = rasterDensity, x0 = Math.floor((c[0] - r) * Q), x1 = Math.ceil((c[0] + r) * Q), y0 = Math.floor((c[1] - r) * Q), y1 = Math.ceil((c[1] + r) * Q);
+  for (let iy = y0; iy <= y1; iy++)
+    for (let ix = x0; ix <= x1; ix++) {
+      const wx = ix / Q, wy = iy / Q;
       const dx = wx - c[0], dy = wy - c[1], d2 = dx * dx + dy * dy;
       if (d2 > r * r || (clipBody && wy < 1.5)) continue;
-      const dz = Math.sqrt(r * r - d2), n = [dx / r, dy / r, dz / r], i = (OY - wy) * BW + (OX + wx);
+      const dz = Math.sqrt(r * r - d2), n = [dx / r, dy / r, dz / r], i = (OY - Math.round(wy * rasterDensity)) * BW + OX + Math.round(wx * rasterDensity);
       plot(i, c[2] + dz, dot(n, LIGHT), part, mat, wx, wy, 0);
     }
 }
@@ -177,21 +179,22 @@ function sweep(a, b, ra, rb, part, mat, bulge = 0) {
 }
 // an ellipsoid with radii r along the axes of frame R, seen along z
 function ellipsoid(c, R, r, part, mat) {
-  const big = Math.max(r[0], r[1], r[2]), x0 = Math.floor(c[0] - big), x1 = Math.ceil(c[0] + big), y0 = Math.floor(c[1] - big), y1 = Math.ceil(c[1] + big);
+  const Q = rasterDensity, big = Math.max(r[0], r[1], r[2]), x0 = Math.floor((c[0] - big) * Q), x1 = Math.ceil((c[0] + big) * Q), y0 = Math.floor((c[1] - big) * Q), y1 = Math.ceil((c[1] + big) * Q);
   const Rt = [R[0], R[3], R[6], R[1], R[4], R[7], R[2], R[5], R[8]], D = [1 / (r[0] * r[0]), 1 / (r[1] * r[1]), 1 / (r[2] * r[2])];
   // A = R diag(D) R^T
   const A = new Array(9);
   for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) A[i * 3 + j] = R[i * 3] * D[0] * R[j * 3] + R[i * 3 + 1] * D[1] * R[j * 3 + 1] + R[i * 3 + 2] * D[2] * R[j * 3 + 2];
   void Rt;
-  for (let wy = y0; wy <= y1; wy++)
-    for (let wx = x0; wx <= x1; wx++) {
+  for (let iy = y0; iy <= y1; iy++)
+    for (let ix = x0; ix <= x1; ix++) {
+      const wx = ix / Q, wy = iy / Q;
       if (clipBody && wy < 1.5) continue;
       const dx = wx - c[0], dy = wy - c[1];
       const qa = A[8], qb = 2 * (A[2] * dx + A[5] * dy), qc = A[0] * dx * dx + 2 * A[1] * dx * dy + A[4] * dy * dy - 1, disc = qb * qb - 4 * qa * qc;
       if (disc < 0) continue;
       const dz = (-qb + Math.sqrt(disc)) / (2 * qa);
       const n = unit([A[0] * dx + A[1] * dy + A[2] * dz, A[3] * dx + A[4] * dy + A[5] * dz, A[6] * dx + A[7] * dy + A[8] * dz]);
-      plot((OY - wy) * BW + (OX + wx), c[2] + dz, dot(n, LIGHT), part, mat, wx, wy, 0);
+      plot((OY - Math.round(wy * rasterDensity)) * BW + OX + Math.round(wx * rasterDensity), c[2] + dz, dot(n, LIGHT), part, mat, wx, wy, 0);
     }
 }
 // parts: each has its own number, so edges between them can be seen
@@ -250,13 +253,14 @@ function mesh(F, points, part, mat) {
     let normal = unit(cross(sub(b, a), sub(c, a)));
     if (normal[2] < 0) normal = mul(normal, -1);
     const tone = dot(normal, LIGHT);
-    for (let y = Math.ceil(Math.min(a[1], b[1], c[1])); y <= Math.max(a[1], b[1], c[1]); y++)
-      for (let x = Math.ceil(Math.min(a[0], b[0], c[0])); x <= Math.max(a[0], b[0], c[0]); x++) {
+    for (let iy = Math.ceil(Math.min(a[1], b[1], c[1]) * rasterDensity); iy <= Math.max(a[1], b[1], c[1]) * rasterDensity; iy++)
+      for (let ix = Math.ceil(Math.min(a[0], b[0], c[0]) * rasterDensity); ix <= Math.max(a[0], b[0], c[0]) * rasterDensity; ix++) {
+        const x = ix / rasterDensity, y = iy / rasterDensity;
         if (clipBody && y < 1.5) continue;
         const u = ((b[1] - c[1]) * (x - c[0]) + (c[0] - b[0]) * (y - c[1])) / area;
         const v = ((c[1] - a[1]) * (x - c[0]) + (a[0] - c[0]) * (y - c[1])) / area;
         if (u < -0.001 || v < -0.001 || u + v > 1.001) continue;
-        const sx = OX + x, sy = OY - y;
+        const sx = OX + ix, sy = OY - iy;
         if (sx < 0 || sy < 0 || sx >= BW || sy >= BH) continue;
         plot(sy * BW + sx, a[2] * u + b[2] * v + c[2] * (1 - u - v), tone, part, mat, x, y, 0);
       }
@@ -311,9 +315,9 @@ function along(H, axis, side, part) {
   const n = cross(axis, side);
   const T = (i, k, c, lift = 0) => {
     const x = H[0] + axis[0] * i + side[0] * k + n[0] * lift, y = H[1] + axis[1] * i + side[1] * k + n[1] * lift, z = H[2] + axis[2] * i + side[2] * k + n[2] * lift;
-    const wx = Math.round(x), wy = Math.round(y);
+    const wx = Math.round(x * rasterDensity) / rasterDensity, wy = Math.round(y * rasterDensity) / rasterDensity;
     if (clipWeapon && wy < 0) return;
-    const idx = (OY - wy) * BW + (OX + wx);
+    const idx = (OY - Math.round(wy * rasterDensity)) * BW + OX + Math.round(wx * rasterDensity);
     if (idx < 0 || idx >= BW * BH) return;
     curFrameIndex = -1;
     plot(idx, z + 0.05, 2, part, 2, wx, wy, c);
@@ -387,7 +391,7 @@ export const WEAPONS = {
     const line = (A, B, c) => {
       const n = Math.max(2, Math.ceil(len(sub(B, A)) / 0.4)), Z = STEEL.a;
       for (let k = 0; k <= n; k++) {
-        const P = add(A, mul(sub(B, A), k / n)), wx = Math.round(P[0]), wy = Math.round(P[1]), idx = (OY - wy) * BW + (OX + wx);
+        const P = add(A, mul(sub(B, A), k / n)), wx = Math.round(P[0] * rasterDensity) / rasterDensity, wy = Math.round(P[1] * rasterDensity) / rasterDensity, idx = (OY - Math.round(wy * rasterDensity)) * BW + OX + Math.round(wx * rasterDensity);
         curFrameIndex = -1;
         plot(idx, P[2] + 0.05, 2, PART.weapon, 2, wx, wy, c ?? Z);
       }
@@ -462,24 +466,24 @@ function finish(S, restFrames, look, sourceBox) {
   // the mark on his chest, when it's facing us
   const { B } = S, chestAt = add(B.chest.t, mv(B.chest.R, [3, 1.6, -1.8]));
   if (!look.style && mv(B.chest.R, [1, 0, 0])[2] > 0.15) {
-    const i = (OY - Math.round(chestAt[1])) * BW + (OX + Math.round(chestAt[0]));
+    const i = (OY - Math.round(chestAt[1] * rasterDensity)) * BW + OX + Math.round(chestAt[0] * rasterDensity);
     if (Part[i] === PART.chest) Col[i] = MARK;
   }
   // the outline, and everything into a small list of pixels
   const list = touched.slice(), ring = new Map();
   for (const i of list) for (const d of [-1, 1, -BW, BW]) { const j = i + d; if (Part[j] === 0 && !ring.has(j)) ring.set(j, i); }
-  const n = list.length + ring.size, out = { n, xs: new Int16Array(n), ys: new Int16Array(n), color: new Uint32Array(n), src: new Int16Array(n), ink: new Uint8Array(n), x0: 0, y0: 0, x1: 0, y1: 0 };
+  const n = list.length + ring.size, out = { n, density: rasterDensity, xs: rasterDensity === 1 ? new Int16Array(n) : new Float32Array(n), ys: rasterDensity === 1 ? new Int16Array(n) : new Float32Array(n), color: new Uint32Array(n), src: new Int16Array(n), ink: new Uint8Array(n), x0: 0, y0: 0, x1: 0, y1: 0 };
   const srcFor = (i) => {
     const f = Fr[i];
     if (f < 0 || !restFrames) return -1;
-    const name = FRAME_IDS[f], A = B[name], R0 = restFrames[name], wx = (i % BW) - OX, wy = OY - ((i / BW) | 0), P = [wx, wy, Zb[i]];
+    const name = FRAME_IDS[f], A = B[name], R0 = restFrames[name], wx = ((i % BW) - OX) / rasterDensity, wy = (OY - ((i / BW) | 0)) / rasterDensity, P = [wx, wy, Zb[i]];
     const lp = tv(A.R, sub(P, A.t)), rp = add(R0.t, mv(R0.R, lp));
     const c = Math.round(rp[0]) - sourceBox.x, r = -Math.round(rp[1]) - sourceBox.y;
     return c < 0 || r < 0 || c >= sourceBox.w || r >= sourceBox.h ? -1 : r * sourceBox.w + c;
   };
   let k = 0, x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
   const push = (i, c, s, isInk) => {
-    const x = (i % BW) - OX, y = ((i / BW) | 0) - OY;
+    const x = ((i % BW) - OX) / rasterDensity, y = (((i / BW) | 0) - OY) / rasterDensity;
     out.xs[k] = x; out.ys[k] = y; out.color[k] = c; out.src[k] = s; out.ink[k] = isInk ? 1 : 0;
     if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
     k++;
@@ -549,18 +553,22 @@ export function shortfall(pose) {
   return Math.max(near, far);
 }
 /** The pixels of a pose: { n, xs, ys, color, src, ink, x0, y0, x1, y1 }, in local space with the feet at (0, 0). */
-export function posed(pose, character = "dummy") {
+export function posed(pose, character = "dummy", { density = 1 } = {}) {
+  if (density !== 1 && density !== 2) throw new RangeError("Pose density must be 1 or 2");
+  rasterDensity = 1;
   const look = resolveLook(character);
   if (look.style && !SOURCE_BOXES.has(look.id)) {
     const rest = render({}, look);
     SOURCE_BOXES.set(look.id, { x: rest.x0, y: rest.y0, w: rest.x1 - rest.x0 + 1, h: rest.y1 - rest.y0 + 1 });
   }
-  const key = look.id + ":" + keyOf(pose);
+  rasterDensity = density;
+  const key = look.id + ":" + density + ":" + keyOf(pose);
   let r = CACHE.get(key);
   if (!r) {
     if (CACHE.size > 6000) CACHE.clear();
     CACHE.set(key, (r = render(pose, look, SOURCE_BOXES.get(look.id))));
   }
+  rasterDensity = 1;
   return r;
 }
 

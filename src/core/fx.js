@@ -7,10 +7,13 @@ import { fit, toHex } from "./color.js";
 
 /**
  * A frame: w x h pixels whose top-left sits at (ox, oy) in world space. `color` holds opaque pixels,
- * `light` additive glow; composite() puts them together. Same shape as Sprite Fusion's VFX frames.
+ * `light` additive glow; composite() puts them together. density multiplies the output dimensions
+ * while ox/oy, effect anchors and geometry remain in world units. Existing calls default to 1.
  */
-export function createFrame(w, h, ox = 0, oy = 0) {
-  return { w, h, ox, oy, color: new Uint32Array(w * h), light: new Uint32Array(w * h) };
+export function createFrame(w, h, ox = 0, oy = 0, density = 1) {
+  if (!Number.isInteger(density) || density < 1 || density > 4) throw new RangeError("Frame density must be an integer from 1 to 4");
+  const width = w * density, height = h * density;
+  return { w: width, h: height, ox, oy, density, color: new Uint32Array(width * height), light: new Uint32Array(width * height) };
 }
 export function clearFrame(f) {
   f.color.fill(0);
@@ -71,6 +74,7 @@ export function createFx(mod, o = {}) {
       const p = painterFor(frame);
       p.place(opts.x ?? 0, opts.y ?? 0, !!opts.flip, opts.angle ?? 0);
       p.fade = stopAt === Infinity ? 1 : clamp(1 - (t - stopAt) / FADE);
+      p.scale = opts.renderScale ?? 1;
       p.lightK = opts.light ?? 1;
       const tt = meta.loop ? t % D : Math.min(t, D);
       if (layer !== "front" && impl.drawBack) {

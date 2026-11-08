@@ -9,6 +9,7 @@
 //
 // Options: --gif --mp4 --sheet (transparent PNG + JSON) --all --max N (frames in the contact sheet)
 // --zoom N (contact sheet scale) --scale N (GIF/MP4) --bg dark|ground|sky|light|black|none --seed N --fps N --opts JSON --out DIR
+// --density 2 (native geometry sampling, including sheet size/pivot)
 // --no-actor --loops N (repeat a loop in the GIF/MP4)
 //
 // This shows the effect by itself, with the character standing by. tools/act.mjs shows it acted out.
@@ -34,6 +35,7 @@ for (const id of resolveIds(ids)) {
   try {
     const fx = await loadEffect(id);
     const r = renderFrames(fx, {
+      density: flags.density ? +flags.density : 1,
       fps: flags.fps ? +flags.fps : undefined,
       seed: flags.seed ? +flags.seed : undefined,
       bg: flags.bg,

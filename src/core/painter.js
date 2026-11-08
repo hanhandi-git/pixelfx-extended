@@ -21,8 +21,8 @@ export class Painter {
   /** Re-read the frame and clear placement, fade and light strength. */
   reset() {
     const f = this.frame;
-    this.w = f.w; this.h = f.h; this.ox = f.ox | 0; this.oy = f.oy | 0; this.C = f.color; this.L = f.light;
-    this.tx = 0; this.ty = 0; this.fx = 1; this.cs = 1; this.sn = 0;
+    this.w = f.w; this.h = f.h; this.density = f.density ?? 1; this.ox = Math.round(f.ox * this.density); this.oy = Math.round(f.oy * this.density); this.C = f.color; this.L = f.light;
+    this.scale = 1; this.tx = 0; this.ty = 0; this.fx = 1; this.cs = 1; this.sn = 0;
     this.fade = 1; this.lightK = 1; this.layer = "front";
     return this;
   }
@@ -34,13 +34,13 @@ export class Painter {
   }
 
   // ---- transforms: local (effect) space <-> screen (frame) space
-  toX(x, y) { return this.tx + x * this.fx * this.cs - y * this.sn; }
-  toY(x, y) { return this.ty + x * this.fx * this.sn + y * this.cs; }
-  fromX(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return (dx * this.cs + dy * this.sn) * this.fx; }
-  fromY(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return -dx * this.sn + dy * this.cs; }
+  toX(x, y) { return (this.tx + (x * this.fx * this.cs - y * this.sn) * this.scale) * this.density; }
+  toY(x, y) { return (this.ty + (x * this.fx * this.sn + y * this.cs) * this.scale) * this.density; }
+  fromX(sx, sy) { const dx = (sx / this.density - this.tx) / this.scale, dy = (sy / this.density - this.ty) / this.scale; return (dx * this.cs + dy * this.sn) * this.fx; }
+  fromY(sx, sy) { const dx = (sx / this.density - this.tx) / this.scale, dy = (sy / this.density - this.ty) / this.scale; return -dx * this.sn + dy * this.cs; }
   // the screen pixel of the local pixel cell holding (x, y): mirrors and rotations land on whole cells
-  cellX(x, y) { return Math.floor(this.toX(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
-  cellY(x, y) { return Math.floor(this.toY(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
+  cellX(x, y) { return Math.floor(this.toX(this.density === 1 && this.scale === 1 ? Math.floor(x) + 0.5 : x + 0.5, this.density === 1 && this.scale === 1 ? Math.floor(y) + 0.5 : y + 0.5)); }
+  cellY(x, y) { return Math.floor(this.toY(this.density === 1 && this.scale === 1 ? Math.floor(x) + 0.5 : x + 0.5, this.density === 1 && this.scale === 1 ? Math.floor(y) + 0.5 : y + 0.5)); }
 
   // ---- raw writes, screen space, whole pixels. Color 0 means "nothing": it never erases what's there.
   put(sx, sy, c, a = 1) {
@@ -76,7 +76,13 @@ export class Painter {
     this.C[i] = (((oa * 255) & 255) << 24) | (ch(16) << 16) | (ch(8) << 8) | ch(0);
   }
   /** Translucent pixel at a local point. */
-  blend(x, y, c, a) { this.blendPx(this.cellX(x, y), this.cellY(x, y), c, a); }
+  blend(x, y, c, a) {
+    if (this.density !== 1 || this.scale !== 1) {
+      this.each(x, y, x + 1, y + 1, (lx, ly, sx, sy) => {
+        if (lx >= x && ly >= y && lx < x + 1 && ly < y + 1) this.blendPx(sx, sy, c, a);
+      });
+    } else this.blendPx(this.cellX(x, y), this.cellY(x, y), c, a);
+  }
   /** A translucent disc: puffs of smoke, vapour, dust. c and a may be functions of (d: 0 center..1 rim, angle). */
   disc(cx, cy, r, c, a) {
     if (r < 0.5) return this.blend(cx, cy, call(c, 0, 0), call(a, 0, 0));
@@ -89,17 +95,28 @@ export class Painter {
   }
   /** Read back the color under a local point (0 if empty). */
   get(x, y) {
-    const sx = this.cellX(x, y) - this.ox, sy = this.cellY(x, y) - this.oy;
+    const sx = (this.density === 1 && this.scale === 1 ? this.cellX(x, y) : Math.floor(this.toX(x, y))) - this.ox;
+    const sy = (this.density === 1 && this.scale === 1 ? this.cellY(x, y) : Math.floor(this.toY(x, y))) - this.oy;
     return sx < 0 || sy < 0 || sx >= this.w || sy >= this.h ? 0 : this.C[sy * this.w + sx];
   }
 
   // ---- pixels
   /** One opaque pixel. */
-  px(x, y, c) { this.put(this.cellX(x, y), this.cellY(x, y), c, 1); }
+  px(x, y, c) { this.dot(x, y, c); }
   /** One pixel at alpha a (0..1), faded by ordered dither. */
-  dot(x, y, c, a = 1) { if (a > 0) this.put(this.cellX(x, y), this.cellY(x, y), c, a); }
+  dot(x, y, c, a = 1) {
+    if (a <= 0) return;
+    if (this.density !== 1 || this.scale !== 1) this.rect(x, y, 1, 1, c, a);
+    else this.put(this.cellX(x, y), this.cellY(x, y), c, a);
+  }
   /** Add light to one pixel. */
-  light(x, y, c, k = 1) { this.add(this.cellX(x, y), this.cellY(x, y), c, k); }
+  light(x, y, c, k = 1) {
+    if (this.density !== 1 || this.scale !== 1) {
+      this.each(x, y, x + 1, y + 1, (lx, ly, sx, sy) => {
+        if (lx >= x && ly >= y && lx < x + 1 && ly < y + 1) this.add(sx, sy, c, k);
+      });
+    } else this.add(this.cellX(x, y), this.cellY(x, y), c, k);
+  }
 
   /**
    * Visit every screen pixel whose center falls in the local box [x0, x1] x [y0, y1], with that center in
@@ -297,9 +314,10 @@ export class Painter {
    * Blit a w x h color buffer (0 = transparent) with its top-left at (x, y). This is the fast path for a map's
    * cached static layers: no per-pixel shape tests and no rotation maths on the common unflipped case.
    */
-  image(buf, bw, bh, x = 0, y = 0) {
+  image(buf, bw, bh, x = 0, y = 0, sourceDensity = 1) {
+    if (this.density !== sourceDensity || this.scale !== 1 || this.sn !== 0 || this.fx !== 1) return this.sampleImage(buf, bw, bh, x, y, sourceDensity, false);
     if (this.sn === 0 && this.fx === 1) {
-      const X = Math.round(x), Y = Math.round(y);
+      const X = Math.round((x + this.tx) * this.density), Y = Math.round((y + this.ty) * this.density);
       const x0 = Math.max(0, this.ox - X), x1 = Math.min(bw, this.ox + this.w - X);
       const y0 = Math.max(0, this.oy - Y), y1 = Math.min(bh, this.oy + this.h - Y);
       for (let yy = y0; yy < y1; yy++) {
@@ -319,9 +337,10 @@ export class Painter {
       }
   }
   /** Add a cached w x h light buffer (0 = no light) with its top-left at (x, y). */
-  lightImage(buf, bw, bh, x = 0, y = 0) {
+  lightImage(buf, bw, bh, x = 0, y = 0, sourceDensity = 1) {
+    if (this.density !== sourceDensity || this.scale !== 1 || this.sn !== 0 || this.fx !== 1) return this.sampleImage(buf, bw, bh, x, y, sourceDensity, true);
     if (this.sn === 0 && this.fx === 1) {
-      const X = Math.round(x), Y = Math.round(y), k = this.fade * this.lightK;
+      const X = Math.round((x + this.tx) * this.density), Y = Math.round((y + this.ty) * this.density), k = this.fade * this.lightK;
       if (k <= 0.004) return;
       const x0 = Math.max(0, this.ox - X), x1 = Math.min(bw, this.ox + this.w - X);
       const y0 = Math.max(0, this.oy - Y), y1 = Math.min(bh, this.oy + this.h - Y);
@@ -346,9 +365,44 @@ export class Painter {
         if (l & 0xffffff) this.light(x + xx, y + yy, l, 1);
       }
   }
+  /** Nearest-neighbour image sampling in local units, including placement, camera and source density. */
+  sampleImage(buf, bw, bh, x, y, sourceDensity, light) {
+    if (this.sn === 0 && this.cs === 1 && this.fx === 1 && this.scale === 1) {
+      const X = this.toX(x, y), Y = this.toY(x, y), ratio = sourceDensity / this.density;
+      const x0 = Math.max(this.ox, Math.ceil(X - 0.5));
+      const x1 = Math.min(this.ox + this.w, Math.ceil(X + bw / ratio - 0.5));
+      const y0 = Math.max(this.oy, Math.ceil(Y - 0.5));
+      const y1 = Math.min(this.oy + this.h, Math.ceil(Y + bh / ratio - 0.5));
+      for (let sy = y0; sy < y1; sy++) {
+        const row = Math.floor((sy + 0.5 - Y) * ratio) * bw;
+        for (let sx = x0; sx < x1; sx++) {
+          const c = buf[row + Math.floor((sx + 0.5 - X) * ratio)];
+          if (light) { if (c & 0xffffff) this.add(sx, sy, c); }
+          else if (c) this.put(sx, sy, c);
+        }
+      }
+      return;
+    }
+    this.each(x, y, x + bw / sourceDensity, y + bh / sourceDensity, (lx, ly, sx, sy) => {
+      const ix = Math.floor((lx - x) * sourceDensity), iy = Math.floor((ly - y) * sourceDensity);
+      if (ix < 0 || iy < 0 || ix >= bw || iy >= bh) return;
+      const c = buf[iy * bw + ix];
+      if (light) { if (c & 0xffffff) this.add(sx, sy, c); }
+      else if (c) this.put(sx, sy, c);
+    });
+  }
   /** Filled rectangle. */
   rect(x, y, w, h, c, a = 1) {
-    if (this.sn === 0) {
+    if (this.sn === 0 && this.cs === 1 && (this.density !== 1 || this.scale !== 1)) {
+      const ax = this.toX(x, y), bx = this.toX(x + w, y);
+      const ay = this.toY(x, y), by = this.toY(x, y + h);
+      const x0 = Math.max(this.ox, Math.ceil(Math.min(ax, bx) - 0.5));
+      const x1 = Math.min(this.ox + this.w, Math.ceil(Math.max(ax, bx) - 0.5));
+      const y0 = Math.max(this.oy, Math.ceil(ay - 0.5)), y1 = Math.min(this.oy + this.h, Math.ceil(by - 0.5));
+      for (let sy = y0; sy < y1; sy++) for (let sx = x0; sx < x1; sx++) this.put(sx, sy, c, a);
+      return;
+    }
+    if (this.sn === 0 && this.density === 1 && this.scale === 1) {
       const X0 = Math.round(x), Y0 = Math.round(y), X1 = Math.round(x + w), Y1 = Math.round(y + h);
       for (let yy = Y0; yy < Y1; yy++) for (let xx = X0; xx < X1; xx++) this.put(this.cellX(xx, yy), this.cellY(xx, yy), c, a);
       return;
@@ -379,7 +433,8 @@ export class Painter {
   // ---- light
   /** Radial glow into the light buffer: k at the center, falling to 0 at radius r. */
   glow(x, y, r, c, k = 0.5) {
-    if (r < 1 || k <= 0.004) return;
+    if (r <= 0 || k <= 0.004) return;
+    r *= this.density * this.scale;
     const cx = this.toX(x, y), cy = this.toY(x, y);
     const x0 = Math.floor(cx - r), x1 = Math.ceil(cx + r), y0 = Math.floor(cy - r), y1 = Math.ceil(cy + r);
     for (let sy = y0; sy <= y1; sy++) {
@@ -394,7 +449,8 @@ export class Painter {
   }
   /** Glow around a segment (a soft beam of light). */
   glowLine(x0, y0, x1, y1, r, c, k = 0.5) {
-    if (r < 1 || k <= 0.004) return;
+    if (r <= 0 || k <= 0.004) return;
+    r *= this.density * this.scale;
     const ax = this.toX(x0, y0), ay = this.toY(x0, y0), bx = this.toX(x1, y1), by = this.toY(x1, y1);
     const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy || 1e-9;
     const X0 = Math.floor(Math.min(ax, bx) - r), X1 = Math.ceil(Math.max(ax, bx) + r);
@@ -410,7 +466,9 @@ export class Painter {
   }
   /** Glow hugging a circle of radius R (a shockwave's light), falling off over width r. */
   glowRing(x, y, R, r, c, k = 0.5) {
-    if (r < 1 || k <= 0.004) return;
+    if (r <= 0 || k <= 0.004) return;
+    r *= this.density * this.scale;
+    R *= this.density * this.scale;
     const cx = this.toX(x, y), cy = this.toY(x, y), E = R + r;
     for (let sy = Math.floor(cy - E); sy <= Math.ceil(cy + E); sy++)
       for (let sx = Math.floor(cx - E); sx <= Math.ceil(cx + E); sx++) {

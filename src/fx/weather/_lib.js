@@ -5,7 +5,7 @@
 // The noise bake and the branching bolt are adapted from Sprite Fusion's open-source fog and lightning
 // (https://www.spritefusion.com/pixel-art-vfx/fog), MIT License, Copyright (c) 2026 Hugo Duprez.
 
-import { rand, wrap, TAU } from "../../core/index.js";
+import { Painter, rand, wrap, TAU } from "../../core/index.js";
 
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
 
@@ -40,6 +40,7 @@ export function clip(p, meta) {
 
 // the painter's glow, with its box cut to the canvas first (big soft lights stay cheap)
 function glow(q, B, x, y, r, c, k) {
+  if (q.density !== 1 || q.scale !== 1) return Painter.prototype.glow.call(q, x, y, r, c, k);
   if (r < 1 || k <= 0.004) return;
   const x0 = Math.max(B.x0, Math.floor(x - r)), x1 = Math.min(B.x1 - 1, Math.ceil(x + r));
   const y0 = Math.max(B.y0, Math.floor(y - r)), y1 = Math.min(B.y1 - 1, Math.ceil(y + r));
@@ -65,7 +66,7 @@ export function pass(p, meta, y0, y1, fn) {
   y0 = Math.max(B.y0, Math.floor(y0));
   y1 = Math.min(B.y1 - 1, Math.ceil(y1));
   if (y0 > y1) return;
-  if (p.sn !== 0) {
+  if (p.sn !== 0 || p.density !== 1 || p.scale !== 1) {
     const q = clip(p, meta);
     for (let y = y0; y <= y1; y++)
       for (let x = B.x0; x < B.x1; x++) {
@@ -123,7 +124,7 @@ export function rows(p, meta, y0, y1, fn) {
   if (R.w !== w) Object.assign(R, { w, c: new Uint32Array(w), a: new Float32Array(w), b: new Uint8Array(w), l: new Uint32Array(w), k: new Float32Array(w) });
   y0 = Math.max(B.y0, Math.floor(y0));
   y1 = Math.min(B.y1 - 1, Math.ceil(y1));
-  const rot = p.sn !== 0, q = rot ? clip(p, meta) : null;
+  const rot = p.sn !== 0 || p.density !== 1 || p.scale !== 1, q = rot ? clip(p, meta) : null;
   const C = p.C, L = p.L, W = p.w, fade = p.fade, lk = p.lightK * fade, fx = p.fx;
   for (let y = y0; y <= y1; y++) {
     R.c.fill(0);

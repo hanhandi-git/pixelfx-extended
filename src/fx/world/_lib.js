@@ -12,17 +12,17 @@ const dither = (x, y) => BAYER[((y & 3) << 2) | (x & 3)];
 
 /** Bake a static layer: draw it once with the full Painter API and keep its color and light buffers. */
 export function bake(w, h, fn) {
-  const f = createFrame(w, h);
+  const f = createFrame(w, h, 0, 0, 2);
   const p = painterFor(clearFrame(f));
   p.place(0, 0);
   fn(p, f);
-  return { w, h, color: f.color, light: f.light };
+  return { w: f.w, h: f.h, density: f.density, color: f.color, light: f.light };
 }
 
 /** Draw a baked layer: color first, then its baked lights added on top. */
 export function blit(p, layer) {
-  p.image(layer.color, layer.w, layer.h, 0, 0);
-  p.lightImage(layer.light, layer.w, layer.h, 0, 0);
+  p.image(layer.color, layer.w, layer.h, 0, 0, layer.density ?? 1);
+  p.lightImage(layer.light, layer.w, layer.h, 0, 0, layer.density ?? 1);
 }
 
 /** A stepped vertical gradient with ordered dither at each step. */
@@ -59,8 +59,14 @@ export function moon(p, x, y, r, core, halo, seed = 0) {
       if (n > 0.86) c = mix(c, halo, 0.25);
       p.px(x + xx, y + yy, c);
     }
-  p.glow(x, y, r * 3.2, halo, 0.3);
-  p.glow(x, y, r * 1.15, core, 0.14);
+  for (let i = 0; i < 8; i++) {
+    const angle = rand(seed, i, 201) * TAU, d = Math.sqrt(rand(seed, i, 202)) * r * 0.65;
+    const cr = r * (0.06 + rand(seed, i, 203) * 0.09);
+    p.ellipse(x + Math.cos(angle) * d, y + Math.sin(angle) * d, cr * 1.3, cr, mix(core, halo, 0.46));
+    p.ellipse(x + Math.cos(angle) * d - 0.4, y + Math.sin(angle) * d - 0.4, cr * 0.75, cr * 0.6, mix(core, halo, 0.2));
+  }
+  p.glow(x, y, r * 3.2, halo, 0.12);
+  p.glow(x, y, r * 1.15, core, 0.04);
 }
 
 /** A far ridge or hill silhouette, filling down from a noisy skyline to baseY. */
@@ -79,16 +85,17 @@ export function ridge(p, w, baseY, amp, color, seed = 0, step = 1) {
 
 /** A clump of leaves or foliage: dark under-shape, mid body, lit top-left rim, a few notches. */
 export function foliage(p, x, y, rx, ry, C, seed = 0, n = 7) {
+  // Opaque, overlapping leaf clusters: a stepped crown, dark pockets and fine lit edges.
   p.ellipse(x, y, rx, ry, C[1]);
-  for (let i = 0; i < n; i++) {
-    const a = rand(seed, i, 1) * TAU, d = rand(seed, i, 2), r = 2 + rand(seed, i, 3) * rx * 0.42;
-    const px = x + Math.cos(a) * rx * 0.62 * d, py = y + Math.sin(a) * ry * 0.62 * d;
-    p.disc(px, py, r, C[2], 0.9);
-    if (rand(seed, i, 4) > 0.45) p.disc(px - r * 0.25, py - r * 0.35, r * 0.55, C[3], 0.85);
-  }
-  for (let i = 0; i < n; i++) {
-    const a = Math.PI + (i / n) * Math.PI, px = x + Math.cos(a) * rx * 0.85, py = y + Math.sin(a) * ry * 0.8;
-    p.dot(px, py, C[3], 0.9);
+  for (let i = 0; i < n * 2; i++) {
+    const a = rand(seed, i, 1) * TAU, d = Math.sqrt(rand(seed, i, 2));
+    const px = x + Math.cos(a) * rx * 0.8 * d, py = y + Math.sin(a) * ry * 0.75 * d;
+    const r = 1.5 + rand(seed, i, 3) * Math.min(rx, ry) * 0.36;
+    p.ellipse(px, py, r * 1.2, r * 0.75, C[2]);
+    p.ellipse(px - r * 0.18, py - r * 0.24, r * 0.9, r * 0.42, C[3]);
+    if (py < y && i % 3 === 0) {
+      p.beam(px - r * 0.65, py - r * 0.3, px + r * 0.3, py - r * 0.48, 0.5, C[4] ?? C[3]);
+    }
   }
 }
 
@@ -178,6 +185,11 @@ export function pillar(p, x, baseY, w, h, C, { broken = false } = {}) {
   p.rect(x, top, w, h, C[2]);
   p.rect(x, top, 1, h, C[4]);
   p.rect(x + w - 2, top, 2, h, C[1]);
+  p.rect(x + 1, top, 0.5, h - 4, C[5] ?? C[4]);
+  for (let flute = 3; flute < w - 2; flute += 3) {
+    p.rect(x + flute, top + 3, 0.5, h - 9, C[1]);
+    p.rect(x + flute + 0.5, top + 3, 0.5, h - 9, C[3]);
+  }
   for (let y = top + 4; y < baseY; y += 8) p.rect(x, y, w, 1, C[1]);
   for (let y = top + 2; y < baseY; y += 8) p.rect(x + 2, y, w - 4, 1, C[3]);
   p.rect(x - 2, baseY - 4, w + 4, 4, C[2]);
@@ -196,13 +208,21 @@ export function ground(p, w, y, h, C, { grass = true, seed = 0, stone = false, l
   const floor = hex(C[0]), dark = hex(C[1]), lit = hex(C[4]), rim = hex(C[5]);
   for (let yy = y; yy < h; yy++) {
     const d = yy - y;
-    let c = d < 2 ? mix(floor, dark, 0.35) : d < 6 ? floor : mix(floor, dark, clamp((d - 5) / 18) * 0.75);
+    const base = d < 2 ? mix(floor, dark, 0.35) : d < 6 ? floor : mix(floor, dark, clamp((d - 5) / 18) * 0.75);
     for (let x = 0; x < w; x++) {
+      let c = base;
       const n = tileNoise(x / 4.5, d / 4.5, 0, 0, seed);
       if (n > 0.35 && d > 2) c = mix(c, lit, 0.18);
       if (n < -0.4 && d > 3) c = mix(c, dark, 0.4);
       p.px(x, yy, c);
     }
+  }
+  // Thin sediment seams and small embedded stones stay subordinate to combat silhouettes.
+  for (let i = 0; i < 80; i++) {
+    const px = rand(seed, i, 151) * w, py = y + 5 + rand(seed, i, 152) * Math.max(1, h - y - 7);
+    const length = 0.75 + rand(seed, i, 153) * 3;
+    p.rect(px, py, length, 0.5, mix(floor, lit, 0.28));
+    p.rect(px + 0.5, py + 0.5, length, 0.5, mix(floor, dark, 0.65));
   }
   // the one-pixel rim reads at a glance; keep it unbroken
   for (let x = 0; x < w; x++) p.px(x, y, rim);

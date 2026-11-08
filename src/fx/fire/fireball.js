@@ -103,6 +103,6 @@ export function draw(p, t, o) {
   // light: a hot heart, a warm halo, light running down the tail
   const fl = 0.85 + 0.15 * N(9, S + 7);
   p.glowLine(hx - 6, hy, -50, -2, 12, GLOW, 0.2 * fl);
-  p.glow(hx - 2, hy, 42, GLOW, 0.42 * fl);
-  p.glow(hx, hy, 13, H[1], 0.3 * fl);
+  p.glow(hx - 2, hy, 36, GLOW, 0.22 * fl);
+  p.glow(hx, hy, 10, H[1], 0.18 * fl);
 }

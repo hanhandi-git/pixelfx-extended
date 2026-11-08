@@ -84,3 +84,35 @@ test("changing costume preserves hit-stop, event times, completion and mirrored 
       assert.equal(left.color[y * 320 + x], right.color[y * 320 + 199 - x], c.id);
   }
 });
+
+test("dense costume poses resample geometry and keep cache entries separate from legacy pixels", () => {
+  for (const c of CHARACTERS) {
+    const pose = { weapon: "sword", fx: 12, fy: -21 };
+    const legacy = posed(pose, c.id), before = digest(legacy.color);
+    const dense = posed(pose, c.id, { density: 2 });
+    assert.equal(dense.density, 2);
+    assert.ok(dense.n > legacy.n * 2, c.id);
+    assert.ok([...dense.xs, ...dense.ys].some(v => v % 1 !== 0), c.id);
+    assert.ok(Math.abs(dense.x0 - legacy.x0) <= 2 && Math.abs(dense.y0 - legacy.y0) <= 4, c.id);
+    assert.equal(posed(pose, c.id), legacy);
+    assert.equal(digest(legacy.color), before);
+    assert.equal(posed(pose, c.id, { density: 2 }), dense);
+  }
+});
+
+test("dense acts retain timing and mirror both the costume and effect around their world anchor", () => {
+  const mod = { meta: { duration: 1, size: [80, 80], origin: [40, 70] },
+    act: { poses: [[0, {}], [1, {}]] }, draw(p) { p.rect(10, -20, 0.5, 1, 0xffffffff); } };
+  const pictures = [];
+  for (const flip of [false, true]) {
+    const a = createAct(mod, { x: 50, y: 70, character: "ember-duelist", flip });
+    const f = createFrame(100, 90, 0, 0, 2);
+    a.update(0.2); a.draw(f); pictures.push(f);
+    assert.equal(a.t, 0.2);
+    assert.ok(f.color.filter(Boolean).length > 1000);
+  }
+  // The screen-space Bayer pattern of the contact shadow stays anchored to the screen.
+  for (let y = 0; y < 136; y++) for (let x = 0; x < pictures[0].w; x++) {
+    assert.equal(pictures[0].color[y * pictures[0].w + x], pictures[1].color[y * pictures[1].w + pictures[1].w - 1 - x]);
+  }
+});

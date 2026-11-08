@@ -137,3 +137,9 @@ const path = createPath(trajectory);   // 按距离重新参数化，可用于�
 
 上层可独立替换曲线、轮廓或力场：例如保持同一条路径，将符文替换为角色遮罩，
 再将吸引场改为排斥场，就能把汇聚效果改为从角色表面向外释放的效果。
+
+## Dense rendering
+
+`createFrame(w, h, ox, oy, density = 1)` supports integer densities 1–4. Width and height in the returned frame are physical pixels; camera offsets and effect anchors remain world units. Painter shape callbacks keep their local units while visiting every output pixel. `createFx(..., { renderScale })` scales geometry before rasterization. Color and additive light remain separate. `image` and `lightImage` accept an optional source density after x/y.
+
+`posed(pose, character, { density: 2 })` samples the actual costume/weapon geometry on a half-unit grid and returns `density` alongside fractional x/y coordinates. A returned pixel occupies `1 / density` world units. Legacy calls remain density 1. See [QUALITY-PASS.md](QUALITY-PASS.md) for integration and current acted-preview limits.

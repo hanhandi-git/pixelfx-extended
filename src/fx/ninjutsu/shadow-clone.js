@@ -73,7 +73,7 @@ function smokeCloud(p, C, x, y, t, t0, size, a, S) {
 function drawClone(p, actor, x, y, a) {
   if (a <= 0.02) return;
   const tx = p.tx, ty = p.ty, fx = p.fx, cs = p.cs, sn = p.sn;
-  p.place(p.toX(x, y), p.toY(x, y), fx < 0, Math.atan2(sn, cs));
+  p.place(p.toX(x, y) / p.density, p.toY(x, y) / p.density, fx < 0, Math.atan2(sn, cs));
   drawActor(p, actor, a);
   p.tx = tx; p.ty = ty; p.fx = fx; p.cs = cs; p.sn = sn;
 }

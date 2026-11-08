@@ -304,6 +304,53 @@ export function createAct(mod, o = {}) {
     },
     /** Paint it. { body: false } leaves the character out, { target: false } the target. */
     draw(frame, { body = true, target: showTarget = true } = {}) {
+      if ((frame.density ?? 1) > 1 && !a.onBody) {
+        // Geometry can be sampled densely without changing the performance clock. Straw targets
+        // keep their hand-authored sprite cells; the duelist is re-rasterized from costume geometry.
+        const q = last ?? poseNow(), active = t >= 0, density = frame.density;
+        const worldW = frame.w / density, worldH = frame.h / density;
+        const FX = (o.x ?? X) - frame.ox, FY = (o.y ?? Y) - frame.oy;
+        const actorX = o.x ?? X, actorY = o.y ?? Y;
+        const p = painterFor(frame);
+        if (active) fx.draw(frame, "back");
+        if (showTarget && targets.length) {
+          const { a: targetFrame } = scratchFor({ w: worldW, h: worldH, ox: 0, oy: 0 });
+          clearFrame(targetFrame);
+          for (const target of targets) target.draw(targetFrame.color, worldW, worldH, FX, FY, flip);
+          p.reset().image(targetFrame.color, worldW, worldH, frame.ox, frame.oy);
+        }
+        const paintPose = (pose, ghost = 0) => {
+          const r = posed(pose, character, { density: 2 }), cell = 1 / r.density;
+          p.reset().place(actorX + (flip ? -(pose.x ?? 0) : pose.x ?? 0), actorY + (pose.y ?? 0), flip);
+          for (let i = 0; i < r.n; i++) {
+            if (ghost) {
+              p.each(r.xs[i], r.ys[i], r.xs[i] + cell, r.ys[i] + cell, (lx, ly, sx, sy) => {
+                if (lx >= r.xs[i] && lx < r.xs[i] + cell && ly >= r.ys[i] && ly < r.ys[i] + cell) p.add(sx, sy, gc, ghost);
+              });
+            } else p.rect(r.xs[i], r.ys[i], cell, cell, r.color[i]);
+          }
+        };
+        if (body) {
+          p.reset().ellipse(actorX + (flip ? -(q.x ?? 0) : q.x ?? 0), actorY, 10, 1.5, hex("#08060c"), 0.45);
+          for (const g of ghosts) paintPose(g.q, 0.5 * (1 - g.age / GHOST_LIFE));
+          paintPose(q);
+        }
+        if (active) fx.draw(frame, "front");
+        if (showTarget && targets.length) {
+          const { a: targetFrame } = scratchFor({ w: worldW, h: worldH, ox: 0, oy: 0 });
+          clearFrame(targetFrame);
+          for (const target of targets) target.drawStraw(targetFrame.color, worldW, worldH, FX, FY, flip);
+          p.reset().image(targetFrame.color, worldW, worldH, frame.ox, frame.oy);
+        }
+        if (body) {
+          p.reset().place(actorX, actorY, flip);
+          for (const k of specks) {
+            const c = k.c || DUST[Math.min(3, Math.floor((k.age / k.life) * 4))];
+            p.rect(Math.round(k.x), Math.round(k.y), k.big ? 2 : 1, 1, c);
+          }
+        }
+        return;
+      }
       const W = frame.w, H = frame.h, q = last ?? poseNow(), active = t >= 0;
       const tgt = showTarget ? targets : [];
       const drawTargets = () => tgt.forEach((g) => g.draw(frame.color, W, H, FX, FY, flip));

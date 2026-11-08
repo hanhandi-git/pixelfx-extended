@@ -181,3 +181,80 @@ test("the combined effect loops both buffers and is independent of seed/cache an
   assert.deepEqual(render(1.37, 7), middle);
   assert.deepEqual(render(flowSeal.meta.duration, 7), start);
 });
+
+test("dense frames sample geometry at half units while preserving world placement and the two buffers", () => {
+  const f = createFrame(8, 6, 10, 20, 2), p = new Painter(f);
+  assert.equal(f.w, 16);
+  assert.equal(f.h, 12);
+  p.place(10, 20);
+  p.rect(0.5, 0.5, 0.5, 1, hex("#ff8040"));
+  assert.equal(f.color.filter(Boolean).length, 2);
+  assert.equal(p.get(0.5, 0.5), hex("#ff8040") >>> 0);
+  assert.equal(f.light.filter(Boolean).length, 0);
+  p.glow(2, 2, 1.5, hex("#20a0ff"), 0.5);
+  assert.ok(f.light.filter(Boolean).length > 8);
+  assert.equal(f.color.filter(Boolean).length, 2);
+  assert.throws(() => createFrame(8, 8, 0, 0, 1.5), RangeError);
+});
+
+test("dense images keep their pivot through camera offsets, mirroring and rotation", () => {
+  const red = hex("#f00") >>> 0, blue = hex("#00f") >>> 0;
+  const src = new Uint32Array([red, blue, red, blue]);
+  const f = createFrame(4, 4, 10, 20, 2), p = new Painter(f);
+  p.place(11, 21).image(src, 2, 2, 0, 0, 2);
+  assert.equal(f.color[2 * f.w + 2], red);
+  assert.equal(f.color[2 * f.w + 3], blue);
+  clearFrame(f);
+  p.reset().place(11, 21, true).image(src, 2, 2, 0, 0, 2);
+  assert.equal(f.color[2 * f.w], blue);
+  assert.equal(f.color[2 * f.w + 1], red);
+  clearFrame(f);
+  p.reset().place(12, 21, false, Math.PI / 2).image(src, 2, 2, 0, 0, 2);
+  assert.equal(f.color.filter(Boolean).length, 4);
+});
+
+test("renderScale samples a shape directly without losing thin source geometry", () => {
+  const f = createFrame(8, 8, 0, 0, 2), p = new Painter(f);
+  p.place(4, 4); p.scale = 0.5;
+  p.rect(-2, -2, 1, 4, hex("#fff"));
+  assert.equal(f.color.filter(Boolean).length, 4);
+  p.glow(0, 0, 2, hex("#fff"));
+  const extent = [];
+  f.light.forEach((c, i) => { if (c) extent.push(i % f.w); });
+  assert.ok(Math.max(...extent) - Math.min(...extent) <= 3);
+});
+
+test("dense sprite sheets export physical frame dimensions and matching pivots", async () => {
+  const { renderFrames, spriteSheet } = await import("../tools/lib/fxlib.mjs");
+  const fx = { id: "test/dense", meta: { size: [8, 6], origin: [2, 4], duration: 0.1, fps: 10, loop: false, options: {} },
+    mod: { draw(p, t) { if (t < 0.1) p.rect(0, -1, 0.5, 1, hex("#fff")); } } };
+  fx.mod.meta = fx.meta;
+  const r = renderFrames(fx, { density: 2, bg: "none", actor: false });
+  const sheet = spriteSheet(fx, r, "dense");
+  assert.deepEqual(sheet.json.meta.pixelfx.frameSize, [16, 12]);
+  assert.deepEqual(sheet.json.meta.pixelfx.pivot, [4, 8]);
+  assert.equal(r.frames.at(-1).raw.filter(Boolean).length, 0);
+});
+
+test("weather shaders cover a dense output at the same world anchor", async () => {
+  const { pass, rows } = await import("../src/fx/weather/_lib.js");
+  const f = createFrame(12, 12, 0, 0, 2), p = new Painter(f).place(3, 4);
+  const meta = { size: [4, 3], origin: [0, 0] }, white = hex("#fff") >>> 0;
+  pass(p, meta, 0, 2, (_x, _y, out) => { out.c = white; });
+  assert.equal(f.color.filter(Boolean).length, 4 * 3 * 4);
+  assert.equal(f.color[8 * f.w + 6], white);
+  clearFrame(f);
+  rows(p, meta, 0, 2, (_y, out) => out.c.fill(white));
+  assert.equal(f.color.filter(Boolean).length, 4 * 3 * 4);
+  assert.equal(f.color[8 * f.w + 6], white);
+});
+
+test("clipped transition pixels keep dense placement and scale", async () => {
+  const { clipTo, pixels } = await import("../src/fx/transitions/_lib.js");
+  const f = createFrame(12, 12, 0, 0, 2), p = new Painter(f).place(3, 4);
+  p.scale = 0.5;
+  const pixel = pixels(clipTo(p));
+  pixel.at(0); pixel.put(hex("#fff"));
+  assert.equal(f.color.filter(Boolean).length, 1);
+  assert.equal(f.color[8 * f.w + 6], hex("#fff") >>> 0);
+});

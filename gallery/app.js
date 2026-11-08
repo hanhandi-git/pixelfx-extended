@@ -2,7 +2,7 @@
 // opens one effect with its options, a sprite sheet and the code to use it.
 
 import { effects, categories, provenance } from "../src/fx/index.js";
-import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, PAL, BACKDROPS, CHARACTERS, characterOf, ARMORY, WEAPON_CLASSES, weaponOf } from "../src/core/index.js";
+import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, posed, PAL, BACKDROPS, CHARACTERS, characterOf, ARMORY, WEAPON_CLASSES, weaponOf } from "../src/core/index.js";
 import { LANGS, detectLang, getLang, setLang, t as tr, applyStatic, categoryText, characterText, characterOption, weaponText, weaponOption, weaponClassText, backdropText } from "./i18n.js";
 import { THEMES, themeOfCat } from "./themes.js";
 
@@ -43,19 +43,22 @@ class Player {
     this.x = Math.floor((this.W - w) / 2) + ox;
     // an act stands near the bottom of its tile, with the room above it
     this.y = acted ? Math.max(oy + 2, this.H - b.y1 - 2) : Math.floor((this.H - h) / 2) + oy;
-    this.canvas.width = this.W;
-    this.canvas.height = this.H;
+    // Acts that remap body pixels retain their original raster contract; standalone geometry
+    // and maps are sampled into a denser frame, rather than enlarged after compositing.
+    this.density = acted && this.fx.mod.act.onBody ? 1 : 2;
+    this.canvas.width = this.W * this.density;
+    this.canvas.height = this.H * this.density;
     // shrinking pixel art nearest-neighbour drops whole 1 px lines; smooth it only when it has to shrink
     const shown = this.canvas.getBoundingClientRect().width * devicePixelRatio;
     this.canvas.style.imageRendering = shown && shown < this.W ? "auto" : "";
-    this.frame = createFrame(this.W, this.H);
-    this.img = this.ctx.createImageData(this.W, this.H);
+    this.frame = createFrame(this.W, this.H, 0, 0, this.density);
+    this.img = this.ctx.createImageData(this.canvas.width, this.canvas.height);
     this.setBg(this.bg);
     this.restart();
   }
   setBg(kind) {
     this.bg = kind;
-    this.bgBuf = kind === "none" ? null : backdrop(kind, this.W, this.H, this.y);
+    this.bgBuf = kind === "none" ? null : backdrop(kind, this.canvas.width, this.canvas.height, this.y * this.density);
     this.dirty = true;
   }
   setCharacter(id) {
@@ -102,7 +105,7 @@ class Player {
       composite(f, this.img.data, this.bgBuf);
       const [sx, sy] = this.inst.shake;
       if (sx || sy) this.ctx.clearRect(0, 0, this.W, this.H);
-      this.ctx.putImageData(this.img, sx, sy);
+      this.ctx.putImageData(this.img, sx * this.density, sy * this.density);
       this.dirty = false;
       return;
     }
@@ -281,10 +284,11 @@ function rebuildCast() {
     choice.setAttribute("role", "radio"); choice.setAttribute("aria-label", characterOption(c));
     choice.dataset.character = c.id;
     choice.style.setProperty("--cast-accent", c.accent);
-    const portrait = el("canvas", { width: 40, height: 48 });
+    const portrait = el("canvas", { width: 80, height: 96 });
     portrait.setAttribute("aria-hidden", "true");
-    const frame = createFrame(40, 48), ctx = portrait.getContext("2d"), img = ctx.createImageData(40, 48);
-    drawActor(painterFor(frame).place(20, 45), stockActor(2, c.id));
+    const frame = createFrame(40, 48, 0, 0, 2), ctx = portrait.getContext("2d"), img = ctx.createImageData(80, 96);
+    const body = posed({}, c.id, { density: 2 }), p = painterFor(frame).place(20, 45);
+    for (let i = 0; i < body.n; i++) p.rect(body.xs[i], body.ys[i], 0.5, 0.5, body.color[i]);
     composite(frame, img.data, null); ctx.putImageData(img, 0, 0);
     choice.append(portrait, el("span", { textContent: text.label }));
     if (c.id !== "dummy") choice.append(el("em", { className: "cast-new", textContent: tr("tag.new") }));

@@ -118,11 +118,12 @@ export function renderEncounter(fx, opts = {}) {
  */
 export function renderFrames(fx, opts = {}) {
   const { meta } = fx, [W, H] = meta.size, [OX, OY] = meta.origin, m = opts.margin ?? 0;
-  const w = W + m * 2, h = H + m * 2, fps = opts.fps ?? meta.fps;
+  const density = opts.density ?? 1;
+  const w = (W + m * 2) * density, h = (H + m * 2) * density, fps = opts.fps ?? meta.fps;
   const n = Math.max(1, Math.round(meta.duration * fps) + (meta.loop ? 0 : 1));
-  const shown = createFrame(w, h, -m, -m), bare = createFrame(w, h, -m, -m);
+  const shown = createFrame(W + m * 2, H + m * 2, -m, -m, density), bare = createFrame(W + m * 2, H + m * 2, -m, -m, density);
   const bgKind = opts.bg ?? meta.bg;
-  const bg = bgKind === "none" ? null : backdrop(bgKind, w, h, OY + m);
+  const bg = bgKind === "none" ? null : backdrop(bgKind, w, h, (OY + m) * density);
   const inst = createFx(fx.mod, { x: OX, y: OY, ...(opts.seed !== undefined ? { seed: opts.seed } : {}), ...(opts.options ?? {}) });
   const actor = meta.actor && opts.actor !== false ? inst.options.actor ?? stockActor() : null;
   const fade = m === 0 && !isScreen(meta);
@@ -145,7 +146,7 @@ export function renderFrames(fx, opts = {}) {
       light: bare.light.slice(),
     });
   }
-  return { w, h, fps, n, frames, margin: m };
+  return { w, h, fps, n, frames, margin: m, density };
 }
 
 /**
@@ -302,7 +303,7 @@ export function spriteSheet(fx, r, name) {
     app: "https://github.com/patch-gg/pixelfx", version: "1", image: `${name}.png`, format: "RGBA8888",
     size: { w: cols * w, h: rows * h }, scale: "1",
     frameTags: [{ name: name, from: 0, to: n - 1, direction: "forward" }],
-    pixelfx: { id: fx.id, name: m.name, fps, loop: m.loop, frames: n, frameSize: [w, h], pivot: m.origin, columns: cols, ...(fx.mod.act ? { act: actTiming(fx.mod) } : {}) },
+    pixelfx: { id: fx.id, name: m.name, fps, loop: m.loop, frames: n, frameSize: [w, h], pivot: m.origin.map(v => v * (r.density ?? 1)), density: r.density ?? 1, columns: cols, ...(fx.mod.act ? { act: actTiming(fx.mod) } : {}) },
   };
   return { png: img.png(), json };
 }

@@ -303,7 +303,7 @@ export function lobe(p, x, y, r, FR, SM, fire, glow, a, z = 0, dark = 0, style =
     p.blendPx(sx, sy, c, solid || d <= rim ? a : a * soft);
     if (k > 0) p.add(sx, sy, c, k);
   };
-  if (p.sn !== 0 || p.cs !== 1) return p.each(x - r, y - r, x + r, y + r, px);
+  if (p.sn !== 0 || p.cs !== 1 || p.density !== 1 || p.scale !== 1) return p.each(x - r, y - r, x + r, y + r, px);
   // unrotated (the usual case): walk the screen pixels directly
   const ax = p.tx + (x - r) * p.fx, bx = p.tx + (x + r) * p.fx;
   const sx0 = Math.max(p.ox, Math.floor(Math.min(ax, bx))), sx1 = Math.min(p.ox + p.w - 1, Math.ceil(Math.max(ax, bx)));

@@ -52,7 +52,7 @@ function handAt(t) {
 // a blue after-image of the body, so the step reads even when the host does not move the actor
 function ghost(p, actor, x, a, C) {
   const tx = p.tx, ty = p.ty, fx = p.fx, cs = p.cs, sn = p.sn;
-  p.place(p.toX(x, 0), p.toY(x, 0), fx < 0, Math.atan2(sn, cs));
+  p.place(p.toX(x, 0) / p.density, p.toY(x, 0) / p.density, fx < 0, Math.atan2(sn, cs));
   p.mask(actor.mask, actor.x, actor.y, C[3], a);
   p.tx = tx; p.ty = ty; p.fx = fx; p.cs = cs; p.sn = sn;
 }

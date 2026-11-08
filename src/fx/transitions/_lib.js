@@ -43,13 +43,13 @@ export function clipTo(p) {
   let q = clips.get(p);
   if (!q) clips.set(p, (q = new Clipped(p.frame)));
   q.reset();
-  q.tx = p.tx; q.ty = p.ty; q.fx = p.fx; q.cs = p.cs; q.sn = p.sn;
+  q.scale = p.scale; q.tx = p.tx; q.ty = p.ty; q.fx = p.fx; q.cs = p.cs; q.sn = p.sn;
   q.fade = p.fade; q.lightK = p.lightK; q.layer = p.layer;
   return q;
 }
 
 // screen column of local pixel column x, for an unrotated painter: x maps to b + fx * x
-const unrotated = (p) => p.sn === 0 && p.cs === 1;
+const unrotated = (p) => p.sn === 0 && p.cs === 1 && p.density === 1 && p.scale === 1;
 const col0 = (p) => (p.fx > 0 ? Math.floor(p.tx + 0.5) : Math.floor(p.tx - 0.5));
 
 /**
@@ -157,7 +157,7 @@ export function field(fn, gmin = 0.45, gmax = 3) {
  */
 export function pixels(p) {
   let sx = 0, sy = 0, i0 = 0;
-  if (p.sn === 0 && p.cs === 1) {
+  if (unrotated(p)) {
     const tx = p.tx, ty = p.ty, fx = p.fx;
     return {
       at(i) {
