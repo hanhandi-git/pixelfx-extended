@@ -13,7 +13,9 @@ const G = join(ROOT, "gallery"), OUT = join(ROOT, "dist", "gallery"), PAGE = joi
 mkdirSync(OUT, { recursive: true });
 mkdirSync(PAGE, { recursive: true });
 
-await build({ entryPoints: [join(G, "app.js")], bundle: true, format: "esm", minify: true, outfile: join(OUT, "app.js"), legalComments: "none" });
+await build({ entryPoints: [join(G, "app.js")], bundle: true, format: "esm", minify: true, outfile: join(OUT, "app.js"), legalComments: "none",
+  define: { __PIXELFX_WORKER_FILE__: JSON.stringify("tile-worker.js") },
+});
 await build({ entryPoints: [join(G, "tile-worker.mjs")], bundle: true, format: "esm", minify: true, outfile: join(OUT, "tile-worker.js"), legalComments: "none" });
 cpSync(join(OUT, "tile-worker.js"), join(PAGE, "tile-worker.js"));
 cpSync(join(G, "fonts"), join(OUT, "fonts"), { recursive: true });

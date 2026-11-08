@@ -2,7 +2,8 @@
 
 import { workerPoolSize, WorkerPool } from "./worker-pool.mjs";
 
-const WORKER_FILE = /\/dist\/(?:gallery|page)\/app\.js$/.test(import.meta.url) ? "tile-worker.js" : "tile-worker.mjs";
+// The static build supplies its filename; hosting paths need not contain /dist/.
+const WORKER_FILE = typeof __PIXELFX_WORKER_FILE__ === "string" ? __PIXELFX_WORKER_FILE__ : "tile-worker.mjs";
 
 let sharedPool = null;
 let nextSlot = 1;
