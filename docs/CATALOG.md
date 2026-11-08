@@ -1,6 +1,6 @@
 # Catalog
 
-359 effects in 31 categories: 244 original and 115 new. Every one is a file in
+390 effects in 32 categories: 244 original and 146 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -146,9 +146,14 @@ slashes, smears, cleaves, combos.
 
 | effect | id | source | kind | play | size | what it does |
 |---|---|---|---|---|---|---|
+| Aurora lightblade combo | `melee/aurora-lightblade-combo` | new | effect | one-shot 1.8s | 208×144 | An energy blade writes two thin arcs that outlive the hilt: each cut hangs as a rod of light, beads race back down it and the fringe cools to violet. |
+| Blood butterfly dance | `melee/blood-butterfly-dance` | new | effect | one-shot 1.6s | 208×144 | Two crossing crimson cuts from a butterfly guard: rose petals scatter where the strokes cross, a gold trace hangs for a beat and the blade cools to ash. |
 | Claw swipe | `melee/claw-swipe` | original | effect | one-shot 0.9s | 128×96 | Three claw marks rake down one after another, white-hot, cooling through orange to red, then close up from both ends and leave a dotted scar, with hot flecks and drips. |
 | Dagger flurry | `melee/dagger-flurry` | original | effect | one-shot 0.95s | 148×104 | A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts. |
+| Demon-eye cleave | `melee/demon-eye-cleave` | new | effect | one-shot 2s | 208×144 | A corrupted greatsword comes over the top: the eye in its guard opens, the slab lands in a void ring, red seams climb the steel and dark shards rain. |
 | Double slash | `melee/double-slash` | original | effect | one-shot 0.8s | 164×108 | A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers. |
+| Dragon-scale sweep | `melee/dragon-scale-sweep` | new | effect | one-shot 1.7s | 208×144 | A dragon-scale sabre opens one wide jade crescent: scale-shaped sparks peel off its edge, gold glints ride the spine and a red tassel whips round the hilt. |
+| Ghostlight draw cut | `melee/ghostlight-draw` | new | effect | one-shot 1.7s | 208×144 | A shadowless draw cut: the blade arrives as a white line and its echo a frame later, a hollow violet gap hangs where it passed and ghost motes stay behind. |
 | Hammer smash | `melee/hammer-smash` | original | effect | one-shot 2s | 208×112 | A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust. |
 | Heavy cleave | `melee/heavy-cleave` | original | effect | one-shot 1.9s | 208×116 | A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers. |
 | Holy sword cleave | `melee/holy-sword-cleave` | new | effect | one-shot 1.7s | 208×144 | A wing-guarded holy blade carves a broad ivory-gold crescent, stamps a radiant cross on contact and releases slowly rising golden stars. |
@@ -157,6 +162,7 @@ slashes, smears, cleaves, combos.
 | War mace crush | `melee/mace-crush` | new | effect | one-shot 1.6s | 208×144 | A flanged spiked mace drops with a thick steel-blue wake, freezes on the crushing blow and throws blocky chips across a spreading ground shock. |
 | Rapier lunge | `melee/rapier-lunge` | new | effect | one-shot 1.5s | 208×144 | A basket-hilt rapier extends in a precise lunge, drawing a needle-white line and a small pierce ring before the point recoils into guard. |
 | Scythe reap | `melee/scythe-reap` | original | effect | one-shot 2.1s | 184×116 | A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour. |
+| Skyvault cleave | `melee/skyvault-cleave` | new | effect | one-shot 1.9s | 208×144 | A two-handed skyvault arc: a broad blue crescent sweeps through, clouds tear open along it, a gold spine flares at the contact and pale feathers drift down. |
 | Spear sweep | `melee/spear-sweep` | original | effect | one-shot 1.5s | 216×84 | A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor. |
 | Spin slash | `melee/spin-slash` | original | effect | one-shot 0.8s | 208×104 | The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks. |
 | Banded staff combo | `melee/staff-combo` | new | effect | one-shot 1.6s | 208×144 | A gold-banded wooden staff sweeps low and reverses upward in two hands, trailing amber arcs and showers of small impact splinters. |
@@ -449,6 +455,38 @@ coins, gems, chests, potions, jade, lanterns and flying blades.
 | Spirit butterfly | `pickups/spirit-butterfly` | new | effect | loop 2.4s | 80×64 | A jade spirit butterfly darts and banks through a figure-eight: it turns with its flight, wings snap open and shut, speed lines trail its dashes, and its light sweeps the floor. |
 | Spirit stone | `pickups/spirit-stone` | new | effect | loop 3.2s | 64×88 | A cluster of jade-cyan spirit crystals hovers and turns: facets catch the light, a pulse climbs the tall stone, splinters and motes circle it, and its cold glow pools on the floor. |
 | XP orb | `pickups/xp-orb` | original | effect | loop 1.8s | 72×56 | A small glowing orb races a figure-eight, a comet tail tapering behind it along its path, flecks shed from the tail winking out, its light following it over the floor. |
+
+## weapons
+
+every armory weapon placed in the world: a slow hover, a sheen down the steel, light ribbons and a turning floor seal.
+
+| effect | id | source | kind | play | size | what it does |
+|---|---|---|---|---|---|---|
+| Aurora lightblade, placed | `weapons/aurora-lightblade` | new | effect | loop 3.2s | 88×123 | A hilt holds a blade of light: the aurora lightblade hangs point-up, its white heart wrapped in aqua, beads sliding down the energy and a cold seal blooming beneath. |
+| Binding silk, placed | `weapons/binding-silk` | new | effect | loop 3.2s | 88×100 | A rolled sash hovers upright in rose-gold light, one tail hanging loose: the silk rolls a slow turn, gold ferrules catch the sheen and petals drift up. |
+| Blood butterfly, placed | `weapons/blood-butterfly` | new | effect | loop 3.2s | 88×123 | The crimson butterfly blade hangs point-up: rose ribbons wind the steel, petals of light shed from the guard, a red tassel stirs and the seal below burns rose-gold. |
+| Boomerang, placed | `weapons/boomerang` | new | effect | loop 3.2s | 88×100 | A wooden boomerang floats on its curve in warm gold light: one arm dips as it rocks, the seal turns beneath it and a trail of motes follows the sweep. |
+| Dagger, placed | `weapons/dagger` | new | effect | loop 3.2s | 88×100 | A short dagger floats hilt-down in a pocket of ochre light: the blade ticks a quarter turn each loop, glints crawl its edge and gold dust drifts up from the seal. |
+| Demon-eye greatsword, placed | `weapons/demon-eye-greatsword` | new | effect | loop 3.2s | 88×133 | The horned demon-eye greatsword hangs point-up and too heavy: violet ribbons coil the slab, the eye in its guard drifts open and shut, and the seal below turns red. |
+| Dragon-scale sabre, placed | `weapons/dragon-scale-sabre` | new | effect | loop 3.2s | 88×128 | The dragon-scale sabre hangs on its curve in jade light: gold scales catch the sheen along its spine, a red tassel turns, and the seal below is ringed in green fire. |
+| Flying sword, placed | `weapons/flying-sword` | new | effect | loop 3.2s | 88×100 | A short jian floats point-up, jade pommel low: a green ribbon wraps the blade once, the point takes a hard glint and sword-qi motes stream from the seal. |
+| Ghostlight jian, placed | `weapons/ghost-blade` | new | effect | loop 3.2s | 88×118 | The hollow ghostlight jian floats in pale cold light: its edge is a white line and its core barely there, wisps cross the steel, and the floor seal glows through it. |
+| Holy sword, placed | `weapons/holy-sword` | new | effect | loop 3.2s | 88×116 | A wing-guarded holy blade hangs point-up in ivory light: gold arcs circle the tip, a slow sheen crosses the crossguard's inset and gold motes climb from the seal. |
+| Katana, placed | `weapons/katana` | new | effect | loop 3.2s | 88×112 | A drawn katana floats point-up with its saya gone: violet ribbons wind the curved blade, the tsuba's ring pulses, a sheen travels the edge and ash motes drift up. |
+| Kunai, placed | `weapons/kunai` | new | effect | loop 3.2s | 88×100 | A kunai floats ring-pommel up, point down: cold steel-blue light pools under it, the edge takes a sheen, and the seal turns while dark motes drift across the blade. |
+| Kusanagi, placed | `weapons/kusanagi` | new | effect | loop 3.2s | 88×115 | The cloud-guarded tsurugi stands in green light: a jade halo turns behind the straight blade, cloud scallops catch the sheen, and river motes rise from a turning seal. |
+| Knight lance, placed | `weapons/lance` | new | effect | loop 3.2s | 88×151 | A knight's lance floats point-up, tall as a door: a royal-blue halo rings the shaft, a sheen runs to the socket, the split pennon stirs and motes rise from the seal. |
+| Pear-blossom needles, placed | `weapons/pear-needles` | new | effect | loop 3.2s | 88×100 | Three needles hover point-up in pearllight: they fan a hair apart, white petal motes fall from the seal and a thin sheen runs each point in turn. |
+| Powder bomb, placed | `weapons/powder-bomb` | new | effect | loop 3.2s | 88×100 | A fused powder bomb hangs nose-down over a scorched seal: the fuse spits a spark, embers cling to its iron shell, and a hot ring pulses across the floor. |
+| Rapier, placed | `weapons/rapier` | new | effect | loop 3.2s | 88×111 | A duelist's rapier hangs point-down from its cup guard: a rose halo circles the needle blade, the star guard catches a sheen and petals of light drift from the seal. |
+| Skyvault greatsword, placed | `weapons/skyvault-greatsword` | new | effect | loop 3.2s | 88×136 | The skyvault greatsword stands in blue light, gold dragon horns bared: a sky-blue heart beats along the blade, cloud motes circle it and pale feathers fall past the seal. |
+| Soul bell, placed | `weapons/soul-bell` | new | effect | loop 3.2s | 88×100 | A bronze bell hangs mouth-down in patina light, its tongue still: a green ring turns beneath it, the rim takes a sheen and pale soul-motes climb past the clapper. |
+| Spear, placed | `weapons/spear` | new | effect | loop 3.2s | 88×133 | A spear hangs point-up over a teal seal, its pennon the only colour: the leaf blade catches a sheen, a ribbon of light winds the socket and dust turns in the pool below. |
+| Banded staff, placed | `weapons/staff` | new | effect | loop 3.2s | 88×127 | A banded staff stands on its butt in the air, the two gold bands bright: light climbs the shaft in a slow ring, and the wooden floor seal turns under it. |
+| Sword, placed | `weapons/sword` | new | effect | loop 3.2s | 88×100 | A longsword hangs point-up in pale light: a slow bob over a turning floor seal, a sheen down the steel, ribbons of light circling the blade and motes climbing past it. |
+| Talisman, placed | `weapons/talisman` | new | effect | loop 3.2s | 88×100 | A paper talisman stands upright in vermilion light, its seal glowing: the slip flutters at one corner, cinnabar motes rise and a ward ring turns on the floor. |
+| Totsuka, placed | `weapons/totsuka` | new | effect | loop 3.2s | 88×125 | The broad Totsuka hangs point-up, vermilion grip down: a violet halo turns behind the bronze dragon guard, a sheen walks the long blade and plum motes climb. |
+| War mace, placed | `weapons/war-mace` | new | effect | loop 3.2s | 88×111 | A studded war mace floats head-up, too heavy to believe: embers shed from the flanges, a hot ring turns on the floor and the shaft ticks a slow quarter turn. |
 
 ## miku
 

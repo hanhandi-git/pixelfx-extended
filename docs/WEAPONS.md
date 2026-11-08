@@ -1,8 +1,9 @@
 # Weapons
 
-Twenty selectable weapons share the portable rig, the character costumes and its depth buffer. Twelve are
-melee weapons; eight are thrown weapons with their own ranged actions. Every model is original
-code-authored geometry under this repository's MIT license.
+Twenty-five selectable weapons share the portable rig, the character costumes and its depth buffer.
+Seventeen are melee weapons; eight are thrown weapons with their own ranged actions. Every model is
+original code-authored geometry under this repository's MIT license. Every one also has a placed effect in
+the `weapons` category — the item hovering in its own light, see [Placed weapons](#placed-weapons).
 
 | ID | Weapon | Class | Action |
 |---|---|---|---|
@@ -15,6 +16,12 @@ code-authored geometry under this repository's MIT license.
 | `katana` | 太刀 / Katana | melee | `melee/katana-draw` — thin horizontal draw cut |
 | `war-mace` | 重钉锤 / War mace | melee | `melee/mace-crush` — crushing blow, chips and ground shock |
 | `rapier` | 刺剑 / Rapier | melee | `melee/rapier-lunge` — precise needle thrust |
+| `blood-butterfly` | 血蝶之刃 / Blood butterfly | melee | `melee/blood-butterfly-dance` — two crossing crimson cuts, wings of petal light |
+| `ghost-blade` | 幽影剑 / Ghostlight jian | melee | `melee/ghostlight-draw` — a shadowless draw cut that arrives before its echo |
+| `demon-eye-greatsword` | 魔眼巨剑 / Demon-eye greatsword | melee | `melee/demon-eye-cleave` — horned slab and a void eye that opens on the floor |
+| `skyvault-greatsword` | 天穹巨剑 / Skyvault greatsword | melee | `melee/skyvault-cleave` — dragon-horn greatsword, torn clouds and falling feathers |
+| `aurora-lightblade` | 极光光刃 / Aurora lightblade | melee | `melee/aurora-lightblade-combo` — two arcs of light that outlive the hilt |
+| `dragon-scale-sabre` | 龙鳞斩刀 / Dragon-scale sabre | melee | `melee/dragon-scale-sweep` — one jade crescent that sheds scales |
 | `kusanagi` | 云从剑 / 天丛云剑 / Kusanagi | melee | `kami/ame-no-murakumo` — one rising cut that carves a seam through a sea of murakumo |
 | `totsuka` | 十拳剑 / Totsuka | melee | `kami/susanoo-thunder` — raised blade draws a forked thunder pillar onto the target |
 | `kunai` | 苦无 / Kunai | **thrown** | `thrown/kunai-throw` — end-over-end throw that embeds in the target |
@@ -33,6 +40,25 @@ pommel; the thrown set adds a fuse bomb, a curved boomerang,
 a red paper seal, a short jade-pommel jian, a rolled sash, a bronze bell and a pinch of needles. The
 shinto set adds a straight cloud-guarded tsurugi, a broad Totsuka with a vermilion grip and dragon guard,
 and a bronze Yata mirror cut with an eight-point star. Filtering is nearest neighbour and the grip is the pivot for standalone weapon icons.
+
+The six heavy blades added for the ghost-knight archetype are a blood-red butterfly sabre, a hollow
+straight jian, a horned violet greatsword with an eye in its guard, a gold-horned sky greatsword, an
+energy lightblade and a wide jade scale sabre. They are original silhouettes drawn for this library, in
+the ornate large-blade tradition rather than after any one game's art.
+
+## Placed weapons
+
+Every armory entry names a placed effect (`weapon.drop`, the `weapons` category, `#weapons`): the item
+hovers point-up in its own light, bobbing over a turning floor seal while a sheen runs down the steel, light
+ribbons wind the blade (half of each strand behind it, half in front) and motes climb past the point. The
+effect quarter-turns the rig's own geometry instead of redrawing the model, so the held weapon and the
+placed weapon can never drift apart. All of these effects carry the `武器` tag, use a themed aura palette in
+`options.palette`, and are deterministic loops.
+
+```sh
+node tools/render.mjs weapons/sword --gif
+node tools/render.mjs weapons --sheet
+```
 
 ## Classes
 

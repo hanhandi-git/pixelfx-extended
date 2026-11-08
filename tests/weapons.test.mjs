@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { ARMORY, MELEE_WEAPONS, THROWN_WEAPONS, WEAPONS, CHARACTERS, skeleton, posed, createAct, createFrame, clearFrame, poseAt, actBounds, createFx, weaponOf } from "../src/core/index.js";
 import { effects } from "../src/fx/index.js";
 
-const addedMelee = MELEE_WEAPONS.filter((w) => ["staff", "lance", "holy-sword", "katana", "war-mace", "rapier"].includes(w.id));
+const addedMelee = MELEE_WEAPONS.filter((w) => ["staff", "lance", "holy-sword", "katana", "war-mace", "rapier",
+  "blood-butterfly", "ghost-blade", "demon-eye-greatsword", "skyvault-greatsword", "aurora-lightblade", "dragon-scale-sabre"].includes(w.id));
 const addedThrown = ["kunai", "powder-bomb", "boomerang", "talisman", "flying-sword", "binding-silk", "soul-bell", "pear-needles"];
 const added = [...addedMelee, ...THROWN_WEAPONS];
 
@@ -86,6 +87,19 @@ test("new attacks finish empty in both buffers, preserve hit events and fit ever
         assert(r.x0 + x >= b.x0 && r.x1 + x < b.x1 && r.y0 + y >= b.y0 && r.y1 + y < b.y1, `${weapon.id}/${c.id}`);
       }
     }
+  }
+});
+
+test("every armory weapon has a placed effect tagged 武器", () => {
+  for (const weapon of ARMORY) {
+    const mod = effects[weapon.drop];
+    assert(mod?.meta, weapon.id);
+    assert(mod.meta.tags.includes("武器"), weapon.id);
+    assert.equal(mod.meta.loop, true, weapon.id);
+    assert.equal(typeof mod.draw, "function", weapon.id);
+    assert.equal(typeof mod.drawBack, "function", weapon.id);
+    assert.equal(mod.meta.size[0], 88, weapon.id);
+    assert.equal(mod.meta.origin[0], 44, weapon.id);
   }
 });
 

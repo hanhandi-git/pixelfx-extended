@@ -5,8 +5,13 @@ const C = Object.fromEntries(Object.entries({
   white: "#fffdf2", silver: "#d8e4ed", steel: "#8b9cb8", edge: "#53627e",
   ink: "#25283d", dark: "#3c3951", wrap: "#a8939d", leather: "#60394b",
   gold: "#f0cb72", goldL: "#fff0b4", goldD: "#a3683d", wood: "#a3714a", woodD: "#603f36",
-  red: "#c75461", redL: "#f48b74", cyan: "#91dbe1", blue: "#568bb8", violet: "#8e71bb",
+  red: "#c75461", redL: "#f48b74", orange: "#e8753b", orangeL: "#ffc15f", cyan: "#91dbe1", blue: "#568bb8", violet: "#8e71bb",
   jade: "#7fd3b0", jadeD: "#3f7f68", patina: "#7aa88a", patinaD: "#456b58",
+  blood: "#a8324a", bloodL: "#ff7a86", bloodD: "#5c1424",
+  void: "#3a2f5e", voidL: "#7f6fb0", voidD: "#1c1730", onyx: "#2a2233",
+  ghost: "#cfe8ff", sky: "#7fc8ff", skyL: "#dff2ff", skyD: "#2f6a9c",
+  scale: "#3f9c78", scaleL: "#9fe8c4", scaleD: "#1f5c48",
+  energy: "#a8f4ff",
   ivory: "#f7eed9", ivoryD: "#cbb796", bronze: "#b98b4a", bronzeD: "#6f5228", rose: "#e8b3b8",
 }).map(([k, v]) => [k, hex(v) >>> 0]));
 
@@ -39,70 +44,82 @@ function wraps(T, from, to, radius = 0.9) {
 
 export const MELEE_SHAPES = {
   "ember-greatsword": { two: -12, draw(T) {
-    // A weighty executioner blade: oversized spine, hooked shoulders and a furnace-red fuller.
-    wraps(T, -11.5, 2.8, 1.15); band(T, -12.2, 0.8, 1.55, C.bronze, C.bronzeD);
-    polygon(T, [[2.5, -4.8], [5.8, -7.2], [9.5, -6.1], [11, -3.8], [11, 3.8], [9.5, 6.1], [5.8, 7.2], [2.5, 4.8]], C.goldD);
-    polygon(T, [[5, -5.4], [8.8, -5.6], [10.2, -3.2], [10.2, 3.2], [8.8, 5.6], [5, 5.4]], C.gold);
-    for (let i = 10; i < 57; i += 0.4) {
-      const u = (i - 10) / 47, w = u > 0.86 ? (1 - u) / 0.14 * 4.8 : 4.8;
-      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -2.8 ? C.white : k < -0.7 ? C.silver : k < 1.5 ? C.steel : C.edge);
+    // DNF-style executioner silhouette: huge shoulders, a flame guard and a hot fuller.
+    wraps(T, -11.8, 2.6, 1.2); band(T, -12.5, 0.9, 1.65, C.bronze, C.bronzeD);
+    polygon(T, [[1.5, -2.2], [3.8, -8.2], [6.2, -5.5], [8.1, -9], [9.2, -3.2], [9.2, 3.2], [8.1, 9], [6.2, 5.5], [3.8, 8.2], [1.5, 2.2]], C.orange);
+    polygon(T, [[3.8, -3.1], [5.6, -6.3], [7.2, -3.8], [8.1, -5.3], [8.1, 5.3], [7.2, 3.8], [5.6, 6.3], [3.8, 3.1]], C.gold);
+    ring(T, 4.6, 0, 2.2, C.redL); T(4.6, 0, C.orangeL);
+    for (let i = 9; i < 59; i += 0.4) {
+      const u = (i - 9) / 50, w = u > 0.84 ? (1 - u) / 0.16 * 5.2 : 5.2;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -3.2 ? C.white : k < -1 ? C.silver : k < 1.8 ? C.steel : C.edge);
     }
-    for (let i = 12; i < 53; i += 0.45) T(i, 0, i % 4 < 2 ? C.redL : C.red);
+    for (let i = 11; i < 55; i += 0.35) {
+      const heat = Math.sin(i * 0.55) > 0 ? C.orangeL : C.redL;
+      T(i, 0, heat); if (i % 3 < 1) T(i, 1.2, C.red);
+    }
     for (const s of [-1, 1]) {
-      polygon(T, [[16, s * 3.1], [22, s * 4.2], [27, s * 3.2], [22, s * 2.2]], C.red);
-      T(31, s * 2.3, C.goldL);
+      polygon(T, [[14, s * 3.2], [20, s * 5.2], [24, s * 3.3], [29, s * 4.4], [24, s * 1.9]], C.red);
+      T(34, s * 2.5, C.orangeL); T(43, s * 2.1, C.goldL);
     }
   } },
   "frost-lightsword": { two: -5, draw(T) {
-    // A slim photon blade: almost no guard, a long cyan rail and a floating crystal pommel.
-    wraps(T, -7.2, 2.2, 0.7); band(T, -7.8, 0.55, 1.05, C.cyan, C.blue);
-    ring(T, 2.4, 0, 2.6, C.cyan); T(2.4, 0, C.goldL);
-    for (let i = 4.2; i < 47; i += 0.3) {
-      const u = (i - 4.2) / 42.8, w = u > 0.92 ? (1 - u) / 0.08 * 1.5 : 1.5;
-      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -0.55 ? C.white : k < 0.2 ? C.cyan : C.blue);
+    // An energy lightsword: crystal crossguard, twin rails and a deliberately overbright core.
+    wraps(T, -7.4, 2.1, 0.72); band(T, -8, 0.55, 1.05, C.cyan, C.blue);
+    polygon(T, [[1.5, -1.4], [3.8, -5.8], [5.2, -2.2], [7.1, -4.2], [6.2, 0], [7.1, 4.2], [5.2, 2.2], [3.8, 5.8], [1.5, 1.4]], C.blue);
+    polygon(T, [[2.4, -1], [4, -4], [5.1, -1.4], [6, 0], [5.1, 1.4], [4, 4], [2.4, 1]], C.cyan);
+    ring(T, -2.6, 0, 1.5, C.cyan); T(-2.6, 0, C.goldL);
+    for (let i = 6.2; i < 53; i += 0.3) {
+      const u = (i - 6.2) / 46.8, w = u > 0.93 ? (1 - u) / 0.07 * 1.8 : 1.8;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -0.55 ? C.white : k < 0.3 ? C.cyan : C.blue);
     }
-    for (let i = 5; i < 45; i += 0.5) T(i, 0, C.cyan);
-    for (const s of [-1, 1]) for (let i = 8; i < 42; i += 4.5) T(i, s * 1.8, C.goldL);
-    T(-4.8, -1.2, C.cyan); T(-4.8, 1.2, C.cyan);
+    for (let i = 7; i < 51; i += 0.45) {
+      T(i, -1.1, C.cyan); T(i, 0, C.white); T(i, 1.1, C.blue);
+    }
+    for (let i = 11; i < 49; i += 5.5) { T(i, -2.3, C.goldL); T(i, 2.3, C.goldL); }
+    T(53, 0, C.white); T(54, 0, C.cyan);
   } },
   "shadow-katana": { two: -5, draw(T) {
-    // A strongly curved draw blade with an oversized dark tsuba and a wrapped saya-like grip.
-    wraps(T, -7.2, 2.6, 0.8); band(T, -7.8, 0.55, 1.1, C.violet, C.ink);
-    ring(T, 2.8, 0, 3.4, C.ink); ring(T, 2.8, 0, 2.4, C.violet); T(2.8, 0, C.cyan);
-    for (let i = 4.2; i < 43; i += 0.32) {
-      const u = (i - 4.2) / 38.8, curve = -5.2 * u * u, w = u > 0.86 ? (1 - u) / 0.14 * 1.55 : 1.55;
-      for (let k = -w; k <= w; k += 0.4) T(i, curve + k, k < -0.55 ? C.silver : k < 0.35 ? C.violet : C.edge);
+    // A dramatic curved draw blade with a hooked tsuba, shadow saya and trailing ribbons.
+    shaft(T, -10, 1.5, 1.1, C.dark, C.ink); wraps(T, -7.2, 2.6, 0.82); band(T, -7.9, 0.55, 1.1, C.violet, C.ink);
+    ring(T, 2.9, 0, 4.2, C.ink); ring(T, 2.9, 0, 3.2, C.violet); T(2.9, 0, C.cyan);
+    for (const s of [-1, 1]) {
+      polygon(T, [[1.6, s * 2.2], [5.5, s * 5.5], [7.3, s * 4.2], [4.4, s * 1.4]], C.violet);
+      T(5.2, s * 3.2, C.goldD);
     }
-    for (let i = 6; i < 40; i += 0.65) T(i, -3.4 * ((i - 4.2) / 38.8) ** 2, C.cyan);
-    for (let i = 0; i < 4; i++) T(-5.2 - i * 0.5, 1.2 + i * 1.1, i & 1 ? C.violet : C.ink);
+    for (let i = 4.4; i < 48; i += 0.3) {
+      const u = (i - 4.4) / 43.6, curve = -7.4 * u * u, w = u > 0.87 ? (1 - u) / 0.13 * 1.7 : 1.7;
+      for (let k = -w; k <= w; k += 0.4) T(i, curve + k, k < -0.6 ? C.silver : k < 0.35 ? C.violet : C.edge);
+    }
+    for (let i = 7; i < 45; i += 0.55) T(i, -4.8 * ((i - 4.4) / 43.6) ** 2, i % 3 ? C.cyan : C.violet);
+    for (let i = 0; i < 5; i++) { T(-5.4 - i * 0.55, 1.3 + i * 1.25, i & 1 ? C.violet : C.ink); T(-5.2 - i * 0.55, -1.1 - i * 1.1, C.red); }
+    T(47, -7.4, C.white); T(48, -7.6, C.cyan);
   } },
   "thunder-claymore": { two: -10, draw(T) {
-    // A blunt storm cleaver: squared tip, chipped edge and a gold-blue lightning channel.
-    wraps(T, -9.7, 2.6, 1); band(T, -10.4, 0.7, 1.35, C.gold, C.goldD);
-    polygon(T, [[2.5, -4.6], [5, -6], [9, -5.2], [12, -3], [12, 3], [9, 5.2], [5, 6], [2.5, 4.6]], C.blue);
-    polygon(T, [[5, -4.1], [8.5, -4.4], [10.4, -2.5], [10.4, 2.5], [8.5, 4.4], [5, 4.1]], C.steel);
-    for (let i = 11; i < 50; i += 0.4) {
-      const u = (i - 11) / 39, w = u > 0.82 ? (1 - u) / 0.18 * 3.6 : 3.6;
-      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -2.1 ? C.white : k < 0.5 ? C.silver : C.edge);
+    // A thick storm cleaver with a split guard, serrated spine and a visible lightning rune.
+    wraps(T, -10.2, 2.4, 1.05); band(T, -10.9, 0.75, 1.45, C.gold, C.goldD);
+    polygon(T, [[1.6, -3.1], [3.8, -7], [5.8, -4.5], [8.4, -8], [10.8, -3], [10.8, 3], [8.4, 8], [5.8, 4.5], [3.8, 7], [1.6, 3.1]], C.goldD);
+    polygon(T, [[2.8, -2.2], [4.4, -5.4], [5.8, -3.3], [8.1, -5.7], [9.2, -2.2], [9.2, 2.2], [8.1, 5.7], [5.8, 3.3], [4.4, 5.4], [2.8, 2.2]], C.gold);
+    ring(T, 5.5, 0, 1.6, C.blue); T(5.5, 0, C.cyan);
+    // The blade itself breaks into a saw-toothed lightning silhouette instead of a straight sword.
+    polygon(T, [[9, -4.4], [17, -5.6], [22, -3.2], [27, -4.7], [33, -2.7], [38, -3.8], [44, -1.7], [56, 0], [44, 1.7], [38, 3.8], [33, 2.7], [27, 4.7], [22, 3.2], [17, 5.6], [9, 4.4]], C.blue);
+    polygon(T, [[10, -2.8], [18, -3.7], [23, -1.8], [28, -3.1], [33, -1.5], [39, -2.2], [46, -0.6], [53, 0], [46, 0.6], [39, 2.2], [33, 1.5], [28, 3.1], [23, 1.8], [18, 3.7], [10, 2.8]], (_, y) => y < -1 ? C.white : y < 0.6 ? C.silver : C.steel);
+    for (const [x, y] of [[14, -2], [20, 2], [26, -1.6], [32, 1.8], [38, -1.2], [44, 1], [50, -0.4]]) {
+      T(x, y, C.goldL); T(x + 1, y - 1, C.cyan); T(x + 2, y - 1.5, C.blue);
     }
-    for (let i = 13; i < 47; i += 0.45) T(i, 0, C.cyan);
-    for (const [x, y] of [[17, -2], [21, 2], [27, -1], [33, 2], [39, -1]]) T(x, y, C.goldL);
-    for (const s of [-1, 1]) {
-      polygon(T, [[3, s * 2.6], [8, s * 4.5], [10, s * 2.4], [6, s * 1.4]], C.gold);
-      T(28, s * 2.1, C.blue);
-    }
+    for (const s of [-1, 1]) polygon(T, [[3, s * 3], [9, s * 5.6], [12, s * 3], [8, s * 1.5]], C.blue);
   } },
   "starlight-rapier": { two: -3.5, draw(T) {
-    // A needle-thin dueling blade with a full cup guard and a star-shaped pommel.
-    wraps(T, -4.4, 2, 0.6); band(T, -5.2, 0.6, 1.05, C.gold, C.goldD);
-    ring(T, 2.4, 0, 4.1, C.gold); ring(T, 2.4, 0, 2.8, C.cyan);
-    for (let i = -1; i < 2; i += 0.35) T(i, -3.4, C.goldL);
-    for (let i = 4; i <= 48; i += 0.3) {
+    // A showpiece dueling weapon: star guard, crescent cup and a needle blade with a light trail.
+    wraps(T, -4.8, 1.9, 0.62); band(T, -5.6, 0.65, 1.1, C.gold, C.goldD);
+    ring(T, 2.2, 0, 4.8, C.gold); ring(T, 2.2, 0, 3.5, C.cyan);
+    polygon(T, [[-1, -2.6], [1.2, -6.2], [3.1, -2.3], [7, -4.2], [5.1, 0], [7, 4.2], [3.1, 2.3], [1.2, 6.2], [-1, 2.6]], C.goldL);
+    for (let i = 5; i <= 54; i += 0.28) {
       T(i, 0, i < 35 ? C.silver : C.white);
-      if (i < 42) T(i, -0.45, C.cyan);
+      if (i < 48) T(i, -0.55, C.cyan);
+      if (i < 36 && i % 5 < 2) T(i, 0.9, C.goldL);
     }
-    for (const [x, y] of [[-6, 0], [-7.2, 0], [-6.6, -1.2], [-6.6, 1.2]]) T(x, y, C.goldL);
-    T(49, 0, C.white); T(50, 0, C.cyan);
+    for (const [x, y] of [[-6.2, 0], [-7.7, 0], [-6.9, -1.5], [-6.9, 1.5], [-5.7, -2.4], [-5.7, 2.4]]) T(x, y, C.goldL);
+    T(55, 0, C.white); T(56, 0, C.cyan); T(52, -1, C.goldL);
   } },
   dagger: { two: -3, draw(T) {
     wraps(T, -3.8, 2, 0.7); band(T, -4.3, 0.7, 1.15);
@@ -184,6 +201,130 @@ export const MELEE_SHAPES = {
     for (let i = 6; i < 44; i += 0.5) T(i, 0, C.violet);
     for (const dy of [-1.4, 1.4]) for (let i = 5; i < 8.6; i += 0.3) T(i, dy, C.violet);
     T(-9.7, 0, C.redL);
+  } },
+
+  "blood-butterfly": { two: -4.6, draw(T) {
+    // 血蝶之刃: a rising crimson single edge, a butterfly guard and a red tassel.
+    wraps(T, -7.6, 2.2, 0.82);
+    band(T, -8.2, 0.6, 1.1, C.gold, C.goldD);
+    ring(T, -8.7, 0, 1.3, C.gold); T(-8.7, 0, C.bloodL);
+    for (const s of [-1, 1]) {
+      polygon(T, [[2.2, s * 1.2], [4.2, s * 5.4], [6.2, s * 6.4], [7.2, s * 3.8], [5.4, s * 1.8]], C.bloodD);
+      polygon(T, [[2.6, s * 1.5], [4.3, s * 4.6], [5.7, s * 5.3], [6.4, s * 3.6], [5.1, s * 2.0]], C.blood);
+      T(5.9, s * 4.4, C.goldL); T(4.8, s * 3.1, C.bloodL); T(6.9, s * 3.9, C.gold);
+    }
+    band(T, 2.1, 0.8, 1.7, C.gold, C.goldD);
+    for (let i = 5.4; i < 44; i += 0.32) {
+      const u = (i - 5.4) / 38.6, curve = -4.4 * u * u, w = u > 0.86 ? (1 - u) / 0.14 * 2.2 : 2.2;
+      for (let k = -w; k <= w; k += 0.4) T(i, curve + k, k < -1.3 ? C.bloodL : k < -0.2 ? C.blood : k < 1.0 ? C.bloodD : C.ink);
+    }
+    for (let i = 7; i < 41; i += 0.55) T(i, -4.4 * ((i - 5.4) / 38.6) ** 2, i % 3 < 1.4 ? C.gold : C.goldD);
+    for (const s of [-1, 1]) { T(12, s * 2.2, C.gold); T(13, s * 2.8, C.goldL); T(14, s * 2.0, C.bloodL); }
+    T(43.6, -4.4, C.white); T(44, -4.5, C.bloodL);
+    for (let i = 0; i < 4; i++) T(-9.3 - i * 0.5, 1.2 + i * 1.1, i & 1 ? C.bloodL : C.blood);
+  } },
+  "ghost-blade": { two: -5, draw(T) {
+    // 幽影剑: a lacquer grip, a crescent silver guard, and a straight blade that is mostly hollow, with a
+    // broken ghost edge floating above the steel.
+    shaft(T, -8, 2.2, 1.0, C.dark, C.ink);
+    wraps(T, -6.6, 2.4, 0.86);
+    band(T, -7.2, 0.6, 1.15, C.silver, C.edge);
+    ring(T, -7.8, 0, 1.35, C.silver); T(-7.8, 0, C.ghost);
+    for (const s of [-1, 1]) {
+      polygon(T, [[2.2, s * 1.0], [3.4, s * 5.0], [6.2, s * 7.6], [5.4, s * 4.0], [4.2, s * 1.4]], C.silver);
+      polygon(T, [[3.0, s * 1.2], [4.0, s * 4.2], [5.2, s * 6.0], [4.9, s * 3.4], [4.2, s * 1.6]], C.edge);
+      T(6.1, s * 7.4, C.ghost);
+    }
+    band(T, 2.3, 0.7, 1.4, C.silver, C.edge);
+    for (let i = 5; i < 41; i += 0.3) {
+      const u = (i - 5) / 36, w = u > 0.9 ? (1 - u) / 0.1 * 1.9 : 1.9;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -1.2 ? C.ghost : k < -0.3 ? C.white : k < 0.4 ? C.voidL : k < 1.2 ? C.void : C.edge);
+    }
+    for (let i = 7; i < 37; i += 1.2) if (Math.round(i) % 5) T(i, -2.4, C.ghost);
+    for (let i = 9; i < 35; i += 0.8) T(i, 0, i % 4 < 1.2 ? C.ghost : C.voidL);
+    T(40.6, 0, C.white); T(41.4, 0, C.ghost);
+  } },
+  "demon-eye-greatsword": { two: -12, draw(T) {
+    // 魔眼巨剑: black horns over the fist, an open eye in the guard and a jagged slab laced with a red seam.
+    wraps(T, -11.4, 2.4, 1.1);
+    band(T, -12.1, 0.7, 1.5, C.goldD, C.ink);
+    band(T, 2.2, 0.8, 2.2, C.voidD, C.ink);
+    for (const s of [-1, 1]) {
+      polygon(T, [[2.6, s * 1.6], [1.6, s * 5.6], [-0.8, s * 7.6], [0.8, s * 4.2], [0.4, s * 2.0]], C.onyx);
+      polygon(T, [[1.8, s * 2.0], [1.0, s * 4.8], [-0.2, s * 6.4], [0.4, s * 3.8], [0.8, s * 2.2]], C.voidL);
+      T(-0.7, s * 7.3, C.goldD);
+    }
+    ring(T, 4.4, 0, 2.6, C.goldD); ring(T, 4.4, 0, 1.9, C.gold); T(4.4, 0, C.bloodL); T(4.4, 0.8, C.bloodD);
+    polygon(T, [[6, -4.4], [12, -5.6], [17, -4.2], [23, -5.8], [29, -4.1], [35, -5.1], [41, -3.7], [54, 0], [41, 3.7], [35, 5.1], [29, 4.1], [23, 5.8], [17, 4.2], [12, 5.6], [6, 4.4]], C.void);
+    polygon(T, [[7, -3.0], [13, -4.0], [18, -2.8], [24, -4.1], [30, -2.9], [36, -3.6], [42, -2.5], [50, 0], [42, 2.5], [36, 3.6], [30, 2.9], [24, 4.1], [18, 2.8], [13, 4.0], [7, 3.0]], (_, y) => y < -2.2 ? C.ghost : y < -0.8 ? C.voidL : y < 1.2 ? C.void : C.voidD);
+    for (let i = 11; i < 50; i += 0.45) T(i, Math.sin(i * 0.7) * 1.5, i % 3 < 1.2 ? C.bloodL : C.blood);
+    ring(T, 9.5, 0, 1.7, C.bloodD); ring(T, 9.5, 0, 1.0, C.blood); T(9.5, 0, C.goldL);
+    T(53.4, 0, C.white); T(52, -0.6, C.bloodL);
+  } },
+  "skyvault-greatsword": { two: -11, draw(T) {
+    // 天穹巨剑: gold dragon horns sweeping up the blade, a sky-blue heart and a gold spine under it.
+    wraps(T, -10.4, 2.2, 1.05);
+    band(T, -11, 0.7, 1.4, C.gold, C.goldD);
+    polygon(T, [[-11.6, -1.6], [-9.4, 0], [-11.6, 1.6]], C.gold);
+    band(T, 2.2, 0.8, 2.0, C.gold, C.goldD);
+    for (const s of [-1, 1]) {
+      polygon(T, [[3, s * 1.6], [6.4, s * 6.6], [8.4, s * 7.4], [10.6, s * 5.2], [7, s * 2.4]], C.gold);
+      polygon(T, [[4, s * 1.8], [6.8, s * 5.6], [8.2, s * 6.2], [9.4, s * 4.8], [6.8, s * 2.6]], C.goldL);
+      T(10.4, s * 5.0, C.goldD);
+      for (let i = 0; i < 3; i++) T(8.4 + i * 1.2, s * (3.4 + i * 0.5), C.goldD);
+    }
+    polygon(T, [[3.4, -1.6], [5.2, 0], [3.4, 1.6]], C.cyan); T(4.4, 0, C.skyL);
+    for (let i = 5; i < 56; i += 0.3) {
+      const u = (i - 5) / 51, w = u > 0.9 ? (1 - u) / 0.1 * 3.4 : 3.4;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -2.4 ? C.white : k < -1.2 ? C.silver : k < -0.2 ? C.sky : k < 0.9 ? C.skyD : k < 2.4 ? C.steel : C.gold);
+    }
+    for (let i = 7; i < 52; i += 0.5) { T(i, 0.2, C.skyL); if (i % 4 < 1) T(i, -0.2, C.white); }
+    for (const at of [12, 22, 32, 42]) { T(at, -1.6, C.white); T(at + 1, -2.2, C.skyL); T(at + 2, -1.6, C.skyL); T(at + 1.5, -1.0, C.skyL); }
+    T(55.4, 0, C.white); T(54, -0.8, C.skyL);
+  } },
+  "aurora-lightblade": { two: -4.4, draw(T) {
+    // 极光光刃: a gold emitter with two prongs and a blade of light: white core, aqua shell, violet fringe.
+    wraps(T, -6.4, 2.2, 0.72);
+    band(T, -7, 0.5, 1.1, C.gold, C.goldD);
+    ring(T, -7.6, 0, 1.3, C.gold); T(-7.6, 0, C.skyL);
+    band(T, 2.0, 1.0, 1.9, C.gold, C.goldD);
+    for (const s of [-1, 1]) {
+      polygon(T, [[2.6, s * 1.2], [5.2, s * 4.4], [6.6, s * 3.6], [4.2, s * 1.0]], C.gold);
+      T(5.4, s * 4.1, C.skyL); T(6.2, s * 3.8, C.cyan);
+    }
+    for (let i = 5.4; i < 46; i += 0.3) {
+      const u = (i - 5.4) / 40.6, w = u > 0.9 ? (1 - u) / 0.1 * 1.8 : 1.8;
+      // a symmetric blade: white heart, aqua shell, violet fringe (sampled out from the heart, so both
+      // sides get the same pixels whatever the float error is)
+      for (let q = 0.2; q <= w + 1e-6; q += 0.5) {
+        const c = q < 0.45 ? C.white : q < 1.35 ? C.cyan : C.voidL;
+        T(i, q, c); T(i, -q, c);
+      }
+    }
+    for (let i = 9; i < 43; i += 3.2) { T(i, 1.1, C.energy); T(i, -1.1, C.energy); T(i + 1.4, 0, C.white); }
+    T(45.6, 0, C.white); T(44.6, 0, C.energy); T(46.2, 0, C.cyan);
+  } },
+  "dragon-scale-sabre": { two: -7.4, draw(T) {
+    // 龙鳞斩刀: a small dragon-head guard, a wide jade curved blade with a gold spine of scales and a tassel.
+    wraps(T, -9.4, 2.2, 0.92);
+    band(T, -10, 0.6, 1.25, C.gold, C.goldD);
+    ring(T, -10.6, 0, 1.4, C.gold); T(-10.6, 0, C.scaleL);
+    polygon(T, [[2.2, -3.0], [4.6, -4.2], [7.0, -2.6], [6.2, 0.4], [3.4, 2.6], [2.2, 3.0]], C.gold);
+    polygon(T, [[3.0, -2.4], [4.8, -3.2], [6.0, -2.2], [5.4, -0.2], [3.6, 1.6], [3.0, 2.2]], C.goldL);
+    T(6.6, -2.4, C.bloodL); T(4.4, -1.0, C.ink); T(4.4, 1.2, C.ink);
+    for (let i = 6; i < 48; i += 0.3) {
+      const u = (i - 6) / 42, curve = -5.4 * u * u, w = u > 0.88 ? (1 - u) / 0.12 * 3.2 : 3.2;
+      for (let k = -w; k <= w; k += 0.4) T(i, curve + k, k < -2.2 ? C.white : k < -1.1 ? C.scaleL : k < 0.2 ? C.scale : k < 1.8 ? C.scaleD : C.goldD);
+    }
+    const bend = (i) => -5.4 * ((i - 6) / 42) ** 2;
+    for (let i = 8; i < 44; i += 3.4) {
+      const q = bend(i);
+      T(i, q + 1.6, C.goldL); T(i + 1.2, q + 1.1, C.gold); T(i + 2.2, q + 1.7, C.gold);
+      T(i + 0.6, q + 2.3, C.goldD); T(i + 1.7, q + 2.6, C.goldD);
+      T(i + 1, q - 2.7, C.white); T(i + 1, q - 3.0, C.scaleL);
+    }
+    T(47.4, -5.4, C.white); T(46.6, -5.5, C.scaleL);
+    for (let i = 0; i < 4; i++) T(-10.2 - i * 0.4, -1.4 - i * 0.9, i & 1 ? C.red : C.redL);
   } },
   rapier: { two: -3.5, draw(T) {
     wraps(T, -4, 2, 0.65); band(T, -5, 0.7, 1.1);
@@ -298,25 +439,31 @@ export const WEAPON_CLASSES = Object.freeze([
 
 /** Every selectable weapon: melee first, then thrown. `fx` is the dedicated action for each one. */
 export const ARMORY = Object.freeze([
-  { id: "sword", label: "长剑", name: "Sword", fx: "melee/sword-slash", tip: 28, family: "sweep", class: "melee" },
-  { id: "dagger", label: "匕首", name: "Dagger", fx: "melee/dagger-flurry", tip: 14, family: "thrust", class: "melee" },
-  { id: "staff", label: "金箍棍", name: "Banded staff", fx: "melee/staff-combo", tip: 34, family: "sweep", class: "melee" },
-  { id: "spear", label: "长矛", name: "Spear", fx: "melee/spear-sweep", tip: 47, family: "sweep", class: "melee" },
-  { id: "lance", label: "骑士长枪", name: "Knight lance", fx: "melee/lance-thrust", tip: 62, family: "thrust", class: "melee" },
-  { id: "holy-sword", label: "圣剑", name: "Holy sword", fx: "melee/holy-sword-cleave", tip: 40, family: "sweep", class: "melee" },
-  { id: "katana", label: "太刀", name: "Katana", fx: "melee/katana-draw", tip: 36, family: "sweep", class: "melee" },
-  { id: "kusanagi", label: "云从剑", name: "Kusanagi", fx: "kami/ame-no-murakumo", tip: 36, family: "sweep", class: "melee" },
-  { id: "totsuka", label: "十拳剑", name: "Totsuka", fx: "kami/susanoo-thunder", tip: 44, family: "sweep", class: "melee" },
-  { id: "war-mace", label: "重钉锤", name: "War mace", fx: "melee/mace-crush", tip: 35, family: "slam", class: "melee" },
-  { id: "rapier", label: "刺剑", name: "Rapier", fx: "melee/rapier-lunge", tip: 38, family: "thrust", class: "melee" },
-  { id: "kunai", label: "苦无", name: "Kunai", fx: "thrown/kunai-throw", tip: 18, family: "throw", class: "thrown" },
-  { id: "powder-bomb", label: "火药弹", name: "Powder bomb", fx: "thrown/powder-bomb-throw", tip: 15, family: "throw", class: "thrown" },
-  { id: "boomerang", label: "回旋镖", name: "Boomerang", fx: "thrown/boomerang-throw", tip: 19, family: "throw", class: "thrown" },
-  { id: "talisman", label: "符箓", name: "Talisman", fx: "thrown/talisman-throw", tip: 17, family: "throw", class: "thrown" },
-  { id: "flying-sword", label: "飞剑", name: "Flying sword", fx: "thrown/flying-sword-throw", tip: 17, family: "throw", class: "thrown" },
-  { id: "binding-silk", label: "缚仙绫", name: "Binding silk", fx: "thrown/binding-silk-throw", tip: 9, family: "throw", class: "thrown" },
-  { id: "soul-bell", label: "摄魂铃", name: "Soul bell", fx: "thrown/soul-bell-throw", tip: 10, family: "throw", class: "thrown" },
-  { id: "pear-needles", label: "梨花针", name: "Pear-blossom needles", fx: "thrown/pear-needles-throw", tip: 13, family: "throw", class: "thrown" },
+  { id: "sword", label: "长剑", name: "Sword", fx: "melee/sword-slash", tip: 28, family: "sweep", drop: "weapons/sword", class: "melee" },
+  { id: "dagger", label: "匕首", name: "Dagger", fx: "melee/dagger-flurry", tip: 14, family: "thrust", drop: "weapons/dagger", class: "melee" },
+  { id: "staff", label: "金箍棍", name: "Banded staff", fx: "melee/staff-combo", tip: 34, family: "sweep", drop: "weapons/staff", class: "melee" },
+  { id: "spear", label: "长矛", name: "Spear", fx: "melee/spear-sweep", tip: 47, family: "sweep", drop: "weapons/spear", class: "melee" },
+  { id: "lance", label: "骑士长枪", name: "Knight lance", fx: "melee/lance-thrust", tip: 62, family: "thrust", drop: "weapons/lance", class: "melee" },
+  { id: "holy-sword", label: "圣剑", name: "Holy sword", fx: "melee/holy-sword-cleave", tip: 40, family: "sweep", drop: "weapons/holy-sword", class: "melee" },
+  { id: "katana", label: "太刀", name: "Katana", fx: "melee/katana-draw", tip: 36, family: "sweep", drop: "weapons/katana", class: "melee" },
+  { id: "kusanagi", label: "云从剑", name: "Kusanagi", fx: "kami/ame-no-murakumo", tip: 36, family: "sweep", drop: "weapons/kusanagi", class: "melee" },
+  { id: "totsuka", label: "十拳剑", name: "Totsuka", fx: "kami/susanoo-thunder", tip: 44, family: "sweep", drop: "weapons/totsuka", class: "melee" },
+  { id: "blood-butterfly", label: "血蝶之刃", name: "Blood butterfly", fx: "melee/blood-butterfly-dance", tip: 44, family: "sweep", drop: "weapons/blood-butterfly", class: "melee" },
+  { id: "ghost-blade", label: "幽影剑", name: "Ghostlight jian", fx: "melee/ghostlight-draw", tip: 42, family: "sweep", drop: "weapons/ghost-blade", class: "melee" },
+  { id: "demon-eye-greatsword", label: "魔眼巨剑", name: "Demon-eye greatsword", fx: "melee/demon-eye-cleave", tip: 54, family: "slam", drop: "weapons/demon-eye-greatsword", class: "melee" },
+  { id: "skyvault-greatsword", label: "天穹巨剑", name: "Skyvault greatsword", fx: "melee/skyvault-cleave", tip: 56, family: "slam", drop: "weapons/skyvault-greatsword", class: "melee" },
+  { id: "aurora-lightblade", label: "极光光刃", name: "Aurora lightblade", fx: "melee/aurora-lightblade-combo", tip: 46, family: "sweep", drop: "weapons/aurora-lightblade", class: "melee" },
+  { id: "dragon-scale-sabre", label: "龙鳞斩刀", name: "Dragon-scale sabre", fx: "melee/dragon-scale-sweep", tip: 48, family: "sweep", drop: "weapons/dragon-scale-sabre", class: "melee" },
+  { id: "war-mace", label: "重钉锤", name: "War mace", fx: "melee/mace-crush", tip: 35, family: "slam", drop: "weapons/war-mace", class: "melee" },
+  { id: "rapier", label: "刺剑", name: "Rapier", fx: "melee/rapier-lunge", tip: 38, family: "thrust", drop: "weapons/rapier", class: "melee" },
+  { id: "kunai", label: "苦无", name: "Kunai", fx: "thrown/kunai-throw", tip: 18, family: "throw", drop: "weapons/kunai", class: "thrown" },
+  { id: "powder-bomb", label: "火药弹", name: "Powder bomb", fx: "thrown/powder-bomb-throw", tip: 15, family: "throw", drop: "weapons/powder-bomb", class: "thrown" },
+  { id: "boomerang", label: "回旋镖", name: "Boomerang", fx: "thrown/boomerang-throw", tip: 19, family: "throw", drop: "weapons/boomerang", class: "thrown" },
+  { id: "talisman", label: "符箓", name: "Talisman", fx: "thrown/talisman-throw", tip: 17, family: "throw", drop: "weapons/talisman", class: "thrown" },
+  { id: "flying-sword", label: "飞剑", name: "Flying sword", fx: "thrown/flying-sword-throw", tip: 17, family: "throw", drop: "weapons/flying-sword", class: "thrown" },
+  { id: "binding-silk", label: "缚仙绫", name: "Binding silk", fx: "thrown/binding-silk-throw", tip: 9, family: "throw", drop: "weapons/binding-silk", class: "thrown" },
+  { id: "soul-bell", label: "摄魂铃", name: "Soul bell", fx: "thrown/soul-bell-throw", tip: 10, family: "throw", drop: "weapons/soul-bell", class: "thrown" },
+  { id: "pear-needles", label: "梨花针", name: "Pear-blossom needles", fx: "thrown/pear-needles-throw", tip: 13, family: "throw", drop: "weapons/pear-needles", class: "thrown" },
 ]);
 export const MELEE_WEAPONS = Object.freeze(ARMORY.filter((w) => w.class === "melee"));
 export const THROWN_WEAPONS = Object.freeze(ARMORY.filter((w) => w.class === "thrown"));

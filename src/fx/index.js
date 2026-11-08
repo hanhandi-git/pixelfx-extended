@@ -88,9 +88,14 @@ import * as scifi_teleporter_pad from "./scifi/teleporter-pad.js";
 import * as scifi_tractor_beam from "./scifi/tractor-beam.js";
 import * as scifi_warp_in from "./scifi/warp-in.js";
 import * as scifi_warp_out from "./scifi/warp-out.js";
+import * as melee_aurora_lightblade_combo from "./melee/aurora-lightblade-combo.js";
+import * as melee_blood_butterfly_dance from "./melee/blood-butterfly-dance.js";
 import * as melee_claw_swipe from "./melee/claw-swipe.js";
 import * as melee_dagger_flurry from "./melee/dagger-flurry.js";
+import * as melee_demon_eye_cleave from "./melee/demon-eye-cleave.js";
 import * as melee_double_slash from "./melee/double-slash.js";
+import * as melee_dragon_scale_sweep from "./melee/dragon-scale-sweep.js";
+import * as melee_ghostlight_draw from "./melee/ghostlight-draw.js";
 import * as melee_hammer_smash from "./melee/hammer-smash.js";
 import * as melee_heavy_cleave from "./melee/heavy-cleave.js";
 import * as melee_holy_sword_cleave from "./melee/holy-sword-cleave.js";
@@ -99,6 +104,7 @@ import * as melee_lance_thrust from "./melee/lance-thrust.js";
 import * as melee_mace_crush from "./melee/mace-crush.js";
 import * as melee_rapier_lunge from "./melee/rapier-lunge.js";
 import * as melee_scythe_reap from "./melee/scythe-reap.js";
+import * as melee_skyvault_cleave from "./melee/skyvault-cleave.js";
 import * as melee_spear_sweep from "./melee/spear-sweep.js";
 import * as melee_spin_slash from "./melee/spin-slash.js";
 import * as melee_staff_combo from "./melee/staff-combo.js";
@@ -293,6 +299,31 @@ import * as pickups_power_star from "./pickups/power-star.js";
 import * as pickups_spirit_butterfly from "./pickups/spirit-butterfly.js";
 import * as pickups_spirit_stone from "./pickups/spirit-stone.js";
 import * as pickups_xp_orb from "./pickups/xp-orb.js";
+import * as weapons_aurora_lightblade from "./weapons/aurora-lightblade.js";
+import * as weapons_binding_silk from "./weapons/binding-silk.js";
+import * as weapons_blood_butterfly from "./weapons/blood-butterfly.js";
+import * as weapons_boomerang from "./weapons/boomerang.js";
+import * as weapons_dagger from "./weapons/dagger.js";
+import * as weapons_demon_eye_greatsword from "./weapons/demon-eye-greatsword.js";
+import * as weapons_dragon_scale_sabre from "./weapons/dragon-scale-sabre.js";
+import * as weapons_flying_sword from "./weapons/flying-sword.js";
+import * as weapons_ghost_blade from "./weapons/ghost-blade.js";
+import * as weapons_holy_sword from "./weapons/holy-sword.js";
+import * as weapons_katana from "./weapons/katana.js";
+import * as weapons_kunai from "./weapons/kunai.js";
+import * as weapons_kusanagi from "./weapons/kusanagi.js";
+import * as weapons_lance from "./weapons/lance.js";
+import * as weapons_pear_needles from "./weapons/pear-needles.js";
+import * as weapons_powder_bomb from "./weapons/powder-bomb.js";
+import * as weapons_rapier from "./weapons/rapier.js";
+import * as weapons_skyvault_greatsword from "./weapons/skyvault-greatsword.js";
+import * as weapons_soul_bell from "./weapons/soul-bell.js";
+import * as weapons_spear from "./weapons/spear.js";
+import * as weapons_staff from "./weapons/staff.js";
+import * as weapons_sword from "./weapons/sword.js";
+import * as weapons_talisman from "./weapons/talisman.js";
+import * as weapons_totsuka from "./weapons/totsuka.js";
+import * as weapons_war_mace from "./weapons/war-mace.js";
 import * as miku_encore from "./miku/encore.js";
 import * as miku_leek_smash from "./miku/leek-smash.js";
 import * as miku_song_aura from "./miku/song-aura.js";
@@ -452,9 +483,14 @@ export const effects = {
   "scifi/tractor-beam": scifi_tractor_beam,
   "scifi/warp-in": scifi_warp_in,
   "scifi/warp-out": scifi_warp_out,
+  "melee/aurora-lightblade-combo": melee_aurora_lightblade_combo,
+  "melee/blood-butterfly-dance": melee_blood_butterfly_dance,
   "melee/claw-swipe": melee_claw_swipe,
   "melee/dagger-flurry": melee_dagger_flurry,
+  "melee/demon-eye-cleave": melee_demon_eye_cleave,
   "melee/double-slash": melee_double_slash,
+  "melee/dragon-scale-sweep": melee_dragon_scale_sweep,
+  "melee/ghostlight-draw": melee_ghostlight_draw,
   "melee/hammer-smash": melee_hammer_smash,
   "melee/heavy-cleave": melee_heavy_cleave,
   "melee/holy-sword-cleave": melee_holy_sword_cleave,
@@ -463,6 +499,7 @@ export const effects = {
   "melee/mace-crush": melee_mace_crush,
   "melee/rapier-lunge": melee_rapier_lunge,
   "melee/scythe-reap": melee_scythe_reap,
+  "melee/skyvault-cleave": melee_skyvault_cleave,
   "melee/spear-sweep": melee_spear_sweep,
   "melee/spin-slash": melee_spin_slash,
   "melee/staff-combo": melee_staff_combo,
@@ -657,6 +694,31 @@ export const effects = {
   "pickups/spirit-butterfly": pickups_spirit_butterfly,
   "pickups/spirit-stone": pickups_spirit_stone,
   "pickups/xp-orb": pickups_xp_orb,
+  "weapons/aurora-lightblade": weapons_aurora_lightblade,
+  "weapons/binding-silk": weapons_binding_silk,
+  "weapons/blood-butterfly": weapons_blood_butterfly,
+  "weapons/boomerang": weapons_boomerang,
+  "weapons/dagger": weapons_dagger,
+  "weapons/demon-eye-greatsword": weapons_demon_eye_greatsword,
+  "weapons/dragon-scale-sabre": weapons_dragon_scale_sabre,
+  "weapons/flying-sword": weapons_flying_sword,
+  "weapons/ghost-blade": weapons_ghost_blade,
+  "weapons/holy-sword": weapons_holy_sword,
+  "weapons/katana": weapons_katana,
+  "weapons/kunai": weapons_kunai,
+  "weapons/kusanagi": weapons_kusanagi,
+  "weapons/lance": weapons_lance,
+  "weapons/pear-needles": weapons_pear_needles,
+  "weapons/powder-bomb": weapons_powder_bomb,
+  "weapons/rapier": weapons_rapier,
+  "weapons/skyvault-greatsword": weapons_skyvault_greatsword,
+  "weapons/soul-bell": weapons_soul_bell,
+  "weapons/spear": weapons_spear,
+  "weapons/staff": weapons_staff,
+  "weapons/sword": weapons_sword,
+  "weapons/talisman": weapons_talisman,
+  "weapons/totsuka": weapons_totsuka,
+  "weapons/war-mace": weapons_war_mace,
   "miku/encore": miku_encore,
   "miku/leek-smash": miku_leek_smash,
   "miku/song-aura": miku_song_aura,
@@ -814,9 +876,14 @@ export const provenance = {
   "scifi/tractor-beam": "original",
   "scifi/warp-in": "original",
   "scifi/warp-out": "original",
+  "melee/aurora-lightblade-combo": "new",
+  "melee/blood-butterfly-dance": "new",
   "melee/claw-swipe": "original",
   "melee/dagger-flurry": "original",
+  "melee/demon-eye-cleave": "new",
   "melee/double-slash": "original",
+  "melee/dragon-scale-sweep": "new",
+  "melee/ghostlight-draw": "new",
   "melee/hammer-smash": "original",
   "melee/heavy-cleave": "original",
   "melee/holy-sword-cleave": "new",
@@ -825,6 +892,7 @@ export const provenance = {
   "melee/mace-crush": "new",
   "melee/rapier-lunge": "new",
   "melee/scythe-reap": "original",
+  "melee/skyvault-cleave": "new",
   "melee/spear-sweep": "original",
   "melee/spin-slash": "original",
   "melee/staff-combo": "new",
@@ -1019,6 +1087,31 @@ export const provenance = {
   "pickups/spirit-butterfly": "new",
   "pickups/spirit-stone": "new",
   "pickups/xp-orb": "original",
+  "weapons/aurora-lightblade": "new",
+  "weapons/binding-silk": "new",
+  "weapons/blood-butterfly": "new",
+  "weapons/boomerang": "new",
+  "weapons/dagger": "new",
+  "weapons/demon-eye-greatsword": "new",
+  "weapons/dragon-scale-sabre": "new",
+  "weapons/flying-sword": "new",
+  "weapons/ghost-blade": "new",
+  "weapons/holy-sword": "new",
+  "weapons/katana": "new",
+  "weapons/kunai": "new",
+  "weapons/kusanagi": "new",
+  "weapons/lance": "new",
+  "weapons/pear-needles": "new",
+  "weapons/powder-bomb": "new",
+  "weapons/rapier": "new",
+  "weapons/skyvault-greatsword": "new",
+  "weapons/soul-bell": "new",
+  "weapons/spear": "new",
+  "weapons/staff": "new",
+  "weapons/sword": "new",
+  "weapons/talisman": "new",
+  "weapons/totsuka": "new",
+  "weapons/war-mace": "new",
   "miku/encore": "new",
   "miku/leek-smash": "new",
   "miku/song-aura": "new",

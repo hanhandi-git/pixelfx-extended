@@ -1,5 +1,5 @@
 // Melee choreography and contact VFX for the equipment set. Pixels and light stay separate.
-import { fit, rng, fly, clamp, smooth, ease, sparkle, skeleton, meleeWeaponOf } from "../../core/index.js";
+import { fit, rng, fly, clamp, smooth, ease, sparkle, band, skeleton, meleeWeaponOf } from "../../core/index.js";
 import { swing, slash } from "./_lib.js";
 
 export function weaponAttack(config) {
@@ -9,7 +9,8 @@ export function weaponAttack(config) {
     : weapon.id === "staff" ? "staff"
     : weapon.id === "lance" || weapon.id === "spear" ? "lance"
     : weapon.id === "holy-sword" ? "holy"
-    : weapon.id === "katana" ? "draw"
+    : weapon.id === "demon-eye-greatsword" || weapon.id === "skyvault-greatsword" ? "greatslam"
+    : weapon.id === "katana" || weapon.id === "ghost-blade" ? "draw"
     : weapon.id === "war-mace" ? "mace"
     : weapon.id === "rapier" ? "rapier" : thrust ? "lance" : heavy ? "mace" : "sweep";
   const STYLE = {
@@ -18,6 +19,7 @@ export function weaponAttack(config) {
     lance: { two: true, guard: { x: -6, fx: 8, fy: -21, bx: -3, by: -25, sa: -0.2, crouch: 3, lean: -1 }, wind: { x: -13, fx: -9, fy: -19, bx: -2, by: -29, sa: 0.05, crouch: 6, lean: -5, ffx: 9, fbx: -8 }, recovery: { x: 6, fx: 22, fy: -20, bx: 6, by: -25, sa: 0.05, crouch: 5, lean: 7, ffx: 15, fbx: -11, toeB: true }, sweep: 2 / 30, span: 0.25 },
     holy: { two: true, guard: { x: -5, fx: 8, fy: -22, bx: -3, by: -25, sa: -0.7, crouch: 2 }, wind: { x: -8, fx: -3, fy: -39, bx: 7, by: -34, sa: -2.55, crouch: 5, lean: -5, ffx: 7, fbx: -7 }, recovery: { x: 3, fx: 19, fy: -23, bx: 2, by: -29, sa: 0.7, crouch: 6, lean: 6, ffx: 12, fbx: -10, toeB: true }, sweep: 5 / 30, span: 2.35 },
     draw: { two: false, guard: { x: -5, fx: 8, fy: -22, bx: 4, by: -24, sa: -0.15, crouch: 2 }, wind: { x: -11, fx: -5, fy: -20, bx: 7, by: -25, sa: -2.9, crouch: 5, lean: -5, ffx: 8, fbx: -8 }, recovery: { x: 5, fx: 20, fy: -27, bx: -4, by: -25, sa: -0.1, crouch: 4, lean: 5, ffx: 12, fbx: -10 }, sweep: 2 / 30, span: 2.7 },
+    greatslam: { two: true, guard: { x: -5, fx: 8, fy: -22, bx: -3, by: -26, sa: -0.8, crouch: 3 }, wind: { x: -9, fx: 0, fy: -36, bx: 9, by: -31, sa: -2.65, crouch: 7, lean: -6, ffx: 7, fbx: -8 }, recovery: { x: 4, fx: 17, fy: -22, bx: -1, by: -28, sa: 0.45, crouch: 7, lean: 7, ffx: 14, fbx: -11, toeB: true }, sweep: 6 / 30, span: 1.9 },
     mace: { two: true, guard: { x: -5, fx: 7, fy: -21, bx: -3, by: -27, sa: -0.8, crouch: 3 }, wind: { x: -8, fx: 0, fy: -35, bx: 9, by: -30, sa: -2.75, crouch: 8, lean: -7, ffx: 7, fbx: -8 }, recovery: { x: 4, fx: 17, fy: -19, bx: -1, by: -27, sa: 0.75, crouch: 8, lean: 8, ffx: 14, fbx: -11, toeB: true }, sweep: 6 / 30, span: 1.8 },
     rapier: { two: false, guard: { x: -5, fx: 9, fy: -25, bx: 4, by: -23, sa: -0.25, crouch: 2, lean: -1 }, wind: { x: -11, fx: -4, fy: -21, bx: 7, by: -27, sa: -0.45, crouch: 4, lean: -3, ffx: 7, fbx: -8 }, recovery: { x: 8, fx: 25, fy: -21, bx: -5, by: -24, sa: 0.02, crouch: 3, lean: 8, ffx: 16, fbx: -11, toeB: true }, sweep: 2 / 30, span: 0.2 },
     sweep: { two: !!config.two, guard: { x: -4, fx: 7, fy: -24, bx: -4, by: -23, sa: -0.9, crouch: 2 }, wind: { x: -6, fx: 0, fy: -33, bx: 7, by: -27, sa: -2.1, crouch: 4, lean: -2 }, recovery: { x: 2, fx: 12, fy: -25, bx: -5, by: -24, sa: 0.3, crouch: 3, lean: 3 }, sweep: 3 / 30, span: 2.1 },
@@ -26,7 +28,7 @@ export function weaponAttack(config) {
   const guard = { weapon: weapon.id, two, ffx: 5, fbx: -6, ...STYLE.guard };
   const wind = { ...guard, ...STYLE.wind };
   const cues = config.hits.map((time, i) => {
-    const angle = style === "lance" || style === "rapier" ? STYLE.recovery.sa : style === "draw" ? -0.1 : style === "mace" ? 0.7 : style === "holy" ? 0.6 : style === "staff" ? (i % 2 ? 0.75 : -0.85) : style === "rapid" ? (i % 2 ? -0.55 : -1.05) : i % 2 ? -0.3 : 0.3;
+    const angle = style === "lance" || style === "rapier" || style === "greatslam" ? STYLE.recovery.sa : style === "draw" ? -0.1 : style === "mace" ? 0.7 : style === "holy" ? 0.6 : style === "staff" ? (i % 2 ? 0.75 : -0.85) : style === "rapid" ? (i % 2 ? -0.55 : -1.05) : i % 2 ? -0.3 : 0.3;
     const q = { ...guard, ...STYLE.recovery, weapon: weapon.id, two, sa: angle, ghost: 1 };
     const hand = skeleton(q).joints.handN;
     const tx = hand[0] + q.x + Math.cos(angle) * weapon.tip, ty = hand[1] + Math.sin(angle) * weapon.tip;
@@ -123,6 +125,71 @@ export function weaponAttack(config) {
           const pulse = k * (0.5 + 0.5 * Math.sin(age * 22 + i));
           sparkle(p, x, y, 1 + pulse * 2, C[5], C[3], pulse);
         }
+      }
+      if (weapon.id === "blood-butterfly" && age < 0.8) {
+        // petals of the butterly blade: four-pixel wings tumbling off the crossing
+        const k = 1 - smooth(0.1, 0.8, age);
+        for (let i = 0; i < 7; i++) {
+          const r = rng(o.seed, ci, i), a = r.range(-Math.PI, 0.4) + age * r.range(-2.4, 2.4), d = r.range(5, 30) * (0.35 + age * 1.4);
+          const x = c.tx + Math.cos(a) * d, y = c.ty + Math.sin(a) * d * 0.72 - age * 6;
+          p.px(x, y, C[6]); p.px(x + 1, y - 1, C[5]); p.px(x - 1, y + 1, C[3]); p.px(x, y - 1, C[4]);
+        }
+      }
+      if (weapon.id === "ghost-blade" && age < 0.42) {
+        // the cut arrives before its echo: a white line, a hollow violet gap, and motes that stay after
+        const k = 1 - age / 0.42;
+        p.line(c.tx - 46, c.ty - 3, c.tx + 4, c.ty - 5, C[6], k);
+        p.line(c.tx - 40, c.ty + 1, c.tx + 2, c.ty - 1, C[2], k * 0.8);
+        for (let i = 0; i < 6; i++) {
+          const r = rng(o.seed, i), x = c.tx + r.range(-30, 10), y = c.ty - r.range(3, 20) - age * 12;
+          if (Math.sin(age * 24 + i) > 0.2) { p.px(x, y, C[6]); p.px(x, y - 1, C[4]); }
+        }
+        p.glow(c.tx, c.ty - 2, 26, C[5], 0.3 * k);
+      }
+      if (weapon.id === "demon-eye-greatsword" && age < 0.62) {
+        // the eye in the guard opens on the floor where the slab lands: a void ring and an iris
+        const k = 1 - age / 0.62;
+        band(p, c.tx, 0.4, 5 + age * 30, 0.22, Math.max(1, 2.2 * (1 - age / 0.62)), 1.05 * k, [C[2], C[4], C[5], C[6]]);
+        for (let a = 0; a < Math.PI * 2; a += 0.1) p.dot(c.tx + Math.cos(a) * 8, -0.5 + Math.sin(a) * 3.2, C[5], k);
+        p.px(c.tx, -0.5, C[6]); p.px(c.tx, -1.5, C[5]);
+        p.glow(c.tx, -2, 26, C[3], 0.34 * k);
+      }
+      if (weapon.id === "skyvault-greatsword" && age < 0.7) {
+        // torn cloud banks, and pale feathers letting go of the cut
+        const k = 1 - age / 0.7;
+        for (let i = 0; i < 3; i++) {
+          const yy = c.ty - 7 - i * 8, off = age * 34 * (i + 1);
+          for (let x = -34; x <= 20; x += 2) {
+            if (x > 20 - age * 46) continue;
+            p.dot(c.tx + x, yy + Math.sin((x + off) * 0.11 + i * 1.7) * 2, i === 0 ? C[5] : C[3], k * (0.7 - i * 0.15));
+          }
+        }
+        for (let i = 0; i < 7; i++) {
+          const r = rng(o.seed, i), x = c.tx + r.range(-26, 24), y = c.ty - r.range(2, 18) + age * 9;
+          p.px(x, y, C[6]); p.px(x + 1, y - 1, C[4]);
+        }
+        p.glow(c.tx, c.ty - 6, 24, C[4], 0.32 * k);
+      }
+      if (weapon.id === "aurora-lightblade" && age < 0.5) {
+        // the cut stays as a rod of light with beads still racing down the blade line
+        const k = 1 - age / 0.5, ca = Math.cos(c.q.sa), sa = Math.sin(c.q.sa), d1 = 6 + 46 * k;
+        p.line(c.tx - ca * 6, c.ty - sa * 6, c.tx - ca * d1, c.ty - sa * d1, C[5], k * 0.6);
+        for (let i = 0; i < 4; i++) {
+          const d0 = 6 + i * 11 + age * 26, x = c.tx - ca * d0, y = c.ty - sa * d0;
+          p.px(x, y, i % 2 ? C[6] : C[5]);
+          p.px(x, y + 1, C[3]);
+          p.glow(x, y, 6, C[5], 0.22 * k);
+        }
+      }
+      if (weapon.id === "dragon-scale-sabre" && age < 0.6) {
+        // scales peel off the edge and fall
+        const k = 1 - age / 0.6;
+        for (let i = 0; i < 10; i++) {
+          const r = rng(o.seed, ci, i), a = r.range(-2.6, 0.3), sp = r.range(10, 26) * (0.5 + age * 1.8);
+          const x = c.tx + Math.cos(a) * sp, y = Math.max(-1, Math.min(6, c.ty + Math.sin(a) * sp * 0.8 + age * age * 22));
+          p.px(x, y, C[5]); p.px(x + 1, y - 1, C[6]); p.px(x, y + 1, C[3]);
+        }
+        p.glow(c.tx, c.ty, 24, C[4], 0.3 * k);
       }
       if (weapon.id === "katana" && age < 0.24) {
         const k = 1 - age / 0.24;
