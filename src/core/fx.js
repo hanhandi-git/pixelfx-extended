@@ -103,19 +103,42 @@ export function createFx(mod, o = {}) {
  */
 export function composite(f, out, bg = null, lightK = 1) {
   const n = f.w * f.h, C = f.color, L = f.light, flat = typeof bg === "number";
+  const bgFlat = flat ? bg : null;
   for (let i = 0; i < n; i++) {
     const c = C[i], l = L[i] & 0xffffff;
+    const j = i * 4;
+    // Most pixels are empty; copying the backdrop (or zero) avoids the full blend loop.
+    if (!c && !l) {
+      if (bg === null) out[j] = out[j + 1] = out[j + 2] = out[j + 3] = 0;
+      else if (bgFlat !== null) {
+        out[j] = bgFlat & 255;
+        out[j + 1] = (bgFlat >>> 8) & 255;
+        out[j + 2] = (bgFlat >>> 16) & 255;
+        out[j + 3] = 255;
+      } else {
+        const k = bg[i];
+        out[j] = k & 255;
+        out[j + 1] = (k >>> 8) & 255;
+        out[j + 2] = (k >>> 16) & 255;
+        out[j + 3] = 255;
+      }
+      continue;
+    }
     let r, g, b, a;
     const ca = c >>> 24;
     if (ca === 255) {
       r = c & 255; g = (c >>> 8) & 255; b = (c >>> 16) & 255; a = 255;
+      if (!l) {
+        out[j] = r; out[j + 1] = g; out[j + 2] = b; out[j + 3] = 255;
+        continue;
+      }
     } else if (bg === null) {
       // translucent color over nothing keeps its alpha
       r = c & 255; g = (c >>> 8) & 255; b = (c >>> 16) & 255; a = ca;
     } else {
-      const k = flat ? bg : bg[i], f = ca / 255;
-      r = (c & 255) * f + (k & 255) * (1 - f); g = ((c >>> 8) & 255) * f + ((k >>> 8) & 255) * (1 - f);
-      b = ((c >>> 16) & 255) * f + ((k >>> 16) & 255) * (1 - f); a = 255;
+      const k = flat ? bg : bg[i], mix = ca / 255;
+      r = (c & 255) * mix + (k & 255) * (1 - mix); g = ((c >>> 8) & 255) * mix + ((k >>> 8) & 255) * (1 - mix);
+      b = ((c >>> 16) & 255) * mix + ((k >>> 16) & 255) * (1 - mix); a = 255;
     }
     if (l) {
       const lr = (l & 255) * lightK, lg = ((l >>> 8) & 255) * lightK, lb = ((l >>> 16) & 255) * lightK;
@@ -128,7 +151,6 @@ export function composite(f, out, bg = null, lightK = 1) {
         r = Math.min(255, r + lr); g = Math.min(255, g + lg); b = Math.min(255, b + lb);
       }
     }
-    const j = i * 4;
     out[j] = r; out[j + 1] = g; out[j + 2] = b; out[j + 3] = a;
   }
   return out;

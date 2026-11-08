@@ -5,6 +5,13 @@ import { effects, categories, provenance } from "../src/fx/index.js";
 import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, posed, PAL, BACKDROPS, CHARACTERS, characterOf, ARMORY, WEAPON_CLASSES, weaponOf } from "../src/core/index.js";
 import { LANGS, detectLang, getLang, setLang, t as tr, applyStatic, categoryText, characterText, characterOption, weaponText, weaponOption, weaponClassText, backdropText } from "./i18n.js";
 import { THEMES, themeOfCat } from "./themes.js";
+import { getTilePool, WorkerTilePlayer } from "./worker-tile-player.mjs";
+
+let tilePool = null;
+function pool() {
+  if (tilePool === null) tilePool = getTilePool();
+  return tilePool;
+}
 
 const REPO = "https://github.com/hanhandi-git/pixelfx-extended";
 const FX = Object.entries(effects).map(([id, mod]) => {
@@ -12,6 +19,11 @@ const FX = Object.entries(effects).map(([id, mod]) => {
   return { id, cat: id.split("/")[0], name: meta.name, prov: provenance[id] ?? "original", mod: { ...mod, meta }, meta };
 });
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Grid tiles: many effects at once — cap work per frame and only animate what's on screen.
+const TILE_BUDGET_MS = 14;
+const TILE_FULL_UPDATE_MAX = 16;
+const TILE_IO_MARGIN = "72px 0px";
+const MAX_SIM_STEPS = 3;
 // full-screen effects (transitions, weather, impact frames) fill a 16:9 stage edge to edge instead of floating in it
 const isScreen = (fx) => fx.meta.size[0] >= 320 && Math.abs(fx.meta.size[0] / fx.meta.size[1] - 16 / 9) < 0.05;
 const $ = (s) => document.querySelector(s);
@@ -83,14 +95,17 @@ class Player {
     const m = this.fx.meta, step = 1 / m.fps;
     if (this.playing) this.acc = Math.min(this.acc + dt * this.speed, 0.25);
     let moved = false;
-    while (this.acc >= step) {
+    let steps = 0;
+    while (this.acc >= step && steps < MAX_SIM_STEPS) {
       this.acc -= step;
+      steps++;
       if (!m.loop && (this.acted ? this.inst.done() : this.inst.t >= m.duration)) {
         this.wait += step;
         if (this.wait > 0.45) this.restart();
       } else this.inst.update(step);
       moved = true;
     }
+    if (this.acc > step * 2) this.acc = step * 2;
     if (moved || this.dirty) this.render();
   }
   seek(t) {
@@ -121,7 +136,59 @@ class Player {
 
 // ---- tiles
 const tiles = [];
+const tileByFig = new Map();
 const sections = [];
+function ensurePlayer(t) {
+  if (t.player) return;
+  const aspect = isScreen(t.fx) ? 16 / 9 : 6 / 5;
+  const pad = isScreen(t.fx) ? 1 : 1.25;
+  const opts = { character: state.character };
+  const workers = pool();
+  if (workers && !reduced) {
+    t.worker = true;
+    t.player = new WorkerTilePlayer(t.cv, t.fx, aspect, pad, opts, workers);
+  } else {
+    t.worker = false;
+    t.player = new Player(t.cv, t.fx, aspect, pad, opts);
+    if (reduced) t.player.seek(t.fx.meta.duration * 0.4);
+  }
+}
+let gridTickFlight = null;
+let gridPhase = 0;
+function tickGridTiles(dt) {
+  if (gridTickFlight) return;
+  gridTickFlight = tickGridTilesAsync(dt).finally(() => { gridTickFlight = null; });
+}
+async function tickGridTilesAsync(dt) {
+  const deadline = performance.now() + TILE_BUDGET_MS * 4;
+  gridPhase++;
+  const active = [];
+  for (const t of tiles) {
+    if (t.live && t.player && !t.fig.hidden && (!reduced || t.hover)) active.push(t);
+  }
+  if (!active.length) return;
+  const t0 = performance.now();
+  const budgeted = active.length > TILE_FULL_UPDATE_MAX ? [...active].sort((a, b) => (b.ratio ?? 0) - (a.ratio ?? 0)) : active;
+  const jobs = [];
+  for (const t of budgeted) {
+    const phase = (t.phase ?? 0) + (t.player?.slot ?? 0);
+    if ((t.ratio ?? 1) < 0.45 && active.length > 8 && (gridPhase + phase) % 2) continue;
+    if (t.worker) {
+      const job = t.player.tick(dt);
+      if (job) jobs.push(job);
+    } else t.player.tick(dt);
+    if (active.length > 10 && performance.now() - t0 > TILE_BUDGET_MS) break;
+  }
+  if (jobs.length) {
+    await Promise.race([
+      Promise.all(jobs),
+      new Promise((resolve) => {
+        const wait = () => (performance.now() > deadline ? resolve() : requestAnimationFrame(wait));
+        wait();
+      }),
+    ]);
+  }
+}
 function build() {
   $("#count").textContent = FX.length;
   const main = $("#grid");
@@ -148,7 +215,8 @@ function build() {
           el("span", { className: "tile-meta" }, [...(tag ? [tag] : []), small]),
         ]),
       ]);
-      const t = { fx, fig, cv, player: null, visible: false, hover: false, small, tag, copy };
+      const t = { fx, fig, cv, player: null, live: false, ratio: 0, phase: tiles.length & 1, hover: false, small, tag, copy };
+      tileByFig.set(fig, t);
       copy.addEventListener("click", (e) => {
         e.stopPropagation();
         copyName(t);
@@ -165,17 +233,21 @@ function build() {
   }
   updateSections();
   updateTiles();
-  const io = new IntersectionObserver((entries) => {
+  const ioPrep = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) ensurePlayer(tileByFig.get(e.target));
+  }, { rootMargin: TILE_IO_MARGIN });
+  const ioLive = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      const t = tiles.find((x) => x.fig === e.target);
-      t.visible = e.isIntersecting;
-      if (t.visible && !t.player) {
-        t.player = isScreen(t.fx) ? new Player(t.cv, t.fx, 16 / 9, 1, { character: state.character }) : new Player(t.cv, t.fx, 6 / 5, 1.25, { character: state.character });
-        if (reduced) t.player.seek(t.fx.meta.duration * 0.4);
-      }
+      const t = tileByFig.get(e.target);
+      if (!t) continue;
+      t.ratio = e.intersectionRatio;
+      t.live = e.isIntersecting && e.intersectionRatio > 0.02;
     }
-  }, { rootMargin: "200px" });
-  tiles.forEach((t) => io.observe(t.fig));
+  }, { threshold: [0, 0.02, 0.08, 0.2, 0.5, 1] });
+  for (const t of tiles) {
+    ioPrep.observe(t.fig);
+    ioLive.observe(t.fig);
+  }
 }
 
 // ---- copy an effect name from its tile: the async clipboard on a secure page, execCommand on plain http
@@ -258,6 +330,7 @@ const initialParams = new URLSearchParams(location.search), initialSource = init
 const THEME_IDS = ["all", "classic", ...THEMES.map((t) => t.id)];
 const state = { cat: "all", theme: THEME_IDS.includes(initialTheme) ? initialTheme : "all", q: "", prov: ["original", "new"].includes(initialSource) ? initialSource : "all", character: characterOf(initialParams.get("character")).id, weapon: weaponOf(initialParams.get("weapon"))?.id ?? "sword" };
 let castPreview = null;
+let castLive = true;
 function buildCharacters() {
   $("#cast-weapon").addEventListener("change", (event) => {
     state.weapon = event.target.value;
@@ -267,6 +340,10 @@ function buildCharacters() {
   });
   rebuildCast();
   resetCastPreview();
+  const castSec = document.querySelector(".gallery-cast");
+  if (castSec) {
+    new IntersectionObserver(([e]) => { castLive = e.isIntersecting; }, { threshold: 0.08 }).observe(castSec);
+  }
   $("#cast-replay").addEventListener("click", () => {
     if (reduced) castPreview.seek(0.37);
     else { castPreview.restart(); castPreview.render(); }
@@ -329,9 +406,13 @@ function chooseCharacter(id) {
   if (reduced) castPreview.seek(0.37);
   else castPreview.render();
   for (const t of tiles) if (t.player && (t.fx.meta.actor || t.fx.mod.act)) {
-    t.player.setCharacter(state.character);
-    if (reduced) t.player.seek(t.fx.meta.duration * 0.4);
-    else t.player.render();
+    const after = t.player.setCharacter(state.character);
+    if (t.worker) {
+      if (reduced) void Promise.resolve(after).then(() => t.player.seek(t.fx.meta.duration * 0.4));
+    } else {
+      if (reduced) t.player.seek(t.fx.meta.duration * 0.4);
+      else t.player.render();
+    }
   }
   if (detail) {
     detail.setCharacter(state.character); detail.render();
@@ -597,13 +678,20 @@ function wireDetail() {
 
 // ---- the clock
 let last = performance.now();
+let pageLive = !document.hidden;
+document.addEventListener("visibilitychange", () => { pageLive = !document.hidden; last = performance.now(); });
 function frameLoop(now) {
+  if (!pageLive) {
+    last = now;
+    requestAnimationFrame(frameLoop);
+    return;
+  }
   const dt = Math.min(0.1, (now - last) / 1000);
   last = now;
   if (detail) detail.tick(dt);
   else {
-    if (!reduced) castPreview?.tick(dt);
-    for (const t of tiles) if (t.visible && t.player && !t.fig.hidden && (!reduced || t.hover)) t.player.tick(dt);
+    if (!reduced && castLive) castPreview?.tick(dt);
+    tickGridTiles(dt);
   }
   requestAnimationFrame(frameLoop);
 }
