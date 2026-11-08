@@ -101,11 +101,11 @@ their main material palette can be replaced through `options.palette`.
 | `world/sunscar-temple` | Sunset dunes, broken sandstone columns, blowing sand and torn banners | 12 s |
 | `world/wisp-marsh` | Flooded roots, ghost lights, mushroom spores, bubbles and water rings | 12 s |
 | `world/inkbound-shrine` | Broken tiled shrine, a sealed altar, soul banners and low mist | 8 s |
-| `world/starter-camp` | Planted farmland, a sheltered bed, campfire, storage cabinet, guardian statue and rippling portal | 12 s |
-| `world/hearth-town` | Stocked shop, blacksmith forge and anvil, synthesis workbench and hooded informant | 12 s |
+| `world/starter-camp` | Ancient tree sanctuary, planted farmland, velvet-canopied bed, bronze-bound cabinet, campfire, feathered guardian and rune portal | 12 s |
+| `world/hearth-town` | Curved rose-slate shop, monumental blacksmith forge, brass armillary synthesis bench and cloaked alley informant | 12 s |
 
 The camp and town are service backdrops: their facilities are scenery, with no interaction logic baked into the map.
-`world/_settlement.js` shares baked woodwork, tiled roofs, masonry and loop-safe fire, smoke and lanterns.
+`world/_settlement.js` shares clustered material shading, curved timber, bevelled masonry, foliage, perspective paving and loop-safe fire, smoke and lanterns.
 Both maps include Chinese facility tags for gallery search.
 
 Open `/gallery/index.html?source=new#world` to browse all nine.
