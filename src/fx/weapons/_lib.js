@@ -151,7 +151,7 @@ function motes(p, C, t, T, seed, top, S, oy) {
 export function weaponDrop({ id, name, desc, palette, seed = 1 }) {
   const S = upright(id), FLOAT = 13;
   const baseY = -FLOAT - S.maxY; // the pommel hovers at y = -13
-  const tip = { x: 0, y: S.minY + baseY };
+  const tip = { x: 0, y: S.minY }; // sprite-local: draw() adds the same oy as the body
   // the canvas is cut to the item: the floor sits 10 px up from the bottom and the halo needs ~29 px
   // above the point, so a dagger and a two-handed lance both fill their tile at the same 1x scale
   const height = Math.max(100, Math.round(S.span + 68));
