@@ -1,6 +1,6 @@
 # Catalog
 
-390 effects in 32 categories: 244 original and 146 new. Every one is a file in
+392 effects in 32 categories: 244 original and 148 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -595,8 +595,10 @@ battle maps: moonlit ruins, lava caverns, arenas with a layout.
 | Aurora Pass | `world/aurora-pass` | new | map | loop 12s | 320×180 | A frozen mountain pass beneath green aurora curtains: snow-bound massifs catch the sky, frosted conifers climb the shoulders and wind lifts loose snow across a quiet shelf. |
 | Crystal Hollow | `world/crystal-hollow` | new | map | loop 10s | 320×180 | An underground reservoir framed by violet crystal clusters: cyan facets breathe with light, a narrow waterfall feeds the pool and drops open small rings in the dark. |
 | Ember Depths | `world/ember-depths` | new | map | loop 9s | 320×180 | A basalt arena under a volcano: lava falls pour down both walls, a broken bridge smoulders in the dark, heat haze drifts over glowing fissures and ash falls. |
+| Hearth Town | `world/hearth-town` | new | map | loop 12s | 320×180 | 城镇：商店、铁匠铺、合成台与情报员。A lantern-lit service street with a stocked striped shop, a smoking forge and anvil, a crystal synthesis bench and a cloaked informant. |
 | Inkbound Shrine | `world/inkbound-shrine` | new | map | loop 8s | 320×180 | An abandoned eastern shrine: broken tiled eaves, a sealed altar, soul banners and low mist; phase two stains the stone and loosens the hanging paper wards. |
 | Mossy Ruins | `world/mossy-ruins` | new | map | loop 10s | 320×180 | A moonlit clearing inside broken elven ruins: mist drifts over a cracked flagstone floor, fireflies wander the arch and leaves fall through the cold light. |
+| Starter Camp | `world/starter-camp` | new | map | loop 12s | 320×180 | 初始营地：耕地、床、篝火、储物柜、圣像与传送门。A forest refuge with planted furrows, a canvas shelter, a glowing hearth, a guardian shrine and a rippling portal. |
 | Sunscar Temple | `world/sunscar-temple` | new | map | loop 12s | 320×180 | A sandstone sanctuary half buried in sunset dunes: wind carries sand through broken columns, torn banners sway and a sun seal glows above the distant temple door. |
 | Wisp Marsh | `world/wisp-marsh` | new | map | loop 12s | 320×180 | A flooded twilight marsh crossed by a stone causeway: ghost lights drift between crooked roots, luminous mushrooms shed spores and bubbles spread rings across the black water. |
 

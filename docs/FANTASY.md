@@ -88,8 +88,8 @@ node tools/map.mjs world/mossy-ruins
 `gameplay.png` (the map at 1x with the stock hero standing at the hero spawn). If the layout and the picture disagree,
 `check` or the layout image will show it.
 
-The `world` category contains six arenas. Each is 320 × 180 at 30 fps, with a continuous floor at y = 150,
-hero/mob/boss spawns and a quiet combat strip. The four new environments use seeded ambience and periodic motion;
+The `world` category contains nine maps. Each is 320 × 180 at 30 fps, with a continuous floor at y = 150,
+hero/mob/boss spawns and a quiet walking strip. The environments use seeded ambience and periodic motion;
 their main material palette can be replaced through `options.palette`.
 
 | map | environment and motion | loop |
@@ -100,8 +100,15 @@ their main material palette can be replaced through `options.palette`.
 | `world/crystal-hollow` | Faceted crystals, pulsing light, waterfall, drops and reservoir ripples | 10 s |
 | `world/sunscar-temple` | Sunset dunes, broken sandstone columns, blowing sand and torn banners | 12 s |
 | `world/wisp-marsh` | Flooded roots, ghost lights, mushroom spores, bubbles and water rings | 12 s |
+| `world/inkbound-shrine` | Broken tiled shrine, a sealed altar, soul banners and low mist | 8 s |
+| `world/starter-camp` | Planted farmland, a sheltered bed, campfire, storage cabinet, guardian statue and rippling portal | 12 s |
+| `world/hearth-town` | Stocked shop, blacksmith forge and anvil, synthesis workbench and hooded informant | 12 s |
 
-Open `/gallery/index.html?source=new#world` to browse all six.
+The camp and town are service backdrops: their facilities are scenery, with no interaction logic baked into the map.
+`world/_settlement.js` shares baked woodwork, tiled roofs, masonry and loop-safe fire, smoke and lanterns.
+Both maps include Chinese facility tags for gallery search.
+
+Open `/gallery/index.html?source=new#world` to browse all nine.
 H5 previews run the source modules directly. Full-screen maps only need Cocos sprite-sheet export when a game
 needs baked images; their full-resolution loops produce large atlases.
 

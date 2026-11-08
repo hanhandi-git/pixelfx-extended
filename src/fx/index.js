@@ -376,8 +376,10 @@ import * as critters_wisp from "./critters/wisp.js";
 import * as world_aurora_pass from "./world/aurora-pass.js";
 import * as world_crystal_hollow from "./world/crystal-hollow.js";
 import * as world_ember_depths from "./world/ember-depths.js";
+import * as world_hearth_town from "./world/hearth-town.js";
 import * as world_inkbound_shrine from "./world/inkbound-shrine.js";
 import * as world_mossy_ruins from "./world/mossy-ruins.js";
+import * as world_starter_camp from "./world/starter-camp.js";
 import * as world_sunscar_temple from "./world/sunscar-temple.js";
 import * as world_wisp_marsh from "./world/wisp-marsh.js";
 import * as mobs_goblin_agile from "./mobs/goblin-agile.js";
@@ -771,8 +773,10 @@ export const effects = {
   "world/aurora-pass": world_aurora_pass,
   "world/crystal-hollow": world_crystal_hollow,
   "world/ember-depths": world_ember_depths,
+  "world/hearth-town": world_hearth_town,
   "world/inkbound-shrine": world_inkbound_shrine,
   "world/mossy-ruins": world_mossy_ruins,
+  "world/starter-camp": world_starter_camp,
   "world/sunscar-temple": world_sunscar_temple,
   "world/wisp-marsh": world_wisp_marsh,
   "mobs/goblin-agile": mobs_goblin_agile,
@@ -1164,8 +1168,10 @@ export const provenance = {
   "world/aurora-pass": "new",
   "world/crystal-hollow": "new",
   "world/ember-depths": "new",
+  "world/hearth-town": "new",
   "world/inkbound-shrine": "new",
   "world/mossy-ruins": "new",
+  "world/starter-camp": "new",
   "world/sunscar-temple": "new",
   "world/wisp-marsh": "new",
   "mobs/goblin-agile": "new",
