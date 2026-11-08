@@ -38,6 +38,72 @@ function wraps(T, from, to, radius = 0.9) {
 }
 
 export const MELEE_SHAPES = {
+  "ember-greatsword": { two: -12, draw(T) {
+    // A weighty executioner blade: oversized spine, hooked shoulders and a furnace-red fuller.
+    wraps(T, -11.5, 2.8, 1.15); band(T, -12.2, 0.8, 1.55, C.bronze, C.bronzeD);
+    polygon(T, [[2.5, -4.8], [5.8, -7.2], [9.5, -6.1], [11, -3.8], [11, 3.8], [9.5, 6.1], [5.8, 7.2], [2.5, 4.8]], C.goldD);
+    polygon(T, [[5, -5.4], [8.8, -5.6], [10.2, -3.2], [10.2, 3.2], [8.8, 5.6], [5, 5.4]], C.gold);
+    for (let i = 10; i < 57; i += 0.4) {
+      const u = (i - 10) / 47, w = u > 0.86 ? (1 - u) / 0.14 * 4.8 : 4.8;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -2.8 ? C.white : k < -0.7 ? C.silver : k < 1.5 ? C.steel : C.edge);
+    }
+    for (let i = 12; i < 53; i += 0.45) T(i, 0, i % 4 < 2 ? C.redL : C.red);
+    for (const s of [-1, 1]) {
+      polygon(T, [[16, s * 3.1], [22, s * 4.2], [27, s * 3.2], [22, s * 2.2]], C.red);
+      T(31, s * 2.3, C.goldL);
+    }
+  } },
+  "frost-lightsword": { two: -5, draw(T) {
+    // A slim photon blade: almost no guard, a long cyan rail and a floating crystal pommel.
+    wraps(T, -7.2, 2.2, 0.7); band(T, -7.8, 0.55, 1.05, C.cyan, C.blue);
+    ring(T, 2.4, 0, 2.6, C.cyan); T(2.4, 0, C.goldL);
+    for (let i = 4.2; i < 47; i += 0.3) {
+      const u = (i - 4.2) / 42.8, w = u > 0.92 ? (1 - u) / 0.08 * 1.5 : 1.5;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -0.55 ? C.white : k < 0.2 ? C.cyan : C.blue);
+    }
+    for (let i = 5; i < 45; i += 0.5) T(i, 0, C.cyan);
+    for (const s of [-1, 1]) for (let i = 8; i < 42; i += 4.5) T(i, s * 1.8, C.goldL);
+    T(-4.8, -1.2, C.cyan); T(-4.8, 1.2, C.cyan);
+  } },
+  "shadow-katana": { two: -5, draw(T) {
+    // A strongly curved draw blade with an oversized dark tsuba and a wrapped saya-like grip.
+    wraps(T, -7.2, 2.6, 0.8); band(T, -7.8, 0.55, 1.1, C.violet, C.ink);
+    ring(T, 2.8, 0, 3.4, C.ink); ring(T, 2.8, 0, 2.4, C.violet); T(2.8, 0, C.cyan);
+    for (let i = 4.2; i < 43; i += 0.32) {
+      const u = (i - 4.2) / 38.8, curve = -5.2 * u * u, w = u > 0.86 ? (1 - u) / 0.14 * 1.55 : 1.55;
+      for (let k = -w; k <= w; k += 0.4) T(i, curve + k, k < -0.55 ? C.silver : k < 0.35 ? C.violet : C.edge);
+    }
+    for (let i = 6; i < 40; i += 0.65) T(i, -3.4 * ((i - 4.2) / 38.8) ** 2, C.cyan);
+    for (let i = 0; i < 4; i++) T(-5.2 - i * 0.5, 1.2 + i * 1.1, i & 1 ? C.violet : C.ink);
+  } },
+  "thunder-claymore": { two: -10, draw(T) {
+    // A blunt storm cleaver: squared tip, chipped edge and a gold-blue lightning channel.
+    wraps(T, -9.7, 2.6, 1); band(T, -10.4, 0.7, 1.35, C.gold, C.goldD);
+    polygon(T, [[2.5, -4.6], [5, -6], [9, -5.2], [12, -3], [12, 3], [9, 5.2], [5, 6], [2.5, 4.6]], C.blue);
+    polygon(T, [[5, -4.1], [8.5, -4.4], [10.4, -2.5], [10.4, 2.5], [8.5, 4.4], [5, 4.1]], C.steel);
+    for (let i = 11; i < 50; i += 0.4) {
+      const u = (i - 11) / 39, w = u > 0.82 ? (1 - u) / 0.18 * 3.6 : 3.6;
+      for (let k = -w; k <= w; k += 0.4) T(i, k, k < -2.1 ? C.white : k < 0.5 ? C.silver : C.edge);
+    }
+    for (let i = 13; i < 47; i += 0.45) T(i, 0, C.cyan);
+    for (const [x, y] of [[17, -2], [21, 2], [27, -1], [33, 2], [39, -1]]) T(x, y, C.goldL);
+    for (const s of [-1, 1]) {
+      polygon(T, [[3, s * 2.6], [8, s * 4.5], [10, s * 2.4], [6, s * 1.4]], C.gold);
+      T(28, s * 2.1, C.blue);
+    }
+  } },
+  "starlight-rapier": { two: -3.5, draw(T) {
+    // A needle-thin dueling blade with a full cup guard and a star-shaped pommel.
+    wraps(T, -4.4, 2, 0.6); band(T, -5.2, 0.6, 1.05, C.gold, C.goldD);
+    ring(T, 2.4, 0, 4.1, C.gold); ring(T, 2.4, 0, 2.8, C.cyan);
+    for (let i = -1; i < 2; i += 0.35) T(i, -3.4, C.goldL);
+    for (let i = 4; i <= 48; i += 0.3) {
+      T(i, 0, i < 35 ? C.silver : C.white);
+      if (i < 42) T(i, -0.45, C.cyan);
+    }
+    for (const [x, y] of [[-6, 0], [-7.2, 0], [-6.6, -1.2], [-6.6, 1.2]]) T(x, y, C.goldL);
+    T(49, 0, C.white); T(50, 0, C.cyan);
+  } },
   dagger: { two: -3, draw(T) {
     wraps(T, -3.8, 2, 0.7); band(T, -4.3, 0.7, 1.15);
     polygon(T, [[2, -3.2], [3.3, -2], [3.3, 2], [2, 3.2]], C.gold);
