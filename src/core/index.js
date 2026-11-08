@@ -9,7 +9,7 @@ export * from "./fields.js";
 export { SDF } from "./sdf.js";
 export { Particles, Bits, Lights, Blazes, P, PF, B, GRAVITY, FIRE_RAMP, SMOKE_RAMP, sparkle, flare, band, crystal } from "./sim.js";
 export { Painter } from "./painter.js";
-export { FONTS, textWidth } from "./font.js";
+export { FONTS, textWidth, glyphFor, isCjk } from "./font.js";
 export { createFrame, clearFrame, createFx, composite, painterFor, resolveOptions } from "./fx.js";
 export { stockActor, drawActor, actorAlphaOf, HERO, HERO2, HERO_PAL, DUMMY_PAL } from "./actor.js";
 export { CHARACTERS, characterOf } from "./characters.js";

@@ -13,7 +13,7 @@ export const meta = {
   loop: false,
   fps: 30,
   bg: "dark",
-  options: { text: "HP +18", tone: "gold", seed: 6 },
+  options: { text: "HP +18", tone: "gold", seed: 6, plate: true },
 };
 
 export function draw(p, t, o) {
@@ -22,9 +22,11 @@ export function draw(p, t, o) {
   if (a <= 0.01) return;
   const G = UI_TONES[o.tone] ? UI_TONES[o.tone].map((c) => hex(c)) : UI_GOLD.map((c) => hex(c));
   const x = Math.round((1 - ease.outCubic(ain)) * 20 + ease.inCubic(aout) * 20), y = 0;
-  plate(p, x - 70, y - 9, 140, 18, UI_INK, { r: 3, a });
-  p.rect(x - 67, y - 7, 134, 1, G[4], a);
-  p.px(x - 64, y, G[6], a); p.px(x - 63, y, G[5], a);
+  if (o.plate !== false) {
+    plate(p, x - 70, y - 9, 140, 18, UI_INK, { r: 3, a });
+    p.rect(x - 67, y - 7, 134, 1, G[4], a);
+    p.px(x - 64, y, G[6], a); p.px(x - 63, y, G[5], a);
+  }
   p.text(o.text ?? "", x + 2, y - 2, G[7], { align: "center", outline: UI_INK.outline, a });
   p.glow(x, y, 50, G[4], 0.08 * a);
 }

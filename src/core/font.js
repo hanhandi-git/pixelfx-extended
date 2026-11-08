@@ -1,5 +1,7 @@
 // Two pixel fonts: "mini" (3x5) for small numbers and tags, "big" (5x7) for words like LEVEL UP.
 // Glyphs are trimmed to their inked columns, so text sets proportionally (an I is narrower than an M).
+// han5 / han7 are fixed 5×5 and 7×7 CJK cells (see font-han-data.js) for Quest-style UI in Chinese.
+import { HAN5, HAN7 } from "./font-han-data.js";
 
 const MINI = {
   A: ".#.|#.#|###|#.#|#.#", B: "##.|#.#|##.|#.#|##.", C: ".##|#..|#..|#..|.##", D: "##.|#.#|#.#|#.#|##.",
@@ -56,33 +58,72 @@ function build(table, h) {
   return out;
 }
 
+function buildFixed(table, h, w) {
+  const out = {};
+  for (const [ch, src] of Object.entries(table)) {
+    const rows = src.split("|");
+    if (rows.length !== h) throw new Error(`glyph ${ch} has ${rows.length} rows, expected ${h}`);
+    out[ch] = { w, rows: rows.map((r) => [...r.slice(0, w)].map((c) => c === "#")) };
+  }
+  return out;
+}
+
+export function isCjk(ch) {
+  const c = ch.codePointAt(0) ?? 0;
+  return (c >= 0x4e00 && c <= 0x9fff) || (c >= 0x3400 && c <= 0x4dbf) || ch === "、" || ch === "。" || ch === "·";
+}
+
 export const FONTS = {
   mini: { h: 5, space: 2, gap: 1, glyphs: build(MINI, 5) },
   big: { h: 7, space: 3, gap: 1, glyphs: build(BIG, 7) },
+  han5: { h: 5, space: 5, gap: 1, glyphs: buildFixed(HAN5, 5, 5) },
+  han7: { h: 7, space: 7, gap: 1, glyphs: buildFixed(HAN7, 7, 7) },
 };
+
+/** One glyph for Latin or CJK within a Latin font tier (mini ↔ han5, big ↔ han7). */
+export function glyphFor(ch, font = "mini") {
+  const F = FONTS[font] ?? FONTS.mini;
+  let g = F.glyphs[ch];
+  if (!g && ch.length === 1 && ch >= "A" && ch <= "Z") g = F.glyphs[ch.toLowerCase()] ?? F.glyphs[ch];
+  if (!g && ch.length === 1 && ch >= "a" && ch <= "z") g = F.glyphs[ch.toUpperCase()] ?? F.glyphs[ch];
+  if (!g && isCjk(ch)) g = (font === "big" ? FONTS.han7 : FONTS.han5).glyphs[ch];
+  return g ?? null;
+}
+
+function advanceFor(ch, font, g) {
+  const F = FONTS[font] ?? FONTS.mini;
+  if (g) return g.w + F.gap;
+  if (ch === " ") return F.space + F.gap;
+  if (isCjk(ch)) {
+    const H = font === "big" ? FONTS.han7 : FONTS.han5;
+    return H.space + F.gap;
+  }
+  return F.space + F.gap;
+}
 
 /** Width in font pixels of a string (before scaling). */
 export function textWidth(str, font = "mini") {
-  const F = FONTS[font];
+  const F = FONTS[font] ?? FONTS.mini;
   let w = 0;
   for (const ch of String(str)) {
-    const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
-    w += (g ? g.w : F.space) + F.gap;
+    const g = glyphFor(ch, font);
+    w += advanceFor(ch, font, g);
   }
   return Math.max(0, w - F.gap);
 }
 
 /** Calls plot(x, y) for every inked font pixel of str, with the top-left of the text at (0, 0). */
 export function rasterText(str, font, plot) {
-  const F = FONTS[font];
+  const F = FONTS[font] ?? FONTS.mini;
   let x = 0;
   for (const ch of String(str)) {
-    const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
+    const g = glyphFor(ch, font);
     if (!g) {
-      x += F.space + F.gap;
+      x += advanceFor(ch, font, null);
       continue;
     }
-    for (let r = 0; r < F.h; r++) for (let c = 0; c < g.w; c++) if (g.rows[r][c]) plot(x + c, r);
-    x += g.w + F.gap;
+    const h = font === "big" && isCjk(ch) ? 7 : F.h;
+    for (let r = 0; r < h; r++) for (let c = 0; c < g.w; c++) if (g.rows[r][c]) plot(x + c, r);
+    x += advanceFor(ch, font, g);
   }
 }

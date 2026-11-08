@@ -6,16 +6,23 @@ export const meta = {
   desc: "An illustrated chamfered skill tile: sword, flame, ice crystal, lightning, healing, meteor or arcane gem. Selection brackets, mana pips, cooldown, pressed and disabled states.",
   tags: ["ui", "skill", "node", "ability", "icon", "cooldown", "loop"],
   size: [92, 92], origin: [46, 46], duration: 2.4, loop: true, fps: 30, bg: "dark",
-  options: { icon: "fire", selected: false, pressed: false, disabled: false, cooldown: 0, cdText: "", mana: 1, level: "", palette: null, seed: 8 },
+  options: { icon: "fire", selected: false, pressed: false, disabled: false, cooldown: 0, cdText: "", mana: 1, level: "", palette: null, hud: false, seed: 8 },
 };
 
 export function draw(p, t, o) {
   const icon = ["slash", "fire", "frost", "bolt", "mend", "meteor", "burst", "none"].includes(o.icon) ? o.icon : "fire";
-  const C = tone(icon, o.palette, o.disabled), y = o.pressed ? -32 : -34;
-  cutPlate(p, -34, y, 68, 68, C, o.selected || o.pressed);
-  p.rect(-27, y + 7, 54, 51, INK);
-  p.poly([[-27, y + 12], [15, y + 7], [27, y + 7], [-27, y + 43]], C[0]);
-  p.glow(0, y + 32, 25, C[2], o.selected ? 0.2 : 0.1);
+  const C = tone(icon, o.palette, o.disabled), hud = !!o.hud, y = o.pressed ? -32 : -34;
+  const cy = y + 32;
+  if (hud) {
+    p.glow(0, cy, 28, C[2], o.selected ? 0.16 : 0.08);
+    p.ring(0, cy, 27, 2, o.selected ? GOLD[4] : C[3], 0.9);
+    p.ring(0, cy, 25, 1, INK, 0.35);
+  } else {
+    cutPlate(p, -34, y, 68, 68, C, o.selected || o.pressed);
+    p.rect(-27, y + 7, 54, 51, INK);
+    p.poly([[-27, y + 12], [15, y + 7], [27, y + 7], [-27, y + 43]], C[0]);
+    p.glow(0, cy, 25, C[2], o.selected ? 0.2 : 0.1);
+  }
   iconArt(p, icon, 0, y + 31, C, t);
   const cd = clamp(o.cooldown ?? 0), edge = -Math.PI / 2 + cd * TAU;
   if (cd > 0) {
@@ -29,15 +36,15 @@ export function draw(p, t, o) {
     if (o.cdText) p.text(String(o.cdText).slice(0, 4), 0, y + 28, SILVER[4], { font: "big", align: "center", outline: INK });
   }
   const mana = o.mana === false ? 0 : clamp(o.mana ?? 1);
-  for (let i = 0; i < 3; i++) {
+  if (!hud) for (let i = 0; i < 3; i++) {
     const x = -8 + i * 8;
     p.poly([[x, y + 60], [x + 2, y + 62], [x, y + 64], [x - 2, y + 62]], mana > i / 3 ? C[3] : SILVER[0]);
   }
-  if (o.selected) {
+  if (o.selected && !hud) {
     for (const [x, py, sign] of [[-38, y - 3, 1], [37, y + 71, -1]]) {
       p.line(x, py, x + sign * 12, py, GOLD[4]); p.line(x, py, x, py + sign * 12, GOLD[3]);
     }
-    p.glow(0, y + 3, 13, GOLD[3], 0.12 + 0.06 * Math.sin(t / 2.4 * TAU));
+    if (!hud) p.glow(0, y + 3, 13, GOLD[3], 0.12 + 0.06 * Math.sin(t / 2.4 * TAU));
   }
   if (o.pressed) p.line(-24, y + 7, 24, y + 7, C[5]);
   if (o.level) {

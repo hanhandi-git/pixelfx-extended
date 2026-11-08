@@ -6,11 +6,11 @@
 
 # pixelfx-extended.
 
-在 [**pixelfx**](https://github.com/patch-gg/pixelfx) 原版 244 特效基线之上，额外增加 **<!-- new-count -->102<!-- /new-count -->** 条地图、小怪等素材的扩展仓库。
+在 [**pixelfx**](https://github.com/patch-gg/pixelfx) 原版 244 特效基线之上，额外增加 **<!-- new-count -->115<!-- /new-count -->** 条地图、小怪等素材的扩展仓库。
 
-**<!-- count -->346<!-- /count --> 个像素特效与动画，每一个都是一小段代码。** 火焰、爆炸、魔法、天气、UI、拾取物、小动物等。可实时播放、换色与镜像，嵌入浏览器游戏，或导出精灵图给任意引擎。另有 **奇幻游戏套件** —— 战斗地图、小怪与 Boss 单位、带预警的技能，以及在 `src/encounters/` 中编写的遭遇战时间轴 —— 以及 Claude Code skill，用像素画师那套「起草 → 渲染 → 眼看 → 精修」流程做新内容。
+**<!-- count -->359<!-- /count --> 个像素特效与动画，每一个都是一小段代码。** 火焰、爆炸、魔法、天气、UI、拾取物、小动物等。可实时播放、换色与镜像，嵌入浏览器游戏，或导出精灵图给任意引擎。另有 **奇幻游戏套件** —— 战斗地图、小怪与 Boss 单位、带预警的技能，以及在 `src/encounters/` 中编写的遭遇战时间轴 —— 以及 Claude Code skill，用像素画师那套「起草 → 渲染 → 眼看 → 精修」流程做新内容。
 
-库内 **<!-- original-count -->244<!-- /original-count -->** 个原始特效与 **<!-- new-count -->102<!-- /new-count -->** 个新增。[Gallery](gallery/index.html) 会把每条资源标为 `original` 或 `new`，并支持按来源筛选。
+库内 **<!-- original-count -->244<!-- /original-count -->** 个原始特效与 **<!-- new-count -->115<!-- /new-count -->** 个新增。[Gallery](gallery/index.html) 会把每条资源标为 `original` 或 `new`，并支持按来源筛选。
 
 有 **<!-- act-count -->118<!-- /act-count -->** 个特效导出 **`act`** 时间轴（蓄力、出手、命中定格、受击与收招）。另有 **<!-- moves-count -->12<!-- /moves-count -->** 个 **`moves`**（`src/fx/moves/`）把这一套打成从 wind-up 到 recovery 的完整攻击。
 
@@ -24,7 +24,7 @@
 
 ## 新增内容
 
-以下 **<!-- new-count -->102<!-- /new-count -->** 条不在原始 244 特效基线内：奇幻地图、小怪、Boss 等。在 [Gallery（`?source=new`）](gallery/index.html?source=new) 或部署版 [在线 Gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown)（仅新增、Moon Oracle、投掷分类）浏览。
+以下 **<!-- new-count -->115<!-- /new-count -->** 条不在原始 244 特效基线内：奇幻地图、小怪、Boss 等。在 [Gallery（`?source=new`）](gallery/index.html?source=new) 或部署版 [在线 Gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown)（仅新增、Moon Oracle、投掷分类）浏览。
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="六张 320×180 奇幻战斗地图循环预览：极光隘口、水晶洞窟、余烬深渊、苔痕遗迹、日痕神殿与磷火沼泽。">
@@ -40,6 +40,17 @@
 | **world** | Mossy Ruins | `world/mossy-ruins` |
 | **world** | Sunscar Temple | `world/sunscar-temple` |
 | **world** | Wisp Marsh | `world/wisp-marsh` |
+| **mobs** | Goblin Agile | `mobs/goblin-agile` |
+| **mobs** | Goblin Agile Flurry | `mobs/goblin-agile-flurry` |
+| **mobs** | Goblin Archer | `mobs/goblin-archer` |
+| **mobs** | Goblin Archer Shot | `mobs/goblin-archer-shot` |
+| **mobs** | Goblin Giant | `mobs/goblin-giant` |
+| **mobs** | Goblin Giant Quake | `mobs/goblin-giant-smash` |
+| **mobs** | Goblin Mage | `mobs/goblin-mage` |
+| **mobs** | Goblin Mage Bolt | `mobs/goblin-mage-bolt` |
+| **mobs** | Goblin Warrior | `mobs/goblin-warrior` |
+| **mobs** | Goblin Warrior Slash | `mobs/goblin-warrior-slash` |
+| **spawn** | Goblin Death | `spawn/goblin-death` |
 | **spawn** | Ink Unravel | `spawn/ink-unravel` |
 | **spawn** | Shanhaijing summon | `spawn/shanhaijing-summon` |
 | **spawn** | Talisman suppression | `spawn/talisman-suppression` |
@@ -65,6 +76,7 @@
 | **fanren** | Immortal-slaying bead | `fanren/immortal-slaying-bead` |
 | **fanren** | Heaven-palm bottle | `fanren/palm-heaven-bottle` |
 | **fanren** | Xuantian spirit-slaying sword | `fanren/xuantian-sword` |
+| **impacts** | Goblin Hit | `impacts/goblin-hit` |
 | **kami** | Ame-no-Murakumo | `kami/ame-no-murakumo` |
 | **kami** | Six magatama | `kami/magatama-six` |
 | **kami** | Susanoo, storm-drum sword | `kami/susanoo-thunder` |
@@ -125,6 +137,7 @@
 | **thrown** | Talisman throw | `thrown/talisman-throw` |
 | **ui** | HUD banner | `ui/banner` |
 | **ui** | HUD dialog | `ui/dialog` |
+| **ui** | HUD toggle | `ui/hud-toggle` |
 | **ui** | Loadout card | `ui/loadout-card` |
 | **ui** | Loadout panel | `ui/loadout-panel` |
 | **ui** | HUD panel | `ui/panel` |
@@ -144,9 +157,10 @@
 <!-- catalog -->
 | category | effects | some of them |
 |---|---|---|
+| **ui** | 25 | hud banner, hud dialog, hud toggle, loadout card, loadout panel, hud panel… |
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **ninjutsu** | 12 | amaterasu, chidori rush, earth wall, great breakthrough, great fireball, kirin… |
-| **ui** | 24 | hud banner, hud dialog, loadout card, loadout panel, hud panel, skill node… |
+| **mobs** | 10 | goblin agile, goblin agile flurry, goblin archer, goblin archer shot, goblin giant, goblin giant quake… |
 | **thrown** | 8 | binding silk, boomerang throw, flying sword, kunai throw, pear-blossom needles, powder bomb throw… |
 | **dragonball** | 8 | destructo disc, drill beam, golden aura, ki charge, ki volley, ki wave… |
 | **lightning** | 18 | forked burst, ground surge, static cage, storm sigil, storm vortex, thunder rain… |
@@ -155,9 +169,10 @@
 | **senjutsu** | 6 | gate of the great god, sage art: goemon, sage orb, thousand wood dragons, white flash, wind shuriken |
 | **a mortal's journey** | 6 | azure bamboo swords, evil-warding thunder, gold-devouring beetles, immortal-slaying bead, heaven-palm bottle, xuantian spirit-slaying sword |
 | **miku** | 5 | encore, leek smash, song aura, sound wave, vocal burst |
+| **spawn & death** | 14 | goblin death, ink unravel, shanhaijing summon, talisman suppression, coin drop, disintegrate… |
 | **konosuba** | 4 | explosion chant, explosion crater, explosion, explosion |
 | **japanese legend** | 4 | ame-no-murakumo, six magatama, susanoo, storm-drum sword, tsukuyomi, moon bow |
-| **spawn & death** | 13 | ink unravel, shanhaijing summon, talisman suppression, coin drop, disintegrate, dissolve burn… |
+| **impacts** | 12 | goblin hit, blunt hit, bullet impact, critical hit, ground slam, heavy landing… |
 | **arcane** | 13 | flow seal, arcane beam, arcane missiles, arcane orb, blink in, blink out… |
 | **moves** | 12 | arrow shot, dash strike, earth stomp, fireball throw, ground pound, holy smite… |
 | **fire** | 12 | brazier, campfire, candle, fire breath, fire ring, fire tornado… |
@@ -165,7 +180,6 @@
 | **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |
 | **ice** | 10 | blizzard vortex, freeze, frost breath, frost nova, ice crystal, ice lance… |
 | **sci-fi** | 12 | emp blast, energy core, force field, glitch, hologram, jetpack… |
-| **impacts** | 11 | blunt hit, bullet impact, critical hit, ground slam, heavy landing, hit flash… |
 | **projectiles** | 13 | arrow, bullet tracer, cannon shot, energy disc, signal flare, homing missile… |
 | **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
 | **shadow** | 12 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
@@ -204,7 +218,7 @@ node tools/map.mjs world/mossy-ruins
 node tools/encounter.mjs <name> --mp4
 ```
 
-本仓库当前未附带示例遭遇战；在 `src/encounters/` 添加模块之前，[`docs/ENCOUNTERS.md`](docs/ENCOUNTERS.md) 中为 **<!-- encounter-count -->0<!-- /encounter-count -->** 条。添加后 [gallery/fantasy.html](gallery/fantasy.html) 会与工具共用同一套时间轴。
+本仓库当前未附带示例遭遇战；在 `src/encounters/` 添加模块之前，[`docs/ENCOUNTERS.md`](docs/ENCOUNTERS.md) 中为 **<!-- encounter-count -->1<!-- /encounter-count -->** 条。添加后 [gallery/fantasy.html](gallery/fantasy.html) 会与工具共用同一套时间轴。
 
 新内容会像普通特效一样过 `npm run check`（地面与出生点、有 Boss 时的阶段、攻击 hit 时间、时间轴顺序等）。`node tools/index.mjs` 会 regenerate 注册表与 [目录](docs/CATALOG.md)/[遭遇目录](docs/ENCOUNTERS.md)。数据约定与设计清单见 [docs/FANTASY.md](docs/FANTASY.md)。
 

@@ -1,4 +1,4 @@
-import { Particles, Lights, P, Rng, fit, sparkle, clamp, seg, ease, rand, TAU, WHITE, scale } from "../../core/index.js";
+import { Particles, Lights, P, Rng, fit, sparkle, clamp, seg, ease, rand, TAU, WHITE, scale, FONTS } from "../../core/index.js";
 import { spell, drawWord, shake } from "./_lib.js";
 
 export const meta = {
@@ -11,19 +11,19 @@ export const meta = {
   loop: false,
   fps: 30,
   bg: "dark",
-  options: { palette: ["#1a0516", "#3d0a33", "#701560", "#b0228f", "#f53cd1", "#ff86e6", "#ffd2f6", "#ffffff"], count: 5, label: "COMBO", seed: 6 },
+  options: { palette: ["#1a0516", "#3d0a33", "#701560", "#b0228f", "#f53cd1", "#ff86e6", "#ffd2f6", "#ffffff"], count: 5, label: "COMBO", seed: 6, textScale: (4 * 7) / 5 },
 };
 
 const HIT = 0.1, BEAT = 0.5, OUT = 1.1;
 
 // a burst of speed lines across the frame, re-thrown every frame like a comic panel; k fades them
-function speedLines(p, C, t, k, dir) {
+function speedLines(p, C, t, k, dir, fx = 1) {
   if (k <= 0.02) return;
   const f = Math.floor(t * 30);
   for (let i = 0; i < 18; i++) {
     if (rand(f, i, 3) > k) continue;
-    const y = Math.round((rand(f, i, 1) - 0.5) * 60), L = 16 + rand(f, i, 2) * 50, x = (rand(f, i, 4) - 0.5) * 190;
-    const x0 = Math.max(-100, x - L / 2), x1 = Math.min(100, x + L / 2);
+    const y = Math.round((rand(f, i, 1) - 0.5) * 60 * fx), L = (16 + rand(f, i, 2) * 50) * fx, x = (rand(f, i, 4) - 0.5) * 190 * fx;
+    const x0 = Math.max(-100 * fx, x - L / 2), x1 = Math.min(100 * fx, x + L / 2);
     p.line(x0, y, x1, y, (u) => ((dir > 0 ? u : 1 - u) > 0.75 ? WHITE : (dir > 0 ? u : 1 - u) > 0.35 ? C[6] : C[4]), (u) => ((dir > 0 ? u : 1 - u) < 0.25 ? 0.6 : 1));
   }
 }
@@ -32,16 +32,24 @@ export function create(o) {
   const C = fit(o.palette, 8), R = new Rng(o.seed), SHADOW = scale(C[0], 0.5);
   const ps = new Particles({ rng: R, sparks: [C[7], C[6], C[5], C[3]] }), lights = new Lights();
   const big = spell("x" + Math.round(o.count)), lab = spell(o.label);
-  const BS = 4, LS = 2, W = big.w * BS + 4 + lab.w * LS, X0 = -W / 2, BASE = 12;
-  const spikes = Array.from({ length: 10 }, (_, i) => [(i / 10) * TAU + R.range(-0.15, 0.15), R.range(14, 24)]);
+  const legacyGs = o.glyphScale;
+  const vsNormal = Math.max(
+    0.5,
+    o.textScale ?? (legacyGs != null ? ((4 * legacyGs) * FONTS.big.h) / FONTS.mini.h : ((4 * FONTS.big.h) / FONTS.mini.h)),
+  );
+  // textScale is × normal combat floaters (mini @ 1); count uses big glyphs at BS px per font cell.
+  const BS = (FONTS.mini.h * vsNormal) / FONTS.big.h;
+  const LS = BS * 0.5, gap = BS, fx = BS / 4;
+  const W = big.w * BS + gap + lab.w * LS, X0 = -W / 2, BASE = 12 * fx;
+  const spikes = Array.from({ length: 10 }, (_, i) => [(i / 10) * TAU + R.range(-0.15, 0.15), R.range(14, 24) * fx]);
   let t = 0, hit = false, out = false;
   // where the words sit: rocketing in from the left, overshooting, settling; whooshing out to the right
   const xAt = (t) => {
     t = Math.max(0, t);
-    if (t < HIT) return -32 * Math.pow(1 - t / HIT, 2);
-    if (t < OUT) return 7 * Math.exp(-(t - HIT) * 18) * Math.sin((t - HIT) * 34);
+    if (t < HIT) return -32 * fx * Math.pow(1 - t / HIT, 2);
+    if (t < OUT) return 7 * fx * Math.exp(-(t - HIT) * 18) * Math.sin((t - HIT) * 34);
     const u = seg(t, OUT, OUT + 0.2);
-    return u < 0.3 ? -4 * ease.outQuad(u / 0.3) : -4 + 24 * ease.inQuad((u - 0.3) / 0.7);
+    return u < 0.3 ? -4 * fx * ease.outQuad(u / 0.3) : -4 * fx + 24 * fx * ease.inQuad((u - 0.3) / 0.7);
   };
 
   return {
@@ -49,30 +57,30 @@ export function create(o) {
       t += dt;
       if (!hit && t >= HIT) {
         hit = true;
-        lights.add(0, 0, 70, C[5], 0.7, 0.4);
-        lights.add(-20, 0, 34, WHITE, 0.8, 0.1);
+        lights.add(0, 0, 70 * fx, C[5], 0.7, 0.4);
+        lights.add(-20 * fx, 0, 34 * fx, WHITE, 0.8, 0.1);
         for (let i = 0; i < 26; i++) {
           const an = R.range(-1.2, 1.2) + (R.chance(0.3) ? Math.PI : 0), sp = R.range(120, 300);
-          ps.spawn(P.SPARK, R.range(-20, 20), R.range(-8, 8), Math.cos(an) * sp, Math.sin(an) * sp * 0.6 - 20, R.range(0.12, 0.3));
+          ps.spawn(P.SPARK, R.range(-20, 20) * fx, R.range(-8, 8) * fx, Math.cos(an) * sp, Math.sin(an) * sp * 0.6 - 20, R.range(0.12, 0.3));
         }
       }
       // sparkles pop off the count on its beat
       if (t > BEAT && t < OUT && R.chance(0.1)) {
-        const x = X0 + R.range(0, big.w * BS), y = BASE - R.range(0, 30);
+        const x = X0 + R.range(0, big.w * BS), y = BASE - R.range(0, 30 * fx);
         ps.spawn(P.STAR, x, y, R.range(-10, 10), -R.range(5, 20), R.range(0.25, 0.45), R.pick([C[7], C[6]]), R.chance(0.3) ? 1.6 : 0.6);
       }
       if (!out && t >= OUT + 0.06) {
         out = true;
-        for (let i = 0; i < 10; i++) ps.spawn(P.MOTE, R.range(-50, 30), R.range(-14, 10), R.range(220, 320), R.range(-10, 10), R.range(0.06, 0.14), R.pick([C[7], C[6]]), 1);
+        for (let i = 0; i < 10; i++) ps.spawn(P.MOTE, R.range(-50, 30) * fx, R.range(-14, 10) * fx, R.range(220, 320), R.range(-10, 10), R.range(0.06, 0.14), R.pick([C[7], C[6]]), 1);
       }
       ps.update(dt);
       lights.update(dt);
     },
 
     draw(p) {
-      const [sx, sy] = shake(t, 3, HIT, 0.25, o.seed);
+      const [sx, sy] = shake(t, 3 * fx, HIT, 0.25, o.seed);
       // speed lines stream behind it as it rockets in, and again as it leaves
-      speedLines(p, C, t, t < HIT ? 1 : t < OUT ? Math.max(0, 1 - (t - HIT) / 0.35) * 0.9 : seg(t, OUT + 0.04, OUT + 0.12) * (1 - seg(t, OUT + 0.18, OUT + 0.3)), t >= OUT ? -1 : 1);
+      speedLines(p, C, t, t < HIT ? 1 : t < OUT ? Math.max(0, 1 - (t - HIT) / 0.35) * 0.9 : seg(t, OUT + 0.04, OUT + 0.12) * (1 - seg(t, OUT + 0.18, OUT + 0.3)), t >= OUT ? -1 : 1, fx);
       // the slam: a spiky white star behind the count for two frames, then a ring rolling out
       const hk = t - HIT;
       if (hk >= 0 && hk < 0.07) {
@@ -85,7 +93,7 @@ export function create(o) {
       }
       const rk = (t - HIT) / 0.32;
       if (rk > 0 && rk < 1) {
-        const r = 20 + 34 * ease.outCubic(rk);
+        const r = (20 + 34 * ease.outCubic(rk)) * fx;
         p.ellipse(sx, sy, r * 1.5, r * 0.75, rk < 0.3 ? WHITE : C[5], (d) => (d > 1 - 1.5 / (r * 0.75) ? 1.25 - rk : 0));
       }
       ps.draw(p);
@@ -97,7 +105,7 @@ export function create(o) {
         const bs = BS * (1 + 0.12 * pulse), items = [];
         const bx = X0 + dx - (big.w * BS * (stretch - 1)) / 2, by = BASE - 7 * bs;
         big.letters.forEach((L) => L.g && items.push({ g: L.g, x: bx + L.x * BS * stretch, y: by, sx: BS * stretch, sy: bs, slant: 1, flash, a }));
-        const lx = X0 + dx + big.w * BS * stretch + 4;
+        const lx = X0 + dx + big.w * BS * stretch + gap;
         lab.letters.forEach((L) => L.g && items.push({ g: L.g, x: lx + L.x * LS * stretch, y: BASE - 7 * LS, sx: LS * stretch, sy: LS, slant: 0.5, flash, a }));
         return items;
       };
@@ -110,7 +118,7 @@ export function create(o) {
       }
       if (a > 0) {
         const sh = seg(t, 0.62, 0.86), items = layout(x + sx);
-        drawWord(p, items.map((it) => ({ ...it, y: it.y + sy })), { fill: [C[4], C[5], C[6], C[7]], edge: WHITE, under: C[3], outline: C[0], ow: 2, shadow: SHADOW, shine: sh > 0 && sh < 1 ? X0 - 10 + (W + 24) * sh : null, shineY: BASE - 28, glint: C[6] });
+        drawWord(p, items.map((it) => ({ ...it, y: it.y + sy })), { fill: [C[4], C[5], C[6], C[7]], edge: WHITE, under: C[3], outline: C[0], ow: Math.max(1, Math.round(2 * fx)), shadow: SHADOW, shine: sh > 0 && sh < 1 ? X0 - 10 * fx + (W + 24 * fx) * sh : null, shineY: BASE - 28 * fx, glint: C[6] });
         // the combo timer: a thin bar under the words, draining until it goes
         const bk = seg(t, HIT + 0.1, HIT + 0.2) * (t > OUT ? 0 : 1);
         if (bk > 0) {
@@ -120,9 +128,9 @@ export function create(o) {
           if (left > 0) p.rect(bx, by, bw * left, 2, C[5]), p.rect(bx, by, bw * left, 1, C[6]), p.px(bx + bw * left - 1, by, WHITE);
         }
       }
-      p.glow(sx - 20, 0, 60, C[4], 0.2 * a + (t >= HIT && t < HIT + 0.15 ? 0.5 * (1 - (t - HIT) / 0.15) : 0) + 0.25 * pulse);
+      p.glow(sx - 20 * fx, 0, 60 * fx, C[4], 0.2 * a + (t >= HIT && t < HIT + 0.15 ? 0.5 * (1 - (t - HIT) / 0.15) : 0) + 0.25 * pulse);
       const g = (t - 0.86) / 0.22;
-      if (g > 0 && g < 1) sparkle(p, X0 + W - 2, BASE - 14, 6 * Math.sin(g * Math.PI), C[7], C[5], 0.5);
+      if (g > 0 && g < 1) sparkle(p, X0 + W - 2, BASE - 14 * fx, 6 * fx * Math.sin(g * Math.PI), C[7], C[5], 0.5);
       lights.draw(p);
     },
   };

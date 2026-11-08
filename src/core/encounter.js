@@ -14,7 +14,7 @@ const UI = {
   phase: hex("#9adf7a"),
 };
 
-const CUES = new Set(["attack", "phase", "text", "shake", "hit", "defeat", "summon"]);
+const CUES = new Set(["attack", "phase", "text", "shake", "hit", "hurt", "defeat", "summon"]);
 
 /**
  * Create a choreographed encounter from a module's `encounter` export (or the definition itself).
@@ -78,8 +78,8 @@ export function createEncounter(mod, o = {}) {
     if (target === "boss") return boss;
     return units.find((u) => u.id === target) ?? null;
   };
-  // A boss attack may declare the body performance that sells it: { cast, windup, hold, recover }. The unit reads
-  // its captured options every frame, so the pose changes in place without rebuilding the simulation.
+  // An attack may declare the body performance that sells it: { cast, windup, hold, recover }. Any unit reads its
+  // captured options every frame, so the pose changes in place without rebuilding the simulation.
   const perform = (unit, spec) => {
     if (!unit || unit.dying || !spec) return;
     const o = unit.fx.options;
@@ -116,6 +116,19 @@ export function createEncounter(mod, o = {}) {
         startShake(h.amp ?? 2, h.shake ?? 0.2);
         break;
       }
+      case "hurt": {
+        // A unit that takes a hit flinches: the body reacts, and the flashing is drawn by the unit itself.
+        const u = unitFor(c.target);
+        if (!u || u.dying) break;
+        const po = u.fx.options;
+        po.pose = "hurt";
+        po.poseT = 0;
+        po.poseDur = c.dur ?? u.mod?.mob?.hurtFor ?? 0.34;
+        po.hurtDir = c.dir ?? (u.x > hero.x ? -1 : 1);
+        hurtFlash = Math.max(hurtFlash, c.flash ?? 0);
+        startShake(c.amp ?? 1.4, c.shake ?? 0.14);
+        break;
+      }
       case "attack": {
         if (!c.fx) break;
         const inst = createFx(c.fx, {
@@ -123,7 +136,7 @@ export function createEncounter(mod, o = {}) {
           seed: seed + 200 + acts.length * 53, ...(o.options ?? {}), ...(c.options ?? {}),
         });
         acts.push({ inst, over: false, until: c.until ?? Infinity });
-        perform(boss, c.fx.attack?.pose);
+        perform(c.unit ? unitFor(c.unit) : boss, c.fx.attack?.pose);
         for (const h of c.fx.attack?.hits ?? []) hits.push({ at: c.at + (h.t ?? 0), hit: h, cue: c });
         if (c.shake) startShake(c.shake, c.shakeDur ?? 0.3);
         break;
@@ -131,12 +144,13 @@ export function createEncounter(mod, o = {}) {
       case "defeat": {
         const u = unitFor(c.target);
         if (u) {
-          // A boss with a death performance keeps its body on screen while the pose plays out.
-          const dieFor = c.dieFor ?? (u.role === "boss" ? u.mod?.boss?.dieFor ?? 0 : 0);
-          if (u.role === "boss" && dieFor > 0) {
+          // A unit with a death performance keeps its body on screen while the pose plays out.
+          const dieFor = c.dieFor ?? (u.role === "boss" ? u.mod?.boss?.dieFor ?? 0 : u.mod?.mob?.dieFor ?? 0);
+          if (dieFor > 0) {
             u.dying = true;
             u.dieAt = t;
             u.dieFor = dieFor;
+            u.until = Math.max(u.until, t + dieFor + 0.05);
             const po = u.fx.options;
             po.pose = "die";
             po.cast = "die";
@@ -181,10 +195,16 @@ export function createEncounter(mod, o = {}) {
       for (const u of units) {
         if (u.gone || t < u.appearAt || t >= u.until) continue;
         u.fx.update(dt);
-        // the pose clock: windup (the tell) -> release inside "cast" -> "recover" -> "idle". A dying boss
-        // simply runs its death pose until its body is removed.
+        // the pose clock: windup (the tell) -> release inside "cast" -> "recover" -> "idle", or a short flinch
+        // after a hit. A dying unit simply runs its death pose until its body is removed.
         const po = u.fx.options;
-        if (po.pose === "cast" || po.pose === "recover" || po.pose === "die") {
+        if (po.pose === "hurt") {
+          po.poseT = (po.poseT ?? 0) + dt;
+          if (po.poseT >= (po.poseDur ?? 0.34)) {
+            po.pose = "idle";
+            po.poseT = 0;
+          }
+        } else if (po.pose === "cast" || po.pose === "recover" || po.pose === "die") {
           po.poseT = (po.poseT ?? 0) + dt;
           const release = (po.poseWindup ?? 0) + (po.poseHold ?? 0);
           if (po.pose === "cast" && po.poseT >= release) po.pose = "recover";

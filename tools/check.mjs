@@ -320,10 +320,14 @@ for (const eid of encIds) {
     }
     const ids = new Set();
     for (const u of E.mobs ?? []) { if (u.id && ids.has(u.id)) errs.push(`duplicate mob id "${u.id}"`); else if (u.id) ids.add(u.id); }
+    // a summon adds a unit mid-fight, so its id is a legal target for later cues
+    for (const c of E.timeline ?? []) if (c.type === "summon" && c.id) ids.add(c.id);
     for (const c of E.timeline ?? []) {
       if (!(c.at >= 0)) errs.push(`cue at ${c.at}: negative time`);
       if (c.type === "attack" && c.fx?.attack) for (const h of c.fx.attack.hits ?? []) if (h.t > c.fx.meta.duration) errs.push(`attack hit at ${h.t} is after ${c.fx.meta.name} ends`);
       if (c.type === "defeat" && c.target !== "boss" && !ids.has(c.target)) errs.push(`defeat cue targets unknown "${c.target}"`);
+      if (c.type === "hurt" && c.target !== "boss" && !ids.has(c.target)) errs.push(`hurt cue targets unknown "${c.target}"`);
+      if (c.type === "attack" && c.unit && !ids.has(c.unit)) errs.push(`attack cue names unknown unit "${c.unit}"`);
     }
     // play the performance at 30 fps without drawing every frame; drawing catches NaN geometry
     const inst = createEncounter(fx.mod, { seed: 1 }), frame = createFrame(320, 180);

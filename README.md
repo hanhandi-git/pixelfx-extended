@@ -6,15 +6,15 @@
 
 # pixelfx-extended.
 
-An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->102<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
+An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->115<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
 
-**<!-- count -->346<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->359<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a **fantasy game kit** — battle maps, minion and boss
 units, telegraphed attacks, and encounter timelines you author under `src/encounters/` — and a Claude Code skill that
 makes new ones the way a picky pixel artist would: draft, render, look, refine.
 
-The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->102<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
+The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->115<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
 
 **<!-- act-count -->118<!-- /act-count -->** effects export an **`act`** timeline: wind-up, release, freeze on contact, target reaction, recovery. **<!-- moves-count -->12<!-- /moves-count -->**
 **moves** in `src/fx/moves/` chain those beats into full attacks from wind-up to recovery.
@@ -33,7 +33,7 @@ the idea at library scale, with a skill to keep going.
 
 ## new additions.
 
-These **<!-- new-count -->102<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
+These **<!-- new-count -->115<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="Six looping fantasy battle maps at full 320×180 resolution: aurora pass, crystal hollow, ember depths, mossy ruins, sunscar temple and wisp marsh.">
@@ -49,6 +49,17 @@ These **<!-- new-count -->102<!-- /new-count -->** pieces are not in the origina
 | **world** | Mossy Ruins | `world/mossy-ruins` |
 | **world** | Sunscar Temple | `world/sunscar-temple` |
 | **world** | Wisp Marsh | `world/wisp-marsh` |
+| **mobs** | Goblin Agile | `mobs/goblin-agile` |
+| **mobs** | Goblin Agile Flurry | `mobs/goblin-agile-flurry` |
+| **mobs** | Goblin Archer | `mobs/goblin-archer` |
+| **mobs** | Goblin Archer Shot | `mobs/goblin-archer-shot` |
+| **mobs** | Goblin Giant | `mobs/goblin-giant` |
+| **mobs** | Goblin Giant Quake | `mobs/goblin-giant-smash` |
+| **mobs** | Goblin Mage | `mobs/goblin-mage` |
+| **mobs** | Goblin Mage Bolt | `mobs/goblin-mage-bolt` |
+| **mobs** | Goblin Warrior | `mobs/goblin-warrior` |
+| **mobs** | Goblin Warrior Slash | `mobs/goblin-warrior-slash` |
+| **spawn** | Goblin Death | `spawn/goblin-death` |
 | **spawn** | Ink Unravel | `spawn/ink-unravel` |
 | **spawn** | Shanhaijing summon | `spawn/shanhaijing-summon` |
 | **spawn** | Talisman suppression | `spawn/talisman-suppression` |
@@ -74,6 +85,7 @@ These **<!-- new-count -->102<!-- /new-count -->** pieces are not in the origina
 | **fanren** | Immortal-slaying bead | `fanren/immortal-slaying-bead` |
 | **fanren** | Heaven-palm bottle | `fanren/palm-heaven-bottle` |
 | **fanren** | Xuantian spirit-slaying sword | `fanren/xuantian-sword` |
+| **impacts** | Goblin Hit | `impacts/goblin-hit` |
 | **kami** | Ame-no-Murakumo | `kami/ame-no-murakumo` |
 | **kami** | Six magatama | `kami/magatama-six` |
 | **kami** | Susanoo, storm-drum sword | `kami/susanoo-thunder` |
@@ -134,6 +146,7 @@ These **<!-- new-count -->102<!-- /new-count -->** pieces are not in the origina
 | **thrown** | Talisman throw | `thrown/talisman-throw` |
 | **ui** | HUD banner | `ui/banner` |
 | **ui** | HUD dialog | `ui/dialog` |
+| **ui** | HUD toggle | `ui/hud-toggle` |
 | **ui** | Loadout card | `ui/loadout-card` |
 | **ui** | Loadout panel | `ui/loadout-panel` |
 | **ui** | HUD panel | `ui/panel` |
@@ -153,9 +166,10 @@ Categories with new content appear first; samples list **new** effects before or
 <!-- catalog -->
 | category | effects | some of them |
 |---|---|---|
+| **ui** | 25 | hud banner, hud dialog, hud toggle, loadout card, loadout panel, hud panel… |
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **ninjutsu** | 12 | amaterasu, chidori rush, earth wall, great breakthrough, great fireball, kirin… |
-| **ui** | 24 | hud banner, hud dialog, loadout card, loadout panel, hud panel, skill node… |
+| **mobs** | 10 | goblin agile, goblin agile flurry, goblin archer, goblin archer shot, goblin giant, goblin giant quake… |
 | **thrown** | 8 | binding silk, boomerang throw, flying sword, kunai throw, pear-blossom needles, powder bomb throw… |
 | **dragonball** | 8 | destructo disc, drill beam, golden aura, ki charge, ki volley, ki wave… |
 | **lightning** | 18 | forked burst, ground surge, static cage, storm sigil, storm vortex, thunder rain… |
@@ -164,9 +178,10 @@ Categories with new content appear first; samples list **new** effects before or
 | **senjutsu** | 6 | gate of the great god, sage art: goemon, sage orb, thousand wood dragons, white flash, wind shuriken |
 | **a mortal's journey** | 6 | azure bamboo swords, evil-warding thunder, gold-devouring beetles, immortal-slaying bead, heaven-palm bottle, xuantian spirit-slaying sword |
 | **miku** | 5 | encore, leek smash, song aura, sound wave, vocal burst |
+| **spawn & death** | 14 | goblin death, ink unravel, shanhaijing summon, talisman suppression, coin drop, disintegrate… |
 | **konosuba** | 4 | explosion chant, explosion crater, explosion, explosion |
 | **japanese legend** | 4 | ame-no-murakumo, six magatama, susanoo, storm-drum sword, tsukuyomi, moon bow |
-| **spawn & death** | 13 | ink unravel, shanhaijing summon, talisman suppression, coin drop, disintegrate, dissolve burn… |
+| **impacts** | 12 | goblin hit, blunt hit, bullet impact, critical hit, ground slam, heavy landing… |
 | **arcane** | 13 | flow seal, arcane beam, arcane missiles, arcane orb, blink in, blink out… |
 | **moves** | 12 | arrow shot, dash strike, earth stomp, fireball throw, ground pound, holy smite… |
 | **fire** | 12 | brazier, campfire, candle, fire breath, fire ring, fire tornado… |
@@ -174,7 +189,6 @@ Categories with new content appear first; samples list **new** effects before or
 | **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |
 | **ice** | 10 | blizzard vortex, freeze, frost breath, frost nova, ice crystal, ice lance… |
 | **sci-fi** | 12 | emp blast, energy core, force field, glitch, hologram, jetpack… |
-| **impacts** | 11 | blunt hit, bullet impact, critical hit, ground slam, heavy landing, hit flash… |
 | **projectiles** | 13 | arrow, bullet tracer, cannon shot, energy disc, signal flare, homing missile… |
 | **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
 | **shadow** | 12 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
@@ -214,7 +228,7 @@ node tools/map.mjs world/mossy-ruins             # contact + layout + gameplay i
 node tools/encounter.mjs <name> --mp4           # contact sheet, timeline JSON and video
 ```
 
-This checkout does not ship sample encounters yet; [`docs/ENCOUNTERS.md`](docs/ENCOUNTERS.md) lists **<!-- encounter-count -->0<!-- /encounter-count -->** until you add
+This checkout does not ship sample encounters yet; [`docs/ENCOUNTERS.md`](docs/ENCOUNTERS.md) lists **<!-- encounter-count -->1<!-- /encounter-count -->** until you add
 modules under `src/encounters/`. After you do, [gallery/fantasy.html](gallery/fantasy.html) loads the same timeline the tools use.
 
 Every new piece is checked like an effect: `npm run check` verifies the map's floor and spawns, boss phases when a

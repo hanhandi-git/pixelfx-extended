@@ -26,7 +26,7 @@ if (!list.length) {
   process.exit(1);
 }
 
-const KNOWN = new Set(["attack", "phase", "text", "shake", "hit", "defeat", "summon"]);
+const KNOWN = new Set(["attack", "phase", "text", "shake", "hit", "hurt", "defeat", "summon"]);
 function check(id, fx) {
   const errs = [], notes = [], meta = fx.meta, E = fx.mod.encounter;
   if (!meta.name) errs.push("meta.name missing");
@@ -49,6 +49,8 @@ function check(id, fx) {
     if (u.until !== undefined && u.until <= (u.appearAt ?? 0)) errs.push(`mob ${u.id ?? "?"} dies before it appears`);
   }
   if (E.boss && ids.has("boss")) errs.push("a mob id \"boss\" collides with the boss target");
+  // summons join the fight mid-timeline, so their ids count as targets too
+  for (const c of E.timeline ?? []) if (c.type === "summon" && c.id) ids.add(c.id);
   const phases = E.phases ?? [];
   for (let i = 1; i < phases.length; i++) if ((phases[i].hp ?? 1) > (phases[i - 1].hp ?? 1)) errs.push("phases must lose health: hp goes up");
   for (const p of phases) if (!(p.at >= 0 && p.at <= meta.duration)) errs.push(`phase "${p.name ?? "?"}" is outside the encounter's duration`);
@@ -66,6 +68,8 @@ function check(id, fx) {
         }
       }
     }
+    if (c.type === "hurt" && !ids.has(c.target) && c.target !== "boss") errs.push(`hurt cue at ${c.at}: target "${c.target}" is not in the encounter`);
+    if (c.type === "attack" && c.unit && !ids.has(c.unit)) errs.push(`attack cue at ${c.at}: unit "${c.unit}" is not in the encounter`);
     if (c.type === "defeat") {
       const known = c.target === "boss" ? !!E.boss : ids.has(c.target);
       if (!known) errs.push(`defeat cue at ${c.at}: target "${c.target}" is not in the encounter`);

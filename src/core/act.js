@@ -317,7 +317,7 @@ export function createAct(mod, o = {}) {
           }
         }
       };
-      const FX = X - (frame.ox | 0), FY = Y - (frame.oy | 0);
+      const FX = (o.x ?? X) - (frame.ox | 0), FY = (o.y ?? Y) - (frame.oy | 0);
       if (!body) {
         if (active) fx.draw(frame, "back");
         drawTargets();

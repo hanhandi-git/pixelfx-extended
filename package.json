@@ -23,7 +23,8 @@
     "cocos:export": "node tools/cocos.mjs --out ../pixelfx-cocos/assets/resources/pixelfx",
     "map": "node tools/map.mjs",
     "encounter": "node tools/encounter.mjs",
-    "montage:new": "node tools/montage.mjs docs/readme/montage-new.gif --category world --cols 3 --rows 2 --cell 320x180 --seconds 6 --scale 1"
+    "montage:new": "node tools/montage.mjs docs/readme/montage-new.gif --category world --cols 3 --rows 2 --cell 320x180 --seconds 6 --scale 1",
+    "font:han": "python3 tools/gen-han-glyphs.py"
   },
   "devDependencies": {
     "esbuild": "^0.25.10",

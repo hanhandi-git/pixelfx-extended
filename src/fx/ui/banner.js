@@ -13,7 +13,7 @@ export const meta = {
   loop: false,
   fps: 30,
   bg: "dark",
-  options: { kicker: "STAGE I", text: "MOSSY RUINS", sub: "THE OLD SANCTUM", seed: 5 },
+  options: { kicker: "STAGE I", text: "MOSSY RUINS", sub: "THE OLD SANCTUM", seed: 5, plate: true },
 };
 
 export function draw(p, t, o) {
@@ -24,11 +24,12 @@ export function draw(p, t, o) {
   const x = Math.round((1 - ease.outCubic(ain)) * 26 - ease.inCubic(aout) * 26);
   const y = 0;
   const sh = seg(t, 0.3, 0.8) > 0 && seg(t, 0.3, 0.8) < 1 ? -90 + 180 * ease.inOutSine(seg(t, 0.3, 0.8)) + x : null;
-  plate(p, x - 104, y - 13, 208, 30, UI_INK, { r: 4, a, shine: sh });
-  p.rect(x - 101, y - 10, 202, 1, G[3], a);
-  p.rect(x - 101, y + 14, 202, 1, UI_INK.low, a);
-  // small end diamonds
-  p.px(x - 100, y - 4, G[4], a); p.px(x + 100, y - 4, G[4], a);
+  if (o.plate !== false) {
+    plate(p, x - 104, y - 13, 208, 30, UI_INK, { r: 4, a, shine: sh });
+    p.rect(x - 101, y - 10, 202, 1, G[3], a);
+    p.rect(x - 101, y + 14, 202, 1, UI_INK.low, a);
+    p.px(x - 100, y - 4, G[4], a); p.px(x + 100, y - 4, G[4], a);
+  }
 
   if (o.kicker) p.text(o.kicker, x, y - 22, G[5], { align: "center", outline: UI_INK.outline, a });
   const word = spell(o.text ?? "", "big");

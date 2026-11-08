@@ -1,6 +1,6 @@
 # Catalog
 
-346 effects in 30 categories: 244 original and 102 new. Every one is a file in
+359 effects in 31 categories: 244 original and 115 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -189,6 +189,7 @@ hit sparks, shockwaves, landings.
 | Blunt hit | `impacts/blunt-hit` | original | effect | one-shot 0.9s | 128×88 | A heavy, soft thud: a white-hot lumpy blob cools to cream in a warm pool of light, inked wedges jab out and snap back, a squashed ring of dust puffs swells and drifts, clods drop. |
 | Bullet impact | `impacts/bullet-impact` | original | effect | one-shot 1.4s | 152×100 | A bullet hits a wall on the right: a hot half-star, sparks sprayed back in a cone, a puff of grit, chips that fall and bounce, a pock mark cooling to soot. |
 | Critical hit | `impacts/crit-hit` | original | effect | one-shot 0.9s | 216×136 | A critical hit: a jagged starburst slams in white and overshoots, a ring breaks into flying arcs, sparks streak off, shards tumble to the floor under a big flare. |
+| Goblin Hit | `impacts/goblin-hit` | new | effect | one-shot 0.55s | 96×64 | 哥布林挨打：白色顿帧、暗绿血花与骨屑从伤口溅开，两道漫画冲击线从身后扎进来，脚下带起一小团灰. |
 | Ground slam | `impacts/ground-slam` | original | effect | one-shot 3.2s | 288×208 | Something lands hard: the floor flashes and cracks, two crescent shock waves race out along it, a dust wave and a tall dust cloud rise, rocks erupt, bounce and settle. |
 | Heavy landing | `impacts/heavy-landing` | original | effect | one-shot 1.6s | 176×80 | A character lands hard: the floor dents and cracks under their feet, two rings of dust roll out along the floor one after the other, and pebbles hop away. |
 | Hit flash | `impacts/hit-flash` | original | effect | one-shot 0.5s | 80×64 | The character takes damage: a white frame, then their own colors flushed red and blinking white, cooling off, while comic hit lines jab in at them. |
@@ -228,6 +229,7 @@ poofs, portals, souls, shatters.
 | Disintegrate | `spawn/disintegrate` | original | effect | one-shot 3.4s | 176×100 | The character crackles with light, flashes white, then peels away from the head down: each pixel flares white-hot and streams off on the wind as a cooling mote of light. |
 | Dissolve burn | `spawn/dissolve-burn` | original | effect | one-shot 3.6s | 96×112 | An ember seam lights at the feet and climbs the body: above it the body scorches and smoulders, at it flames lick up, below it there's only falling ash, embers and smoke. |
 | Egg hatch | `spawn/egg-hatch` | original | effect | one-shot 3.1s | 120×96 | A speckled egg rocks three times, each rock cracking it further with warm light leaking out, then pops: light pours out of the opening and lit shell halves tumble away. |
+| Goblin Death | `spawn/goblin-death` | new | effect | one-shot 1.5s | 128×88 | 哥布林倒下：暗绿血雾先炸开，尸体塌成一团烟，断刀与骨牙弹落在地，最后一缕绿魂向上飘散. |
 | Ink Unravel | `spawn/ink-unravel` | new | effect | one-shot 2.2s | 128×160 | A departing silhouette comes apart into hanging ink threads, torn paper and slow ash; width and height fit either a small shade guard or the ritualist. |
 | Poof | `spawn/poof` | original | effect | one-shot 1.6s | 112×92 | A cartoon death poof: a white pop, a ring of soft round smoke balls bursting out between speed lines, little stars spinning off, and the cloud lifting and thinning away. |
 | Respawn beam | `spawn/respawn-beam` | original | effect | one-shot 2.5s | 128×150 | A guide line drops, a pillar of light slams onto the spot, and a scan bar climbs from the feet writing the character back in row by row, white-hot lines cooling to its colors. |
@@ -403,6 +405,7 @@ level ups, numbers, toasts, countdowns.
 | Exclamation | `ui/exclamation` | original | effect | one-shot 1.4s | 84×104 | A bold ! springs up off the hero's head, stretching as it shoots up and squashing as it lands; surprise ticks flick out, it wobbles, then pops away. |
 | Health bar hit | `ui/health-bar-hit` | original | effect | one-shot 2s | 160×64 | A segmented health bar takes a hit: it jolts and dips, the lost chunk flashes white and sheds chips, holds, then drains away behind a sparking edge. |
 | Heart lost | `ui/heart-lost` | original | effect | one-shot 1.5s | 96×88 | A HUD heart is hit: it flashes white and jolts, a crack runs down it, it splits into two halves that tumble away, leaving an empty socket that fades. |
+| HUD toggle | `ui/hud-toggle` | new | effect | loop 2.4s | 18×18 | A small rounded square HUD toggle for auto-battle, auto-loot and similar switches. Gold when on, recessed ink when off. |
 | Level up | `ui/level-up` | original | effect | one-shot 3.2s | 176×138 | Gold gathers at the feet and bursts up as a pillar of light round the hero; rings climb it, LEVEL UP! drops in letter by letter, a shine sweeps it, sparkles twinkle. |
 | Loadout card | `ui/loadout-card` | new | effect | loop 2.4s | 240×112 | A chamfered steel inventory card: illustrated weapon or spell, rarity inlay, amber selection, equipped checkmark and a quiet rim glint. Optional text for native font overlays. |
 | Loadout panel | `ui/loadout-panel` | new | effect | loop 2.4s | 352×252 | A matching backpack panel: black steel frame, slanted tabs, item sockets, equipped details and an amber selected slot. Hide contents for a background with native text overlays. |
@@ -558,3 +561,20 @@ battle maps: moonlit ruins, lava caverns, arenas with a layout.
 | Mossy Ruins | `world/mossy-ruins` | new | map | loop 10s | 320×180 | A moonlit clearing inside broken elven ruins: mist drifts over a cracked flagstone floor, fireflies wander the arch and leaves fall through the cold light. |
 | Sunscar Temple | `world/sunscar-temple` | new | map | loop 12s | 320×180 | A sandstone sanctuary half buried in sunset dunes: wind carries sand through broken columns, torn banners sway and a sun seal glows above the distant temple door. |
 | Wisp Marsh | `world/wisp-marsh` | new | map | loop 12s | 320×180 | A flooded twilight marsh crossed by a stone causeway: ghost lights drift between crooked roots, luminous mushrooms shed spores and bubbles spread rings across the black water. |
+
+## mobs
+
+minion loops and their attacks.
+
+| effect | id | source | kind | play | size | what it does |
+|---|---|---|---|---|---|---|
+| Goblin Agile | `mobs/goblin-agile` | new | mob | loop 2s | 88×104 | 敏捷哥布林：精瘦低伏的小哥布林，红布头带与腕踝绑带；踩着碎步连跳佯攻，双匕在胸前交错闪寒光. |
+| Goblin Agile Flurry | `mobs/goblin-agile-flurry` | new | mob-attack | one-shot 0.7s | 112×72 | 敏捷哥布林的双匕连刺：两下短促的寒光在胸前交叉成 X，第一刀轻、第二刀重，火星与残光收得很快. |
+| Goblin Archer | `mobs/goblin-archer` | new | mob | loop 2.8s | 104×108 | 哥布林弓箭手：皮帽红羽、独眼钩鼻，背箭囊挎短弓；拉弦半满、屏息瞄准，再松劲巡视. |
+| Goblin Archer Shot | `mobs/goblin-archer-shot` | new | mob-attack | one-shot 0.72s | 112×72 | 哥布林弓箭手的短弓射击：搭箭屏息，一道白线钉进目标，箭杆震颤、木屑与尘土从命中点炸开. |
+| Goblin Giant | `mobs/goblin-giant` | new | mob | loop 3.4s | 120×128 | 巨人哥布林：两倍体格的驼背哥布林，铁肩甲骨项链、腰缠铁扣；巨棒扛肩，跺脚震起一圈尘土. |
+| Goblin Giant Quake | `mobs/goblin-giant-smash` | new | mob-attack | one-shot 1.25s | 128×80 | 巨人哥布林的踏地重击：地面阴影先压下来，脚落时白闪、地裂、碎石与尘浪向四周推开，余尘久久不散. |
+| Goblin Mage | `mobs/goblin-mage` | new | mob | loop 3s | 96×112 | 哥布林法师：紫袍尖帽裹着驼背绿皮，独眼泛着紫光；木杖叉尖托着漂浮的奥术球与环绕符文. |
+| Goblin Mage Bolt | `mobs/goblin-mage-bolt` | new | mob-attack | one-shot 0.95s | 112×72 | 哥布林法师的奥术弹：杖顶符文收束成球，紫光沿瞄准线飞出，在目标胸口炸成符文环与四散光尘. |
+| Goblin Warrior | `mobs/goblin-warrior` | new | mob | loop 2.8s | 96×108 | 哥布林战士：驼背宽颚、钩鼻独眼，红腰布束皮甲；圆木盾护身，锈剑在身前画圈虚刺. |
+| Goblin Warrior Slash | `mobs/goblin-warrior-slash` | new | mob-attack | one-shot 0.8s | 112×72 | 哥布林战士的锈剑横斩：举剑蓄力，一道斜向刀光切过身前，命中炸出火星与铁锈碎屑，脚下扬起尘土. |

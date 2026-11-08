@@ -141,6 +141,39 @@ into the grid, outline it, blit it, then add the shadow and foot light in `drawB
 blink, shift weight, and maybe turn a blade to catch the light. **Attacks are separate modules**: `fx` in
 `mob.attacks` points at a `kind: "mob-attack"` file.
 
+### A minion that reacts
+
+A loop alone reads as scenery once the fight starts. The encounter drives the same unit through four poses by
+writing its captured options; the unit reads them inside `draw()` and never gets rebuilt:
+
+| option | set by | the unit should |
+|---|---|---|
+| `pose: "cast"`, `cast`, `poseT`, `poseWindup`, `poseHold`, `poseRecover` | an `attack` cue that names the unit, using the attack's `pose` | wind up through the tell, release on the hit, recover to the idle stance |
+| `pose: "hurt"`, `poseT`, `poseDur`, `hurtDir` | a `hurt` cue | flinch away from the blow and flash white → red, then back |
+| `pose: "die"`, `poseT`, `poseDur` | a `defeat` cue, when `mob.dieFor > 0` | sink, fold and fade out |
+
+```js
+export const mob = {
+  // …
+  hurtFor: 0.34, // how long the flinch lasts
+  dieFor: 0.9,   // keep the body on screen this long after defeat
+};
+```
+
+Two rules keep it honest. The attack's `pose.windup` is the telegraph, and `windup + hold` is the frame the hit
+lands on — so the body is already swinging when the effect connects. And the flinch is a *pose*, not a second
+simulation: the loop clock keeps running, so the unit never snaps when the reaction ends.
+
+`src/fx/mobs/_goblin.js` implements this for the goblin family (`goblinAction`, `castClock`, `tintHurt`); copy the
+pattern, not the geometry, for another creature.
+
+Review the whole set on one sheet — the idle loop, the attack (body and effect together), the flinch and the death:
+
+```bash
+node tools/mob.mjs mobs/goblin-warrior          # records/mobs/goblin-warrior/combat.png
+node tools/mob.mjs "mobs/goblin-*" --zoom 5
+```
+
 ## Attacks: the tell and the hit
 
 A mob attack is small and grounded to the hand or mouth; a boss attack is a screen.
@@ -157,7 +190,7 @@ A boss attack is `320 x 180`, `origin: [160, 150]`, `meta.kind: "boss-attack"`, 
 ```js
 export const attack = {
   telegraph: 0.9,
-  // optional body performance; the encounter drives the boss's pose while the screen effect plays
+  // optional body performance; any unit named by the cue's `unit` plays it while the effect runs
   pose: { cast: "slam", windup: 0.9, hold: 0.35, recover: 0.9 },
   hits: [{ t: 1.0, amp: 4, shake: 0.45, damage: 120, radius: 136, target: "hero" }],
 };
@@ -167,8 +200,9 @@ export const attack = {
 - The hit gets a 1–2 frame white hero frame, a ring/flash at the same `t`, and screen shake from `amp`/`shake`.
 - The effect ends empty at `meta.duration`.
 - A boss attack is a screen-wide statement: 320 x 180. A minion attack stays near 112 x 72.
-- `pose` is how the boss sells the move. `windup` should match the telegraph, the release lands on the first hit and
-  `hold`/`recover` cover the follow-through. The encounter writes `pose`, `cast`, `poseT`, `poseWindup`, `poseHold`
+- `pose` is how the unit sells the move — a boss with its attack, or a mob when the cue names it in `unit`. `windup`
+  should match the telegraph, the release lands on the first hit and `hold`/`recover` cover the follow-through. The
+  encounter writes `pose`, `cast`, `poseT`, `poseWindup`, `poseHold`
   and `poseRecover` into the unit's captured options every frame, so the unit draws its wind-up/recovery without
   being recreated. A unit that ignores these fields simply idles.
 
@@ -237,10 +271,11 @@ encounter then draws the boss bar too. See [Boss units](#boss-units).
 
 | type | fields | what it does |
 |---|---|---|
-| `attack` | `at, fx, x, y, flip?, options?, until?` | plays an effect; if it has `attack.hits`, schedules shake and the hero's hit flash |
+| `attack` | `at, fx, x, y, flip?, unit?, options?, until?` | plays an effect; `unit` makes that mob perform the attack's `pose`; `attack.hits` schedule shake and the hero's hit flash |
 | `phase` | `at, name, sub, hp, dur, shake?, bossOptions?, mapOptions?` | sets the boss bar, shows a banner, optionally shakes or updates visual options in place |
 | `text` | `at, text, sub, dur` | a banner with no health change |
 | `shake` | `at, amp, dur` | a standalone shake |
+| `hurt` | `at, target, dir?, dur?, amp?, shake?` | makes a unit flinch: the body recoils away from `dir` and flashes |
 | `hit` | `at, target, amp, shake, dur` | the hero's white hit flash |
 | `defeat` | `at, target` | hides a mob or the boss; the boss bar drains to zero |
 | `summon` | `at, mod, id, x, y, …` | adds a mob mid-fight |

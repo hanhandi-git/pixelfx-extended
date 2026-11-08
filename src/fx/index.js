@@ -117,6 +117,7 @@ import * as thrown_talisman_throw from "./thrown/talisman-throw.js";
 import * as impacts_blunt_hit from "./impacts/blunt-hit.js";
 import * as impacts_bullet_impact from "./impacts/bullet-impact.js";
 import * as impacts_crit_hit from "./impacts/crit-hit.js";
+import * as impacts_goblin_hit from "./impacts/goblin-hit.js";
 import * as impacts_ground_slam from "./impacts/ground-slam.js";
 import * as impacts_heavy_landing from "./impacts/heavy-landing.js";
 import * as impacts_hit_flash from "./impacts/hit-flash.js";
@@ -142,6 +143,7 @@ import * as spawn_coin_drop from "./spawn/coin-drop.js";
 import * as spawn_disintegrate from "./spawn/disintegrate.js";
 import * as spawn_dissolve_burn from "./spawn/dissolve-burn.js";
 import * as spawn_egg_hatch from "./spawn/egg-hatch.js";
+import * as spawn_goblin_death from "./spawn/goblin-death.js";
 import * as spawn_ink_unravel from "./spawn/ink-unravel.js";
 import * as spawn_poof from "./spawn/poof.js";
 import * as spawn_respawn_beam from "./spawn/respawn-beam.js";
@@ -254,6 +256,7 @@ import * as ui_dialog from "./ui/dialog.js";
 import * as ui_exclamation from "./ui/exclamation.js";
 import * as ui_health_bar_hit from "./ui/health-bar-hit.js";
 import * as ui_heart_lost from "./ui/heart-lost.js";
+import * as ui_hud_toggle from "./ui/hud-toggle.js";
 import * as ui_level_up from "./ui/level-up.js";
 import * as ui_loadout_card from "./ui/loadout-card.js";
 import * as ui_loadout_panel from "./ui/loadout-panel.js";
@@ -346,6 +349,16 @@ import * as world_inkbound_shrine from "./world/inkbound-shrine.js";
 import * as world_mossy_ruins from "./world/mossy-ruins.js";
 import * as world_sunscar_temple from "./world/sunscar-temple.js";
 import * as world_wisp_marsh from "./world/wisp-marsh.js";
+import * as mobs_goblin_agile from "./mobs/goblin-agile.js";
+import * as mobs_goblin_agile_flurry from "./mobs/goblin-agile-flurry.js";
+import * as mobs_goblin_archer from "./mobs/goblin-archer.js";
+import * as mobs_goblin_archer_shot from "./mobs/goblin-archer-shot.js";
+import * as mobs_goblin_giant from "./mobs/goblin-giant.js";
+import * as mobs_goblin_giant_smash from "./mobs/goblin-giant-smash.js";
+import * as mobs_goblin_mage from "./mobs/goblin-mage.js";
+import * as mobs_goblin_mage_bolt from "./mobs/goblin-mage-bolt.js";
+import * as mobs_goblin_warrior from "./mobs/goblin-warrior.js";
+import * as mobs_goblin_warrior_slash from "./mobs/goblin-warrior-slash.js";
 
 export { categories } from "./categories.js";
 export { originOf, ORIGINS, ORIGINAL_EFFECTS } from "./provenance.js";
@@ -468,6 +481,7 @@ export const effects = {
   "impacts/blunt-hit": impacts_blunt_hit,
   "impacts/bullet-impact": impacts_bullet_impact,
   "impacts/crit-hit": impacts_crit_hit,
+  "impacts/goblin-hit": impacts_goblin_hit,
   "impacts/ground-slam": impacts_ground_slam,
   "impacts/heavy-landing": impacts_heavy_landing,
   "impacts/hit-flash": impacts_hit_flash,
@@ -493,6 +507,7 @@ export const effects = {
   "spawn/disintegrate": spawn_disintegrate,
   "spawn/dissolve-burn": spawn_dissolve_burn,
   "spawn/egg-hatch": spawn_egg_hatch,
+  "spawn/goblin-death": spawn_goblin_death,
   "spawn/ink-unravel": spawn_ink_unravel,
   "spawn/poof": spawn_poof,
   "spawn/respawn-beam": spawn_respawn_beam,
@@ -605,6 +620,7 @@ export const effects = {
   "ui/exclamation": ui_exclamation,
   "ui/health-bar-hit": ui_health_bar_hit,
   "ui/heart-lost": ui_heart_lost,
+  "ui/hud-toggle": ui_hud_toggle,
   "ui/level-up": ui_level_up,
   "ui/loadout-card": ui_loadout_card,
   "ui/loadout-panel": ui_loadout_panel,
@@ -697,6 +713,16 @@ export const effects = {
   "world/mossy-ruins": world_mossy_ruins,
   "world/sunscar-temple": world_sunscar_temple,
   "world/wisp-marsh": world_wisp_marsh,
+  "mobs/goblin-agile": mobs_goblin_agile,
+  "mobs/goblin-agile-flurry": mobs_goblin_agile_flurry,
+  "mobs/goblin-archer": mobs_goblin_archer,
+  "mobs/goblin-archer-shot": mobs_goblin_archer_shot,
+  "mobs/goblin-giant": mobs_goblin_giant,
+  "mobs/goblin-giant-smash": mobs_goblin_giant_smash,
+  "mobs/goblin-mage": mobs_goblin_mage,
+  "mobs/goblin-mage-bolt": mobs_goblin_mage_bolt,
+  "mobs/goblin-warrior": mobs_goblin_warrior,
+  "mobs/goblin-warrior-slash": mobs_goblin_warrior_slash,
 };
 
 export const provenance = {
@@ -817,6 +843,7 @@ export const provenance = {
   "impacts/blunt-hit": "original",
   "impacts/bullet-impact": "original",
   "impacts/crit-hit": "original",
+  "impacts/goblin-hit": "new",
   "impacts/ground-slam": "original",
   "impacts/heavy-landing": "original",
   "impacts/hit-flash": "original",
@@ -842,6 +869,7 @@ export const provenance = {
   "spawn/disintegrate": "original",
   "spawn/dissolve-burn": "original",
   "spawn/egg-hatch": "original",
+  "spawn/goblin-death": "new",
   "spawn/ink-unravel": "new",
   "spawn/poof": "original",
   "spawn/respawn-beam": "original",
@@ -954,6 +982,7 @@ export const provenance = {
   "ui/exclamation": "original",
   "ui/health-bar-hit": "original",
   "ui/heart-lost": "original",
+  "ui/hud-toggle": "new",
   "ui/level-up": "original",
   "ui/loadout-card": "new",
   "ui/loadout-panel": "new",
@@ -1046,4 +1075,14 @@ export const provenance = {
   "world/mossy-ruins": "new",
   "world/sunscar-temple": "new",
   "world/wisp-marsh": "new",
+  "mobs/goblin-agile": "new",
+  "mobs/goblin-agile-flurry": "new",
+  "mobs/goblin-archer": "new",
+  "mobs/goblin-archer-shot": "new",
+  "mobs/goblin-giant": "new",
+  "mobs/goblin-giant-smash": "new",
+  "mobs/goblin-mage": "new",
+  "mobs/goblin-mage-bolt": "new",
+  "mobs/goblin-warrior": "new",
+  "mobs/goblin-warrior-slash": "new",
 };

@@ -16,7 +16,7 @@ export const meta = {
   bg: "dark",
   options: {
     icon: "quick", pressed: false, disabled: false, cooldown: 0, flash: false,
-    label: "", key: "", badge: "", palette: null, seed: 6,
+    label: "", key: "", badge: "", palette: null, hud: false, seed: 6,
   },
 };
 
@@ -25,6 +25,26 @@ export function draw(p, t, o) {
   const C = tone(icon, o.palette, o.disabled), S = SILVER, G = GOLD;
   const cd = clamp(o.cooldown ?? 0), cy = o.pressed ? 2 : 0;
   const ready = !o.disabled && cd === 0;
+  const hud = !!o.hud;
+  if (hud) {
+    p.glow(0, cy, 30, C[2], o.pressed ? 0.18 : 0.1);
+    p.ring(0, cy, 36, 2, ready ? G[3] : S[2], 0.92);
+    p.ring(0, cy, 34, 1, INK, 0.4);
+    iconArt(p, icon, 0, cy, C, t);
+    if (cd > 0) {
+      p.disc(0, cy, 32, INK, (d, an) => {
+        const u = ((an + Math.PI / 2) / TAU + 1) % 1;
+        return u < cd ? 0.65 : 0;
+      });
+      const edge = -Math.PI / 2 + cd * TAU;
+      p.arc(0, cy, 34, 2, -Math.PI / 2, edge, C[3]);
+    }
+    if (o.pressed || o.flash) p.ring(0, cy, 38, 1, C[4], 0.85);
+    if (o.disabled) {
+      p.ring(0, cy, 36, 3, INK, 0.55);
+    }
+    return;
+  }
   p.circle(0, cy + 2, 39, INK);
   p.circle(0, cy, 38, (d, an) => d < 0.9 ? S[0] : Math.sin(an - 0.5) < 0 ? S[3] : S[1]);
   p.ring(0, cy, 36, 1, INK);
