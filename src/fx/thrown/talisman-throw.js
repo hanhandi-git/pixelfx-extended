@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // A paper talisman dug out of a pocket. The caster opens his fingers and lets it go; it
 // floats off at walking pace, hangs, and then the cinnabar seal in its own ink catches and
 // snaps it flat onto the target.
@@ -54,58 +55,13 @@ const rollAt = (u) => -0.3 + 0.3 * Math.sin(u * TAU * 1.2 + 0.4) * (1 - 0.3 * u)
  * `flare` 0..1 lights the ink white.
  */
 function paper(p, C, x, y, ang, yaw, { a = 1, curl = 0.6, phase = 0, char = 0, flare = 0, scale = 1 } = {}) {
-  const cw = Math.cos(yaw), af = Math.abs(cw), front = cw >= 0;
-  const ca = Math.cos(ang), sa = Math.sin(ang);
-  const at = (u, v) => [x + ca * u * cw - sa * v, y + sa * u * cw + ca * v];
-  const full = HH * scale, low = full - 2 * full * 0.85 * char, w = HW * scale;
-  if (low <= -full + 0.6) return;
-  const body = front ? C[6] : C[5], rim = front ? C[4] : C[3], lit = front ? WHITE : C[6];
-
-  // the strip bows in the air: its middle drifts aside and narrows a touch
-  const bow = (v) => Math.sin((v / full) * Math.PI * 0.5 + phase * 0.2) * curl * (1 - Math.abs(v) / full * 0.35);
-  const sides = (hwd) => {
-    const out = [];
-    for (let i = 0; i <= 3; i++) {
-      const v = -full + (low + full) * (i / 3), k = 1 - Math.pow(Math.abs(v) / full, 2) * 0.1;
-      out.push(at(-hwd * k + bow(v), v));
-    }
-    for (let i = 3; i >= 0; i--) {
-      const v = -full + (low + full) * (i / 3), k = 1 - Math.pow(Math.abs(v) / full, 2) * 0.1;
-      out.push(at(hwd * k + bow(v), v));
-    }
-    return out;
-  };
-
-  if (af < 0.18) {
-    // edge-on: a lit sliver of paper, with the ink band showing on the edge
-    const A = at(0, -full), B = at(0, low);
-    p.line(A[0], A[1], B[0], B[1], rim, a);
-    p.line(A[0], A[1], B[0], B[1], lit, a);
-    if (front) {
-      const m0 = at(0, low - Math.min(1.7, (low + full) * 0.24)), m1 = at(0, low - 1);
-      p.line(m0[0], m0[1], m1[0], m1[1], mix(C[2], C[6], flare), a);
-    }
-    return;
-  }
-
-  p.poly(sides(w), rim, a);
-  p.poly(sides(Math.max(0.3, w - 1)), body, a);
-  if (front) {
-    const e0 = at(-w + 0.4 + bow(-full + 0.8), -full + 0.8), e1 = at(-w + 0.4 + bow(low - 0.8), low - 0.8);
-    p.line(e0[0], e0[1], e1[0], e1[1], lit, a * 0.3);
-  } else return;
-
-  // cinnabar band at the lower end and a few brush strokes above it
-  const inkC = mix(C[2], C[6], flare), inkB = mix(C[3], C[6], flare * 0.85);
-  const bandTop = low - Math.min(1.7, (low + full) * 0.24), bandBot = low - 0.7;
-  if (bandBot > bandTop + 0.4) p.poly([at(-w * 0.72, bandTop), at(w * 0.72, bandTop), at(w * 0.72, bandBot), at(-w * 0.72, bandBot)], inkB, a * 0.95);
-  const seg = (u0, v0, u1, v1, c, k) => { const A = at(u0, v0), B = at(u1, v1); p.line(A[0], A[1], B[0], B[1], c, a * k); };
-  // two bars on a spine: a plain brush glyph, no clutter at this size
-  const g0 = -full + 1.3;
-  seg(0, g0 + 0.3, 0, bandTop - 1.2, inkC, 1);
-  seg(-w * 0.5, g0 + 1.6, w * 0.5, g0 + 1.6, inkB, 0.95);
-  seg(-w * 0.36, g0 + 3.6, w * 0.36, g0 + 3.6, inkC, 0.95);
-  if (flare > 0.02) { const c = at(0, (bandTop + bandBot) * 0.5); p.glow(c[0], c[1], 5, C[4], 0.5 * flare); }
+  const cw=Math.cos(yaw),full=HH*scale,low=full-2*full*.85*char,w=HW*scale;
+  if(low<=-full+.6)return;
+  drawWeaponSprite(p,"talisman",x,y,ang,{alpha:a,pivot:[7.1,.5],map:(u,v)=>{
+    v=v/6.5*full;if(v>low)return null;
+    const bow=Math.sin(v/full*Math.PI*.5+phase*.2)*curl*(1-Math.abs(v)/full*.35);
+    return [(u/4.5*w*(1-(Math.abs(v)/full)**2*.1)+bow)*cw,v];
+  },tint:c=>cw<0?C[5]:flare>.02?mix(c,WHITE,flare*.65):c});
 }
 
 // Faint air the paper drags with it: two short speed dashes on the fast legs, and three paper

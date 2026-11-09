@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // A thrown kunai: a ring-pommeled blade is drawn back past the ear and let go. It crosses the gap
 // end over end, bites into the target and quivers there while the steel chips and sparks cool.
 import { READY, TAU, clamp, ease, fit, fly, rng, sparkle } from "../../core/index.js";
@@ -48,32 +49,12 @@ export const act = {
 
 // the kunai itself, tip at (x, y) and the handle trailing along -angle
 function kunai(p, C, x, y, angle, alpha = 1, scale = 1) {
-  const ca = Math.cos(angle), sa = Math.sin(angle), s = scale;
-  const P = (lx, ly) => [x + (ca * lx - sa * ly) * s, y + (sa * lx + ca * ly) * s];
-  const at = (lx, ly) => P(lx, ly);
-  const blade = [at(0, 0), at(-4, -1.2), at(-8, -2.2), at(-11, -1.6), at(-11, 1.6), at(-8, 2.2), at(-4, 1.2)];
-  p.poly(blade, C[0], alpha);
-  p.poly([at(0.4, 0), at(-4, -0.8), at(-8, -1.5), at(-9.4, 0), at(-8, 1.5), at(-4, 0.8)], C[5], alpha);
-  p.poly([at(0.4, 0), at(-4, -0.9), at(-8, -1.6), at(-9.6, -0.2), at(-6, -0.3), at(-2, -0.1)], C[6], alpha);
-  p.line(at(-1, 0.3)[0], at(-1, 0.3)[1], at(-8.4, 1.2)[0], at(-8.4, 1.2)[1], C[2], alpha);
-  const h0 = at(-11, 0), h1 = at(-15.5, 0);
-  p.beam(h0[0], h0[1], h1[0], h1[1], 2.2 * s, C[0], alpha);
-  p.beam(h0[0], h0[1], h1[0], h1[1], 1 * s, C[3], alpha);
-  const rc = at(-17.5, 0);
-  p.ring(rc[0], rc[1], 2.2 * s, 1.2 * s, C[3], alpha);
-  p.dot(at(-17.5, -1.8)[0], at(-17.5, -1.8)[1], C[6], alpha * 0.7);
+  drawWeaponSprite(p,"kunai",x,y,angle,{alpha,scale,pivot:[17,0]});
 }
 
 // what stays outside the target: the wrapped grip and the ring pommel, the blade buried
 function hilt(p, C, x, y, angle, alpha = 1, scale = 1) {
-  const ca = Math.cos(angle), sa = Math.sin(angle), s = scale;
-  const P = (lx, ly) => [x + (ca * lx - sa * ly) * s, y + (sa * lx + ca * ly) * s];
-  const a = P(-1.5, 0), b = P(-11, 0), rc = P(-13.5, 0);
-  p.beam(a[0], a[1], b[0], b[1], 2.3 * s, C[0], alpha);
-  p.beam(a[0], a[1], b[0], b[1], 1.1 * s, C[3], alpha);
-  p.ring(rc[0], rc[1], 2.2 * s, 1.2 * s, C[3], alpha);
-  p.dot(P(-13.5, -1.7)[0], P(-13.5, -1.7)[1], C[6], alpha * 0.7);
-  p.dot(a[0], a[1], C[6], alpha);
+  drawWeaponSprite(p,"kunai",x,y,angle,{alpha,scale,pivot:[2.4,0],filter:q=>q.x<2.4});
 }
 
 export function draw(p, t, o) {

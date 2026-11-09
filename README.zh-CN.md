@@ -6,11 +6,11 @@
 
 # pixelfx-extended.
 
-在 [**pixelfx**](https://github.com/patch-gg/pixelfx) 原版 244 特效基线之上，额外增加 **<!-- new-count -->159<!-- /new-count -->** 条地图、小怪等素材的扩展仓库。
+在 [**pixelfx**](https://github.com/patch-gg/pixelfx) 原版 244 特效基线之上，额外增加 **<!-- new-count -->172<!-- /new-count -->** 条地图、小怪等素材的扩展仓库。
 
-**<!-- count -->403<!-- /count --> 个像素特效与动画，每一个都是一小段代码。** 火焰、爆炸、魔法、天气、UI、拾取物、小动物等。可实时播放、换色与镜像，嵌入浏览器游戏，或导出精灵图给任意引擎。另有 **奇幻游戏套件** —— 战斗地图、小怪与 Boss 单位、带预警的技能，以及在 `src/encounters/` 中编写的遭遇战时间轴 —— 以及 Claude Code skill，用像素画师那套「起草 → 渲染 → 眼看 → 精修」流程做新内容。
+**<!-- count -->416<!-- /count --> 个像素特效与动画，每一个都是一小段代码。** 火焰、爆炸、魔法、天气、UI、拾取物、小动物等。可实时播放、换色与镜像，嵌入浏览器游戏，或导出精灵图给任意引擎。另有 **奇幻游戏套件** —— 战斗地图、小怪与 Boss 单位、带预警的技能，以及在 `src/encounters/` 中编写的遭遇战时间轴 —— 以及 Claude Code skill，用像素画师那套「起草 → 渲染 → 眼看 → 精修」流程做新内容。
 
-库内 **<!-- original-count -->244<!-- /original-count -->** 个原始特效与 **<!-- new-count -->159<!-- /new-count -->** 个新增。[Gallery](gallery/index.html) 会把每条资源标为 `original` 或 `new`，并支持按来源筛选。
+库内 **<!-- original-count -->244<!-- /original-count -->** 个原始特效与 **<!-- new-count -->172<!-- /new-count -->** 个新增。[Gallery](gallery/index.html) 会把每条资源标为 `original` 或 `new`，并支持按来源筛选。
 
 有 **<!-- act-count -->121<!-- /act-count -->** 个特效导出 **`act`** 时间轴（蓄力、出手、命中定格、受击与收招）。另有 **<!-- moves-count -->12<!-- /moves-count -->** 个 **`moves`**（`src/fx/moves/`）把这一套打成从 wind-up 到 recovery 的完整攻击。
 
@@ -24,7 +24,7 @@
 
 ## 新增内容
 
-以下 **<!-- new-count -->159<!-- /new-count -->** 条不在原始 244 特效基线内：奇幻地图、小怪、Boss 等。在 [Gallery（`?source=new`）](gallery/index.html?source=new) 或部署版 [在线 Gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown)（仅新增、Moon Oracle、投掷分类）浏览。
+以下 **<!-- new-count -->172<!-- /new-count -->** 条不在原始 244 特效基线内：奇幻地图、小怪、Boss 等。在 [Gallery（`?source=new`）](gallery/index.html?source=new) 或部署版 [在线 Gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown)（仅新增、Moon Oracle、投掷分类）浏览。
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="六张 320×180 奇幻战斗地图循环预览：极光隘口、水晶洞窟、余烬深渊、苔痕遗迹、日痕神殿与磷火沼泽。">
@@ -171,25 +171,38 @@
 | **weapons** | Binding silk, placed | `weapons/binding-silk` |
 | **weapons** | Blood butterfly, placed | `weapons/blood-butterfly` |
 | **weapons** | Boomerang, placed | `weapons/boomerang` |
+| **weapons** | Bow, placed | `weapons/bow` |
+| **weapons** | Claw, placed | `weapons/claw` |
 | **weapons** | Dagger, placed | `weapons/dagger` |
 | **weapons** | Demon-eye greatsword, placed | `weapons/demon-eye-greatsword` |
 | **weapons** | Dragon-scale sabre, placed | `weapons/dragon-scale-sabre` |
+| **weapons** | Ember Greatsword, placed | `weapons/ember-greatsword` |
 | **weapons** | Flying sword, placed | `weapons/flying-sword` |
+| **weapons** | Frost Lightsword, placed | `weapons/frost-lightsword` |
 | **weapons** | Ghostlight jian, placed | `weapons/ghost-blade` |
+| **weapons** | Greatsword, placed | `weapons/greatsword` |
+| **weapons** | Hammer, placed | `weapons/hammer` |
+| **weapons** | Handle, placed | `weapons/handle` |
 | **weapons** | Holy sword, placed | `weapons/holy-sword` |
 | **weapons** | Katana, placed | `weapons/katana` |
 | **weapons** | Kunai, placed | `weapons/kunai` |
 | **weapons** | Kusanagi, placed | `weapons/kusanagi` |
 | **weapons** | Knight lance, placed | `weapons/lance` |
+| **weapons** | Launcher, placed | `weapons/launcher` |
 | **weapons** | Pear-blossom needles, placed | `weapons/pear-needles` |
+| **weapons** | Pistol, placed | `weapons/pistol` |
 | **weapons** | Powder bomb, placed | `weapons/powder-bomb` |
 | **weapons** | Rapier, placed | `weapons/rapier` |
+| **weapons** | Scythe, placed | `weapons/scythe` |
+| **weapons** | Shadow Katana, placed | `weapons/shadow-katana` |
 | **weapons** | Skyvault greatsword, placed | `weapons/skyvault-greatsword` |
 | **weapons** | Soul bell, placed | `weapons/soul-bell` |
 | **weapons** | Spear, placed | `weapons/spear` |
 | **weapons** | Banded staff, placed | `weapons/staff` |
+| **weapons** | Starlight Rapier, placed | `weapons/starlight-rapier` |
 | **weapons** | Sword, placed | `weapons/sword` |
 | **weapons** | Talisman, placed | `weapons/talisman` |
+| **weapons** | Thunder Claymore, placed | `weapons/thunder-claymore` |
 | **weapons** | Totsuka, placed | `weapons/totsuka` |
 | **weapons** | War mace, placed | `weapons/war-mace` |
 <!-- /new-catalog -->
@@ -201,7 +214,7 @@
 <!-- catalog -->
 | category | effects | some of them |
 |---|---|---|
-| **weapons** | 25 | aurora lightblade, placed, binding silk, placed, blood butterfly, placed, boomerang, placed, dagger, placed, demon-eye greatsword, placed… |
+| **weapons** | 38 | aurora lightblade, placed, binding silk, placed, blood butterfly, placed, boomerang, placed, bow, placed, claw, placed… |
 | **ui** | 25 | hud banner, hud dialog, hud toggle, loadout card, loadout panel, hud panel… |
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **melee** | 24 | aurora lightblade combo, blood butterfly dance, demon-eye cleave, dragon-scale sweep, ghostlight draw cut, holy sword cleave… |

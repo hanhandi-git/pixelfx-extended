@@ -1,12 +1,14 @@
 # Weapons
 
-Twenty-five selectable weapons share the portable rig, the character costumes and its depth buffer.
-Seventeen are melee weapons; eight are thrown weapons with their own ranged actions. Every model is
-original code-authored geometry under this repository's MIT license. Every one also has a placed effect in
-the `weapons` category — the item hovering in its own light, see [Placed weapons](#placed-weapons).
+All **41 existing rig models** use the shared four-texel artwork compositor. This includes the 27 selectable
+armory entries, five Ember Echo sword variants, eight stock rig weapons and the hellcannon.
+Every model has one high-detail material master for held rendering, equipment icons and a placed preview.
+The armory keeps its nineteen melee and eight thrown entries, their grips, reach and authored hit timings.
 
 | ID | Weapon | Class | Action |
 |---|---|---|---|
+| `blood-cleaver` | 血焰斩铁剑 / Bloodsteel cleaver | melee | `dnf/overdrive-slash` |
+| `chain-blade` | 锁影刃 / Chainshade blade | melee | `dnf/chain-cut` |
 | `sword` | 长剑 / Sword | melee | `melee/sword-slash` |
 | `dagger` | 匕首 / Dagger | melee | `melee/dagger-flurry` |
 | `staff` | 金箍棍 / Banded staff | melee | `melee/staff-combo` — two sweeps in opposite directions |
@@ -33,7 +35,7 @@ the `weapons` category — the item hovering in its own light, see [Placed weapo
 | `soul-bell` | 摄魂铃 / Soul bell | **thrown** | `thrown/soul-bell-throw` — tolled at the chest, underarm lob, three sound rings and soul-fire |
 | `pear-needles` | 梨花针 / Pear-blossom needles | **thrown** | `thrown/pear-needles-throw` — a half-turn into a sleeve flick, five needles at five heights |
 
-The native figure is about 38 px tall. Weapons are measured from the fist in the same pixel units;
+The native figure is about 38 px tall. Weapons retain their original grip-space world units, with four authored texels per unit. All overpainting is composed before the rig depth test. Models are measured from the fist in the same pixel units;
 models distinguish material faces, edge highlights, wraps and guards at one-pixel scale. The lance
 has a split pennon; the holy sword has a wing guard and inset gold line; the kunai has a hollow ring
 pommel; the thrown set adds a fuse bomb, a curved boomerang,
@@ -48,12 +50,10 @@ the ornate large-blade tradition rather than after any one game's art.
 
 ## Placed weapons
 
-Every armory entry names a placed effect (`weapon.drop`, the `weapons` category, `#weapons`): the item
-hovers point-up in its own light, bobbing over a turning floor seal while a sheen runs down the steel, light
-ribbons wind the blade (half of each strand behind it, half in front) and motes climb past the point. The
-effect quarter-turns the rig's own geometry instead of redrawing the model, so the held weapon and the
-placed weapon can never drift apart. All of these effects carry the `武器` tag, use a themed aura palette in
-`options.palette`, and are deterministic loops.
+Every model has a placed preview in `weapons/` or `dnf/`; selectable entries name it in `weapon.drop`.
+The preview shows source texels directly, with restrained sheen, sparse motes and a small floor seal.
+Blades stand upright; bows, guns and small props use a broadside presentation. The held model, icon and
+placed preview share the exact composed source. All displays carry the `武器` tag and loop deterministically.
 
 ```sh
 node tools/render.mjs weapons/sword --gif
@@ -70,6 +70,12 @@ three staggered ticks, and the others have one primary hit.
 Select a weapon with `weaponOf(id)`; `meleeWeaponOf` and `thrownWeaponOf` narrow by class.
 
 ## Preview and use
+
+The index has a dedicated **武器 / 投掷物** content chip: `gallery/?type=equipment&lang=zh`.
+It includes all weapon models, melee and thrown actions, and weapon-specific techniques. It combines with
+theme, source, category and search; `?type=equipment&theme=dnf` shows the DNF equipment and weapon actions.
+The selection survives reloads through the URL. Inventory UI demonstrations and unrelated spell casts are
+excluded from this content type.
 
 The gallery's “武器” selector groups “近战武器” and “投掷武器”. It changes the dedicated action in the
 character preview, independently of the effect source filter. Character, weapon and source are preserved
@@ -97,11 +103,12 @@ node tools/render.mjs melee/holy-sword-cleave --sheet
 node --test tests/weapons.test.mjs
 ```
 
-`records/weapons/` contains `armory.png`, one transparent icon per weapon, `weapons.json` with dimensions
-and grip coordinates, optional animated action previews, and optional acted PNG/JSON sheets. Acted
+`records/weapons/` contains `armory-1.png` through `armory-5.png`, all 41 transparent native masters,
+`weapons.json` with dimensions, native density and grip coordinates, and optional acted GIF/PNG/JSON exports. Acted
 sheets contain the character, target and VFX; their metadata carries the actual pivot and weapon ID.
-Raw VFX exports still contain only the effect. Source geometry and selection metadata live in
-`src/core/weapons.js`; the melee attack choreography and VFX recipes live in `src/fx/melee/_weapons.js`,
+Raw VFX exports still contain only the effect. `src/core/pixel-weapon-art.js` owns texel composition;
+`ornate-blades.js`, `ornate-equipment.js`, `ornate-props.js` and `dnf-weapons.js` author the models.
+`src/core/weapons.js` exposes shapes and selection metadata; the melee choreography and VFX recipes live in `src/fx/melee/_weapons.js`,
 and each thrown action lives in its matching `src/fx/thrown/*-throw.js` module.
 
 Melee actions use distinct choreography rather than a shared pose track. Dagger keeps the elbows close
@@ -116,3 +123,10 @@ form a seal and point while five swords leave in a ring. The silk is hauled two-
 pull. The bell is tolled at the chest and then tossed underarm out of a half-spin. The needles leave a half-turn
 that unwinds into the sleeve flick. Their hit cues are timed to the projectile reaching the target, not to a
 held tip; returning weapons and multi-hit volleys may expose more than one cue before recovery.
+
+## Shared flight artwork
+
+`src/fx/thrown/_weapon-sprite.js` samples the same equipment masters after release. Kunai, bombs,
+boomerangs, flying swords, bells and needles retain their materials and engraving in flight. Talisman
+flight warps the composed parchment with its original curl, yaw and burn timing; silk carries brocade
+stitches along its unfurling ribbon. Attack events and travel paths remain controlled by the original actions.

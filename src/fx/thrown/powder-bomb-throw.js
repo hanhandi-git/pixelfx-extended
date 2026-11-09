@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // A small black-powder bomb follows a readable lob: fuse flare, one floor bounce,
 // then a compact blast with a hot ring, smoke puffs and falling grit.
 import { READY, TAU, clamp, ease, fit, hex, rng, sparkle } from "../../core/index.js";
@@ -27,14 +28,7 @@ export const act = {
 };
 
 function bomb(p, C, x, y, a, alpha = 1) {
-  p.circle(x, y, 7, SHELL, alpha);
-  p.circle(x, y + 1.6, 5.7, SHELL_MID, alpha);
-  p.arc(x, y, 6, 1.5, Math.PI * 0.18, Math.PI * 0.82, RIM, alpha);
-  p.line(x - 6, y + 0.4, x + 6, y + 0.4, BAND_D, alpha);
-  p.line(x - 6, y + 1.4, x + 6, y + 1.4, BAND, alpha);
-  const fx = x + Math.cos(a) * 6.5, fy = y + Math.sin(a) * 6.5;
-  p.line(x + Math.cos(a) * 4, y + Math.sin(a) * 4, fx, fy, BAND_D, alpha);
-  p.dot(fx, fy, C[6], alpha); p.px(fx, fy, C[7]);
+  drawWeaponSprite(p,"powder-bomb",x,y,a,{alpha,pivot:[8,0],scale:1.15});
 }
 
 export function draw(p, t, o) {

@@ -83,6 +83,11 @@ function ribbon(p, C, t, reach) {
     if (d > 12) {
       p.line(prev[0] + NORM[0] * w * 0.55, prev[1] + NORM[1] * w * 0.55 + 0.8, cur[0] + NORM[0] * w * 0.55, cur[1] + NORM[1] * w * 0.55 + 0.8, GOLD_D, 0.7);
     }
+    if (d > 14 && Math.floor(d / 2.5) % 4 === 0) {
+      const mid=[(prev[0]+cur[0])/2,(prev[1]+cur[1])/2];
+      p.polyline([[mid[0]-1,mid[1]],[mid[0],mid[1]-1],[mid[0]+1,mid[1]],[mid[0],mid[1]+1],[mid[0]-1,mid[1]]],GOLD_D,.8);
+      p.px(mid[0],mid[1],C[6]);
+    }
     prev = cur;
   }
   const tip = at(reach);

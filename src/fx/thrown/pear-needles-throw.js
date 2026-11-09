@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // 梨花针：袖口一抖，五根细针成扇面激射出去，一根根钉进草靶，针尾还在颤，
 // 针上带的梨花瓣跟着散开，最后针尖的灵光散成点点白尘。
 import { READY, WHITE, clamp, ease, fit, hex, rng, sparkle } from "../../core/index.js";
@@ -51,13 +52,7 @@ function needleAt(n, t) {
 
 /** a needle: 9 px of steel, a white head, a thinning trail */
 function needle(p, C, x, y, ang, len, alpha) {
-  const ca = Math.cos(ang), sa = Math.sin(ang);
-  const tx = x - ca * len, ty = y - sa * len;
-  p.line(tx, ty, x, y, C[3], alpha);
-  p.line(tx + ca * 1.5, ty + sa * 1.5, x, y, C[4], alpha);
-  p.px(x, y, C[6]);
-  p.px(x + ca, y + sa, C[6]);
-  p.dot(tx, ty, GOLD, alpha * 0.55);
+  drawWeaponSprite(p,"pear-needles",x,y,ang,{alpha,scale:len/12.2,pivot:[13.6,0],filter:q=>q.x>1.4&&Math.abs(q.y)<0.6});
 }
 
 export function draw(p, t, o) {

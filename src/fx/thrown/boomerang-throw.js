@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // A hooked boomerang travels out on a high crescent, clips the target, then sweeps
 // back through the same space for a second contact before the hand catches it.
 import { READY, TAU, clamp, ease, fit, rng, sparkle } from "../../core/index.js";
@@ -28,15 +29,7 @@ export const act = {
 };
 
 function boomerang(p, C, x, y, a, alpha = 1) {
-  const ca = Math.cos(a), sa = Math.sin(a), P = (u, v) => [x + ca * u - sa * v, y + sa * u + ca * v];
-  const pts = [];
-  for (let u = 0; u <= 1; u += 0.06) {
-    const q = -0.75 + u * 1.5, r = 6 + u * 11;
-    pts.push(P(3 + Math.cos(q) * r, Math.sin(q) * r));
-  }
-  for (let i = 0; i < pts.length - 1; i++) p.line(...pts[i], ...pts[i + 1], C[2], 2.2 * alpha);
-  for (let i = 0; i < pts.length - 1; i += 2) p.line(...pts[i], ...pts[i + 1], C[5], alpha);
-  p.dot(...P(3, 0), C[6], alpha * 0.8);
+  drawWeaponSprite(p,"boomerang",x,y,a,{alpha,pivot:[6,0]});
 }
 
 function pointAt(t) {

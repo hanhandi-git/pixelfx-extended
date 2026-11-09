@@ -113,6 +113,18 @@ test("engraved DNF weapons preserve multiple metal and inlay colors in the held 
   }
 });
 
+test("every existing rig weapon has a dense material master and registered display", () => {
+  assert(Object.keys(WEAPONS).length >= 41);
+  for (const [id,model] of Object.entries(WEAPONS)) {
+    assert.equal(model.density,4,id);
+    assert(model.pixels.length > 250,id);
+    assert(new Set(model.pixels.map(p=>p.c)).size >= 8,id);
+    const display=effects[`weapons/${id}`]??effects[`dnf/${id}`];
+    assert(display?.meta?.tags.includes("weapon"),id);
+    assert(model.bounds.x1>model.bounds.x0&&model.bounds.y1>model.bounds.y0,id);
+  }
+});
+
 test("the armory keeps thrown weapons out of the melee group", () => {
   assert.equal(ARMORY.length, MELEE_WEAPONS.length + THROWN_WEAPONS.length);
   assert(!MELEE_WEAPONS.some((w) => w.id === "kunai"));

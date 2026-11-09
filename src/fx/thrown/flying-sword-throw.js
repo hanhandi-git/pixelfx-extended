@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // 御剑化五：手捏剑诀把一柄小剑送出去，它在半空裂成五柄，绕着他转成一道剑轮；
 // 剑指一递，五柄小剑依次脱离剑轮、各自挑一个高度扎进草靶，扎完再游回剑轮里。
 import { READY, WHITE, clamp, ease, fit, hex, rng, sparkle } from "../../core/index.js";
@@ -95,20 +96,7 @@ function grip(i, t) {
 
 /** 一柄尺长的小剑，握点 (x,y)，剑身沿 +a */
 function jian(p, C, x, y, a, k) {
-  const ca = Math.cos(a), sa = Math.sin(a);
-  const P = (u, v) => [x + ca * u - sa * v, y + sa * u + ca * v];
-  for (let i = 0; i < 2; i++) { const q = P(-3.4 - i * 0.6, 1.0); p.dot(q[0], q[1], i ? TASSEL : GOLD_D, 0.85 * k); }
-  const g0 = P(-2.6, 0), g1 = P(1.2, 0);
-  p.beam(g0[0], g0[1], g1[0], g1[1], 2.6, C[0], k);
-  p.beam(g0[0], g0[1], g1[0], g1[1], 1.5, C[2], k);
-  const pc = P(-3.2, 0); p.dot(pc[0], pc[1], GOLD, k); p.dot(pc[0], pc[1] - 1, JADE, 0.8 * k);
-  for (let i = -1; i <= 1; i++) { const q = P(1.4, i * 1.1); p.dot(q[0], q[1], GOLD, k * 0.95); }
-  p.poly([P(1.8, -1.0), P(15.4, -0.8), P(17, 0), P(15.4, 0.8), P(1.8, 1.0)], C[2], k);
-  p.poly([P(2.0, -0.8), P(15.2, -0.6), P(16.6, 0), P(2.2, 0)], C[4], k);
-  p.poly([P(2.0, 0.2), P(16.6, 0.2), P(15.2, 0.7), P(2.0, 0.8)], C[1], k);
-  const e0 = P(3, -0.7), e1 = P(14.6, -0.5);
-  p.line(e0[0], e0[1], e1[0], e1[1], WHITE, 0.7 * k);
-  const tp = P(16.8, 0); p.px(tp[0], tp[1], C[6]);
+  drawWeaponSprite(p,"flying-sword",x,y,a,{alpha:k});
 }
 
 /** 剑后拖的灵气：沿它自己刚走过的路取样，越远越淡 */

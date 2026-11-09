@@ -1,3 +1,4 @@
+import { drawWeaponSprite } from "./_weapon-sprite.js";
 // 摄魂铃：铜铃高高抛出去，铃身在半空里慢慢翻滚，砸在草靶胸口的一瞬炸开三圈声波，
 // 紫魂焰从铃口卷着往上走，铃掉到地上还要再轻响一下。
 import { READY, clamp, ease, fit, hex, rng, sparkle } from "../../core/index.js";
@@ -41,35 +42,7 @@ function flight(u) {
 
 /** the bell: mouth at +x, ring handle at -x, a clapper hanging in the mouth */
 function bell(p, C, x, y, a, alpha = 1, s = 1) {
-  const ca = Math.cos(a), sa = Math.sin(a);
-  const P = (u, v) => [x + (ca * u - sa * v) * s, y + (sa * u + ca * v) * s];
-  // tassel: red threads trailing off the handle
-  for (let i = 0; i < 4; i++) {
-    const q = P(-5.2 - i * 0.5, -1.4 - i * 1.1);
-    p.dot(q[0], q[1], i & 1 ? TASSEL : GOLD_D, alpha * 0.9);
-  }
-  // 环钮
-  const r0 = P(-3.6, 0);
-  p.ring(r0[0], r0[1], 1.7 * s, 1.1 * s, C[4], alpha);
-  // 钟身：暗底、铜面、口沿
-  p.poly([P(-2.2, -2.8), P(1.4, -2.2), P(6.4, -4.4), P(7.2, 0), P(6.4, 4.4), P(1.4, 2.2), P(-2.2, 2.8)], C[2], alpha);
-  p.poly([P(-1.8, -2.4), P(1.6, -1.9), P(6, -3.8), P(6, -0.4), P(-1.6, -0.4)], C[3], alpha);
-  p.poly([P(-1.6, 0.5), P(6, 0.5), P(6, 3.8), P(1.6, 1.9), P(-1.6, 2.4)], C[1], alpha);
-  // 铜绿斑与铸纹
-  for (const [u, v] of [[0.4, 1.6], [2.2, -1.2], [3.4, 2.2], [4.6, 0.2], [1.2, -2.4]]) {
-    const q = P(u, v); p.dot(q[0], q[1], C[5], alpha * 0.55);
-  }
-  for (let u = 0.2; u < 6; u += 1.4) { const q = P(u, -3.1); p.dot(q[0], q[1], GOLD_D, alpha * 0.7); }
-  // 口沿：金唇
-  const l0 = P(6.8, -4.6), l1 = P(6.8, 4.6);
-  p.beam(l0[0], l0[1], l1[0], l1[1], 1.8, GOLD, alpha);
-  const c0 = P(7.6, -1.2), c1 = P(7.6, 1.2);
-  p.beam(c0[0], c0[1], c1[0], c1[1], 1, GOLD_D, alpha * 0.8);
-  // 铃舌
-  const k0 = P(5.4, 0), k1 = P(8.6, 0);
-  p.line(k0[0], k0[1], k1[0], k1[1], C[4], alpha * 0.8);
-  const kk = P(8.8, 0);
-  p.dot(kk[0], kk[1], C[6], alpha);
+  drawWeaponSprite(p,"soul-bell",x,y,a,{alpha,scale:s,pivot:[2.2,0]});
 }
 
 /** 声波：三圈错峰外扩的环，越远越淡 */

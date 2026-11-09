@@ -1,6 +1,6 @@
 # Catalog
 
-403 effects in 33 categories: 244 original and 159 new. Every one is a file in
+416 effects in 33 categories: 244 original and 172 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -462,31 +462,44 @@ every armory weapon placed in the world: a slow hover, a sheen down the steel, l
 
 | effect | id | source | kind | play | size | what it does |
 |---|---|---|---|---|---|---|
-| Aurora lightblade, placed | `weapons/aurora-lightblade` | new | effect | loop 3.2s | 88×123 | A hilt holds a blade of light: the aurora lightblade hangs point-up, its white heart wrapped in aqua, beads sliding down the energy and a cold seal blooming beneath. |
-| Binding silk, placed | `weapons/binding-silk` | new | effect | loop 3.2s | 88×100 | A rolled sash hovers upright in rose-gold light, one tail hanging loose: the silk rolls a slow turn, gold ferrules catch the sheen and petals drift up. |
-| Blood butterfly, placed | `weapons/blood-butterfly` | new | effect | loop 3.2s | 88×123 | The crimson butterfly blade hangs point-up: rose ribbons wind the steel, petals of light shed from the guard, a red tassel stirs and the seal below burns rose-gold. |
-| Boomerang, placed | `weapons/boomerang` | new | effect | loop 3.2s | 88×100 | A wooden boomerang floats on its curve in warm gold light: one arm dips as it rocks, the seal turns beneath it and a trail of motes follows the sweep. |
-| Dagger, placed | `weapons/dagger` | new | effect | loop 3.2s | 88×100 | A short dagger floats hilt-down in a pocket of ochre light: the blade ticks a quarter turn each loop, glints crawl its edge and gold dust drifts up from the seal. |
-| Demon-eye greatsword, placed | `weapons/demon-eye-greatsword` | new | effect | loop 3.2s | 88×133 | The horned demon-eye greatsword hangs point-up and too heavy: violet ribbons coil the slab, the eye in its guard drifts open and shut, and the seal below turns red. |
-| Dragon-scale sabre, placed | `weapons/dragon-scale-sabre` | new | effect | loop 3.2s | 88×128 | The dragon-scale sabre hangs on its curve in jade light: gold scales catch the sheen along its spine, a red tassel turns, and the seal below is ringed in green fire. |
-| Flying sword, placed | `weapons/flying-sword` | new | effect | loop 3.2s | 88×100 | A short jian floats point-up, jade pommel low: a green ribbon wraps the blade once, the point takes a hard glint and sword-qi motes stream from the seal. |
-| Ghostlight jian, placed | `weapons/ghost-blade` | new | effect | loop 3.2s | 88×118 | The hollow ghostlight jian floats in pale cold light: its edge is a white line and its core barely there, wisps cross the steel, and the floor seal glows through it. |
-| Holy sword, placed | `weapons/holy-sword` | new | effect | loop 3.2s | 88×116 | A wing-guarded holy blade hangs point-up in ivory light: gold arcs circle the tip, a slow sheen crosses the crossguard's inset and gold motes climb from the seal. |
-| Katana, placed | `weapons/katana` | new | effect | loop 3.2s | 88×112 | A drawn katana floats point-up with its saya gone: violet ribbons wind the curved blade, the tsuba's ring pulses, a sheen travels the edge and ash motes drift up. |
-| Kunai, placed | `weapons/kunai` | new | effect | loop 3.2s | 88×100 | A kunai floats ring-pommel up, point down: cold steel-blue light pools under it, the edge takes a sheen, and the seal turns while dark motes drift across the blade. |
-| Kusanagi, placed | `weapons/kusanagi` | new | effect | loop 3.2s | 88×115 | The cloud-guarded tsurugi stands in green light: a jade halo turns behind the straight blade, cloud scallops catch the sheen, and river motes rise from a turning seal. |
-| Knight lance, placed | `weapons/lance` | new | effect | loop 3.2s | 88×151 | A knight's lance floats point-up, tall as a door: a royal-blue halo rings the shaft, a sheen runs to the socket, the split pennon stirs and motes rise from the seal. |
-| Pear-blossom needles, placed | `weapons/pear-needles` | new | effect | loop 3.2s | 88×100 | Three needles hover point-up in pearllight: they fan a hair apart, white petal motes fall from the seal and a thin sheen runs each point in turn. |
-| Powder bomb, placed | `weapons/powder-bomb` | new | effect | loop 3.2s | 88×100 | A fused powder bomb hangs nose-down over a scorched seal: the fuse spits a spark, embers cling to its iron shell, and a hot ring pulses across the floor. |
-| Rapier, placed | `weapons/rapier` | new | effect | loop 3.2s | 88×111 | A duelist's rapier hangs point-down from its cup guard: a rose halo circles the needle blade, the star guard catches a sheen and petals of light drift from the seal. |
-| Skyvault greatsword, placed | `weapons/skyvault-greatsword` | new | effect | loop 3.2s | 88×136 | The skyvault greatsword stands in blue light, gold dragon horns bared: a sky-blue heart beats along the blade, cloud motes circle it and pale feathers fall past the seal. |
-| Soul bell, placed | `weapons/soul-bell` | new | effect | loop 3.2s | 88×100 | A bronze bell hangs mouth-down in patina light, its tongue still: a green ring turns beneath it, the rim takes a sheen and pale soul-motes climb past the clapper. |
-| Spear, placed | `weapons/spear` | new | effect | loop 3.2s | 88×133 | A spear hangs point-up over a teal seal, its pennon the only colour: the leaf blade catches a sheen, a ribbon of light winds the socket and dust turns in the pool below. |
-| Banded staff, placed | `weapons/staff` | new | effect | loop 3.2s | 88×127 | A banded staff stands on its butt in the air, the two gold bands bright: light climbs the shaft in a slow ring, and the wooden floor seal turns under it. |
-| Sword, placed | `weapons/sword` | new | effect | loop 3.2s | 88×100 | A longsword hangs point-up in pale light: a slow bob over a turning floor seal, a sheen down the steel, ribbons of light circling the blade and motes climbing past it. |
-| Talisman, placed | `weapons/talisman` | new | effect | loop 3.2s | 88×100 | A paper talisman stands upright in vermilion light, its seal glowing: the slip flutters at one corner, cinnabar motes rise and a ward ring turns on the floor. |
-| Totsuka, placed | `weapons/totsuka` | new | effect | loop 3.2s | 88×125 | The broad Totsuka hangs point-up, vermilion grip down: a violet halo turns behind the bronze dragon guard, a sheen walks the long blade and plum motes climb. |
-| War mace, placed | `weapons/war-mace` | new | effect | loop 3.2s | 88×111 | A studded war mace floats head-up, too heavy to believe: embers shed from the flanges, a hot ring turns on the floor and the shaft ticks a slow quarter turn. |
+| Aurora lightblade, placed | `weapons/aurora-lightblade` | new | effect | loop 3.2s | 128×284 | A layered cyan energy blade above an ornate gold star emitter, etched crystal diamonds and an inset ice-blue pommel. |
+| Binding silk, placed | `weapons/binding-silk` | new | effect | loop 3.2s | 128×128 | A brocade silk scroll with gold end collars, engraved gem clasp and embroidered red-thread folded tails. |
+| Blood butterfly, placed | `weapons/blood-butterfly` | new | effect | loop 3.2s | 128×285 | A curved crimson blade with a butterfly-wing enamel guard, gold vine inlay, garnet pommel and split red tassels. |
+| Boomerang, placed | `weapons/boomerang` | new | effect | loop 3.2s | 140×148 | A carved wooden returning blade with two swept arms, gold edge tracing, inset stones and a crosswrapped center grip. |
+| Bow, placed | `weapons/bow` | new | effect | loop 3.2s | 128×206 | A carved greenwood bow with gold leaf tracery, faceted inset stones, braided grip and a taut silver string. |
+| Claw, placed | `weapons/claw` | new | effect | loop 3.2s | 128×98 | Three curved silver talons mounted on a gem-set gilt knuckle plate with stepped metal faces and carved borders. |
+| Dagger, placed | `weapons/dagger` | new | effect | loop 3.2s | 128×146 | A compact silver dagger with a star-etched face, gem-set guard, tiny gilt pommel and a tightly braided leather grip. |
+| Demon-eye greatsword, placed | `weapons/demon-eye-greatsword` | new | effect | loop 3.2s | 128×336 | A serrated obsidian greatsword with raised horns, a ruby eye in the guard, gilt engraving and stepped pale steel facets. |
+| Dragon-scale sabre, placed | `weapons/dragon-scale-sabre` | new | effect | loop 3.2s | 128×308 | A curved jade sabre with overlapping gilt scale engravings, a carved dragon guard and red silk tassels. |
+| Ember Greatsword, placed | `weapons/ember-greatsword` | new | effect | loop 3.2s | 128×358 | A massive ember-steel blade with horned gold guard, lightning-shaped heat inlay, faceted gems and a long braided grip. |
+| Flying sword, placed | `weapons/flying-sword` | new | effect | loop 3.2s | 128×159 | A miniature jade sword with cloud guard, carved glyphs, faceted green stones and a pair of red tassels. |
+| Frost Lightsword, placed | `weapons/frost-lightsword` | new | effect | loop 3.2s | 128×320 | An icy energy sword with crystal diamond etchings, layered blue rails, a sculpted star guard and cold silver settings. |
+| Ghostlight jian, placed | `weapons/ghost-blade` | new | effect | loop 3.2s | 128×269 | A hollow violet blade framed by cold silver rails, with carved cyan glyphs, a cloud guard and faceted stones. |
+| Greatsword, placed | `weapons/greatsword` | new | effect | loop 3.2s | 128×239 | A broad steel greatsword with a carved gold guard, runic fuller, layered bevels and an inset stone above its braided two-hand grip. |
+| Hammer, placed | `weapons/hammer` | new | effect | loop 3.2s | 128×217 | A heavy steel hammer with engraved gilt head plates, inset ruby crest, bevelled corners and a banded leather handle. |
+| Handle, placed | `weapons/handle` | new | effect | loop 3.2s | 128×78 | A compact leather-wrapped handle with carved gold collars and a faceted inset pommel. |
+| Holy sword, placed | `weapons/holy-sword` | new | effect | loop 3.2s | 128×260 | An ivory-silver holy sword with a winged gilt guard, green stones, fine runes and a layered luminous cutting bevel. |
+| Katana, placed | `weapons/katana` | new | effect | loop 3.2s | 128×251 | A curved steel katana with a scrollwork basket guard, carved glyphs, banded leather grip and two thin crimson tassels. |
+| Kunai, placed | `weapons/kunai` | new | effect | loop 3.2s | 128×165 | A steel kunai with a hollow ring pommel, gold guard stone, engraved blade lozenge and fine crosswrapped grip. |
+| Kusanagi, placed | `weapons/kusanagi` | new | effect | loop 3.2s | 128×249 | A jade-steel straight sword with a cloud-lobed gold guard, green inset gems and pale runes along its center ridge. |
+| Knight lance, placed | `weapons/lance` | new | effect | loop 3.2s | 128×397 | A long knight lance with a faceted point, etched gold socket, split crimson pennon, braided grip and gilded shaft collars. |
+| Launcher, placed | `weapons/launcher` | new | effect | loop 3.2s | 196×97 | A banded heavy launcher with silver cooling fins, brass scrollwork, a recessed crystal core and braided secondary grip. |
+| Pear-blossom needles, placed | `weapons/pear-needles` | new | effect | loop 3.2s | 128×89 | Three etched silver needles nested in a blue wrapped cuff, with gilded bases, sharp pale tips and a tiny gem clasp. |
+| Pistol, placed | `weapons/pistol` | new | effect | loop 3.2s | 128×97 | A compact engraved steel pistol with gold scroll inlay, a gem-set wood grip, stepped sight and an open dark bore. |
+| Powder bomb, placed | `weapons/powder-bomb` | new | effect | loop 3.2s | 128×115 | A dark powder bomb with engraved brass straps, inset gem, stepped metal faces and a braided burning fuse. |
+| Rapier, placed | `weapons/rapier` | new | effect | loop 3.2s | 128×242 | A needle rapier with a pierced scrollwork cup guard, tiny star etchings and a faceted pommel over dark leather. |
+| Scythe, placed | `weapons/scythe` | new | effect | loop 3.2s | 278×270 | A crescent silver scythe with gold ribs along the cutting head, a violet gem socket and an engraved wrapped shaft. |
+| Shadow Katana, placed | `weapons/shadow-katana` | new | effect | loop 3.2s | 128×300 | A deeply curved violet katana with carved runes, pierced scroll guard, dark braided grip and thin crimson ribbons. |
+| Skyvault greatsword, placed | `weapons/skyvault-greatsword` | new | effect | loop 3.2s | 128×340 | A sky-blue greatsword with a gold dragon guard, bright star etchings, crystal settings and a long braided grip. |
+| Soul bell, placed | `weapons/soul-bell` | new | effect | loop 3.2s | 128×102 | A cast bronze bell with embossed scrollwork, patina, open dark mouth, gilt rim and a hanging red cord. |
+| Spear, placed | `weapons/spear` | new | effect | loop 3.2s | 128×325 | An engraved spear with a faceted leaf head, gold center ridge, gem socket and layered collars over a patterned shaft. |
+| Banded staff, placed | `weapons/staff` | new | effect | loop 3.2s | 128×307 | A long lacquered staff with engraved collars, inset endpoint gems, woven grip and gold tracing along the shaft. |
+| Starlight Rapier, placed | `weapons/starlight-rapier` | new | effect | loop 3.2s | 128×318 | A slender gilt star rapier with a sculpted star guard, etched constellations, faceted pommel and a braided leather grip. |
+| Sword, placed | `weapons/sword` | new | effect | loop 3.2s | 128×212 | A silver longsword with a beveled cutting edge, gold vine inlay, faceted gems, wrapped grip and layered crossguard; every engraving is sampled from the held model. |
+| Talisman, placed | `weapons/talisman` | new | effect | loop 3.2s | 128×116 | A folded parchment charm with a gilt border, cinnabar side band, raised seal stamp and dark branching calligraphy. |
+| Thunder Claymore, placed | `weapons/thunder-claymore` | new | effect | loop 3.2s | 128×339 | An ornate storm blade with zigzag gold inlay, serrated steel facets, a dragon guard and blue crystal settings. |
+| Totsuka, placed | `weapons/totsuka` | new | effect | loop 3.2s | 128×295 | A broad violet-steel blade with a gold dragon guard, carved script, wrapped long grip and crimson cord ends. |
+| War mace, placed | `weapons/war-mace` | new | effect | loop 3.2s | 128×237 | A spiked steel mace with engraved gold head plates, a large faceted center gem and banded braided handle. |
 
 ## dnf
 

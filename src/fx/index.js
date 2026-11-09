@@ -303,25 +303,38 @@ import * as weapons_aurora_lightblade from "./weapons/aurora-lightblade.js";
 import * as weapons_binding_silk from "./weapons/binding-silk.js";
 import * as weapons_blood_butterfly from "./weapons/blood-butterfly.js";
 import * as weapons_boomerang from "./weapons/boomerang.js";
+import * as weapons_bow from "./weapons/bow.js";
+import * as weapons_claw from "./weapons/claw.js";
 import * as weapons_dagger from "./weapons/dagger.js";
 import * as weapons_demon_eye_greatsword from "./weapons/demon-eye-greatsword.js";
 import * as weapons_dragon_scale_sabre from "./weapons/dragon-scale-sabre.js";
+import * as weapons_ember_greatsword from "./weapons/ember-greatsword.js";
 import * as weapons_flying_sword from "./weapons/flying-sword.js";
+import * as weapons_frost_lightsword from "./weapons/frost-lightsword.js";
 import * as weapons_ghost_blade from "./weapons/ghost-blade.js";
+import * as weapons_greatsword from "./weapons/greatsword.js";
+import * as weapons_hammer from "./weapons/hammer.js";
+import * as weapons_handle from "./weapons/handle.js";
 import * as weapons_holy_sword from "./weapons/holy-sword.js";
 import * as weapons_katana from "./weapons/katana.js";
 import * as weapons_kunai from "./weapons/kunai.js";
 import * as weapons_kusanagi from "./weapons/kusanagi.js";
 import * as weapons_lance from "./weapons/lance.js";
+import * as weapons_launcher from "./weapons/launcher.js";
 import * as weapons_pear_needles from "./weapons/pear-needles.js";
+import * as weapons_pistol from "./weapons/pistol.js";
 import * as weapons_powder_bomb from "./weapons/powder-bomb.js";
 import * as weapons_rapier from "./weapons/rapier.js";
+import * as weapons_scythe from "./weapons/scythe.js";
+import * as weapons_shadow_katana from "./weapons/shadow-katana.js";
 import * as weapons_skyvault_greatsword from "./weapons/skyvault-greatsword.js";
 import * as weapons_soul_bell from "./weapons/soul-bell.js";
 import * as weapons_spear from "./weapons/spear.js";
 import * as weapons_staff from "./weapons/staff.js";
+import * as weapons_starlight_rapier from "./weapons/starlight-rapier.js";
 import * as weapons_sword from "./weapons/sword.js";
 import * as weapons_talisman from "./weapons/talisman.js";
+import * as weapons_thunder_claymore from "./weapons/thunder-claymore.js";
 import * as weapons_totsuka from "./weapons/totsuka.js";
 import * as weapons_war_mace from "./weapons/war-mace.js";
 import * as dnf_awakening_burst from "./dnf/awakening-burst.js";
@@ -711,25 +724,38 @@ export const effects = {
   "weapons/binding-silk": weapons_binding_silk,
   "weapons/blood-butterfly": weapons_blood_butterfly,
   "weapons/boomerang": weapons_boomerang,
+  "weapons/bow": weapons_bow,
+  "weapons/claw": weapons_claw,
   "weapons/dagger": weapons_dagger,
   "weapons/demon-eye-greatsword": weapons_demon_eye_greatsword,
   "weapons/dragon-scale-sabre": weapons_dragon_scale_sabre,
+  "weapons/ember-greatsword": weapons_ember_greatsword,
   "weapons/flying-sword": weapons_flying_sword,
+  "weapons/frost-lightsword": weapons_frost_lightsword,
   "weapons/ghost-blade": weapons_ghost_blade,
+  "weapons/greatsword": weapons_greatsword,
+  "weapons/hammer": weapons_hammer,
+  "weapons/handle": weapons_handle,
   "weapons/holy-sword": weapons_holy_sword,
   "weapons/katana": weapons_katana,
   "weapons/kunai": weapons_kunai,
   "weapons/kusanagi": weapons_kusanagi,
   "weapons/lance": weapons_lance,
+  "weapons/launcher": weapons_launcher,
   "weapons/pear-needles": weapons_pear_needles,
+  "weapons/pistol": weapons_pistol,
   "weapons/powder-bomb": weapons_powder_bomb,
   "weapons/rapier": weapons_rapier,
+  "weapons/scythe": weapons_scythe,
+  "weapons/shadow-katana": weapons_shadow_katana,
   "weapons/skyvault-greatsword": weapons_skyvault_greatsword,
   "weapons/soul-bell": weapons_soul_bell,
   "weapons/spear": weapons_spear,
   "weapons/staff": weapons_staff,
+  "weapons/starlight-rapier": weapons_starlight_rapier,
   "weapons/sword": weapons_sword,
   "weapons/talisman": weapons_talisman,
+  "weapons/thunder-claymore": weapons_thunder_claymore,
   "weapons/totsuka": weapons_totsuka,
   "weapons/war-mace": weapons_war_mace,
   "dnf/awakening-burst": dnf_awakening_burst,
@@ -1117,25 +1143,38 @@ export const provenance = {
   "weapons/binding-silk": "new",
   "weapons/blood-butterfly": "new",
   "weapons/boomerang": "new",
+  "weapons/bow": "new",
+  "weapons/claw": "new",
   "weapons/dagger": "new",
   "weapons/demon-eye-greatsword": "new",
   "weapons/dragon-scale-sabre": "new",
+  "weapons/ember-greatsword": "new",
   "weapons/flying-sword": "new",
+  "weapons/frost-lightsword": "new",
   "weapons/ghost-blade": "new",
+  "weapons/greatsword": "new",
+  "weapons/hammer": "new",
+  "weapons/handle": "new",
   "weapons/holy-sword": "new",
   "weapons/katana": "new",
   "weapons/kunai": "new",
   "weapons/kusanagi": "new",
   "weapons/lance": "new",
+  "weapons/launcher": "new",
   "weapons/pear-needles": "new",
+  "weapons/pistol": "new",
   "weapons/powder-bomb": "new",
   "weapons/rapier": "new",
+  "weapons/scythe": "new",
+  "weapons/shadow-katana": "new",
   "weapons/skyvault-greatsword": "new",
   "weapons/soul-bell": "new",
   "weapons/spear": "new",
   "weapons/staff": "new",
+  "weapons/starlight-rapier": "new",
   "weapons/sword": "new",
   "weapons/talisman": "new",
+  "weapons/thunder-claymore": "new",
   "weapons/totsuka": "new",
   "weapons/war-mace": "new",
   "dnf/awakening-burst": "new",

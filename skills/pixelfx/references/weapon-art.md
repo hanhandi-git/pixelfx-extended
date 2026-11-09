@@ -58,8 +58,9 @@ Compose outlines, facets, engraving and highlights into a local texel map first.
 then submit each final texel once through `shape.draw(T)`. Keep real depth for genuinely separate geometry.
 Do not change the global depth comparison merely to make one decorative layer appear.
 
-The checked-out library's `src/core/dnf-weapons.js` demonstrates this composition, and
-`src/fx/dnf/_weapon-display.js` shows the same source at full detail with restrained lighting. Ember Echo's
+The library's `src/core/pixel-weapon-art.js` implements composition. `src/core/ornate-blades.js`,
+`ornate-equipment.js`, `ornate-props.js` and `dnf-weapons.js` author complete masters;
+`src/fx/weapons/_detail.js` shows them at full detail with restrained lighting. Ember Echo's
 `src/ui-art.js` samples the composed source for equipment icons. Adapt these patterns to the current project.
 
 ## Visual acceptance

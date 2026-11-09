@@ -5,6 +5,7 @@ import { effects, categories, provenance } from "../src/fx/index.js";
 import { createFrame, clearFrame, createFx, createAct, actBounds, composite, backdrop, drawActor, painterFor, stockActor, actorAlphaOf, posed, PAL, BACKDROPS, CHARACTERS, characterOf, ARMORY, WEAPON_CLASSES, weaponOf } from "../src/core/index.js";
 import { LANGS, detectLang, getLang, setLang, t as tr, applyStatic, categoryText, characterText, characterOption, weaponText, weaponOption, weaponClassText, backdropText } from "./i18n.js";
 import { THEMES, themeOfCat } from "./themes.js";
+import { MATERIAL_IDS, matchesMaterial } from "./materials.js";
 import { getTilePool, WorkerTilePlayer } from "./worker-tile-player.mjs";
 
 let tilePool = null;
@@ -328,7 +329,7 @@ function wireLang() {
 // ---- filters
 const initialParams = new URLSearchParams(location.search), initialSource = initialParams.get("source"), initialTheme = initialParams.get("theme");
 const THEME_IDS = ["all", "classic", ...THEMES.map((t) => t.id)];
-const state = { cat: "all", theme: THEME_IDS.includes(initialTheme) ? initialTheme : "all", q: "", prov: ["original", "new"].includes(initialSource) ? initialSource : "all", character: characterOf(initialParams.get("character")).id, weapon: weaponOf(initialParams.get("weapon"))?.id ?? "sword" };
+const state = { cat: "all", theme: THEME_IDS.includes(initialTheme) ? initialTheme : "all", material: MATERIAL_IDS.includes(initialParams.get("type")) ? initialParams.get("type") : "all", q: "", prov: ["original", "new"].includes(initialSource) ? initialSource : "all", character: characterOf(initialParams.get("character")).id, weapon: weaponOf(initialParams.get("weapon"))?.id ?? "sword" };
 let castPreview = null;
 let castLive = true;
 function buildCharacters() {
@@ -427,11 +428,12 @@ function themeSections(id = state.theme) {
 const tally = (list) => list.reduce((n, s) => n + s.list.length, 0);
 
 function chips() {
-  const themeBox = $("#themes"), box = $("#chips"), srcBox = $("#origins");
+  const themeBox = $("#themes"), box = $("#chips"), srcBox = $("#origins"), materialBox = $("#materials");
   if (!themeBox || !srcBox) return;
   themeBox.replaceChildren();
   box.replaceChildren();
   srcBox.replaceChildren();
+  materialBox.replaceChildren();
   const mk = (parent, { id, label, n, field, pressed, cls = "", onPick }) => {
     const b = el("button", { className: `chip ${cls}`.trim(), type: "button" }, [label, el("span", { textContent: n })]);
     b.dataset[field] = id;
@@ -450,13 +452,25 @@ function chips() {
   const classic = themeSections("classic");
   if (classic.length) mk(themeBox, { id: "classic", label: tr("theme.classic"), n: tally(classic), field: "theme", pressed: state.theme === "classic", cls: "theme", onPick: () => setTheme("classic") });
 
-  const shown = themeSections();
-  mk(box, { id: "all", label: tr("chip.all"), n: tally(shown), field: "cat", pressed: state.cat === "all", onPick: () => setCat("all") });
-  for (const s of shown) mk(box, { id: s.c.id, label: categoryText(s.c).name, n: s.list.length, field: "cat", pressed: state.cat === s.c.id, onPick: () => setCat(s.c.id) });
+  const scope=themeSections(), materialCount=id=>scope.reduce((n,s)=>n+s.list.filter(fx=>matchesMaterial(id,fx.id,fx.mod)).length,0);
+  for(const id of MATERIAL_IDS) mk(materialBox,{id,label:tr(`material.${id}`),n:materialCount(id),field:"material",pressed:state.material===id,cls:"material",onPick:()=>setMaterial(id)});
+  const shown = scope.filter(s=>s.list.some(fx=>matchesMaterial(state.material,fx.id,fx.mod)));
+  mk(box, { id: "all", label: tr("chip.all"), n: materialCount(state.material), field: "cat", pressed: state.cat === "all", onPick: () => setCat("all") });
+  for (const s of shown) mk(box, { id: s.c.id, label: categoryText(s.c).name, n: s.list.filter(fx=>matchesMaterial(state.material,fx.id,fx.mod)).length, field: "cat", pressed: state.cat === s.c.id, onPick: () => setCat(s.c.id) });
 
   mk(srcBox, { id: "all", label: tr("prov.all"), n: FX.length, field: "origin", pressed: state.prov === "all", cls: "origin", onPick: () => setProv("all") });
   mk(srcBox, { id: "original", label: tr("prov.original"), n: FX.filter((f) => f.prov === "original").length, field: "origin", pressed: state.prov === "original", cls: "origin", onPick: () => setProv("original") });
   mk(srcBox, { id: "new", label: tr("prov.new"), n: FX.filter((f) => f.prov === "new").length, field: "origin", pressed: state.prov === "new", cls: "origin", onPick: () => setProv("new") });
+}
+
+function setMaterial(id) {
+  state.material=MATERIAL_IDS.includes(id)?id:"all";
+  state.cat="all";
+  const url=new URL(location.href);
+  if(state.material==="all")url.searchParams.delete("type");else url.searchParams.set("type",state.material);
+  url.hash="";
+  history.replaceState(null,"",url);
+  chips();filter();window.scrollTo({top:0});
 }
 
 function setTheme(id) {
@@ -508,7 +522,7 @@ function filter() {
     for (const fx of s.list) {
       const t = tiles.find((x) => x.fx === fx);
       // the category's localized name is searchable too, so "火焰" finds the fire section
-      const hit = inTheme.has(s.c.id) && (state.cat === "all" || state.cat === s.c.id) && (state.prov === "all" || fx.prov === state.prov) && (!q || [fx.id, fx.name, fx.prov, categoryText(s.c).name, fx.meta.desc, ...fx.meta.tags].join(" ").toLowerCase().includes(q));
+      const hit = inTheme.has(s.c.id) && matchesMaterial(state.material,fx.id,fx.mod) && (state.cat === "all" || state.cat === s.c.id) && (state.prov === "all" || fx.prov === state.prov) && (!q || [fx.id, fx.name, fx.prov, categoryText(s.c).name, fx.meta.desc, ...fx.meta.tags].join(" ").toLowerCase().includes(q));
       t.fig.hidden = !hit;
       any ||= hit;
       shown += hit;
