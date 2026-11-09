@@ -26,6 +26,7 @@ copied sprite art, logos or other published assets.
 | `amaterasu` | Amaterasu / 天照命 | Gold sun disc behind the head, waist-length black hair and hairpins, white haori, vermilion hakama, the Yata mirror at the chest | Original procedural geometry, MIT |
 | `tsukuyomi` | Tsukuyomi / 月读命 | Tall black kanmuri with a silver crescent and gold trim, a straight mane, indigo sokutai, white collar and obi, a silver crescent behind the head | Original procedural geometry, MIT |
 | `susanoo` | Susanoo / 须佐之男 | Wild mane, bare shoulders, a torn storm cloak, the shimenawa rope twisted across the chest, bracers, storm-grey hakama, lightning on one arm | Original procedural geometry, MIT |
+| `ivory-swordsman` | Ivory swordsman / 白衣剑客 | Pale swept hair, high white collar, charcoal split coat with red trim, gold clasp, dark hip scabbard and wrapped boots | Original procedural geometry, MIT |
 
 The bone height and hand positions stay fixed. Costumes extend the rest silhouette to roughly
 40–42 px; each actor exposes its actual `x`, `y`, `w`, `h`, mask and pixels. Feet stay at `(0, 0)`.

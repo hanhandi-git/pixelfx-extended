@@ -535,5 +535,69 @@ export function costume(S, look, api) {
     line("upperF", [2, 1.4, 0], [4, 2.2, 0], 0.2, 0.18, 8);
     line("upperF", [4, 2.2, 0], [5, 1.2, 0], 0.18, 0.16, 8);
     line("upperF", [4, 2.2, 0], [4.6, 3.2, 0.4], 0.14, 0.12, 8);
+  } else if (look.style === "ivory-swordsman") {
+    // A pale-haired three-quarter swordsman: high collar, layered charcoal coat, red trim, gold closure and a long hip scabbard.
+    head([-1.25, 1.8, 0], [2.8, 2.35, 3.05], 5);
+    // Swept fringe and a short fan of locks keep the head readable at one pixel per unit.
+    for (const [a, b, r] of [
+      [[0.2, 2.7, 0.2], [2.4, 4.5, 0.9], 1.05],
+      [[-1.1, 2.8, -1], [-2.7, 4.1, -1.8], 0.95],
+      [[-2.3, 2.1, 0.8], [-4.1, 3.7, 1.7], 0.85],
+      [[-0.1, 2.7, 2.15], [0.9, 4.1, 3.2], 0.8],
+    ]) line("head", a, b, r, 0.12, 5);
+    for (const s of [-1, 1]) {
+      line("head", [-1.2, 1.3, s * 2.45], [-2.6, -3.6, s * 3.2], 0.85, 0.32, 5);
+      line("head", [-2.3, 0.4, s * 2.7], [-3.1, -6.6, s * 3.45], 0.48, 0.2, 5);
+    }
+    // One thick forelock breaks the pale face plane, while the red tie peeks from the collar.
+    line("head", [1.15, 2.7, 2.2], [2.35, 0.6, 2.45], 0.7, 0.22, 5);
+    // A dark inner vest and a tall ivory collar sit underneath the coat.
+    ball("neck", [-0.25, 0.15, 0], [1.65, 1.2, 2.1], 7);
+    line("neck", [1.15, 0.4, -1.5], [1.15, 0.4, 1.5], 0.34, 0.34, 9);
+    line("chest", [1.0, 4.0, -1.9], [3.3, 1.35, 0], 0.36, 0.3, 9);
+    line("chest", [1.0, 4.0, 1.9], [3.3, 1.35, 0], 0.36, 0.3, 9);
+    line("chest", [3.35, 1.3, 0], [3.25, -2.4, 0], 0.42, 0.34, 7);
+    line("chest", [3.45, 2.6, -2.3], [3.5, -2.6, -2.2], 0.18, 0.16, 10);
+    line("chest", [3.45, 2.6, 2.3], [3.5, -2.6, 2.2], 0.18, 0.16, 10);
+    // A short red neck wrap and two tails survive the dark silhouette on the far shoulder.
+    line("neck", [1.2, 1.8, -2.2], [2.6, 1.7, -3.25], 0.38, 0.2, 10);
+    line("chest", [2.5, 1.8, -3.15], [1.8, -3.7, -4.3], 0.3, 0.14, 10);
+    line("chest", [2.4, 1.6, 3.1], [-1.8, -5.8, 4.8], 0.25, 0.12, 10);
+    // Broad sleeves and a stepped cuff echo the reference's white shoulder planes.
+    for (const f of ["upperN", "upperF"]) {
+      line(f, [0.7, 0, 0], [7.6, 0, 0], 2.2, 1.75, 4);
+      face(f, [[0.8, -2.2, -2.2], [0.8, 2.2, 2.2], [6.6, 2.8, 2.8], [6.9, -5.5, -2.6]], 4);
+      line(f, [6.6, -5.2, -2.4], [6.6, 2.5, 2.5], 0.32, 0.3, 6);
+      line(f, [5.9, -4.4, -2.25], [6.7, -4.5, -2.35], 0.2, 0.2, 10);
+      line(f, [3.0, 2.0, 2.3], [4.6, 1.2, 2.55], 0.16, 0.12, 10);
+    }
+    for (const f of ["foreN", "foreF"]) {
+      line(f, [0.3, 0, 0], [7.3, 0, 0], 1.55, 1.35, 7);
+      line(f, [6.3, 0, 0], [7.4, 0, 0], 1.5, 1.35, 9);
+    }
+    // Split tails: the near panel is longer and carries the pale-lavender lining visible in the silhouette.
+    face("pelvis", [[3.0, 1.3, -4.2], [3.0, 1.3, 4.2], [4.2, -11.8, 6.8], [4.8, -15.3, 1.1], [4.2, -12.3, -5.8]], 4);
+    face("pelvis", [[3.2, 1.1, -2.6], [3.2, 1.1, 1.1], [4.6, -13.6, 1.1], [4.8, -15.1, -0.2], [4.2, -12.7, -2.8]], 10);
+    line("pelvis", [3.25, 1.1, -4.3], [3.35, 1.1, 4.3], 0.58, 0.58, 6);
+    line("pelvis", [3.35, 0.8, -3.7], [4.4, -12.7, -5.8], 0.28, 0.18, 6);
+    line("pelvis", [3.4, 0.8, 2.1], [4.4, -12.2, 6.3], 0.24, 0.16, 6);
+    // Gold clasp and a small diagonal chain are the focal detail at the waist/chest break.
+    ball("pelvis", [3.7, 1.1, -0.2], [0.72, 0.68, 0.62], 6);
+    ball("pelvis", [4.02, 1.0, -0.25], [0.28, 0.3, 0.28], 8);
+    line("chest", [3.15, 2.9, -1.1], [3.7, 1.1, -0.25], 0.18, 0.16, 6);
+    // Dark trousers, pale wrapped boots and the long scabbard at the near hip.
+    for (const f of ["thighN", "thighF"]) line(f, [1, 0, 0], [8, 0, 0], 2.7, 2.2, 7);
+    for (const f of ["shinN", "shinF"]) {
+      line(f, [0.5, 0, 0], [7.8, 0, 0], 1.9, 1.5, 9);
+      line(f, [6.1, 0, 0], [7.5, 0, 0], 1.85, 1.58, 4);
+    }
+    for (const f of ["footN", "footF"]) {
+      line(f, [-1, -0.7, 0], [3.7, -1.15, 0], 1.65, 1.3, 9);
+      line(f, [-0.7, -1.25, -0.05], [3.6, -1.55, -0.05], 0.38, 0.3, 4);
+    }
+    line("pelvis", [4.4, 0.2, -4.0], [4.65, -12.0, -5.0], 0.78, 0.56, 7);
+    line("pelvis", [4.65, -12.0, -5.0], [4.65, -14.0, -5.15], 0.58, 0.42, 6);
+    ball("pelvis", [4.4, 0.5, -4.05], [0.65, 0.6, 0.58], 6);
+    line("pelvis", [4.58, -13.8, -5.15], [4.5, -14.8, -5.1], 0.34, 0.22, 10);
   }
 }

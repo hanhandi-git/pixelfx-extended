@@ -48,6 +48,8 @@ const stances = {
   hulk: { fx: 9, fy: -15, bx: -2, by: -17, ffx: 5, fbx: -5, crouch: 5 },
   thor: { weapon: "war-mace", fx: 8, fy: -30, bx: -4, by: -22, sa: -1.4, ffx: 4, fbx: -5 },
   "captain-america": { fx: 6, fy: -24, bx: -5, by: -21, ffx: 3, fbx: -5, turn: 0.6 },
+  // The reference's ready pose lets the curved blade hang from the near hand, tip low and forward.
+  "ivory-swordsman": { weapon: "katana", fx: 8, fy: -20, bx: -4, by: -20, sa: 0.88, ffx: 5, fbx: -5, turn: 0.35 },
 };
 const lineCols = 5, lineW = 300, lineH = 340;
 const lineup = canvas(lineW * lineCols, Math.ceil(CHARACTERS.length / lineCols) * lineH);
