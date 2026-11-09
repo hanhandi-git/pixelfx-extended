@@ -8,6 +8,7 @@ export const THEMES = [
   { id: "konosuba", cats: ["konosuba"] },
   { id: "fanren", cats: ["fanren"] },
   { id: "japan", cats: ["kami"] },
+  { id: "dnf", cats: ["dnf"] },
 ];
 
 /** The theme a category belongs to, or "classic" when no work claims it. */

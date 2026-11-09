@@ -6,17 +6,17 @@
 
 # pixelfx-extended.
 
-An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->148<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
+An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->159<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
 
-**<!-- count -->392<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->403<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a **fantasy game kit** — battle maps, minion and boss
 units, telegraphed attacks, and encounter timelines you author under `src/encounters/` — and a Claude Code skill that
 makes new ones the way a picky pixel artist would: draft, render, look, refine.
 
-The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->148<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
+The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->159<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
 
-**<!-- act-count -->118<!-- /act-count -->** effects export an **`act`** timeline: wind-up, release, freeze on contact, target reaction, recovery. **<!-- moves-count -->12<!-- /moves-count -->**
+**<!-- act-count -->121<!-- /act-count -->** effects export an **`act`** timeline: wind-up, release, freeze on contact, target reaction, recovery. **<!-- moves-count -->12<!-- /moves-count -->**
 **moves** in `src/fx/moves/` chain those beats into full attacks from wind-up to recovery.
 
 **[open the gallery](https://patch-gg.github.io/pixelfx/)** ·
@@ -33,7 +33,7 @@ the idea at library scale, with a skill to keep going.
 
 ## new additions.
 
-These **<!-- new-count -->148<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
+These **<!-- new-count -->159<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="Six looping fantasy battle maps at full 320×180 resolution: aurora pass, crystal hollow, ember depths, mossy ruins, sunscar temple and wisp marsh.">
@@ -73,6 +73,17 @@ These **<!-- new-count -->148<!-- /new-count -->** pieces are not in the origina
 | **lightning** | Thunder rain | `lightning/thunder-rain` |
 | **lightning** | Thunder spear | `lightning/thunder-spear` |
 | **arcane** | Flow seal | `arcane/flow-seal` |
+| **dnf** | Awakening burst | `dnf/awakening-burst` |
+| **dnf** | Bloodsteel cleaver, placed | `dnf/blood-cleaver` |
+| **dnf** | Chainshade blade, placed | `dnf/chain-blade` |
+| **dnf** | Chainshade crossing cut | `dnf/chain-cut` |
+| **dnf** | Chain pull | `dnf/chain-pull` |
+| **dnf** | Dustland gunner | `dnf/dust-gunner` |
+| **dnf** | Ghosthand slayer | `dnf/ghost-slayer` |
+| **dnf** | Brass hellcannon, placed | `dnf/hell-cannon` |
+| **dnf** | Launcher volley | `dnf/launcher-volley` |
+| **dnf** | Overdrive awakening slash | `dnf/overdrive-slash` |
+| **dnf** | Berserker rage aura | `dnf/rage-aura` |
 | **dragonball** | Destructo disc | `dragonball/destructo-disc` |
 | **dragonball** | Drill beam | `dragonball/drill-beam` |
 | **dragonball** | Golden aura | `dragonball/golden-aura` |
@@ -204,6 +215,7 @@ Categories with new content appear first; samples list **new** effects before or
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **melee** | 24 | aurora lightblade combo, blood butterfly dance, demon-eye cleave, dragon-scale sweep, ghostlight draw cut, holy sword cleave… |
 | **ninjutsu** | 12 | amaterasu, chidori rush, earth wall, great breakthrough, great fireball, kirin… |
+| **dnf** | 11 | awakening burst, bloodsteel cleaver, placed, chainshade blade, placed, chainshade crossing cut, chain pull, dustland gunner… |
 | **mobs** | 10 | goblin agile, goblin agile flurry, goblin archer, goblin archer shot, goblin giant, goblin giant quake… |
 | **world** | 9 | aurora pass, crystal hollow, ember depths, hearth town, inkbound shrine, mossy ruins… |
 | **thrown** | 8 | binding silk, boomerang throw, flying sword, kunai throw, pear-blossom needles, powder bomb throw… |
@@ -356,7 +368,7 @@ node tools/render.mjs fire/torch --gif --opts '{"palette": ["#102","#215","#43a"
 </p>
 
 An effect on its own looks like a sticker. What sells a hit is the body around it: the wind-up that says something is
-coming, the freeze on contact, the target rocking back, the recovery. **<!-- act-count -->118<!-- /act-count -->** effects export `act` data for that; the
+coming, the freeze on contact, the target rocking back, the recovery. **<!-- act-count -->121<!-- /act-count -->** effects export `act` data for that; the
 **<!-- moves-count -->12<!-- /moves-count -->** **moves** are the standalone attack choreographies:
 
 ```js

@@ -39,6 +39,7 @@ const TEXT = {
     "theme.konosuba": "KonoSuba",
     "theme.fanren": "A Mortal's Journey",
     "theme.japan": "Japanese legend",
+    "theme.dnf": "DNF style",
     "theme.classic": "classic effects",
     "prov.all": "all",
     "prov.original": "original",
@@ -119,6 +120,7 @@ const TEXT = {
     "theme.konosuba": "为美好的世界献上祝福",
     "theme.fanren": "凡人修仙传",
     "theme.japan": "日本传说",
+    "theme.dnf": "DNF 风格",
     "theme.classic": "经典特效",
     "prov.all": "全部",
     "prov.original": "原作",
@@ -199,6 +201,7 @@ const TEXT = {
     "theme.konosuba": "このすば",
     "theme.fanren": "凡人修仙伝",
     "theme.japan": "日本伝説",
+    "theme.dnf": "DNF スタイル",
     "theme.classic": "クラシック",
     "prov.all": "すべて",
     "prov.original": "オリジナル",
@@ -288,6 +291,7 @@ const CATEGORY = {
     dragonball: ["龙珠", "气之技法：聚气、龟派气功、贯穿钻光、元气弹、气圆斩与金色气焰"],
     fanren: ["凡人修仙传", "仙侠之术：青竹蜂云剑、辟邪神雷、噬金虫、玄天斩灵剑、灭仙珠与掌天瓶"],
     kami: ["日本传说", "神道之术：天照的八咫镜、月读的月弓、云从剑、六勾玉、天岩户与八岐大蛇"],
+    dnf: ["DNF 风格", "地下城动作：觉醒斩、锁链武器、重炮齐射与赤金能量法阵"],
     transitions: ["转场", "划像、圆形遮罩、溶解"],
     critters: ["小生物", "史莱姆、蝙蝠、幽灵、青蛙"],
     world: ["地图", "战斗地图：月光遗迹、熔岩洞窟、带布局的竞技场"],
@@ -323,6 +327,7 @@ const CATEGORY = {
     dragonball: ["ドラゴンボール", "気の技法：気溜め、かめはめ波、貫通ドリル光線、元気玉、気円斬、金色のオーラ"],
     fanren: ["凡人修仙伝", "仙侠の術：青竹蜂雲剣、辟邪神雷、噬金虫、玄天斬霊剣、滅仙珠、掌天瓶"],
     kami: ["日本伝説", "神道の術：天照の八咫鏡、月読の月弓、雲叢剣、六勾玉、天岩戸、八岐大蛇"],
+    dnf: ["DNF スタイル", "ダンジョンアクション：覚醒斬り、チェイン武器、重砲斉射、紅金の力場"],
     transitions: ["トランジション", "ワイプ、アイリス、ディゾルブ"],
     critters: ["小生物", "スライム、コウモリ、幽霊、カエル"],
     world: ["マップ", "戦闘マップ：月明かりの遺跡、溶岩洞窟、レイアウト付きの闘技場"],
@@ -352,6 +357,8 @@ const CHARACTER = {
     amaterasu: ["Amaterasu", "sun disc · Yata mirror"],
     tsukuyomi: ["Tsukuyomi", "kanmuri and crescent · indigo robe"],
     susanoo: ["Susanoo", "storm mane · shimenawa rope"],
+    "dnf-ghost-slayer": ["Ghosthand slayer", "silver spikes · scarlet scarf · cobalt trousers"],
+    "dnf-dust-gunner": ["Dustland gunner", "blond hair · green scarf · burgundy coat"],
   },
   ja: {
     dummy: ["甲冑の人形", "訓練用の人形"],
@@ -372,6 +379,8 @@ const CHARACTER = {
     amaterasu: ["天照命", "日輪・八咫鏡"],
     tsukuyomi: ["月読命", "冠と三日月・藍の装束"],
     susanoo: ["須佐之男", "嵐の鬣・注連縄"],
+    "dnf-ghost-slayer": ["鬼手の剣士", "銀髪・紅いスカーフ・青いパンツ"],
+    "dnf-dust-gunner": ["荒野のガンナー", "金髪・緑のスカーフ・バーガンディのコート"],
   },
 };
 
@@ -404,6 +413,9 @@ const WEAPON = {
     "skyvault-greatsword": "天穹の大剣",
     "aurora-lightblade": "極光の光刃",
     "dragon-scale-sabre": "竜鱗の斬刀",
+    "blood-cleaver": "血焔の大鉈",
+    "chain-blade": "鎖影ブレード",
+    "hell-cannon": "ヘルキャノン",
   },
 };
 

@@ -1,6 +1,6 @@
 # Catalog
 
-392 effects in 32 categories: 244 original and 148 new. Every one is a file in
+403 effects in 33 categories: 244 original and 159 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -487,6 +487,24 @@ every armory weapon placed in the world: a slow hover, a sheen down the steel, l
 | Talisman, placed | `weapons/talisman` | new | effect | loop 3.2s | 88×100 | A paper talisman stands upright in vermilion light, its seal glowing: the slip flutters at one corner, cinnabar motes rise and a ward ring turns on the floor. |
 | Totsuka, placed | `weapons/totsuka` | new | effect | loop 3.2s | 88×125 | The broad Totsuka hangs point-up, vermilion grip down: a violet halo turns behind the bronze dragon guard, a sheen walks the long blade and plum motes climb. |
 | War mace, placed | `weapons/war-mace` | new | effect | loop 3.2s | 88×111 | A studded war mace floats head-up, too heavy to believe: embers shed from the flanges, a hot ring turns on the floor and the shaft ticks a slow quarter turn. |
+
+## dnf
+
+arcade dungeon combat: awakening cuts, chain weapons, launcher volleys and red-gold power seals.
+
+| effect | id | source | kind | play | size | what it does |
+|---|---|---|---|---|---|---|
+| Awakening burst | `dnf/awakening-burst` | new | effect | one-shot 2.2s | 224×188 | A planted red-gold seal opens under the fighter, a crest of light punches upward, then the crest breaks into hot pixels and falling sparks. |
+| Bloodsteel cleaver, placed | `dnf/blood-cleaver` | new | effect | loop 3.2s | 88×131 | A broad clipped blade with cold silver facets, a deep blood-red fuller and a squared guard; red embers rise around its heavy silhouette. |
+| Chainshade blade, placed | `dnf/chain-blade` | new | effect | loop 3.2s | 88×128 | A hooked black saber with pale cyan inlays, a silver edge and linked steel hanging behind its lacquered grip. |
+| Chainshade crossing cut | `dnf/chain-cut` | new | effect | one-shot 1.5s | 208×144 | The hooked saber draws a narrow cyan crescent, recoils at the wrist and crosses back through its own trailing chain sparks. |
+| Chain pull | `dnf/chain-pull` | new | effect | one-shot 1.35s | 248×96 | A hooked chain skims the floor in a stepped pixel arc, catches with a white spark, then snaps back through a trail of red links. |
+| Dustland gunner | `dnf/dust-gunner` | new | effect | loop 2.4s | 120×100 | Swept blond hair, a green scarf, a burgundy split coat and brass cartridge belt; the gunner braces a squared heavy cannon. |
+| Ghosthand slayer | `dnf/ghost-slayer` | new | effect | loop 2.4s | 120×100 | Silver spikes, a scarlet scarf, a red armored arm, exposed abdomen and baggy cobalt trousers; the fighter holds a broad clipped blade at the shoulder. |
+| Brass hellcannon, placed | `dnf/hell-cannon` | new | effect | loop 3.2s | 88×103 | A squared heavy barrel framed by brass straps, a red heat rail, a separate leather grip and a dark muzzle aperture. |
+| Launcher volley | `dnf/launcher-volley` | new | effect | one-shot 1.8s | 292×126 | Three red-gold shells leave a chunky launcher in staggered beats; each shell leaves a hard tracer and detonates in a small white-cored fan. |
+| Overdrive awakening slash | `dnf/overdrive-slash` | new | effect | one-shot 1.5s | 224×184 | A two-beat awakening cut: the blade winds behind the shoulder, crosses the target in white heat, then leaves a red-gold seal and a delayed afterimage. |
+| Berserker rage aura | `dnf/rage-aura` | new | effect | loop 2.4s | 112×132 | A looping berserker aura: red motes orbit a dark core, short blade marks pulse behind the body and a cool counter-light keeps the feet readable. |
 
 ## miku
 

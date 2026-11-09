@@ -24,6 +24,7 @@ export const categories = [
   { id: "ui", name: "ui", blurb: "level ups, numbers, toasts, countdowns" },
   { id: "pickups", name: "pickups", blurb: "coins, gems, chests, potions, jade, lanterns and flying blades" },
   { id: "weapons", name: "weapons", blurb: "every armory weapon placed in the world: a slow hover, a sheen down the steel, light ribbons and a turning floor seal" },
+  { id: "dnf", name: "dnf", blurb: "arcade dungeon combat: awakening cuts, chain weapons, launcher volleys and red-gold power seals" },
   { id: "miku", name: "miku", blurb: "a virtual idol and her teal song: twin tails, sound rings, notes and a leek" },
   { id: "konosuba", name: "konosuba", blurb: "crimson explosion magic: a blood-red chant seal, the white-hot blast, its crater and the whole move" },
   { id: "dragonball", name: "dragonball", blurb: "ki arts: charged orbs, kamehameha waves, drill beams, spirit bombs, discs and gold auras" },

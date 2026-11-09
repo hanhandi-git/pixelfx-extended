@@ -324,6 +324,17 @@ import * as weapons_sword from "./weapons/sword.js";
 import * as weapons_talisman from "./weapons/talisman.js";
 import * as weapons_totsuka from "./weapons/totsuka.js";
 import * as weapons_war_mace from "./weapons/war-mace.js";
+import * as dnf_awakening_burst from "./dnf/awakening-burst.js";
+import * as dnf_blood_cleaver from "./dnf/blood-cleaver.js";
+import * as dnf_chain_blade from "./dnf/chain-blade.js";
+import * as dnf_chain_cut from "./dnf/chain-cut.js";
+import * as dnf_chain_pull from "./dnf/chain-pull.js";
+import * as dnf_dust_gunner from "./dnf/dust-gunner.js";
+import * as dnf_ghost_slayer from "./dnf/ghost-slayer.js";
+import * as dnf_hell_cannon from "./dnf/hell-cannon.js";
+import * as dnf_launcher_volley from "./dnf/launcher-volley.js";
+import * as dnf_overdrive_slash from "./dnf/overdrive-slash.js";
+import * as dnf_rage_aura from "./dnf/rage-aura.js";
 import * as miku_encore from "./miku/encore.js";
 import * as miku_leek_smash from "./miku/leek-smash.js";
 import * as miku_song_aura from "./miku/song-aura.js";
@@ -721,6 +732,17 @@ export const effects = {
   "weapons/talisman": weapons_talisman,
   "weapons/totsuka": weapons_totsuka,
   "weapons/war-mace": weapons_war_mace,
+  "dnf/awakening-burst": dnf_awakening_burst,
+  "dnf/blood-cleaver": dnf_blood_cleaver,
+  "dnf/chain-blade": dnf_chain_blade,
+  "dnf/chain-cut": dnf_chain_cut,
+  "dnf/chain-pull": dnf_chain_pull,
+  "dnf/dust-gunner": dnf_dust_gunner,
+  "dnf/ghost-slayer": dnf_ghost_slayer,
+  "dnf/hell-cannon": dnf_hell_cannon,
+  "dnf/launcher-volley": dnf_launcher_volley,
+  "dnf/overdrive-slash": dnf_overdrive_slash,
+  "dnf/rage-aura": dnf_rage_aura,
   "miku/encore": miku_encore,
   "miku/leek-smash": miku_leek_smash,
   "miku/song-aura": miku_song_aura,
@@ -1116,6 +1138,17 @@ export const provenance = {
   "weapons/talisman": "new",
   "weapons/totsuka": "new",
   "weapons/war-mace": "new",
+  "dnf/awakening-burst": "new",
+  "dnf/blood-cleaver": "new",
+  "dnf/chain-blade": "new",
+  "dnf/chain-cut": "new",
+  "dnf/chain-pull": "new",
+  "dnf/dust-gunner": "new",
+  "dnf/ghost-slayer": "new",
+  "dnf/hell-cannon": "new",
+  "dnf/launcher-volley": "new",
+  "dnf/overdrive-slash": "new",
+  "dnf/rage-aura": "new",
   "miku/encore": "new",
   "miku/leek-smash": "new",
   "miku/song-aura": "new",
