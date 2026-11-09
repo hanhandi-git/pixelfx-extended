@@ -1,6 +1,6 @@
 ---
 name: pixelfx
-description: Generate and edit pixel VFX, maps, minions, bosses and encounters with pixelfx JavaScript/Painter, and extend reusable low-level drawing primitives when a task needs them; match the library's pixel, palette, lighting and motion language, register effects, run render/check, export PNG/JSON, and verify in gallery/index.html or gallery/fantasy.html. Use for new pixel assets, magic/hit/particle effects, fantasy maps and enemies, boss phases and fight choreography, sprite sheets, palette recolors, Painter/core extensions and Cocos Creator export—not for generic illustration or photos.
+description: Generate and edit pixel VFX, detailed engraved weapons, maps, minions, bosses and encounters with pixelfx JavaScript/Painter, and extend reusable low-level drawing primitives when a task needs them; match the library's pixel, palette, lighting and motion language, register effects, run render/check, export PNG/JSON, and verify in gallery/index.html or gallery/fantasy.html. Use for new pixel assets, weapon models and ornamentation, magic/hit/particle effects, fantasy maps and enemies, boss phases and fight choreography, sprite sheets, palette recolors, Painter/core extensions and Cocos Creator export—not for generic illustration or photos.
 license: MIT
 metadata:
   runtime: Node 18 or newer; npm for the static build; ffmpeg optional for GIF/MP4 previews.
@@ -57,6 +57,15 @@ scorch and sparks cool away; ground ellipse behind/in front, deterministic seed.
    dependencies are missing. Create a new checkout only when the user needs a separate one.
 2. Check it runs: `node tools/render.mjs fire/torch` writes `records/fire/torch/contact.png`. Open that PNG with
    your image-reading tool. That contact sheet is how you see every effect from now on.
+
+## Default weapon art standard
+
+For **any new or refined weapon**, use the user's approved ornate pixel-weapon finish: ample authored pixels,
+coherent engraving, stepped metal facets, crafted guards and grips, and readable gems or mechanical details.
+This is the default across weapon themes; choose ornament and materials that belong to each design.
+Read [references/weapon-art.md](references/weapon-art.md) and inspect its approved comparison image before
+authoring. It covers native detail density, shared held/display/icon art, and the depth-buffer issue that can
+hide engraving. Follow a later explicit request for a different style or resolution.
 
 ## Generate assets and preview in the gallery
 
