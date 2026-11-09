@@ -98,8 +98,18 @@ test("every armory weapon has a placed effect tagged 武器", () => {
     assert.equal(mod.meta.loop, true, weapon.id);
     assert.equal(typeof mod.draw, "function", weapon.id);
     assert.equal(typeof mod.drawBack, "function", weapon.id);
-    assert.equal(mod.meta.size[0], 88, weapon.id);
-    assert.equal(mod.meta.origin[0], 44, weapon.id);
+    assert(mod.meta.size[0] >= 88, weapon.id);
+    assert.equal(mod.meta.origin[0], Math.ceil(mod.meta.size[0] / 2), weapon.id);
+  }
+});
+
+test("engraved DNF weapons preserve multiple metal and inlay colors in the held raster", () => {
+  for (const id of ["blood-cleaver", "chain-blade", "hell-cannon"]) {
+    const pose = posed({ weapon: id, fx: 7, fy: -22, sa: -0.4 }, "dnf-ghost-slayer", { density: 2 });
+    const colors = new Set();
+    // Beyond the actor's body: this catches same-depth base coats hiding the inlay.
+    for (let i = 0; i < pose.n; i++) if (pose.xs[i] > 22) colors.add(pose.color[i]);
+    assert(colors.size >= 8, `${id}: the held weapon lost its engraving/material colors`);
   }
 });
 

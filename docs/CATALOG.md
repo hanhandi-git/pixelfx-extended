@@ -495,13 +495,13 @@ arcade dungeon combat: awakening cuts, chain weapons, launcher volleys and red-g
 | effect | id | source | kind | play | size | what it does |
 |---|---|---|---|---|---|---|
 | Awakening burst | `dnf/awakening-burst` | new | effect | one-shot 2.2s | 224×188 | A planted red-gold seal opens under the fighter, a crest of light punches upward, then the crest breaks into hot pixels and falling sparks. |
-| Bloodsteel cleaver, placed | `dnf/blood-cleaver` | new | effect | loop 3.2s | 88×131 | A broad clipped blade with cold silver facets, a deep blood-red fuller and a squared guard; red embers rise around its heavy silhouette. |
-| Chainshade blade, placed | `dnf/chain-blade` | new | effect | loop 3.2s | 88×128 | A hooked black saber with pale cyan inlays, a silver edge and linked steel hanging behind its lacquered grip. |
+| Bloodsteel cleaver, placed | `dnf/blood-cleaver` | new | effect | loop 3.2s | 128×321 | An engraved executioner blade with silver bevels, ruby enamel, gold acanthus inlay, a garnet wing guard and a crown pommel over a braided grip. |
+| Chainshade blade, placed | `dnf/chain-blade` | new | effect | loop 3.2s | 164×301 | An obsidian hook blade with a silver cutting bevel, engraved cyan glyphs, a crescent scroll guard, faceted blue stones and seven articulated chain links ending in a crystal drop. |
 | Chainshade crossing cut | `dnf/chain-cut` | new | effect | one-shot 1.5s | 208×144 | The hooked saber draws a narrow cyan crescent, recoils at the wrist and crosses back through its own trailing chain sparks. |
 | Chain pull | `dnf/chain-pull` | new | effect | one-shot 1.35s | 248×96 | A hooked chain skims the floor in a stepped pixel arc, catches with a white spark, then snaps back through a trail of red links. |
 | Dustland gunner | `dnf/dust-gunner` | new | effect | loop 2.4s | 120×100 | Swept blond hair, a green scarf, a burgundy split coat and brass cartridge belt; the gunner braces a squared heavy cannon. |
 | Ghosthand slayer | `dnf/ghost-slayer` | new | effect | loop 2.4s | 120×100 | Silver spikes, a scarlet scarf, a red armored arm, exposed abdomen and baggy cobalt trousers; the fighter holds a broad clipped blade at the shoulder. |
-| Brass hellcannon, placed | `dnf/hell-cannon` | new | effect | loop 3.2s | 88×103 | A squared heavy barrel framed by brass straps, a red heat rail, a separate leather grip and a dark muzzle aperture. |
+| Brass hellcannon, placed | `dnf/hell-cannon` | new | effect | loop 3.2s | 192×128 | An ornate brass cannon with engraved crimson plates, riveted collars, silver cooling fins, a cyan clockwork core, an open bore and a wrapped leather grip. |
 | Launcher volley | `dnf/launcher-volley` | new | effect | one-shot 1.8s | 292×126 | Three red-gold shells leave a chunky launcher in staggered beats; each shell leaves a hard tracer and detonates in a small white-cored fan. |
 | Overdrive awakening slash | `dnf/overdrive-slash` | new | effect | one-shot 1.5s | 224×184 | A two-beat awakening cut: the blade winds behind the shoulder, crosses the target in white heat, then leaves a red-gold seal and a delayed afterimage. |
 | Berserker rage aura | `dnf/rage-aura` | new | effect | loop 2.4s | 112×132 | A looping berserker aura: red motes orbit a dark core, short blade marks pulse behind the body and a cool counter-light keeps the feet readable. |

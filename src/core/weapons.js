@@ -1,5 +1,6 @@
 // Original weapon equipment, drawn in grip-local coordinates through the rig's depth buffer.
 import { hex } from "./color.js";
+import { DNF_WEAPON_SHAPES } from "./dnf-weapons.js";
 
 const C = Object.fromEntries(Object.entries({
   white: "#fffdf2", silver: "#d8e4ed", steel: "#8b9cb8", edge: "#53627e",
@@ -43,33 +44,8 @@ function wraps(T, from, to, radius = 0.9) {
 }
 
 export const MELEE_SHAPES = {
-  "blood-cleaver": { two: -9, draw(T) {
-    // Broad straight dungeon blade: clipped tip, cold flat and a deep red fuller.
-    wraps(T, -10, 2, 0.9); band(T, -10.8, 1, 1.5, C.silver, C.edge);
-    polygon(T, [[2,-4],[4,-6],[6,-5],[6,5],[4,6],[2,4]], C.edge);
-    polygon(T, [[3,-4],[4.5,-4.8],[5,-3],[5,3],[4.5,4.8],[3,4]], C.silver);
-    polygon(T, [[5,-4],[44,-4],[52,-1],[48,4],[5,4]], C.edge);
-    polygon(T, [[6,-3],[44,-3],[50,-1],[46,2],[6,2]], C.steel);
-    polygon(T, [[6,2],[46,2],[50,-1],[48,4],[6,4]], C.white);
-    for (let x=8;x<44;x+=0.4) T(x,-2,C.silver);
-    shaft(T,8,39,0.45,C.blood,C.bloodD);
-    for (const x of [10,17,24,31]) { T(x,0,C.goldD); T(x+1,0,C.redL); }
-    T(-11,0,C.redL);
-  } },
-  "chain-blade": { two: -4, draw(T) {
-    // Narrow black saber with a hooked tip and a readable chain hanging behind the grip.
-    wraps(T,-7,2,0.7); band(T,-8,1,1.2,C.gold,C.goldD);
-    band(T,2,1.4,3.4,C.silver,C.edge);
-    polygon(T,[[4,-2],[35,-3],[43,-7],[41,-1],[36,2],[4,2]],C.ink);
-    polygon(T,[[5,-1],[35,-2],[41,-5],[38,0],[34,1],[5,1]],C.violet);
-    for(let x=6;x<37;x+=0.4) T(x,1,C.silver);
-    for(let x=9;x<34;x+=5) { T(x,-2,C.cyan); T(x+1,-2,C.white); }
-    for(let i=0;i<6;i++) {
-      const x=-8-i*1.5,y=2+i*1.7;
-      ring(T,x,y,1.2,i%2?C.edge:C.silver);
-      T(x-0.6,y-0.7,C.white);
-    }
-  } },
+  "blood-cleaver": DNF_WEAPON_SHAPES["blood-cleaver"],
+  "chain-blade": DNF_WEAPON_SHAPES["chain-blade"],
   "ember-greatsword": { two: -12, draw(T) {
     // DNF-style executioner silhouette: huge shoulders, a flame guard and a hot fuller.
     wraps(T, -11.8, 2.6, 1.2); band(T, -12.5, 0.9, 1.65, C.bronze, C.bronzeD);
@@ -366,19 +342,7 @@ export const MELEE_SHAPES = {
 
 /** Thrown equipment is kept separate from the melee catalogue so its grip geometry can leave the hand. */
 export const THROWN_SHAPES = {
-  "hell-cannon": { two: -5, draw(T) {
-    // Squared heavy barrel, brass rails, separate grip and a dark muzzle aperture.
-    polygon(T,[[-8,-5],[19,-5],[23,-3],[23,3],[19,5],[-8,5]],C.ink);
-    polygon(T,[[-7,-4],[18,-4],[21,-2],[21,2],[18,3],[-7,3]],C.steel);
-    polygon(T,[[-6,-3],[16,-3],[18,-1],[-6,-1]],C.silver);
-    polygon(T,[[19,-4],[24,-3],[24,3],[19,4]],C.edge);
-    band(T,22,1.7,2.7,C.ink,C.dark);
-    shaft(T,-6,18,0.6,C.blood,C.bloodD);
-    for(const x of [-5,2,9,16]) band(T,x,1,4.2,C.gold,C.goldD);
-    polygon(T,[[-3,3],[1,3],[0,9],[-4,9]],C.leather);
-    polygon(T,[[-10,-3],[-7,-3],[-7,3],[-11,4]],C.red);
-    T(18,-4,C.white); T(-6,-4,C.white);
-  } },
+  "hell-cannon": DNF_WEAPON_SHAPES["hell-cannon"],
   kunai: { two: -2.5, draw(T) {
     wraps(T, -4, 2.4, 0.65); ring(T, -6, 0, 1.8, C.steel); T(-7.8, 0, C.silver);
     band(T, 2.3, 0.5, 1.4, C.edge, C.ink);
