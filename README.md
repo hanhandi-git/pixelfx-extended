@@ -6,15 +6,15 @@
 
 # pixelfx-extended.
 
-An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->172<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
+An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->177<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
 
-**<!-- count -->416<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->421<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a **fantasy game kit** — battle maps, minion and boss
 units, telegraphed attacks, and encounter timelines you author under `src/encounters/` — and a Claude Code skill that
 makes new ones the way a picky pixel artist would: draft, render, look, refine.
 
-The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->172<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
+The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->177<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
 
 **<!-- act-count -->121<!-- /act-count -->** effects export an **`act`** timeline: wind-up, release, freeze on contact, target reaction, recovery. **<!-- moves-count -->12<!-- /moves-count -->**
 **moves** in `src/fx/moves/` chain those beats into full attacks from wind-up to recovery.
@@ -33,7 +33,7 @@ the idea at library scale, with a skill to keep going.
 
 ## new additions.
 
-These **<!-- new-count -->172<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
+These **<!-- new-count -->177<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="Six looping fantasy battle maps at full 320×180 resolution: aurora pass, crystal hollow, ember depths, mossy ruins, sunscar temple and wisp marsh.">
@@ -47,6 +47,7 @@ These **<!-- new-count -->172<!-- /new-count -->** pieces are not in the origina
 | **world** | Ember Depths | `world/ember-depths` |
 | **world** | Hearth Town | `world/hearth-town` |
 | **world** | Inkbound Shrine | `world/inkbound-shrine` |
+| **world** | Mosswood Ruins | `world/mosswood-ruins` |
 | **world** | Mossy Ruins | `world/mossy-ruins` |
 | **world** | Starter Camp | `world/starter-camp` |
 | **world** | Sunscar Temple | `world/sunscar-temple` |
@@ -165,6 +166,10 @@ These **<!-- new-count -->172<!-- /new-count -->** pieces are not in the origina
 | **thrown** | Talisman throw | `thrown/talisman-throw` |
 | **ui** | HUD banner | `ui/banner` |
 | **ui** | HUD dialog | `ui/dialog` |
+| **ui** | Dungeon boss bar | `ui/dnf-boss-bar` |
+| **ui** | Dungeon HUD console | `ui/dnf-hud` |
+| **ui** | Dungeon minimap | `ui/dnf-minimap` |
+| **ui** | Dungeon skill slot | `ui/dnf-slot` |
 | **ui** | HUD toggle | `ui/hud-toggle` |
 | **ui** | Loadout card | `ui/loadout-card` |
 | **ui** | Loadout panel | `ui/loadout-panel` |
@@ -224,13 +229,13 @@ Categories with new content appear first; samples list **new** effects before or
 | category | effects | some of them |
 |---|---|---|
 | **weapons** | 38 | aurora lightblade, placed, binding silk, placed, blood butterfly, placed, boomerang, placed, bow, placed, claw, placed… |
-| **ui** | 25 | hud banner, hud dialog, hud toggle, loadout card, loadout panel, hud panel… |
+| **ui** | 29 | hud banner, hud dialog, dungeon boss bar, dungeon hud console, dungeon minimap, dungeon skill slot… |
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **melee** | 24 | aurora lightblade combo, blood butterfly dance, demon-eye cleave, dragon-scale sweep, ghostlight draw cut, holy sword cleave… |
 | **ninjutsu** | 12 | amaterasu, chidori rush, earth wall, great breakthrough, great fireball, kirin… |
 | **dnf** | 11 | awakening burst, bloodsteel cleaver, placed, chainshade blade, placed, chainshade crossing cut, chain pull, dustland gunner… |
+| **world** | 10 | aurora pass, crystal hollow, ember depths, hearth town, inkbound shrine, mosswood ruins… |
 | **mobs** | 10 | goblin agile, goblin agile flurry, goblin archer, goblin archer shot, goblin giant, goblin giant quake… |
-| **world** | 9 | aurora pass, crystal hollow, ember depths, hearth town, inkbound shrine, mossy ruins… |
 | **thrown** | 8 | binding silk, boomerang throw, flying sword, kunai throw, pear-blossom needles, powder bomb throw… |
 | **dragonball** | 8 | destructo disc, drill beam, golden aura, ki charge, ki volley, ki wave… |
 | **lightning** | 18 | forked burst, ground surge, static cage, storm sigil, storm vortex, thunder rain… |

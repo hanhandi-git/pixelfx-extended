@@ -1,7 +1,7 @@
 // Two pixel fonts: "mini" (3x5) for small numbers and tags, "big" (5x7) for words like LEVEL UP.
 // Glyphs are trimmed to their inked columns, so text sets proportionally (an I is narrower than an M).
 // han5 / han7 are fixed 5×5 and 7×7 CJK cells (see font-han-data.js) for Quest-style UI in Chinese.
-import { HAN5, HAN7 } from "./font-han-data.js";
+import { HAN5, HAN7, HAN12 } from "./font-han-data.js";
 
 const MINI = {
   A: ".#.|#.#|###|#.#|#.#", B: "##.|#.#|##.|#.#|##.", C: ".##|#..|#..|#..|.##", D: "##.|#.#|#.#|#.#|##.",
@@ -78,6 +78,8 @@ export const FONTS = {
   big: { h: 7, space: 3, gap: 1, glyphs: build(BIG, 7) },
   han5: { h: 5, space: 5, gap: 1, glyphs: buildFixed(HAN5, 5, 5) },
   han7: { h: 7, space: 7, gap: 1, glyphs: buildFixed(HAN7, 7, 7) },
+  // 12 x 12 cells for density-2 frames: a UI draws them at half scale next to the mini font.
+  han12: { h: 12, space: 12, gap: 1, glyphs: buildFixed(HAN12, 12, 12) },
 };
 
 /** One glyph for Latin or CJK within a Latin font tier (mini ↔ han5, big ↔ han7). */

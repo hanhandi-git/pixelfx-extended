@@ -61,6 +61,9 @@ def main() -> None:
         + [""]
         + table_lines("HAN7", 7, 12, chars)
         + [""]
+        # 12 px glyphs for frames at density 2: drawn at half scale they sit beside the 3x5 Latin font.
+        + table_lines("HAN12", 12, 12, chars)
+        + [""]
     )
     OUT_PATH.write_text(text, encoding="utf-8")
     print(f"wrote {OUT_PATH} ({len(chars)} chars)")

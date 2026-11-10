@@ -259,6 +259,10 @@ import * as ui_countdown from "./ui/countdown.js";
 import * as ui_crit_number from "./ui/crit-number.js";
 import * as ui_damage_number from "./ui/damage-number.js";
 import * as ui_dialog from "./ui/dialog.js";
+import * as ui_dnf_boss_bar from "./ui/dnf-boss-bar.js";
+import * as ui_dnf_hud from "./ui/dnf-hud.js";
+import * as ui_dnf_minimap from "./ui/dnf-minimap.js";
+import * as ui_dnf_slot from "./ui/dnf-slot.js";
 import * as ui_exclamation from "./ui/exclamation.js";
 import * as ui_health_bar_hit from "./ui/health-bar-hit.js";
 import * as ui_heart_lost from "./ui/heart-lost.js";
@@ -402,6 +406,7 @@ import * as world_crystal_hollow from "./world/crystal-hollow.js";
 import * as world_ember_depths from "./world/ember-depths.js";
 import * as world_hearth_town from "./world/hearth-town.js";
 import * as world_inkbound_shrine from "./world/inkbound-shrine.js";
+import * as world_mosswood_ruins from "./world/mosswood-ruins.js";
 import * as world_mossy_ruins from "./world/mossy-ruins.js";
 import * as world_starter_camp from "./world/starter-camp.js";
 import * as world_sunscar_temple from "./world/sunscar-temple.js";
@@ -680,6 +685,10 @@ export const effects = {
   "ui/crit-number": ui_crit_number,
   "ui/damage-number": ui_damage_number,
   "ui/dialog": ui_dialog,
+  "ui/dnf-boss-bar": ui_dnf_boss_bar,
+  "ui/dnf-hud": ui_dnf_hud,
+  "ui/dnf-minimap": ui_dnf_minimap,
+  "ui/dnf-slot": ui_dnf_slot,
   "ui/exclamation": ui_exclamation,
   "ui/health-bar-hit": ui_health_bar_hit,
   "ui/heart-lost": ui_heart_lost,
@@ -823,6 +832,7 @@ export const effects = {
   "world/ember-depths": world_ember_depths,
   "world/hearth-town": world_hearth_town,
   "world/inkbound-shrine": world_inkbound_shrine,
+  "world/mosswood-ruins": world_mosswood_ruins,
   "world/mossy-ruins": world_mossy_ruins,
   "world/starter-camp": world_starter_camp,
   "world/sunscar-temple": world_sunscar_temple,
@@ -1099,6 +1109,10 @@ export const provenance = {
   "ui/crit-number": "original",
   "ui/damage-number": "original",
   "ui/dialog": "new",
+  "ui/dnf-boss-bar": "new",
+  "ui/dnf-hud": "new",
+  "ui/dnf-minimap": "new",
+  "ui/dnf-slot": "new",
   "ui/exclamation": "original",
   "ui/health-bar-hit": "original",
   "ui/heart-lost": "original",
@@ -1242,6 +1256,7 @@ export const provenance = {
   "world/ember-depths": "new",
   "world/hearth-town": "new",
   "world/inkbound-shrine": "new",
+  "world/mosswood-ruins": "new",
   "world/mossy-ruins": "new",
   "world/starter-camp": "new",
   "world/sunscar-temple": "new",

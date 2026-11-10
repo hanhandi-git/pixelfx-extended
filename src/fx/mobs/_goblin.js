@@ -128,6 +128,7 @@ export function goblinPose(t, D, o = {}) {
 
 /**
  * The pose a unit plays. The idle loop is the base; an encounter can override it by writing options:
+ *   pose "walk"  + walkDistance (local rendered units) / walkStride   alternating planted/lifted feet
  *   pose "cast"  + poseT / poseWindup / poseHold / poseRecover / cast   a wind-up, a release, a recovery
  *   pose "hurt"  + poseT / poseDur / hurtDir                          a flinch that snaps back
  *   pose "die"   + poseT / poseDur                                    a collapse that fades out
@@ -136,6 +137,7 @@ export function goblinPose(t, D, o = {}) {
 export function goblinAction(t, D, o = {}, mix) {
   const base = goblinPose(t, D, { phase: o.phase, mix });
   const pose = o.pose ?? "idle";
+  if (pose === "walk") return { ...base, ...walkPose(base, t, D, o), fade: 1 };
   if (pose === "cast") return { ...base, ...castPose(base, o), casting: true };
   if (pose === "hurt") return { ...base, ...hurtPose(base, o) };
   if (pose === "die") return { ...base, ...diePose(base, o) };
@@ -143,6 +145,30 @@ export function goblinAction(t, D, o = {}, mix) {
 }
 
 const add = ([x, y], [dx, dy]) => [x + dx, y + dy];
+
+function walkPose(base, t, duration, o) {
+  const stride = Math.max(1, o.walkStride ?? 5);
+  const cycle = o.walkDistance != null ? o.walkDistance / (stride * 4 * base.scale)
+    : (o.poseT ?? t) / (o.walkDuration ?? duration / 4);
+  const phase = ((cycle % 1) + 1) % 1;
+  const angle = phase * TAU, bob = -0.65 * (1 - Math.cos(angle * 2));
+  const shift = Math.sin(angle) * 0.45;
+  const foot = (offset, plane) => {
+    const u = ((phase + offset) % 1 + 1) % 1;
+    const swing = Math.max(0, (u - 0.5) * 2);
+    const eased = swing * swing * (3 - 2 * swing);
+    return {
+      x: plane + stride * (u < 0.5 ? 1 - u * 4 : eased * 2 - 1) - shift,
+      y: -Math.sin(swing * Math.PI) * 3.3 - bob,
+      roll: u < 0.5 ? (u * 4 - 1) * 0.08 : -Math.sin(swing * Math.PI) * 0.2,
+    };
+  };
+  const swing = Math.sin(angle) * 1.1;
+  return { shift, bob, hop: 0, knee: 0, lift: { L: 0, R: 0 },
+    feet: { L: foot(0.5, 4), R: foot(0, -4) },
+    hands: { L: add(base.hands.L, [swing, -Math.abs(swing) * 0.2]), R: add(base.hands.R, [-swing, -Math.abs(swing) * 0.2]) },
+  };
+}
 
 /** How far through a cast we are, as three numbers: wind-up 0..1, release 0..1, recovery 0..1. */
 export function castClock(o) {
@@ -434,7 +460,8 @@ export function drawGoblin(g, P, C, hooks = {}) {
     head: { x: 0.8 + P.headX, y: -33.2 + P.headY },
     chest: { x: 0.6 + P.headX * 0.3, y: -26.5 + P.bob * 0.3 },
     hip: { x: 0.4 + P.shift * 0.3, y: -13.4 },
-    foot: { L: [-6 + sh, by], R: [5.6 + sh, by] },
+    foot: { L: [-6 + sh + (P.feet?.L.x ?? 0), by + (P.feet?.L.y ?? 0)],
+      R: [5.6 + sh + (P.feet?.R.x ?? 0), by + (P.feet?.R.y ?? 0)] },
     line: (x0, y0, x1, y1, c, a = 1) => {
       const [ax, ay] = at(x0, y0), [bx, by2] = at(x1, y1);
       g.line(ax, ay, bx, by2, c, a);
@@ -452,9 +479,20 @@ export function drawGoblin(g, P, C, hooks = {}) {
 
   if (hooks.back) hooks.back(g, ctx);
 
+  const placeFoot = (side, x, y) => {
+    const f = P.feet?.[side];
+    if (!f) return [x, y];
+    const pivotX = side === "L" ? -6.2 : 6, pivotY = -2.6;
+    const c = Math.cos(f.roll), s = Math.sin(f.roll);
+    return [pivotX + (x - pivotX) * c - (y - pivotY) * s + f.x,
+      pivotY + (x - pivotX) * s + (y - pivotY) * c + f.y];
+  };
+  const fStep = P.feet?.L ?? { x: 0, y: 0 }, nStep = P.feet?.R ?? { x: 0, y: 0 };
+
   // far leg: behind the near one, one ramp step darker
-  const fHip = [-3.5, -13.0], fKnee = [-6.5, -7.0 - P.knee * 0.3], fAnkle = [-6.2 + P.shift * 0.1, -2.6 - (P.lift.L ?? 0)];
-  const fFoot = [[-9.9, -2.8], [-8.0, -3.5], [-3.2, -2.0], [-1.6, -0.7], [-2.1, 0], [-9.4, 0]];
+  const fHip = [-3.5, -13.0], fKnee = [-6.5 + fStep.x * 0.5, -7.0 - P.knee * 0.3 + fStep.y * 0.45],
+    fAnkle = [-6.2 + P.shift * 0.1 + fStep.x, -2.6 - (P.lift.L ?? 0) + fStep.y];
+  const fFoot = [[-9.9, -2.8], [-8.0, -3.5], [-3.2, -2.0], [-1.6, -0.7], [-2.1, 0], [-9.4, 0]].map(([x, y]) => placeFoot("L", x, y));
   const farLeg = any(cap(...fHip, ...fKnee, 2.9 - lp * 0.5, 2.2 - lp * 0.4), cap(...fKnee, ...fAnkle, 2.2, 1.8), poly(fFoot));
   paint(g, P, boxUnion(boxCap(...fHip, ...fKnee, 3), boxCap(...fKnee, ...fAnkle, 3), boxPoly(fFoot)), farLeg, C.skin, {
     mid: 2,
@@ -463,12 +501,13 @@ export function drawGoblin(g, P, C, hooks = {}) {
     dark: 1,
     deep: 0,
   });
-  ctx.line(-8.8, -0.7, -3.4, -0.7, C.skin[0]);
-  ctx.line(-8.6, -1.5, -5.9, -1.6, C.skin[1]);
+  ctx.line(...placeFoot("L", -8.8, -0.7), ...placeFoot("L", -3.4, -0.7), C.skin[0]);
+  ctx.line(...placeFoot("L", -8.6, -1.5), ...placeFoot("L", -5.9, -1.6), C.skin[1]);
 
   // near leg: brighter, with a big three-toed foot
-  const nHip = [3.8, -13.0], nKnee = [6.6, -6.8 - P.knee * 0.3], nAnkle = [6.0 + P.shift * 0.1, -2.6 - (P.lift.R ?? 0)];
-  const nFoot = [[1.0, -2.8], [2.9, -3.6], [8.2, -2.2], [10.3, -0.8], [9.9, 0], [1.5, 0]];
+  const nHip = [3.8, -13.0], nKnee = [6.6 + nStep.x * 0.5, -6.8 - P.knee * 0.3 + nStep.y * 0.45],
+    nAnkle = [6.0 + P.shift * 0.1 + nStep.x, -2.6 - (P.lift.R ?? 0) + nStep.y];
+  const nFoot = [[1.0, -2.8], [2.9, -3.6], [8.2, -2.2], [10.3, -0.8], [9.9, 0], [1.5, 0]].map(([x, y]) => placeFoot("R", x, y));
   const nearLeg = any(cap(...nHip, ...nKnee, 3.1 - lp * 0.5, 2.3 - lp * 0.4), cap(...nKnee, ...nAnkle, 2.3, 1.9), poly(nFoot));
   paint(g, P, boxUnion(boxCap(...nHip, ...nKnee, 3.2), boxCap(...nKnee, ...nAnkle, 3.2), boxPoly(nFoot)), nearLeg, C.skin, {
     mid: 3,
@@ -477,9 +516,9 @@ export function drawGoblin(g, P, C, hooks = {}) {
     dark: 2,
     deep: 1,
   });
-  ctx.line(2.0, -0.6, 6.8, -0.9, C.skin[1]);
-  ctx.line(6.8, -0.8, 6.8, -0.1, C.skin[1]);
-  ctx.line(8.5, -0.8, 8.5, -0.1, C.skin[1]);
+  ctx.line(...placeFoot("R", 2.0, -0.6), ...placeFoot("R", 6.8, -0.9), C.skin[1]);
+  ctx.line(...placeFoot("R", 6.8, -0.8), ...placeFoot("R", 6.8, -0.1), C.skin[1]);
+  ctx.line(...placeFoot("R", 8.5, -0.8), ...placeFoot("R", 8.5, -0.1), C.skin[1]);
 
   // torso: pot belly, narrow chest, a hump across the back, a short neck with no chin room
   const sq = P.squash;

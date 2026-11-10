@@ -150,11 +150,12 @@ blink, shift weight, and maybe turn a blade to catch the light. **Attacks are se
 
 ### A minion that reacts
 
-A loop alone reads as scenery once the fight starts. The encounter drives the same unit through four poses by
+A loop alone reads as scenery once the fight starts. The encounter drives the same unit through idle, walking and combat poses by
 writing its captured options; the unit reads them inside `draw()` and never gets rebuilt:
 
 | option | set by | the unit should |
 |---|---|---|
+| `pose: "walk"`, `walkDistance`, `walkStride?` | the host movement controller | alternate planted and lifted feet, bend knees, bob and counter-swing the hands |
 | `pose: "cast"`, `cast`, `poseT`, `poseWindup`, `poseHold`, `poseRecover` | an `attack` cue that names the unit, using the attack's `pose` | wind up through the tell, release on the hit, recover to the idle stance |
 | `pose: "hurt"`, `poseT`, `poseDur`, `hurtDir` | a `hurt` cue | flinch away from the blow and flash white → red, then back |
 | `pose: "die"`, `poseT`, `poseDur` | a `defeat` cue, when `mob.dieFor > 0` | sink, fold and fade out |
@@ -166,6 +167,8 @@ export const mob = {
   dieFor: 0.9,   // keep the body on screen this long after defeat
 };
 ```
+
+For goblins, `walkDistance` is accumulated voluntary movement divided by the host's render scale. The gait accounts for the body's own scale; each full cycle covers `4 * walkStride * bodyScale` local units (`walkStride` defaults to `5`). Only add distance when the creature actually walks, and stop setting the walk pose during attacks, damage reactions, freezes and death. Without a distance clock, the renderer can preview a walking loop from time. Switching back to idle does not require rebuilding the effect.
 
 Two rules keep it honest. The attack's `pose.windup` is the telegraph, and `windup + hold` is the frame the hit
 lands on — so the body is already swinging when the effect connects. And the flinch is a *pose*, not a second

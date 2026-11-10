@@ -1,6 +1,6 @@
 # Catalog
 
-416 effects in 33 categories: 244 original and 172 new. Every one is a file in
+421 effects in 33 categories: 244 original and 177 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -408,6 +408,10 @@ level ups, numbers, toasts, countdowns.
 | Crit number | `ui/crit-number` | original | effect | one-shot 1.5s | 152×120 | CRIT 128! slams in huge and white over a jagged starburst with a hard shake and speed lines, cools to fire, holds with a shine, then pops into sparks. |
 | Damage number | `ui/damage-number` | original | effect | one-shot 1.05s | 76×68 | A red -27 punches out of a hit spark, white for a frame, arcs up, lands with a squash and a little hop, then fades as it lifts away. |
 | HUD dialog | `ui/dialog` | new | effect | loop 2.4s | 300×190 | A pixel dialog card: dark plate, gold frame, corner brackets, a big pixel-font title, divider, small lines and a blinking prompt. One card for title, pause, defeat, victory. |
+| Dungeon boss bar | `ui/dnf-boss-bar` | new | effect | loop 2.4s | 184×28 | A stacked target bar: portrait box, name, phase tag and a multi-line health bar that drains colour by colour with an xN counter and a damage trail. Compact mode for mobs. |
+| Dungeon HUD console | `ui/dnf-hud` | new | effect | loop 2.4s | 200×36 | The bottom console of an arcade-dungeon HUD: a liquid life orb, seven square skill slots with key caps and clockwise cooldowns, an action bar, an experience bar and a mana orb. |
+| Dungeon minimap | `ui/dnf-minimap` | new | effect | loop 2.4s | 72×40 | A dungeon progress card: name, a corridor of room cells (cleared, current, ahead and boss rooms) and a wave and timer line, in the arcade-dungeon HUD style. |
+| Dungeon skill slot | `ui/dnf-slot` | new | effect | loop 2.4s | 40×40 | A square hotbar slot in the arcade-dungeon HUD style: recessed well, illustrated icon, key cap, clockwise cooldown wedge, and pressed, cast, denied and no-mana states. |
 | Exclamation | `ui/exclamation` | original | effect | one-shot 1.4s | 84×104 | A bold ! springs up off the hero's head, stretching as it shoots up and squashing as it lands; surprise ticks flick out, it wobbles, then pops away. |
 | Health bar hit | `ui/health-bar-hit` | original | effect | one-shot 2s | 160×64 | A segmented health bar takes a hit: it jolts and dips, the lost chunk flashes white and sheds chips, holds, then drains away behind a sparking edge. |
 | Heart lost | `ui/heart-lost` | original | effect | one-shot 1.5s | 96×88 | A HUD heart is hit: it flashes white and jolts, a crack runs down it, it splits into two halves that tumble away, leaving an empty socket that fades. |
@@ -628,6 +632,7 @@ battle maps: moonlit ruins, lava caverns, arenas with a layout.
 | Ember Depths | `world/ember-depths` | new | map | loop 9s | 320×180 | A basalt arena under a volcano: lava falls pour down both walls, a broken bridge smoulders in the dark, heat haze drifts over glowing fissures and ash falls. |
 | Hearth Town | `world/hearth-town` | new | map | loop 12s | 320×180 | 城镇：弧檐商店、巨炉铁匠铺、悬浮晶石合成台与巷口情报员。A richly layered fantasy street of rose slate, warm plaster, brass machinery and arcane light. |
 | Inkbound Shrine | `world/inkbound-shrine` | new | map | loop 8s | 320×180 | An abandoned eastern shrine: broken tiled eaves, a sealed altar, soul banners and low mist; phase two stains the stone and loosens the hanging paper wards. |
+| Mosswood Ruins | `world/mosswood-ruins` | new | map | loop 12s | 320×180 | A belt-scroll forest ruin: a wide mossy walkway under giant trunks and broken masonry, a hazy forest scrolling behind and dark leaves in front. Layered for parallax. |
 | Mossy Ruins | `world/mossy-ruins` | new | map | loop 10s | 320×180 | A moonlit clearing inside broken elven ruins: mist drifts over a cracked flagstone floor, fireflies wander the arch and leaves fall through the cold light. |
 | Starter Camp | `world/starter-camp` | new | map | loop 12s | 320×180 | 初始营地：古树下的耕地、帷帐床铺、储物柜与篝火，羽翼圣像守护着符文传送门。A lush sanctuary of velvet, carved stone, bronze and drifting woodland magic. |
 | Sunscar Temple | `world/sunscar-temple` | new | map | loop 12s | 320×180 | A sandstone sanctuary half buried in sunset dunes: wind carries sand through broken columns, torn banners sway and a sun seal glows above the distant temple door. |
