@@ -12,6 +12,9 @@
 import { hex } from "./color.js";
 import { DUMMY_PAL, characterOf } from "./characters.js";
 import { costume } from "./costume.js";
+import { tailorCharacter } from "./character-tailoring.js";
+import { CHARACTER_TAILORING } from "./character-tailoring.js";
+import { dnfPose } from "./dnf-characters.js";
 import { MELEE_SHAPES, THROWN_SHAPES } from "./weapons.js";
 
 const PAL = Object.fromEntries(Object.entries(DUMMY_PAL).map(([k, v]) => [k, hex(v) >>> 0]));
@@ -144,6 +147,7 @@ const Zb = new Float32Array(BW * BH), Tone = new Float32Array(BW * BH), Part = n
 const touched = [];
 const LIGHT = unit([-0.55, 0.72, 0.5]);
 let rasterDensity = 1;
+let characterRenderScale = 1;
 let clipBody = false, clipWeapon = false, curFrameIndex = 0, curDim = 0, onlyPart = 0;
 const FRAME_IDS = ["pelvis", "waist", "chest", "head", "neck", "upperN", "foreN", "upperF", "foreF", "thighN", "shinN", "thighF", "shinF", "footN", "footF"];
 function plot(i, z, tone, part, mat, wx, wy, color) {
@@ -160,6 +164,7 @@ function plot(i, z, tone, part, mat, wx, wy, color) {
   Col[i] = color;
 }
 function sphere(c, r, part, mat) {
+  r *= characterRenderScale;
   const Q = rasterDensity, x0 = Math.floor((c[0] - r) * Q), x1 = Math.ceil((c[0] + r) * Q), y0 = Math.floor((c[1] - r) * Q), y1 = Math.ceil((c[1] + r) * Q);
   for (let iy = y0; iy <= y1; iy++)
     for (let ix = x0; ix <= x1; ix++) {
@@ -171,6 +176,7 @@ function sphere(c, r, part, mat) {
     }
 }
 function sweep(a, b, ra, rb, part, mat, bulge = 0) {
+  ra *= characterRenderScale; rb *= characterRenderScale; bulge *= characterRenderScale;
   const n = Math.max(2, Math.ceil(len(sub(b, a)) / 0.4));
   for (let k = 0; k <= n; k++) {
     const u = k / n;
@@ -179,6 +185,7 @@ function sweep(a, b, ra, rb, part, mat, bulge = 0) {
 }
 // an ellipsoid with radii r along the axes of frame R, seen along z
 function ellipsoid(c, R, r, part, mat) {
+  r = r.map((value) => value * characterRenderScale);
   const Q = rasterDensity, big = Math.max(r[0], r[1], r[2]), x0 = Math.floor((c[0] - big) * Q), x1 = Math.ceil((c[0] + big) * Q), y0 = Math.floor((c[1] - big) * Q), y1 = Math.ceil((c[1] + big) * Q);
   const Rt = [R[0], R[3], R[6], R[1], R[4], R[7], R[2], R[5], R[8]], D = [1 / (r[0] * r[0]), 1 / (r[1] * r[1]), 1 / (r[2] * r[2])];
   // A = R diag(D) R^T
@@ -245,7 +252,7 @@ function drawBody(S) {
 // Costume polygons share the body's z buffer. No screen-space stickers: cloth, hair and
 // ornaments turn with their bone and correctly pass behind arms, faces and weapons.
 function mesh(F, points, part, mat) {
-  const pts = points.map((v) => add(F.t, mv(F.R, v)));
+  const pts = points.map((v) => add(F.t, mv(F.R, mul(v, characterRenderScale))));
   for (let k = 1; k < pts.length - 1; k++) {
     const [a, b, c] = [pts[0], pts[k], pts[k + 1]];
     const area = (b[1] - c[1]) * (a[0] - c[0]) + (c[0] - b[0]) * (a[1] - c[1]);
@@ -270,7 +277,7 @@ function mesh(F, points, part, mat) {
 function drawCharacter(S, look) {
   const { B, armN, armF, legN, legF, sN, sF, hipN, hipF } = S;
   const heavy = look.style === "warden", robed = look.style === "oracle";
-  const local = (f, v) => add(B[f].t, mv(B[f].R, v));
+  const local = (f, v) => add(B[f].t, mv(B[f].R, mul(v, characterRenderScale)));
   const ball = (f, v, radii, mat) => {
     useFrame(f);
     ellipsoid(local(f, v), B[f].R, radii, PART[f] ?? PART.chest, mat);
@@ -307,14 +314,16 @@ function drawCharacter(S, look) {
   };
   leg(legN, hipN, PART.thighN, PART.kneeN, PART.shinN, PART.footN, "thighN", "shinN", "footN");
   leg(legF, hipF, PART.thighF, PART.kneeF, PART.shinF, PART.footF, "thighF", "shinF", "footF");
-  costume(S, look, { ball, bone, panel(f, points, mat) { useFrame(f); mesh(B[f], points, PART[f] ?? PART.chest, mat); } });
+  const wardrobe = { ball, bone, panel(f, points, mat) { useFrame(f); mesh(B[f], points, PART[f] ?? PART.chest, mat); } };
+  costume(S, look, wardrobe);
+  tailorCharacter(S, look, wardrobe);
 }
 
 // ---- what they hold: drawn along the handle from the fist, through the same depth buffer
 function along(H, axis, side, part) {
   const n = cross(axis, side);
   const T = (i, k, c, lift = 0) => {
-    const x = H[0] + axis[0] * i + side[0] * k + n[0] * lift, y = H[1] + axis[1] * i + side[1] * k + n[1] * lift, z = H[2] + axis[2] * i + side[2] * k + n[2] * lift;
+    const x = H[0] + axis[0] * i * characterRenderScale + side[0] * k * characterRenderScale + n[0] * lift * characterRenderScale, y = H[1] + axis[1] * i * characterRenderScale + side[1] * k * characterRenderScale + n[1] * lift * characterRenderScale, z = H[2] + axis[2] * i * characterRenderScale + side[2] * k * characterRenderScale + n[2] * lift * characterRenderScale;
     const wx = Math.round(x * rasterDensity) / rasterDensity, wy = Math.round(y * rasterDensity) / rasterDensity;
     if (clipWeapon && wy < 0) return;
     const idx = (OY - Math.round(wy * rasterDensity)) * BW + OX + Math.round(wx * rasterDensity);
@@ -322,7 +331,7 @@ function along(H, axis, side, part) {
     curFrameIndex = -1;
     plot(idx, z + 0.05, 2, part, 2, wx, wy, c);
   };
-  T.at = (i, k) => [H[0] + axis[0] * i + side[0] * k, H[1] + axis[1] * i + side[1] * k, H[2] + axis[2] * i + side[2] * k];
+  T.at = (i, k) => [H[0] + axis[0] * i * characterRenderScale + side[0] * k * characterRenderScale, H[1] + axis[1] * i * characterRenderScale + side[1] * k * characterRenderScale, H[2] + axis[2] * i * characterRenderScale + side[2] * k * characterRenderScale];
   return T;
 }
 export const WEAPONS = { ...MELEE_SHAPES, ...THROWN_SHAPES };
@@ -412,9 +421,27 @@ const turnAll = (S, a) => {
   S.sN = P(S.sN); S.sF = P(S.sF); S.hipN = P(S.hipN); S.hipF = P(S.hipF);
   S.axis = P(S.axis); S.side = P(S.side);
 };
+function scaleSolved(S, scale) {
+  if (scale === 1) return;
+  const point = (v) => [v[0] * scale, v[1] * scale, v[2] * scale];
+  for (const frame of Object.values(S.B)) frame.t = point(frame.t);
+  for (const arm of [S.armN, S.armF, S.legN, S.legF]) { arm.joint = point(arm.joint); arm.end = point(arm.end); }
+  for (const key of ["sN", "sF", "hipN", "hipF"]) S[key] = point(S[key]);
+}
 let REST_FRAMES = null;
+const SCALED_REST_FRAMES = new Map();
+function restFramesFor(scale) {
+  if (scale === 1) return REST_FRAMES;
+  if (!SCALED_REST_FRAMES.has(scale)) {
+    SCALED_REST_FRAMES.set(scale, Object.fromEntries(Object.entries(REST_FRAMES).map(([key, frame]) => [key, { ...frame, t: [frame.t[0] * scale, frame.t[1] * scale, frame.t[2] * scale] }])));
+  }
+  return SCALED_REST_FRAMES.get(scale);
+}
 function render(pose, look = characterOf("dummy"), sourceBox = { x: -12, y: -38, w: W0, h: H0 }) {
+  if (look.sprite) return dnfPose(pose, look.id, rasterDensity);
   const S = solve(pose), q = S.q, whole = (q.yaw ?? 0) + (q.face === -1 ? Math.PI : 0);
+  characterRenderScale = look.style ? CHARACTER_TAILORING[look.id]?.volume ?? 1 : 1;
+  scaleSolved(S, characterRenderScale);
   if (whole) turnAll(S, whole);
   const air = (q.y ?? 0) < -0.5;
   clipBody = !air;
@@ -430,7 +457,9 @@ function render(pose, look = characterOf("dummy"), sourceBox = { x: -12, y: -38,
     S.OW.draw(along(S.armF.end, ax, sd, PART.offWeapon), q, S.armF.end);
   }
   clipWeapon = false;
-  return finish(S, REST_FRAMES, look, sourceBox);
+  const result = finish(S, restFramesFor(characterRenderScale), look, sourceBox);
+  characterRenderScale = 1;
+  return result;
 }
 REST_FRAMES = solve({}).B;
 
@@ -440,7 +469,15 @@ function resolveLook(character) {
   const c = characterOf(character);
   if (!LOOKS.has(c.id)) {
     const names = { 3: "skin", 4: "cloth", 5: "hair", 6: "gold", 7: "leather", 8: "glow", 9: "bone", 10: "lining" };
-    LOOKS.set(c.id, { ...c, materials: c.style ? Object.fromEntries(Object.entries(names).map(([m, key]) => [m, c[key].map((v) => hex(v) >>> 0)])) : null });
+    if (c.sprite) LOOKS.set(c.id, { ...c, materials: null });
+    else LOOKS.set(c.id, { ...c, materials: c.style ? Object.fromEntries(Object.entries(names).map(([m, key]) => [m, c[key].map((v) => hex(v) >>> 0)])) : null });
+    if (c.style && !c.sprite) {
+      const m = LOOKS.get(c.id).materials, H = m[5], C = m[4];
+      m[11] = [H[0], H[0], H[1], H[2]]; m[12] = [H[2], H[2], H[3], H[3]];
+      m[13] = [C[0], C[0], C[1], C[2]]; m[14] = [C[2], C[2], C[3], C[3]];
+      m[15] = [INK, INK, INK, INK];
+      for (const [index, color] of [[16, m[3][1]], [17, m[3][2]], [18, m[3][0]], [19, m[9][0]], [20, H[2]], [21, H[0]], [22, C[0]], [23, C[2]], [24, m[6][0]], [25, m[10][0]]]) m[index] = [color, color, color, color];
+    }
   }
   return LOOKS.get(c.id);
 }
@@ -463,7 +500,7 @@ export function posed(pose, character = "dummy", { density = 1 } = {}) {
   if (density !== 1 && density !== 2) throw new RangeError("Pose density must be 1 or 2");
   rasterDensity = 1;
   const look = resolveLook(character);
-  if (look.style && !SOURCE_BOXES.has(look.id)) {
+  if (look.style && !look.sprite && !SOURCE_BOXES.has(look.id)) {
     const rest = render({}, look);
     SOURCE_BOXES.set(look.id, { x: rest.x0, y: rest.y0, w: rest.x1 - rest.x0 + 1, h: rest.y1 - rest.y0 + 1 });
   }

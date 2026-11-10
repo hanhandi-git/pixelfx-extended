@@ -8,7 +8,7 @@ copied sprite art, logos or other published assets.
 
 | Character ID | Character | Silhouette and materials | Source |
 |---|---|---|---|
-| `dummy` | Armored stand-in / 盔甲人 | Original neutral armor | Existing pixelfx design |
+| `dummy` | Armored stand-in / 盔甲人 | Neutral DNF-style armor for effect comparison | Procedural pixelfx design |
 | `ember-duelist` | Ember duelist / 余烬剑士 | Swept hair, forked scarf, crimson half cape, bare arms, bronze shoulder plate | Original procedural geometry, MIT |
 | `moon-oracle` | Moon oracle / 月相祭司 | Crescent crown, silver locks, indigo sleeves, floor-length pleated robe | Original procedural geometry, MIT |
 | `laurel-ranger` | Laurel ranger / 月桂游侠 | Copper braid, laurel circlet, leaf-cut mantle, short tunic, laced boots | Original procedural geometry, MIT |
@@ -33,6 +33,34 @@ The bone height and hand positions stay fixed. Costumes extend the rest silhouet
 Pixel clusters, four-step material shading, a one-pixel outline and upper-left lighting are shared.
 Weapons belong to the action: changing character preserves contact frames and grip alignment.
 Cloth, ornaments and hair use bone-local geometry and the body's depth buffer, including turns.
+
+The current roster also runs through a DNF-inspired tailoring pass in
+`src/core/character-tailoring.js`. It adds stepped face clusters, separated hair locks,
+lapels, collars, buckles, layered coat panels, robe pleats, armor plates and boot straps.
+`CHARACTER_TAILORING` is data rather than a bitmap, so changing a hair recipe, material index or
+coat layer keeps every existing action pose and effect attachment intact. The pass is a style
+translation for the procedural characters; it does not copy DNF character pixels or require the
+reference PNGs at runtime.
+
+The five code-pixel DNF reference characters from Ember Echo are also registered in the same
+roster: `dnf-blade-master`, `dnf-berserker`, `dnf-sword-master`, `dnf-elementalist` and
+`dnf-elemental-bomber`. Their palette-indexed source lives in `src/core/dnf-pixel-data.js`,
+metadata in `src/core/dnf-character-meta.js`, and the adapter in `src/core/dnf-characters.js`.
+They use the same `posed()`, `stockActor()`, effect body binding, gallery cards and action preview
+paths as procedural looks. Their body pixels now come from the corresponding **unarmed** frame
+exports. Equipment is composed independently by `equipDnfFrame()` at a per-frame grip; the weapon
+model and angle follow `pose.weapon` / `pose.sa`. Leaving `weapon` unset produces an unarmed body,
+which also supports the release frame of thrown actions. The original fixed weapon never remains
+under the selected equipment. Ember Echo uses this same equipment adapter for its animation and portraits.
+
+`python3 tools/import-dnf-bodies.py` regenerates the 201 body frames from the local reference library
+and preserves existing palette indices used by the game's wardrobe editor. The importer registers
+body pixels against the combined reference frame and checks adjacent frame IDs where the weapon
+export duplicated frames. `tools/dnf-body-sources.json` records the matched source frame, body hash,
+registration score, offset and grip for every frame. No PNG is loaded at runtime.
+
+The imported DNF pixels are NEOPLE / NEXON reference material for a local noncommercial prototype;
+they are separate from pixelfx's MIT procedural source and should not be treated as MIT assets.
 
 ## Use and preview
 

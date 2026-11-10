@@ -1,9 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { CHARACTERS, characterOf, posed, stockActor, createAct, createFrame, clearFrame, actBounds } from "../src/core/index.js";
+import { readFileSync } from "node:fs";
+import { CHARACTERS, CHARACTER_TAILORING, characterOf, posed, stockActor, createAct, createFrame, clearFrame, actBounds } from "../src/core/index.js";
 import * as slash from "../src/fx/melee/sword-slash.js";
 import * as electrified from "../src/fx/lightning/electrified.js";
+import { HERO_PIXEL_DATA } from "../src/core/dnf-pixel-data.js";
+import { WEAPONS } from "../src/core/rig.js";
 
 const digest = (buf) => createHash("sha256").update(new Uint8Array(buf.buffer)).digest("hex");
 const blank = (onBody) => ({ meta: { duration: 1, actor: 2, size: [96, 96], origin: [48, 80] },
@@ -14,8 +17,8 @@ const picture = (mod, character, options = {}, t = 0.37) => {
   a.draw(f); return { a, f };
 };
 
-test("the legacy actor retains its original pixels and unknown characters safely fall back", () => {
-  assert.equal(digest(stockActor(2).pixels), "5cbbffaf922f2230c889a355d7989955be66341f7317afb6a57440f03d668a40");
+test("the neutral DNF-style stand-in remains stable and unknown characters safely fall back", () => {
+  assert.equal(digest(stockActor(2).pixels), "4ff154a85cbedc0a38471a7834ada413dc235fbf05717943d6689612c3b0334c");
   assert.equal(characterOf("missing").id, "dummy");
   assert.deepEqual(posed({}, "missing"), posed({}));
 });
@@ -37,6 +40,66 @@ test("each costume has a different silhouette, consistent rest mask and separate
     assert.equal(stockActor(1, c.id).k, 1);
   }
   assert.equal(silhouettes.size, CHARACTERS.length - 1);
+});
+
+test("the DNF-inspired tailoring pass gives every named procedural look an editable hair and coat recipe", () => {
+  for (const look of CHARACTERS.filter((character) => character.style && !character.sprite)) {
+    const design = CHARACTER_TAILORING[look.id];
+    assert.ok(design, look.id);
+    assert.ok(design.hair && design.coat, look.id);
+    const pose = posed({}, look.id, { density: 2 });
+    assert.ok(pose.n > 1200, `${look.id}: dense costume should retain authored detail`);
+  }
+});
+
+test("the five Ember Echo DNF code-pixel characters are part of the pixelfx roster", () => {
+  const dnf = CHARACTERS.filter((look) => look.sprite);
+  assert.deepEqual(dnf.map((look) => look.id), [
+    "dnf-blade-master", "dnf-berserker", "dnf-sword-master", "dnf-elementalist", "dnf-elemental-bomber",
+  ]);
+  for (const look of dnf) {
+    const body = posed({}, look.id);
+    const actor = stockActor(2, look.id);
+    assert.ok(body.n > 500, `${look.id}: source pixels should survive import`);
+    assert.equal(actor.mask.data.reduce((sum, value) => sum + value, 0), body.n, look.id);
+    assert.ok(body.src.every((source) => source >= 0 && source < actor.w * actor.h), `${look.id}: source map`);
+  }
+});
+
+test("every DNF character changes its visible equipment for every weapon and restores an unarmed body", () => {
+  for (const look of CHARACTERS.filter((look) => look.sprite)) {
+    const body = posed({}, look.id, { density: 2 }), before = digest(body.color);
+    for (const pose of [{}, { fx: 20, fy: -22, sa: -0.4 }]) {
+      const signatures = new Set();
+      for (const weapon of Object.keys(WEAPONS)) {
+        const equipped = posed({ ...pose, weapon }, look.id, { density: 2 });
+        signatures.add(digest(equipped.color) + digest(equipped.xs) + digest(equipped.ys));
+        assert.equal(equipped.weapon, weapon, `${look.id}/${weapon}`);
+        assert.ok([...equipped.src].some((source) => source === -1), "equipment has independent pixels");
+        assert.equal(equipped, posed({ ...pose, weapon }, look.id, { density: 2 }));
+      }
+      assert.equal(signatures.size, Object.keys(WEAPONS).length, `${look.id}: distinct visible weapons`);
+    }
+    assert.equal(digest(posed({}, look.id, { density: 2 }).color), before, `${look.id}: changing equipment mutated the body`);
+  }
+});
+
+test("all 201 DNF body frames match the separate unarmed source and keep their grips on body pixels", () => {
+  const sources = JSON.parse(readFileSync(new URL("../tools/dnf-body-sources.json", import.meta.url)));
+  let checked = 0;
+  for (const source of sources) for (const [frameId, expected] of Object.entries(source.frames)) {
+    const frame = HERO_PIXEL_DATA[source.id].frames[frameId];
+    const body = posed({ spriteFrame: Number(frameId) }, source.id, { density: 2 });
+    const pixels = Buffer.alloc(frame.width * frame.height * 4);
+    for (let i = 0; i < body.n; i++) {
+      const x = Math.round(body.xs[i] * 2) - frame.offset[0], y = Math.round(body.ys[i] * 2) - frame.offset[1];
+      pixels.writeUInt32LE(body.color[i], (y * frame.width + x) * 4);
+    }
+    assert.equal(createHash("sha256").update(pixels).digest("hex"), expected.sha256, `${source.id}/${frameId}`);
+    assert.ok([...body.xs].some((x, i) => x * 2 === frame.grip[0] && body.ys[i] * 2 === frame.grip[1]), `${source.id}/${frameId}: grip detached`);
+    checked++;
+  }
+  assert.equal(checked, 201);
 });
 
 test("an untouched body effect preserves costume colors and works mirrored", () => {

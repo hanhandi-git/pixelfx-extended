@@ -9,3 +9,8 @@ https://github.com/rehan-remade/hollow-crown, Copyright (c) 2026 rehan-remade, M
 
 **Patch Pixel.** The font in `gallery/fonts` is Patch's own and is not covered by this repository's MIT license. See
 `gallery/fonts/NOTICE.md`.
+
+**DNF reference characters.** `src/core/dnf-pixel-data.js` contains five code-owned pixel references
+from the local Ember Echo prototype import: Blade Master, Berserker, Sword Master, Elementalist and
+Elemental Bomber. The source character pixels are NEOPLE / NEXON reference material, are not covered
+by this repository's MIT license, and are intended for local noncommercial prototype use only.

@@ -13,6 +13,8 @@ export { FONTS, textWidth, glyphFor, isCjk } from "./font.js";
 export { createFrame, clearFrame, createFx, composite, painterFor, resolveOptions } from "./fx.js";
 export { stockActor, drawActor, actorAlphaOf, HERO, HERO2, HERO_PAL, DUMMY_PAL } from "./actor.js";
 export { CHARACTERS, characterOf } from "./characters.js";
+export { CHARACTER_TAILORING, tailorCharacter } from "./character-tailoring.js";
+export { DNF_CHARACTER_LOOKS, dnfCharacterOf, dnfPose, equipDnfFrame, isDnfCharacter } from "./dnf-characters.js";
 export { ARMORY, MELEE_WEAPONS, THROWN_WEAPONS, WEAPON_CLASSES, weaponOf, meleeWeaponOf, thrownWeaponOf } from "./weapons.js";
 export { WEAPONS } from "./rig.js";
 export { backdrop, BACKDROPS } from "./scene.js";

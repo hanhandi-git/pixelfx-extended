@@ -1,0 +1,2650 @@
+[
+  {
+    "id": "dnf-blade-master",
+    "bodySource": "03_时装_二觉/Male Slayer (Blade Master)__206523/A Type",
+    "combinedSource": "03_时装_二觉/Male Slayer (Blade Master, Weapon)__206524/A Type",
+    "frames": {
+      "0": {
+        "bodyFrame": "000",
+        "sha256": "7d0d99facf7e07eb3c8b0826f20b35438c6ce8bc21b5b577c7ccab2999959c2e",
+        "offset": [
+          -37,
+          -112
+        ],
+        "grip": [
+          -25,
+          -85
+        ],
+        "registration": 0.9658
+      },
+      "1": {
+        "bodyFrame": "001",
+        "sha256": "94261863a2053964de0b7f44f8c3b231768fe06ba60e4db106f305474d604f14",
+        "offset": [
+          -38,
+          -112
+        ],
+        "grip": [
+          -25,
+          -85
+        ],
+        "registration": 0.9672
+      },
+      "2": {
+        "bodyFrame": "002",
+        "sha256": "4dee279ebc0ee81b4d3fae8454b9f03e94abc1c3b0faa82e4d43d6717500dacb",
+        "offset": [
+          -40,
+          -112
+        ],
+        "grip": [
+          -25,
+          -85
+        ],
+        "registration": 0.9673
+      },
+      "3": {
+        "bodyFrame": "003",
+        "sha256": "a8babc52919835ccf59c611e87b679ce96fba2e4120bacaf8d79db0e8b288494",
+        "offset": [
+          -25,
+          -98
+        ],
+        "grip": [
+          -11,
+          -82
+        ],
+        "registration": 0.9961
+      },
+      "4": {
+        "bodyFrame": "004",
+        "sha256": "2a7e0c7d35d0236c5a4bd3670f5b81050360150c868158f2e3cd18e26213c6d4",
+        "offset": [
+          -25,
+          -95
+        ],
+        "grip": [
+          -8,
+          -84
+        ],
+        "registration": 1.0
+      },
+      "5": {
+        "bodyFrame": "005",
+        "sha256": "a61f1d640ac5a644d9eea175929d7ba1a9adbae339408ba26f6dc57143adf797",
+        "offset": [
+          -25,
+          -94
+        ],
+        "grip": [
+          -1,
+          -83
+        ],
+        "registration": 0.9995
+      },
+      "6": {
+        "bodyFrame": "006",
+        "sha256": "d3b1420c86a19a17e8f1553d7ddd96832451a8be7cd41661ed69c6e9c6ce38ec",
+        "offset": [
+          -25,
+          -94
+        ],
+        "grip": [
+          -8,
+          -69
+        ],
+        "registration": 0.999
+      },
+      "7": {
+        "bodyFrame": "007",
+        "sha256": "b8feb942e6a717ea0a1ffbcb6f7f289a85686fc34d579a58c444fd7ba4b04e29",
+        "offset": [
+          -25,
+          -94
+        ],
+        "grip": [
+          -16,
+          -73
+        ],
+        "registration": 0.9995
+      },
+      "12": {
+        "bodyFrame": "012",
+        "sha256": "117d1acd0719c860545e3fd04541c0b1696fbc2f03660b68477534db8ee523d2",
+        "offset": [
+          -20,
+          -97
+        ],
+        "grip": [
+          65,
+          -71
+        ],
+        "registration": 1.0
+      },
+      "13": {
+        "bodyFrame": "013",
+        "sha256": "460774d18b92f12fcf1626534fbc73f8030bb9c8759a5e1937863f24af2be1ba",
+        "offset": [
+          -34,
+          -99
+        ],
+        "grip": [
+          34,
+          -60
+        ],
+        "registration": 0.8932
+      },
+      "14": {
+        "bodyFrame": "014",
+        "sha256": "c7bacc21705c845c15f290f728e2ba8c0e84d99ea548a9e577cd6c202aa893cf",
+        "offset": [
+          -35,
+          -99
+        ],
+        "grip": [
+          27,
+          -63
+        ],
+        "registration": 0.9954
+      },
+      "15": {
+        "bodyFrame": "015",
+        "sha256": "a2976a2208377db9c436e033c24203f85286efbc454ceb592b8798ec7f6040ec",
+        "offset": [
+          -41,
+          -99
+        ],
+        "grip": [
+          23,
+          -73
+        ],
+        "registration": 0.9953
+      },
+      "16": {
+        "bodyFrame": "016",
+        "sha256": "b94c4ff37d7c5b2c775fae37960c26565be93d1380eaeb97432ba74e2df33681",
+        "offset": [
+          -45,
+          -99
+        ],
+        "grip": [
+          27,
+          -43
+        ],
+        "registration": 0.9948
+      },
+      "17": {
+        "bodyFrame": "017",
+        "sha256": "01806a91829db926b73964efce96812630214290212288ceaa3d02afb4f4d2ef",
+        "offset": [
+          -43,
+          -99
+        ],
+        "grip": [
+          27,
+          -43
+        ],
+        "registration": 0.9948
+      },
+      "32": {
+        "bodyFrame": "032",
+        "sha256": "e524c713e55eff7ddc9b37ebdd12e4e937ad55fe3b6adec602c0eeb6f611e59e",
+        "offset": [
+          -19,
+          -97
+        ],
+        "grip": [
+          54,
+          -72
+        ],
+        "registration": 1.0
+      },
+      "33": {
+        "bodyFrame": "033",
+        "sha256": "4054ea40f858e0109a72433a224661f830d9847984dc4b11014936b5f6b26cf7",
+        "offset": [
+          -34,
+          -94
+        ],
+        "grip": [
+          18,
+          -76
+        ],
+        "registration": 0.9914
+      },
+      "34": {
+        "bodyFrame": "034",
+        "sha256": "1e93338afc63c3f30acee326deeec3665ced0766c59b2874a265d0254773d16a",
+        "offset": [
+          -27,
+          -91
+        ],
+        "grip": [
+          26,
+          -73
+        ],
+        "registration": 0.9668
+      },
+      "35": {
+        "bodyFrame": "035",
+        "sha256": "e8c10b52ea327dcc46154ce61aa398a94e778528d7880cd14b4eb2f52f54524d",
+        "offset": [
+          7,
+          -91
+        ],
+        "grip": [
+          54,
+          -72
+        ],
+        "registration": 0.9965
+      },
+      "36": {
+        "bodyFrame": "036",
+        "sha256": "9031c744b869f8e9ecac43dae2481d2ae73acd31f0316dec77cbe0044f6916da",
+        "offset": [
+          11,
+          -113
+        ],
+        "grip": [
+          54,
+          -72
+        ],
+        "registration": 0.9921
+      },
+      "37": {
+        "bodyFrame": "037",
+        "sha256": "0887efecf0314511568a857e1e8629f1eefe4606be26d2dbc4ae16cfb9de4d95",
+        "offset": [
+          12,
+          -116
+        ],
+        "grip": [
+          54,
+          -72
+        ],
+        "registration": 0.9925
+      },
+      "38": {
+        "bodyFrame": "038",
+        "sha256": "db6e7849b5c678e88cf8fe2fcd183c71261f799549b7430049d96de853f5a319",
+        "offset": [
+          12,
+          -117
+        ],
+        "grip": [
+          54,
+          -72
+        ],
+        "registration": 0.9927
+      },
+      "75": {
+        "bodyFrame": "075",
+        "sha256": "21938bd893e06afc64f5d4069735801e44aafd66a38a950576b2a208d3b10129",
+        "offset": [
+          -22,
+          -108
+        ],
+        "grip": [
+          40,
+          -64
+        ],
+        "registration": 0.9153
+      },
+      "80": {
+        "bodyFrame": "080",
+        "sha256": "0de32c5c65004eae6ced4395217d5bac76d6d0f5d8e81b0c450ca6cb1eba0b04",
+        "offset": [
+          -18,
+          -137
+        ],
+        "grip": [
+          21,
+          -64
+        ],
+        "registration": 0.9421
+      },
+      "81": {
+        "bodyFrame": "081",
+        "sha256": "fd9fe197489ca7cba46a1bf43776fdf6165499e9c245950b9b1ee1db5102f8aa",
+        "offset": [
+          -18,
+          -140
+        ],
+        "grip": [
+          21,
+          -64
+        ],
+        "registration": 0.9388
+      },
+      "82": {
+        "bodyFrame": "082",
+        "sha256": "2ea4729d08e0924ac2c4f17172b199a8f71ea6333d6c3b47f94061447b82a788",
+        "offset": [
+          -18,
+          -140
+        ],
+        "grip": [
+          21,
+          -64
+        ],
+        "registration": 0.9377
+      },
+      "83": {
+        "bodyFrame": "083",
+        "sha256": "ef6f0d924520c6f559ca3581ef6faf4b490b090ee277824f9ab4748b99b241a8",
+        "offset": [
+          -17,
+          -140
+        ],
+        "grip": [
+          21,
+          -64
+        ],
+        "registration": 0.9376
+      },
+      "89": {
+        "bodyFrame": "089",
+        "sha256": "dc59991154dc72a29f295a842c75882a06fe2de1bedb6a97ad62462810bb4c71",
+        "offset": [
+          -26,
+          -110
+        ],
+        "grip": [
+          37,
+          -67
+        ],
+        "registration": 0.9215
+      },
+      "90": {
+        "bodyFrame": "090",
+        "sha256": "4debd76e35d9c04332e7499a2964b34637293f2f60e0059385e2ef604e04b984",
+        "offset": [
+          -26,
+          -110
+        ],
+        "grip": [
+          32,
+          -67
+        ],
+        "registration": 0.919
+      },
+      "91": {
+        "bodyFrame": "091",
+        "sha256": "02a4cd84510ba8c1bf73faa6c3580c775a1b1fa3bb0429b436bd7d8c9af1e501",
+        "offset": [
+          -26,
+          -109
+        ],
+        "grip": [
+          32,
+          -67
+        ],
+        "registration": 0.9166
+      },
+      "96": {
+        "bodyFrame": "096",
+        "sha256": "9c48f55b6934f3a3d408652e5d3a99ff3a84b889d421c1ebfb6b25fcc3578dba",
+        "offset": [
+          -26,
+          -110
+        ],
+        "grip": [
+          21,
+          -20
+        ],
+        "registration": 0.9201
+      },
+      "97": {
+        "bodyFrame": "097",
+        "sha256": "b10195a810668f5d564d24c7a5436f18001edddf9da827569911bdbac82907ac",
+        "offset": [
+          -55,
+          -66
+        ],
+        "grip": [
+          21,
+          -20
+        ],
+        "registration": 0.9035
+      },
+      "98": {
+        "bodyFrame": "098",
+        "sha256": "948be3dd2f03ba76b54b21ed4c9df50127bba4833dc96ee524e51f8e070453d5",
+        "offset": [
+          -56,
+          -70
+        ],
+        "grip": [
+          21,
+          -20
+        ],
+        "registration": 0.9231
+      },
+      "99": {
+        "bodyFrame": "099",
+        "sha256": "71bf2f5f89ae584106d38ad55a328c5c40792a7ef4327977ddc85e37bf82c51d",
+        "offset": [
+          -56,
+          -39
+        ],
+        "grip": [
+          21,
+          -20
+        ],
+        "registration": 0.9755
+      },
+      "100": {
+        "bodyFrame": "100",
+        "sha256": "98797602e9de787477da0f403b9e7047673f73dbfe8bb36c9839227ea22f3180",
+        "offset": [
+          -56,
+          -33
+        ],
+        "grip": [
+          21,
+          -20
+        ],
+        "registration": 0.9744
+      },
+      "101": {
+        "bodyFrame": "101",
+        "sha256": "c77f3381f045cf1fc87f0ebba2a60f79f39839c13d550b26ff84d96edbd9093a",
+        "offset": [
+          -26,
+          -110
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.92
+      },
+      "102": {
+        "bodyFrame": "102",
+        "sha256": "3841a7746381c6370e43d223d771486af9c59baace826cf4a0c46b90a0395c03",
+        "offset": [
+          -16,
+          -109
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9868
+      },
+      "103": {
+        "bodyFrame": "103",
+        "sha256": "c2d42622009cf0e6c423a42c76c10fee91b4d4bad615bbfeb87aa0c4901b7b35",
+        "offset": [
+          -34,
+          -111
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9863
+      },
+      "104": {
+        "bodyFrame": "104",
+        "sha256": "bb934273c337f2ca7e632c0a17bbfdeef426cc4a80f7e4b832f85ae4f6c7b89d",
+        "offset": [
+          -41,
+          -110
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9474
+      },
+      "105": {
+        "bodyFrame": "105",
+        "sha256": "776deeb1a46056e9c2b8a28eef8396b185cb1f95ea202c5cdb8cc3e04e606d0a",
+        "offset": [
+          -30,
+          -109
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9875
+      },
+      "106": {
+        "bodyFrame": "106",
+        "sha256": "b24fc03c9d2486355984e93ffc8630850d647101e96c3e9f7133f033f8e26911",
+        "offset": [
+          -16,
+          -109
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9877
+      },
+      "107": {
+        "bodyFrame": "107",
+        "sha256": "1bca60ed38e02ab9e9c746a45d87851d97458b7305ff70b124d8dc03b961b904",
+        "offset": [
+          -31,
+          -111
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9883
+      },
+      "108": {
+        "bodyFrame": "108",
+        "sha256": "704d58ac186bc0ab994957fe1f33c6eae4f65731a725aa11f287ff2207cb6f62",
+        "offset": [
+          -38,
+          -110
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9618
+      },
+      "109": {
+        "bodyFrame": "109",
+        "sha256": "382e6ec3ed58b3f3cbd0edb1db42bc7d7e438fe6e66ec412b866ec7438f96a15",
+        "offset": [
+          -28,
+          -109
+        ],
+        "grip": [
+          27,
+          -74
+        ],
+        "registration": 0.9863
+      }
+    }
+  },
+  {
+    "id": "dnf-berserker",
+    "bodySource": "03_时装_二觉/Male Slayer (Berserker)__206520/A Type",
+    "combinedSource": "03_时装_二觉/Male Slayer (Berserker, Weapon)__206522/A Type",
+    "frames": {
+      "0": {
+        "bodyFrame": "000",
+        "sha256": "67916c2627ae3f64707b70aed77e36af7fd3db6136b551a930f30c479d9a1ab4",
+        "offset": [
+          -33,
+          -116
+        ],
+        "grip": [
+          -23,
+          -79
+        ],
+        "registration": 0.9921
+      },
+      "1": {
+        "bodyFrame": "001",
+        "sha256": "346420f7efe5d18e3bb5390a7cf88739aff2a1ce0add1d4e973b38388dd83a3d",
+        "offset": [
+          -33,
+          -116
+        ],
+        "grip": [
+          -23,
+          -79
+        ],
+        "registration": 0.9922
+      },
+      "2": {
+        "bodyFrame": "002",
+        "sha256": "ff60ff0bc1b0162f284428ff846fce83e35bfb168045fb4fcf86a6fafa38f9e2",
+        "offset": [
+          -29,
+          -116
+        ],
+        "grip": [
+          -23,
+          -79
+        ],
+        "registration": 0.9724
+      },
+      "3": {
+        "bodyFrame": "003",
+        "sha256": "0e8eac6db257c8a0228072279657af7f8762d609b55383ff287376b6c743daf5",
+        "offset": [
+          -25,
+          -102
+        ],
+        "grip": [
+          -3,
+          -56
+        ],
+        "registration": 0.9953
+      },
+      "4": {
+        "bodyFrame": "004",
+        "sha256": "a84c3b871f952c65832e8f828562461b2051d9a20f8018f36fabfd07e5ca70d2",
+        "offset": [
+          -24,
+          -98
+        ],
+        "grip": [
+          1,
+          -65
+        ],
+        "registration": 1.0
+      },
+      "5": {
+        "bodyFrame": "005",
+        "sha256": "b55f20ce568e54d8d2a43da17621663acf6b53b4eee1d4cdbbdcdfa4489355ce",
+        "offset": [
+          -22,
+          -96
+        ],
+        "grip": [
+          -1,
+          -67
+        ],
+        "registration": 1.0
+      },
+      "6": {
+        "bodyFrame": "006",
+        "sha256": "956aea7ba38f1a13cd03110e6361fbe1a038c556832122075370d64f58856592",
+        "offset": [
+          -22,
+          -97
+        ],
+        "grip": [
+          -10,
+          -65
+        ],
+        "registration": 1.0
+      },
+      "7": {
+        "bodyFrame": "007",
+        "sha256": "06a91c0625ac0a93a4d0f07187349d438a5915bb6ce4d106ce1ca0bad28e81df",
+        "offset": [
+          -22,
+          -97
+        ],
+        "grip": [
+          -20,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "12": {
+        "bodyFrame": "012",
+        "sha256": "cee4db41cd952002d7b81cd4e5fe912ecb888b51ebcfd2c6b85c912fefe3d64a",
+        "offset": [
+          -17,
+          -100
+        ],
+        "grip": [
+          69,
+          -71
+        ],
+        "registration": 1.0
+      },
+      "13": {
+        "bodyFrame": "013",
+        "sha256": "3f3b335dfad9a40220d7f8fa2d3384c3faeb156876f60ba68c530c90c9dbc09e",
+        "offset": [
+          -32,
+          -97
+        ],
+        "grip": [
+          43,
+          -50
+        ],
+        "registration": 0.845
+      },
+      "14": {
+        "bodyFrame": "014",
+        "sha256": "5baeaff44fd3e0d6fd1a52f538a50bbf051fd8ddc11f90ea59915beac584a351",
+        "offset": [
+          -33,
+          -99
+        ],
+        "grip": [
+          50,
+          -41
+        ],
+        "registration": 0.9958
+      },
+      "15": {
+        "bodyFrame": "015",
+        "sha256": "def006a7c83452587bd31b1d76fa6922503f5ea0384ee75aa5bf224a65b24af9",
+        "offset": [
+          -39,
+          -98
+        ],
+        "grip": [
+          38,
+          -45
+        ],
+        "registration": 0.9959
+      },
+      "16": {
+        "bodyFrame": "016",
+        "sha256": "72502b915eb89e1c09d11243af8960d644245b75ae07f56de74c17a339f4a247",
+        "offset": [
+          -43,
+          -98
+        ],
+        "grip": [
+          37,
+          -42
+        ],
+        "registration": 0.9916
+      },
+      "17": {
+        "bodyFrame": "017",
+        "sha256": "ca891a2e21ec16af0acdcf51e9bdeaecaf6b4cac0f63011b2113c5d6e6b39df8",
+        "offset": [
+          -41,
+          -98
+        ],
+        "grip": [
+          27,
+          -58
+        ],
+        "registration": 0.9939
+      },
+      "32": {
+        "bodyFrame": "032",
+        "sha256": "430dc94e2000b7049c4f59d2cff3fe07b6f999001174aace2a5693592dc38549",
+        "offset": [
+          -16,
+          -99
+        ],
+        "grip": [
+          57,
+          -73
+        ],
+        "registration": 1.0
+      },
+      "33": {
+        "bodyFrame": "033",
+        "sha256": "18b58fbb162f6b35dca9dc1a9dffc47fbc7e1c79d18f6ad0c41021baf950b944",
+        "offset": [
+          -32,
+          -93
+        ],
+        "grip": [
+          29,
+          -80
+        ],
+        "registration": 0.972
+      },
+      "34": {
+        "bodyFrame": "034",
+        "sha256": "c2365a73c7e6a6a12e7f687818b120ea96f715f6cd30e06adf7e182afbd17a22",
+        "offset": [
+          -29,
+          -91
+        ],
+        "grip": [
+          37,
+          -78
+        ],
+        "registration": 0.9659
+      },
+      "35": {
+        "bodyFrame": "035",
+        "sha256": "892c7f49542fd1555a16564814754145f9409cdcff143123d8c2d8e7d4bda350",
+        "offset": [
+          12,
+          -94
+        ],
+        "grip": [
+          57,
+          -73
+        ],
+        "registration": 0.9963
+      },
+      "36": {
+        "bodyFrame": "036",
+        "sha256": "6cbe1a17ac176d21a16d7749a24cd4127ec3da3a4446bc43e1fbae739d1e5bfc",
+        "offset": [
+          15,
+          -113
+        ],
+        "grip": [
+          61,
+          -73
+        ],
+        "registration": 0.9967
+      },
+      "37": {
+        "bodyFrame": "037",
+        "sha256": "20da97cfcda22d02ed636730bfab92a2083b9f475f40ec142537005e154db600",
+        "offset": [
+          15,
+          -116
+        ],
+        "grip": [
+          60,
+          -71
+        ],
+        "registration": 0.9923
+      },
+      "38": {
+        "bodyFrame": "038",
+        "sha256": "7411f15df101bbb5fffc0fa618bccd4e1b3d32aafdb2ade76f2a8d243804b855",
+        "offset": [
+          15,
+          -117
+        ],
+        "grip": [
+          59,
+          -70
+        ],
+        "registration": 0.9924
+      },
+      "75": {
+        "bodyFrame": "075",
+        "sha256": "c2298a605afdefab84d080c0f9c66c5b7f899ea0735c493270c0e1a60dd5c1d0",
+        "offset": [
+          -22,
+          -108
+        ],
+        "grip": [
+          46,
+          -64
+        ],
+        "registration": 0.8038
+      },
+      "80": {
+        "bodyFrame": "080",
+        "sha256": "03872a00a4f84eeccfcf9c52664c61d6b2f9faf6a72a07ca47537b9c13863ec6",
+        "offset": [
+          -17,
+          -137
+        ],
+        "grip": [
+          29,
+          -69
+        ],
+        "registration": 0.825
+      },
+      "81": {
+        "bodyFrame": "081",
+        "sha256": "596f9037a9265d7ab8eba156c41105253b856ad37c785ecee67a51c78c84f54a",
+        "offset": [
+          -19,
+          -140
+        ],
+        "grip": [
+          28,
+          -64
+        ],
+        "registration": 0.8164
+      },
+      "82": {
+        "bodyFrame": "082",
+        "sha256": "1ee97df66569835be377356e3683082fb3e3eb41b56e70c1a18a19ff3def6528",
+        "offset": [
+          -19,
+          -140
+        ],
+        "grip": [
+          28,
+          -64
+        ],
+        "registration": 0.8132
+      },
+      "83": {
+        "bodyFrame": "083",
+        "sha256": "971e6bd4ae6fc5a69c2be443e08a83ea5baa0be1ade9f86454ec99f638f10a68",
+        "offset": [
+          -19,
+          -140
+        ],
+        "grip": [
+          28,
+          -64
+        ],
+        "registration": 0.8125
+      },
+      "89": {
+        "bodyFrame": "089",
+        "sha256": "c00321054cfbf22befb8148989c3e5d2163e27522bb59e85f9ae6914f9463401",
+        "offset": [
+          -22,
+          -115
+        ],
+        "grip": [
+          41,
+          -69
+        ],
+        "registration": 0.768
+      },
+      "90": {
+        "bodyFrame": "090",
+        "sha256": "52ac893c6e7be61ba60fcfcb070e42fcf23092a76122b6e44ae76988dfff01f0",
+        "offset": [
+          -24,
+          -114
+        ],
+        "grip": [
+          29,
+          -66
+        ],
+        "registration": 0.7632
+      },
+      "91": {
+        "bodyFrame": "091",
+        "sha256": "f9b7dcae834a910a12030115403596647c4ebb24d47dd8eeaafb7dfa1e54893e",
+        "offset": [
+          -25,
+          -114
+        ],
+        "grip": [
+          29,
+          -66
+        ],
+        "registration": 0.7627
+      },
+      "96": {
+        "bodyFrame": "096",
+        "sha256": "67af94a5f8254273d1a09dc53408178ff911c5a52f820b3f770385253392c1b6",
+        "offset": [
+          -21,
+          -117
+        ],
+        "grip": [
+          16,
+          -20
+        ],
+        "registration": 0.7751
+      },
+      "97": {
+        "bodyFrame": "097",
+        "sha256": "00d9fd09b2dfdfe454d556c535ea99b36575bda6e36bc84075bf8d3d45216d4f",
+        "offset": [
+          -56,
+          -66
+        ],
+        "grip": [
+          17,
+          -20
+        ],
+        "registration": 0.7568
+      },
+      "98": {
+        "bodyFrame": "098",
+        "sha256": "c6e38c7379f0baeaa352828270d730aca8f67510d44eaa9268314d67adeb5644",
+        "offset": [
+          -61,
+          -70
+        ],
+        "grip": [
+          17,
+          -20
+        ],
+        "registration": 0.7748
+      },
+      "99": {
+        "bodyFrame": "099",
+        "sha256": "c36e882b7b58f723dc1f988ac9048121f20fe78e7abe8aa0755b7b3a0a7971ac",
+        "offset": [
+          -61,
+          -34
+        ],
+        "grip": [
+          17,
+          -20
+        ],
+        "registration": 0.8324
+      },
+      "100": {
+        "bodyFrame": "100",
+        "sha256": "74f2d04a80661a523edd58c6e7509a7249c0b0f4c275071ebf78ee681ffe597c",
+        "offset": [
+          -21,
+          -117
+        ],
+        "grip": [
+          16,
+          -20
+        ],
+        "registration": 0.7756
+      },
+      "101": {
+        "bodyFrame": "101",
+        "sha256": "776a64279820cdfa7ee33b2d8216d5cb7e8cfd6b4650eb051f8f996ad728b393",
+        "offset": [
+          -19,
+          -108
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.9936
+      },
+      "102": {
+        "bodyFrame": "102",
+        "sha256": "9d788464dd7c0d25d2ec6ac7a89dddc17805a6575acfd9c2245786ecf3e6a246",
+        "offset": [
+          -32,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.964
+      },
+      "103": {
+        "bodyFrame": "103",
+        "sha256": "985d4189e680351389d699f1cde4fa81ed25b743d6d6981541a1a76fae938538",
+        "offset": [
+          -40,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.8651
+      },
+      "104": {
+        "bodyFrame": "104",
+        "sha256": "3425c3b8282d2e7106946c2f282e099113d8cf622add3aab0fc159dd2205e3b5",
+        "offset": [
+          -29,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.9868
+      },
+      "105": {
+        "bodyFrame": "105",
+        "sha256": "77ba0855b8539b657b91f2e76cb6c1da0624405cfddd4a459a191a1368b68375",
+        "offset": [
+          -14,
+          -108
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.9934
+      },
+      "106": {
+        "bodyFrame": "106",
+        "sha256": "af2a310db941fc7075171ff6dd012a861d0265dbf61ca95e39354bebcc2fa17d",
+        "offset": [
+          -29,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.966
+      },
+      "107": {
+        "bodyFrame": "107",
+        "sha256": "537c08a432298cfbd2286309b97a5f64f9bea037e6bac874e0e665f5e9b9ce05",
+        "offset": [
+          -37,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.8921
+      },
+      "108": {
+        "bodyFrame": "108",
+        "sha256": "c90eb38b9adc15533bab71c4dbfe93706ee8d7855a00fd917926ae316f52b199",
+        "offset": [
+          -31,
+          -109
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.9638
+      },
+      "109": {
+        "bodyFrame": "109",
+        "sha256": "f3a20ce0a2f28dafc9053b73d0aae6d69c368da78393d4b9df7c4c463217c1cf",
+        "offset": [
+          -23,
+          -104
+        ],
+        "grip": [
+          24,
+          -71
+        ],
+        "registration": 0.8489
+      }
+    }
+  },
+  {
+    "id": "dnf-sword-master",
+    "bodySource": "03_时装_二觉/Female Slayer (Sword Master)__206536/A Type",
+    "combinedSource": "03_时装_二觉/Female Slayer (Sword Master, Weapon)__206533/A Type",
+    "frames": {
+      "0": {
+        "bodyFrame": "000",
+        "sha256": "7b187336cc67dda8e129db73acbe255fb09c72035f34a9d29edc5c56a39648ff",
+        "offset": [
+          -57,
+          -118
+        ],
+        "grip": [
+          -39,
+          -57
+        ],
+        "registration": 0.7965
+      },
+      "1": {
+        "bodyFrame": "001",
+        "sha256": "f4fc7f71bb3e373ca79ad8e94daa4a3735e62dcdd3271850176f66cc30fda6c5",
+        "offset": [
+          -57,
+          -118
+        ],
+        "grip": [
+          -39,
+          -57
+        ],
+        "registration": 0.7955
+      },
+      "2": {
+        "bodyFrame": "002",
+        "sha256": "77a170b138deab32e24664e751d5c6601d2c8a532f7a35583cf1519730e8aba4",
+        "offset": [
+          -57,
+          -118
+        ],
+        "grip": [
+          -39,
+          -57
+        ],
+        "registration": 0.7938
+      },
+      "3": {
+        "bodyFrame": "003",
+        "sha256": "ac1671afdbcb62add32882f416f14420c6f3b2ecf8a0e67d7807b99c30c6c5de",
+        "offset": [
+          -57,
+          -118
+        ],
+        "grip": [
+          -39,
+          -57
+        ],
+        "registration": 0.7954
+      },
+      "4": {
+        "bodyFrame": "004",
+        "sha256": "3c8908a9edda5c5180d1d7f5e21be9b806e76bfc2958fa501bf626e2efe7920c",
+        "offset": [
+          -57,
+          -117
+        ],
+        "grip": [
+          -39,
+          -57
+        ],
+        "registration": 0.8045
+      },
+      "13": {
+        "bodyFrame": "013",
+        "sha256": "b3a0059bb520af006b6d07d46fb15ee2a101f1fdf85380ebce481267211faf3e",
+        "offset": [
+          -53,
+          -115
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.8256
+      },
+      "14": {
+        "bodyFrame": "014",
+        "sha256": "c7a0e86a01c0236bb9ca1c3d26594337d3c7c26abcd1ed4baa40b81ba39962b1",
+        "offset": [
+          -60,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.7978
+      },
+      "15": {
+        "bodyFrame": "015",
+        "sha256": "0fd5fbc8185b4f222672cffed0b4a521834a658713f6ce7aa49305815c8b1723",
+        "offset": [
+          -64,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.8404
+      },
+      "16": {
+        "bodyFrame": "016",
+        "sha256": "91cc00102f975253b76bf5aa14711d66e7bc008a43ddbeac05dfcbf5bd43275b",
+        "offset": [
+          -67,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.8568
+      },
+      "17": {
+        "bodyFrame": "017",
+        "sha256": "aab1b483220866fcfd5ca2bfb463adfe1d575162347b46f195b84d0b9c57aefe",
+        "offset": [
+          -55,
+          -115
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.886
+      },
+      "18": {
+        "bodyFrame": "018",
+        "sha256": "351ca889bd3d72af7c7a9344faa4603d659ec5d8317580528884104839032040",
+        "offset": [
+          -49,
+          -115
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.9086
+      },
+      "19": {
+        "bodyFrame": "019",
+        "sha256": "cee43ecec5e21b65ce7927b0d53b143461c1c328d98e096de9175d2549979501",
+        "offset": [
+          -55,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.9256
+      },
+      "20": {
+        "bodyFrame": "020",
+        "sha256": "8cc21544432b53de4d91cdad202e1f175d4f43182f2c52e4072533ff1fd609ae",
+        "offset": [
+          -63,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.9619
+      },
+      "21": {
+        "bodyFrame": "021",
+        "sha256": "a2ce54cde4965577bb4b55b5a7a7c3cf88078b6d01b91d50359478d8ce253ab2",
+        "offset": [
+          -63,
+          -114
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.954
+      },
+      "22": {
+        "bodyFrame": "022",
+        "sha256": "a6d566d47b2baec83ada64d517d524ed758eb731f2b8b35190893435e88d54a3",
+        "offset": [
+          -55,
+          -115
+        ],
+        "grip": [
+          -29,
+          -53
+        ],
+        "registration": 0.9215
+      },
+      "23": {
+        "bodyFrame": "023",
+        "sha256": "b5beaf51c2171f6df8fc684b8cc7562efc422877e09a062b9e81083fbea02aab",
+        "offset": [
+          -81,
+          -98
+        ],
+        "grip": [
+          13,
+          -83
+        ],
+        "registration": 1.0
+      },
+      "24": {
+        "bodyFrame": "024",
+        "sha256": "e1756d60790b2d4bf296353752762816b258a7b13f1ee0e9c19ba94d097d415e",
+        "offset": [
+          -81,
+          -97
+        ],
+        "grip": [
+          13,
+          -83
+        ],
+        "registration": 1.0
+      },
+      "25": {
+        "bodyFrame": "025",
+        "sha256": "a99adccee590171a2f7444fc87e0d2a642f4b2e891abac21e3a7b82496afca27",
+        "offset": [
+          -81,
+          -96
+        ],
+        "grip": [
+          -2,
+          -84
+        ],
+        "registration": 1.0
+      },
+      "26": {
+        "bodyFrame": "026",
+        "sha256": "1afdd671e20317f68e71c4d92313b0c82dfb154aec12ffcc538c922f9cf5cbee",
+        "offset": [
+          -83,
+          -95
+        ],
+        "grip": [
+          13,
+          -84
+        ],
+        "registration": 1.0
+      },
+      "27": {
+        "bodyFrame": "027",
+        "sha256": "21c92c56056f50a5efd948737a1b698ca12178f72d676a3ac46381277503b4d9",
+        "offset": [
+          -83,
+          -94
+        ],
+        "grip": [
+          14,
+          -83
+        ],
+        "registration": 1.0
+      },
+      "50": {
+        "bodyFrame": "050",
+        "sha256": "589dc8ef15b9a2155b59ada14dfec20b4db027cd43258303c7dc3ed3868f0c67",
+        "offset": [
+          -44,
+          -108
+        ],
+        "grip": [
+          -14,
+          -79
+        ],
+        "registration": 1.0
+      },
+      "51": {
+        "bodyFrame": "051",
+        "sha256": "95d6227561dbfc25d79f96f7a972ae47e4b1b02ba24312e9732e04e4ec27de9d",
+        "offset": [
+          -45,
+          -107
+        ],
+        "grip": [
+          -14,
+          -79
+        ],
+        "registration": 1.0
+      },
+      "52": {
+        "bodyFrame": "052",
+        "sha256": "752b903a0c504bea8af7c1787aa1407fc281e34216b4ecba998527c107ca04c0",
+        "offset": [
+          -46,
+          -106
+        ],
+        "grip": [
+          -14,
+          -79
+        ],
+        "registration": 1.0
+      },
+      "53": {
+        "bodyFrame": "053",
+        "sha256": "15f00c328cbdfd47a04be8038fe020b441b3aebac75045d22be997b1a436f055",
+        "offset": [
+          -44,
+          -103
+        ],
+        "grip": [
+          -12,
+          -79
+        ],
+        "registration": 1.0
+      },
+      "54": {
+        "bodyFrame": "054",
+        "sha256": "b5aa00624c4200cd786219f4daf91cc633568e0304a7bbdf63e067cc38967b03",
+        "offset": [
+          -43,
+          -102
+        ],
+        "grip": [
+          -10,
+          -80
+        ],
+        "registration": 0.9978
+      },
+      "58": {
+        "bodyFrame": "058",
+        "sha256": "8fa9b8aa9d974ab5c8d939288ef51af33716635d1bf49f8b6e24a22441348fd6",
+        "offset": [
+          -45,
+          -101
+        ],
+        "grip": [
+          -40,
+          -91
+        ],
+        "registration": 1.0
+      },
+      "59": {
+        "bodyFrame": "059",
+        "sha256": "5af63b1774ee6dc700216f1d7dd86daf94ef643482e7eb097f97913b235690dd",
+        "offset": [
+          -53,
+          -124
+        ],
+        "grip": [
+          -35,
+          -97
+        ],
+        "registration": 0.9997
+      },
+      "60": {
+        "bodyFrame": "060",
+        "sha256": "eb8ed11dff31b383a17d289b4f34f57ce54a710f20fca688b4c3d37632c27e9b",
+        "offset": [
+          -44,
+          -119
+        ],
+        "grip": [
+          -29,
+          -96
+        ],
+        "registration": 0.9996
+      },
+      "61": {
+        "bodyFrame": "061",
+        "sha256": "181c5b06a6c991fb29f57562f4c1427b89cda98256e570b65a3e31faf6e8ef26",
+        "offset": [
+          -46,
+          -66
+        ],
+        "grip": [
+          -23,
+          -46
+        ],
+        "registration": 0.997
+      },
+      "62": {
+        "bodyFrame": "062",
+        "sha256": "f87667a351f3235389081780f9c4e190decb6da5f055027c4273326e02097cff",
+        "offset": [
+          -47,
+          -67
+        ],
+        "grip": [
+          -25,
+          -40
+        ],
+        "registration": 0.997
+      },
+      "63": {
+        "bodyFrame": "063",
+        "sha256": "09e6a4e22e78be823edab1131503b4860ebaf52a709e3975979289e9768815d1",
+        "offset": [
+          -47,
+          -68
+        ],
+        "grip": [
+          -21,
+          -36
+        ],
+        "registration": 0.9969
+      },
+      "121": {
+        "bodyFrame": "121",
+        "sha256": "6880737b90751948e517883e02c925a849daebbbe3d2a5812c71fcfbef9c1407",
+        "offset": [
+          -70,
+          -130
+        ],
+        "grip": [
+          -37,
+          -120
+        ],
+        "registration": 0.9677
+      },
+      "122": {
+        "bodyFrame": "122",
+        "sha256": "41c723b1d390fae5167adb38cff3548a50760621d644ce1ba6219f247b7d9937",
+        "offset": [
+          -66,
+          -120
+        ],
+        "grip": [
+          -37,
+          -116
+        ],
+        "registration": 1.0
+      },
+      "123": {
+        "bodyFrame": "123",
+        "sha256": "5934485486ed7b531ff622ce888198ad8075b3fd88819ac301429b1b3015524b",
+        "offset": [
+          -62,
+          -116
+        ],
+        "grip": [
+          -36,
+          -116
+        ],
+        "registration": 0.9977
+      },
+      "124": {
+        "bodyFrame": "124",
+        "sha256": "f5ce0aebfdf7764cf8c411c8dee23e38c6448f1999402c2cb15d298bf74c3a49",
+        "offset": [
+          -59,
+          -116
+        ],
+        "grip": [
+          -35,
+          -115
+        ],
+        "registration": 0.9966
+      },
+      "125": {
+        "bodyFrame": "125",
+        "sha256": "17ab64b780556b0a1e49604c4457b2662479db922c022845f689be80a4d8496e",
+        "offset": [
+          -62,
+          -114
+        ],
+        "grip": [
+          -37,
+          -114
+        ],
+        "registration": 1.0
+      },
+      "126": {
+        "bodyFrame": "126",
+        "sha256": "91d9b103d4a6af99b2bda95837f684b45a4f8f1561b52790dda8d092231d4b28",
+        "offset": [
+          -64,
+          -116
+        ],
+        "grip": [
+          -34,
+          -116
+        ],
+        "registration": 1.0
+      },
+      "136": {
+        "bodyFrame": "136",
+        "sha256": "dd9734a2758fb2a353fba51c71e6d077551fd4111886c889e61beee8e45787a5",
+        "offset": [
+          -63,
+          -118
+        ],
+        "grip": [
+          -27,
+          -68
+        ],
+        "registration": 1.0
+      },
+      "137": {
+        "bodyFrame": "137",
+        "sha256": "0600fbd941994f47ab6d8a229ac8759ec27e04292dfe183f84b69d135db9642d",
+        "offset": [
+          -62,
+          -118
+        ],
+        "grip": [
+          -27,
+          -67
+        ],
+        "registration": 1.0
+      },
+      "138": {
+        "bodyFrame": "138",
+        "sha256": "f252494154c76616a21a11ce9e04bb28adaef7236349740e298541e7293f7864",
+        "offset": [
+          -61,
+          -117
+        ],
+        "grip": [
+          -27,
+          -67
+        ],
+        "registration": 1.0
+      },
+      "139": {
+        "bodyFrame": "139",
+        "sha256": "241c60cb37cf0f82cf89c81a649ca0236138b7e5a1767f69269b75b94206a6cf",
+        "offset": [
+          -71,
+          -96
+        ],
+        "grip": [
+          -24,
+          -70
+        ],
+        "registration": 1.0
+      },
+      "140": {
+        "bodyFrame": "140",
+        "sha256": "f137071cfc9c00eade0154a5f31202595647d9e53f148b004f8d1a1f233713a9",
+        "offset": [
+          -66,
+          -104
+        ],
+        "grip": [
+          -19,
+          -22
+        ],
+        "registration": 1.0
+      },
+      "141": {
+        "bodyFrame": "141",
+        "sha256": "da2ebca8f3630c2998a360aa42cd801f45fd0503de3c86a2977f4198037b51a3",
+        "offset": [
+          -82,
+          -54
+        ],
+        "grip": [
+          -22,
+          -22
+        ],
+        "registration": 1.0
+      },
+      "142": {
+        "bodyFrame": "142",
+        "sha256": "c9dbf75b11d3884c06c36e00b1a996c825e7d1a5eaa576d5865aafe5cb33f597",
+        "offset": [
+          -92,
+          -53
+        ],
+        "grip": [
+          -20,
+          -23
+        ],
+        "registration": 1.0
+      },
+      "143": {
+        "bodyFrame": "143",
+        "sha256": "e7f4d229e01bb306c2a5391c1688e1c5bed79efbd6859c35eaccc17fa91318fc",
+        "offset": [
+          -91,
+          -41
+        ],
+        "grip": [
+          -20,
+          -26
+        ],
+        "registration": 1.0
+      }
+    }
+  },
+  {
+    "id": "dnf-elementalist",
+    "bodySource": "01_角色职业_一觉/Female Mage (Elementalist)__198254/A Type",
+    "combinedSource": "01_角色职业_一觉/Female Mage (Elementalist, Weapon)__198255/A Type",
+    "frames": {
+      "2": {
+        "bodyFrame": "002",
+        "sha256": "b4d546cab7fc778b847ec441bb0cfa18e93d9842b48ca35f6f82fc05bdfa43e8",
+        "offset": [
+          -20,
+          -92
+        ],
+        "grip": [
+          10,
+          -68
+        ],
+        "registration": 1.0
+      },
+      "3": {
+        "bodyFrame": "003",
+        "sha256": "c5c832a37a327364fca57396e42f63d38bbed4465ae1705e7fb7df5c2ed1a84a",
+        "offset": [
+          -22,
+          -92
+        ],
+        "grip": [
+          17,
+          -57
+        ],
+        "registration": 1.0
+      },
+      "4": {
+        "bodyFrame": "004",
+        "sha256": "f87708879736268252ad02f620d3c84d069cb0a5cbf01c5469ab837dbde8fafb",
+        "offset": [
+          -30,
+          -92
+        ],
+        "grip": [
+          25,
+          -62
+        ],
+        "registration": 1.0
+      },
+      "5": {
+        "bodyFrame": "005",
+        "sha256": "17248c69d5bc25802170d348ab79160a673d3433a6669115e6e306a51d7698f3",
+        "offset": [
+          -33,
+          -92
+        ],
+        "grip": [
+          29,
+          -67
+        ],
+        "registration": 1.0
+      },
+      "6": {
+        "bodyFrame": "006",
+        "sha256": "c250d96b896407e3f9302a909f644d0ef23d5303e2d0c7063bbe7cacad523fec",
+        "offset": [
+          -25,
+          -93
+        ],
+        "grip": [
+          21,
+          -53
+        ],
+        "registration": 1.0
+      },
+      "7": {
+        "bodyFrame": "007",
+        "sha256": "108b0cda97950a907edd6abe3653928ca7a69d86b0dfbba649aaad6a31cd7fd6",
+        "offset": [
+          -23,
+          -91
+        ],
+        "grip": [
+          10,
+          -68
+        ],
+        "registration": 1.0
+      },
+      "8": {
+        "bodyFrame": "008",
+        "sha256": "44b7320a67bde0b5e586a2fff723f571ed9a38d68303f6f15046997ff8c0dda8",
+        "offset": [
+          -27,
+          -91
+        ],
+        "grip": [
+          22,
+          -61
+        ],
+        "registration": 1.0
+      },
+      "9": {
+        "bodyFrame": "009",
+        "sha256": "cd282eb6bb8ff766c62ad95af93f8a697872c3cb27c5fa121ca78d6fe9c843b4",
+        "offset": [
+          -30,
+          -92
+        ],
+        "grip": [
+          27,
+          -65
+        ],
+        "registration": 1.0
+      },
+      "10": {
+        "bodyFrame": "010",
+        "sha256": "f44543ffcc027c773087dad8469f9110c9737492469154f5c3191c711974108f",
+        "offset": [
+          -26,
+          -93
+        ],
+        "grip": [
+          -18,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "11": {
+        "bodyFrame": "011",
+        "sha256": "70f03b1dfc11b307381e37b5236428ae184cc0fc5a4e43d1e68e34fc520eb6a0",
+        "offset": [
+          -24,
+          -92
+        ],
+        "grip": [
+          -18,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "12": {
+        "bodyFrame": "012",
+        "sha256": "66437805a57047b772845a7767290eb5435fa64ecc957eec36ad42b22f47410e",
+        "offset": [
+          -26,
+          -93
+        ],
+        "grip": [
+          -18,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "13": {
+        "bodyFrame": "013",
+        "sha256": "f1eaa9796e1f39b8411eb66a5104c35905d2bf6c5dde0af8fea8911e86b6b8a4",
+        "offset": [
+          -27,
+          -93
+        ],
+        "grip": [
+          -15,
+          -55
+        ],
+        "registration": 1.0
+      },
+      "14": {
+        "bodyFrame": "014",
+        "sha256": "e6890b1708900d05a189838e3cae457d1c4282cdc35fe7d063fa0d8e5baa5342",
+        "offset": [
+          -26,
+          -92
+        ],
+        "grip": [
+          -17,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "15": {
+        "bodyFrame": "015",
+        "sha256": "c76a5a2c5a0ffdd80daf54b89511f3f1ed4d6b51d52839c2044d5e2119e0765a",
+        "offset": [
+          -26,
+          -92
+        ],
+        "grip": [
+          -17,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "16": {
+        "bodyFrame": "016",
+        "sha256": "63671ac5025bc15d696e5ba400916204ec4457624ec06fd594543f9bfd31cec0",
+        "offset": [
+          -26,
+          -92
+        ],
+        "grip": [
+          -17,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "17": {
+        "bodyFrame": "017",
+        "sha256": "959e057686d50e2b3952acf81a1d58bec081b4c820f71fad530e64adbe06585a",
+        "offset": [
+          -26,
+          -92
+        ],
+        "grip": [
+          -17,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "29": {
+        "bodyFrame": "029",
+        "sha256": "0bcce3d6d9a575ac187d9f974521c2f26c5cf6ca1ceae6674f32e98ab689a08f",
+        "offset": [
+          -44,
+          -71
+        ],
+        "grip": [
+          15,
+          -31
+        ],
+        "registration": 0.9976
+      },
+      "30": {
+        "bodyFrame": "030",
+        "sha256": "69fcb77f69f3fea70714cc8fbc4a1e6be87f3e17e5145ec0efc5fbbe7a32e6de",
+        "offset": [
+          -46,
+          -51
+        ],
+        "grip": [
+          21,
+          -27
+        ],
+        "registration": 1.0
+      },
+      "31": {
+        "bodyFrame": "031",
+        "sha256": "52b698bba2b83646511a65ad270a759d3bfd729422f9bd96a1890264ab91b21e",
+        "offset": [
+          -30,
+          -58
+        ],
+        "grip": [
+          20,
+          -26
+        ],
+        "registration": 1.0
+      },
+      "32": {
+        "bodyFrame": "032",
+        "sha256": "63e967b7c90255baa408f728eb485054d3c3f94e21dd4bffdeeba4835ed5cb52",
+        "offset": [
+          -30,
+          -58
+        ],
+        "grip": [
+          19,
+          -29
+        ],
+        "registration": 1.0
+      },
+      "33": {
+        "bodyFrame": "033",
+        "sha256": "9198b495bb5fcea9c48d3096c2e837b9952c5d894d4e22c26c5866cdfdbd6c1d",
+        "offset": [
+          -44,
+          -51
+        ],
+        "grip": [
+          18,
+          -22
+        ],
+        "registration": 1.0
+      },
+      "48": {
+        "bodyFrame": "048",
+        "sha256": "249bee64441d12a835d057267d164d3ab0d403aa81e36fcf5f458c4147f6e0e9",
+        "offset": [
+          -35,
+          -106
+        ],
+        "grip": [
+          13,
+          -101
+        ],
+        "registration": 1.0
+      },
+      "49": {
+        "bodyFrame": "049",
+        "sha256": "505cdf115afba6584b84f45357013d14d21b685716628a239cbbe84ea1d67d8a",
+        "offset": [
+          -35,
+          -108
+        ],
+        "grip": [
+          12,
+          -100
+        ],
+        "registration": 1.0
+      },
+      "50": {
+        "bodyFrame": "050",
+        "sha256": "42a0c0fe955eeb6cee78367fb44d14790b778cde6662da7a6303efa717dd56cd",
+        "offset": [
+          -35,
+          -109
+        ],
+        "grip": [
+          13,
+          -101
+        ],
+        "registration": 1.0
+      },
+      "51": {
+        "bodyFrame": "051",
+        "sha256": "505cdf115afba6584b84f45357013d14d21b685716628a239cbbe84ea1d67d8a",
+        "offset": [
+          -35,
+          -109
+        ],
+        "grip": [
+          12,
+          -101
+        ],
+        "registration": 1.0
+      },
+      "52": {
+        "bodyFrame": "052",
+        "sha256": "42a0c0fe955eeb6cee78367fb44d14790b778cde6662da7a6303efa717dd56cd",
+        "offset": [
+          -35,
+          -109
+        ],
+        "grip": [
+          13,
+          -101
+        ],
+        "registration": 1.0
+      },
+      "62": {
+        "bodyFrame": "061",
+        "sha256": "59f0a9098db968bc3df364c95d1c58b06e5a274b659fdca627b15359aef17e87",
+        "offset": [
+          -24,
+          -92
+        ],
+        "grip": [
+          -1,
+          -52
+        ],
+        "registration": 1.0
+      },
+      "63": {
+        "bodyFrame": "062",
+        "sha256": "d80230d4316472a3c70e02de9ce7e434c15ff377e6b2a652fc022f85a7b4c662",
+        "offset": [
+          -27,
+          -92
+        ],
+        "grip": [
+          -1,
+          -52
+        ],
+        "registration": 1.0
+      },
+      "64": {
+        "bodyFrame": "063",
+        "sha256": "2a9affb5842beea6143efdb47a7fdbf678a88fc42fce851389ee5567b9e2f001",
+        "offset": [
+          -30,
+          -92
+        ],
+        "grip": [
+          -1,
+          -52
+        ],
+        "registration": 1.0
+      },
+      "70": {
+        "bodyFrame": "069",
+        "sha256": "c486eea6e962ea506cbf025d10d9b58a08bee9ec40155a625062b6263f7c5b29",
+        "offset": [
+          -21,
+          -93
+        ],
+        "grip": [
+          -4,
+          -53
+        ],
+        "registration": 1.0
+      },
+      "71": {
+        "bodyFrame": "070",
+        "sha256": "45a67e4f9bc3245fc0679938fc0dcb417f3ea8279cbf1ed7454b80e085b04280",
+        "offset": [
+          -38,
+          -84
+        ],
+        "grip": [
+          -4,
+          -53
+        ],
+        "registration": 1.0
+      },
+      "72": {
+        "bodyFrame": "071",
+        "sha256": "baa4435a5a99a11020cafaa196baa6e366a4b41d5aae62b08475802c5a0bc215",
+        "offset": [
+          -27,
+          -83
+        ],
+        "grip": [
+          -4,
+          -58
+        ],
+        "registration": 1.0
+      },
+      "73": {
+        "bodyFrame": "072",
+        "sha256": "3910b5bca9286caabbf34f91189e7ddce621e7beb6afebdc94ec43c58d087e77",
+        "offset": [
+          -26,
+          -85
+        ],
+        "grip": [
+          -5,
+          -54
+        ],
+        "registration": 1.0
+      },
+      "74": {
+        "bodyFrame": "074",
+        "sha256": "4811b44ab25da09383533c7ec3ff299c3748d30e8baa71573208e69015d4dffe",
+        "offset": [
+          -11,
+          -85
+        ],
+        "grip": [
+          -4,
+          -53
+        ],
+        "registration": 0.7794
+      }
+    }
+  },
+  {
+    "id": "dnf-elemental-bomber",
+    "bodySource": "01_角色职业_一觉/Male Mage (Elemental Bomber)__198232/A Type",
+    "combinedSource": "01_角色职业_一觉/Male Mage (Elemental Bomber, Weapon)__198233/A Type",
+    "frames": {
+      "0": {
+        "bodyFrame": "000",
+        "sha256": "188fbd61eaae6cebf63716413a91a5f376e06d533eda63438a653689f632c10a",
+        "offset": [
+          -18,
+          -116
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "1": {
+        "bodyFrame": "001",
+        "sha256": "9479cbe428fdb4675bd07754acd8fce445520a87e20e2049ea2a965660348f3c",
+        "offset": [
+          -18,
+          -116
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "2": {
+        "bodyFrame": "002",
+        "sha256": "411ca8fa7fa598265bdb46abfd9d655e8f3199f9a2e338412adc6b82333a699e",
+        "offset": [
+          -18,
+          -116
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "3": {
+        "bodyFrame": "003",
+        "sha256": "027dbb1f7e335bfcf1460bd4d0bcc5943e32aceff63820e1d80096bb52195e22",
+        "offset": [
+          -18,
+          -119
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "4": {
+        "bodyFrame": "004",
+        "sha256": "e669c517cca296bbb4df3121836ec4b6d3564e297ad60639067789eb93820f78",
+        "offset": [
+          -16,
+          -117
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "5": {
+        "bodyFrame": "005",
+        "sha256": "319922ebd3e29e45f0b830328e71f78441386ee1043e26173292e1bf91cbf641",
+        "offset": [
+          -13,
+          -119
+        ],
+        "grip": [
+          6,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "6": {
+        "bodyFrame": "006",
+        "sha256": "1ea68bce8ba063b9708ceb3d0e2cc502b502b23e009928a1775a91016c6f780c",
+        "offset": [
+          -13,
+          -123
+        ],
+        "grip": [
+          6,
+          -67
+        ],
+        "registration": 1.0
+      },
+      "7": {
+        "bodyFrame": "007",
+        "sha256": "f63c18763a094ea041ef02cf1d2d8432fd50cc78a7a9898a1e1a92b30406728b",
+        "offset": [
+          -13,
+          -125
+        ],
+        "grip": [
+          5,
+          -68
+        ],
+        "registration": 1.0
+      },
+      "8": {
+        "bodyFrame": "008",
+        "sha256": "8bd6b01720904c41c2fd95847c9fb5dfc3186f576229ca02f21df072ddf070d6",
+        "offset": [
+          -18,
+          -117
+        ],
+        "grip": [
+          3,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "18": {
+        "bodyFrame": "018",
+        "sha256": "a55a274ff1b96e47ee0f304ead325ff52e96e94ad582cba69e971b07b94fb94b",
+        "offset": [
+          -17,
+          -117
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "19": {
+        "bodyFrame": "019",
+        "sha256": "971fd65972bd52b05fe7632f144ad59861f956afc6ea12abf194fb9382b793e8",
+        "offset": [
+          -21,
+          -118
+        ],
+        "grip": [
+          10,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "20": {
+        "bodyFrame": "020",
+        "sha256": "b976fd1d2fa9456917eebf0fe4c0f5574f5895b9890a94c6cee3147da2236338",
+        "offset": [
+          -24,
+          -118
+        ],
+        "grip": [
+          10,
+          -63
+        ],
+        "registration": 1.0
+      },
+      "21": {
+        "bodyFrame": "021",
+        "sha256": "a7e0ed12f008da505d1e718858368396589ded372463d90fe57e6ea750232b1c",
+        "offset": [
+          -29,
+          -120
+        ],
+        "grip": [
+          8,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "22": {
+        "bodyFrame": "022",
+        "sha256": "e71d7b9c8df7997b91e101e9d3fa0d923a585f793c5a6f35dc9f8a0a52420ef2",
+        "offset": [
+          -27,
+          -116
+        ],
+        "grip": [
+          6,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "23": {
+        "bodyFrame": "023",
+        "sha256": "d6b2add7b4e74dc6c0f2bbcabdb1c2c8283ff0ab44ee554424ea37af93ed823a",
+        "offset": [
+          -25,
+          -117
+        ],
+        "grip": [
+          6,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "24": {
+        "bodyFrame": "024",
+        "sha256": "41979c7b7fbd5941edd8d26f61cb6773035d2a16d31e9bb74668d3c5811ba191",
+        "offset": [
+          -26,
+          -118
+        ],
+        "grip": [
+          8,
+          -65
+        ],
+        "registration": 1.0
+      },
+      "25": {
+        "bodyFrame": "025",
+        "sha256": "f984cc27ecbdaf10af22d287db1a02af4cdc2a7bbfc2f45c2ea55810b66cb38f",
+        "offset": [
+          -27,
+          -118
+        ],
+        "grip": [
+          9,
+          -65
+        ],
+        "registration": 1.0
+      },
+      "26": {
+        "bodyFrame": "026",
+        "sha256": "d6f4551c6faa89146ab5c699a0721a152381b9b23975f545c6b440f3126caa14",
+        "offset": [
+          -28,
+          -120
+        ],
+        "grip": [
+          8,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "27": {
+        "bodyFrame": "027",
+        "sha256": "7d475f384236d08081096ca6b06d25052de6410918dbe8170cc1483f9df4e86d",
+        "offset": [
+          -27,
+          -116
+        ],
+        "grip": [
+          5,
+          -69
+        ],
+        "registration": 1.0
+      },
+      "90": {
+        "bodyFrame": "090",
+        "sha256": "e3114a796019722c4950b5eee0666566a883d64dec85686d95dd553dd44cc295",
+        "offset": [
+          -32,
+          -104
+        ],
+        "grip": [
+          46,
+          -77
+        ],
+        "registration": 1.0
+      },
+      "91": {
+        "bodyFrame": "091",
+        "sha256": "f4a47b44feb3c9b16cdd21f090bb407f26fbf5ab4ad3ce099f85753857b58c6d",
+        "offset": [
+          -72,
+          -101
+        ],
+        "grip": [
+          45,
+          -77
+        ],
+        "registration": 1.0
+      },
+      "92": {
+        "bodyFrame": "092",
+        "sha256": "2a45bec073f1044b3a2eaa7ebf8921710672f9b1a3acbf1b509508e80780a36c",
+        "offset": [
+          -67,
+          -97
+        ],
+        "grip": [
+          45,
+          -77
+        ],
+        "registration": 1.0
+      },
+      "93": {
+        "bodyFrame": "093",
+        "sha256": "9d148e60bf3328b58754d8f16575f394c195ed3f696f7d158ec58ddca8bc64e5",
+        "offset": [
+          -55,
+          -99
+        ],
+        "grip": [
+          46,
+          -77
+        ],
+        "registration": 1.0
+      },
+      "94": {
+        "bodyFrame": "094",
+        "sha256": "5d9226f7204d3bdc620e7c66235f43c7e4468b41ac1d86d3551a7191774a2355",
+        "offset": [
+          -73,
+          -94
+        ],
+        "grip": [
+          46,
+          -77
+        ],
+        "registration": 1.0
+      },
+      "150": {
+        "bodyFrame": "150",
+        "sha256": "079e5dc44f523bea2ef838c6480b686dce7526821b79514b5d5f06d68c5f0df6",
+        "offset": [
+          -21,
+          -105
+        ],
+        "grip": [
+          8,
+          -84
+        ],
+        "registration": 1.0
+      },
+      "151": {
+        "bodyFrame": "151",
+        "sha256": "f2e684ad050127b79a073615726e7d8512012708a72b9a437ab1dd4298d67b60",
+        "offset": [
+          -36,
+          -116
+        ],
+        "grip": [
+          7,
+          -86
+        ],
+        "registration": 1.0
+      },
+      "152": {
+        "bodyFrame": "152",
+        "sha256": "54d8b0a6bb48e5038727baeb5b4003f43d45060b6d493da7c3343984d31f70ad",
+        "offset": [
+          -30,
+          -114
+        ],
+        "grip": [
+          7,
+          -85
+        ],
+        "registration": 1.0
+      },
+      "153": {
+        "bodyFrame": "153",
+        "sha256": "cc247c1e2654c5bbbdf8e61bbaace76cf46e4df465c8a80173f182ea43e123fd",
+        "offset": [
+          -29,
+          -118
+        ],
+        "grip": [
+          7,
+          -85
+        ],
+        "registration": 1.0
+      },
+      "154": {
+        "bodyFrame": "154",
+        "sha256": "6d5d5819ae22da84efef1df700bbb275029ff8ed28fee0291e6225c438cc9192",
+        "offset": [
+          -16,
+          -106
+        ],
+        "grip": [
+          7,
+          -84
+        ],
+        "registration": 1.0
+      },
+      "172": {
+        "bodyFrame": "172",
+        "sha256": "c18303c0f6bd837ee2c865524340e29687e17bbf5453696ec5ef2c237bf0d49c",
+        "offset": [
+          4,
+          -121
+        ],
+        "grip": [
+          14,
+          -74
+        ],
+        "registration": 1.0
+      },
+      "173": {
+        "bodyFrame": "173",
+        "sha256": "3aff7a2d2dbf4f8a3b8a979a3c29af65748adb0ebac73fc84bcd2ec6f242f2d4",
+        "offset": [
+          -2,
+          -121
+        ],
+        "grip": [
+          13,
+          -75
+        ],
+        "registration": 1.0
+      },
+      "174": {
+        "bodyFrame": "174",
+        "sha256": "34b756b9b6d1d665eb925bc9f74131e6be96982e33d707277c2223ae6f4db6d7",
+        "offset": [
+          -10,
+          -121
+        ],
+        "grip": [
+          13,
+          -75
+        ],
+        "registration": 1.0
+      },
+      "176": {
+        "bodyFrame": "176",
+        "sha256": "a0a3047dbb24343155d905a650023705a93a0b17f275d3991e3ade6e688c415f",
+        "offset": [
+          -27,
+          -109
+        ],
+        "grip": [
+          26,
+          -19
+        ],
+        "registration": 1.0
+      },
+      "177": {
+        "bodyFrame": "177",
+        "sha256": "de40864e1184453688e7660fbdde4faa7da4faa1d70c0da609b8dd729bcbfc15",
+        "offset": [
+          -49,
+          -66
+        ],
+        "grip": [
+          19,
+          -19
+        ],
+        "registration": 1.0
+      },
+      "178": {
+        "bodyFrame": "178",
+        "sha256": "43763f8e7ca6d98f131ce42e4eaa29ec93555ee4d9f53bc834c1a712a57a3a64",
+        "offset": [
+          -63,
+          -60
+        ],
+        "grip": [
+          19,
+          -21
+        ],
+        "registration": 1.0
+      },
+      "179": {
+        "bodyFrame": "179",
+        "sha256": "ed5d9963526a6096e037ba1dcd8d9db82ab8b9ea5ebe8cbc7ff9eef6dfbcfbd4",
+        "offset": [
+          -64,
+          -37
+        ],
+        "grip": [
+          19,
+          -21
+        ],
+        "registration": 1.0
+      }
+    }
+  }
+]

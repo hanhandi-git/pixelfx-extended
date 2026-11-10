@@ -1,3 +1,4 @@
+import { DNF_CHARACTER_LOOKS } from "./dnf-characters.js";
 // Original character designs. Four-step material ramps run from light to shadow.
 // Costumes use the existing skeleton; weapon choice and hit timing still belong to each act.
 // Every look is drawn from procedural geometry here; named characters get likeness cues
@@ -9,8 +10,16 @@ const gold = ["#fff1b0", "#e9b957", "#aa6336", "#57302d"];
 const leather = ["#a48276", "#695367", "#3e354b", "#211f33"];
 const bone = ["#fff1d5", "#d9c8b7", "#9f8091", "#51465f"];
 
-export const CHARACTERS = Object.freeze([
-  { id: "dummy", name: "Armored stand-in", label: "盔甲人", role: "训练人偶", accent: "#b6b9c3", desc: "Neutral armor for comparing effect colors." },
+const PROCEDURAL_CHARACTERS = [
+  { id: "dummy", name: "Armored stand-in", label: "盔甲人", role: "训练人偶 · 中性装甲", accent: "#b6b9c3", style: "dnf-dummy", desc: "Neutral DNF-inspired armor for comparing effect colors.",
+    skin: ["#e4e6ec", "#b6b9c3", "#868995", "#5c5e6a"],
+    cloth: ["#b6b9c3", "#868995", "#5c5e6a", "#34353f"],
+    hair: ["#e4e6ec", "#b6b9c3", "#5c5e6a", "#2a2b33"],
+    gold: ["#ffffff", "#d0d4dc", "#858b98", "#3f4350"],
+    leather: ["#9da4b2", "#697180", "#424956", "#242933"],
+    bone: ["#ffffff", "#d9dde4", "#979eaa", "#555d6b"],
+    lining: ["#dce8f2", "#a6b9cb", "#66788b", "#374554"],
+    glow: ["#ffffff", "#d8f2ff", "#91bdd8", "#496d86"] },
   { id: "ember-duelist", name: "Ember duelist", label: "余烬剑士", role: "短披风 · 赤金", accent: "#ef7259", style: "duelist",
     desc: "Swept dark hair, a crimson half cape, bare arms, bronze bracers and a split battle skirt.",
     skin: ["#ffd8a5", "#dba077", "#a25f56", "#603b4e"],
@@ -201,5 +210,6 @@ export const CHARACTERS = Object.freeze([
     bone: ["#fff3da", "#d9ccc4", "#a694a5", "#685b76"],
     lining: ["#b8d080", "#7a9d59", "#4b6c48", "#2a4238"],
     glow: ["#fff8d4", "#ffc479", "#e17c4d", "#8a3d42"] },
-]);
+];
+export const CHARACTERS = Object.freeze([...PROCEDURAL_CHARACTERS, ...DNF_CHARACTER_LOOKS]);
 export const characterOf = (id) => CHARACTERS.find((c) => c.id === id) ?? CHARACTERS[0];
