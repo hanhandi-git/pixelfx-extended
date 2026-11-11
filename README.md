@@ -6,15 +6,15 @@
 
 # pixelfx-extended.
 
-An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->177<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
+An extended [**pixelfx**](https://github.com/patch-gg/pixelfx) fork with **<!-- new-count -->199<!-- /new-count -->** additional maps, minions and effects beyond the original 244-effect baseline.
 
-**<!-- count -->421<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
+**<!-- count -->443<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
 explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
 a browser game, or export sprite sheets for any engine. Plus a **fantasy game kit** — battle maps, minion and boss
 units, telegraphed attacks, and encounter timelines you author under `src/encounters/` — and a Claude Code skill that
 makes new ones the way a picky pixel artist would: draft, render, look, refine.
 
-The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->177<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
+The library is **<!-- original-count -->244<!-- /original-count --> original effects and **<!-- new-count -->199<!-- /new-count --> new ones**. The [gallery](gallery/index.html) marks every item `original` or `new` and filters by it.
 
 **<!-- act-count -->121<!-- /act-count -->** effects export an **`act`** timeline: wind-up, release, freeze on contact, target reaction, recovery. **<!-- moves-count -->12<!-- /moves-count -->**
 **moves** in `src/fx/moves/` chain those beats into full attacks from wind-up to recovery.
@@ -33,7 +33,7 @@ the idea at library scale, with a skill to keep going.
 
 ## new additions.
 
-These **<!-- new-count -->177<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
+These **<!-- new-count -->199<!-- /new-count -->** pieces are not in the original 244-effect baseline: fantasy maps, minions, bosses and more. Browse them in the [gallery (`?source=new`)](gallery/index.html?source=new) or the deployed [live gallery](http://42.192.38.33/pixelfx_extend/index.html?source=new&character=moon-oracle#thrown) (new effects, Moon Oracle, thrown category).
 
 <p align="center">
   <img src="docs/readme/montage-new.gif" width="800" alt="Six looping fantasy battle maps at full 320×180 resolution: aurora pass, crystal hollow, ember depths, mossy ruins, sunscar temple and wisp marsh.">
@@ -44,7 +44,9 @@ These **<!-- new-count -->177<!-- /new-count -->** pieces are not in the origina
 |---|---|---|
 | **world** | Aurora Pass | `world/aurora-pass` |
 | **world** | Crystal Hollow | `world/crystal-hollow` |
+| **world** | Ember Camp | `world/ember-camp` |
 | **world** | Ember Depths | `world/ember-depths` |
+| **world** | Ember Town | `world/ember-town` |
 | **world** | Hearth Town | `world/hearth-town` |
 | **world** | Inkbound Shrine | `world/inkbound-shrine` |
 | **world** | Mosswood Ruins | `world/mosswood-ruins` |
@@ -52,6 +54,12 @@ These **<!-- new-count -->177<!-- /new-count -->** pieces are not in the origina
 | **world** | Starter Camp | `world/starter-camp` |
 | **world** | Sunscar Temple | `world/sunscar-temple` |
 | **world** | Wisp Marsh | `world/wisp-marsh` |
+| **mobs** | Cinder Brute | `mobs/cinder-brute` |
+| **mobs** | Anvil Slam | `mobs/cinder-brute-slam` |
+| **mobs** | Cinder Spitter | `mobs/cinder-spitter` |
+| **mobs** | Cinder Spit | `mobs/cinder-spitter-spit` |
+| **mobs** | Ember Imp | `mobs/ember-imp` |
+| **mobs** | Ember Imp Rake | `mobs/ember-imp-rake` |
 | **mobs** | Goblin Agile | `mobs/goblin-agile` |
 | **mobs** | Goblin Agile Flurry | `mobs/goblin-agile-flurry` |
 | **mobs** | Goblin Archer | `mobs/goblin-archer` |
@@ -74,6 +82,20 @@ These **<!-- new-count -->177<!-- /new-count -->** pieces are not in the origina
 | **lightning** | Thunder rain | `lightning/thunder-rain` |
 | **lightning** | Thunder spear | `lightning/thunder-spear` |
 | **arcane** | Flow seal | `arcane/flow-seal` |
+| **critters** | Acorn sprite | `critters/acorn-sprite` |
+| **critters** | Bone viper | `critters/bone-viper` |
+| **critters** | Fireflies | `critters/fireflies` |
+| **critters** | Frost moth | `critters/frost-moth` |
+| **critters** | Hyena pup | `critters/hyena-pup` |
+| **critters** | Penguin chick | `critters/penguin-chick` |
+| **critters** | Sand fox | `critters/sand-fox` |
+| **critters** | Scarab | `critters/scarab` |
+| **critters** | Scorpion | `critters/scorpion` |
+| **critters** | Shroomling | `critters/shroomling` |
+| **critters** | Snapjaw | `critters/snapjaw` |
+| **critters** | Snowmite | `critters/snowmite` |
+| **critters** | Tarantula | `critters/tarantula` |
+| **critters** | Tumble-imp | `critters/tumble-imp` |
 | **dnf** | Awakening burst | `dnf/awakening-burst` |
 | **dnf** | Bloodsteel cleaver, placed | `dnf/blood-cleaver` |
 | **dnf** | Chainshade blade, placed | `dnf/chain-blade` |
@@ -230,12 +252,13 @@ Categories with new content appear first; samples list **new** effects before or
 |---|---|---|
 | **weapons** | 38 | aurora lightblade, placed, binding silk, placed, blood butterfly, placed, boomerang, placed, bow, placed, claw, placed… |
 | **ui** | 29 | hud banner, hud dialog, dungeon boss bar, dungeon hud console, dungeon minimap, dungeon skill slot… |
+| **mobs** | 16 | cinder brute, anvil slam, cinder spitter, cinder spit, ember imp, ember imp rake… |
+| **critters** | 26 | acorn sprite, bone viper, fireflies, frost moth, hyena pup, penguin chick… |
 | **pickups** | 24 | cash coin, dragon pearl, elixir gourd, flying sword, gold ingot, immortal fan… |
 | **melee** | 24 | aurora lightblade combo, blood butterfly dance, demon-eye cleave, dragon-scale sweep, ghostlight draw cut, holy sword cleave… |
 | **ninjutsu** | 12 | amaterasu, chidori rush, earth wall, great breakthrough, great fireball, kirin… |
+| **world** | 12 | aurora pass, crystal hollow, ember camp, ember depths, ember town, hearth town… |
 | **dnf** | 11 | awakening burst, bloodsteel cleaver, placed, chainshade blade, placed, chainshade crossing cut, chain pull, dustland gunner… |
-| **world** | 10 | aurora pass, crystal hollow, ember depths, hearth town, inkbound shrine, mosswood ruins… |
-| **mobs** | 10 | goblin agile, goblin agile flurry, goblin archer, goblin archer shot, goblin giant, goblin giant quake… |
 | **thrown** | 8 | binding silk, boomerang throw, flying sword, kunai throw, pear-blossom needles, powder bomb throw… |
 | **dragonball** | 8 | destructo disc, drill beam, golden aura, ki charge, ki volley, ki wave… |
 | **lightning** | 18 | forked burst, ground surge, static cage, storm sigil, storm vortex, thunder rain… |
@@ -260,7 +283,6 @@ Categories with new content appear first; samples list **new** effects before or
 | **nature** | 13 | acid splash, boulder, earth spike, healing bloom, leaf storm, poison cloud… |
 | **weather** | 12 | aurora, blizzard, cherry blossoms, clouds, falling leaves, fireflies… |
 | **transitions** | 10 | blinds, burn away, crt off, diamond wipe, glitch wipe, iris… |
-| **critters** | 12 | bat, bird, butterfly, eyeball, fish school, flying skull… |
 <!-- /catalog -->
 
 Every effect is a file in `src/fx/<category>/<name>.js`. The [catalog](docs/CATALOG.md) lists them all.

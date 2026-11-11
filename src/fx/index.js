@@ -389,21 +389,37 @@ import * as transitions_pixel_dissolve from "./transitions/pixel-dissolve.js";
 import * as transitions_shatter_wipe from "./transitions/shatter-wipe.js";
 import * as transitions_slash_wipe from "./transitions/slash-wipe.js";
 import * as transitions_star_iris from "./transitions/star-iris.js";
+import * as critters_acorn_sprite from "./critters/acorn-sprite.js";
 import * as critters_bat from "./critters/bat.js";
 import * as critters_bird from "./critters/bird.js";
+import * as critters_bone_viper from "./critters/bone-viper.js";
 import * as critters_butterfly from "./critters/butterfly.js";
 import * as critters_eyeball from "./critters/eyeball.js";
+import * as critters_fireflies from "./critters/fireflies.js";
 import * as critters_fish_school from "./critters/fish-school.js";
 import * as critters_flying_skull from "./critters/flying-skull.js";
 import * as critters_frog from "./critters/frog.js";
+import * as critters_frost_moth from "./critters/frost-moth.js";
 import * as critters_ghost from "./critters/ghost.js";
+import * as critters_hyena_pup from "./critters/hyena-pup.js";
 import * as critters_jellyfish from "./critters/jellyfish.js";
+import * as critters_penguin_chick from "./critters/penguin-chick.js";
+import * as critters_sand_fox from "./critters/sand-fox.js";
+import * as critters_scarab from "./critters/scarab.js";
+import * as critters_scorpion from "./critters/scorpion.js";
+import * as critters_shroomling from "./critters/shroomling.js";
 import * as critters_slime from "./critters/slime.js";
 import * as critters_snake from "./critters/snake.js";
+import * as critters_snapjaw from "./critters/snapjaw.js";
+import * as critters_snowmite from "./critters/snowmite.js";
+import * as critters_tarantula from "./critters/tarantula.js";
+import * as critters_tumble_imp from "./critters/tumble-imp.js";
 import * as critters_wisp from "./critters/wisp.js";
 import * as world_aurora_pass from "./world/aurora-pass.js";
 import * as world_crystal_hollow from "./world/crystal-hollow.js";
+import * as world_ember_camp from "./world/ember-camp.js";
 import * as world_ember_depths from "./world/ember-depths.js";
+import * as world_ember_town from "./world/ember-town.js";
 import * as world_hearth_town from "./world/hearth-town.js";
 import * as world_inkbound_shrine from "./world/inkbound-shrine.js";
 import * as world_mosswood_ruins from "./world/mosswood-ruins.js";
@@ -411,6 +427,12 @@ import * as world_mossy_ruins from "./world/mossy-ruins.js";
 import * as world_starter_camp from "./world/starter-camp.js";
 import * as world_sunscar_temple from "./world/sunscar-temple.js";
 import * as world_wisp_marsh from "./world/wisp-marsh.js";
+import * as mobs_cinder_brute from "./mobs/cinder-brute.js";
+import * as mobs_cinder_brute_slam from "./mobs/cinder-brute-slam.js";
+import * as mobs_cinder_spitter from "./mobs/cinder-spitter.js";
+import * as mobs_cinder_spitter_spit from "./mobs/cinder-spitter-spit.js";
+import * as mobs_ember_imp from "./mobs/ember-imp.js";
+import * as mobs_ember_imp_rake from "./mobs/ember-imp-rake.js";
 import * as mobs_goblin_agile from "./mobs/goblin-agile.js";
 import * as mobs_goblin_agile_flurry from "./mobs/goblin-agile-flurry.js";
 import * as mobs_goblin_archer from "./mobs/goblin-archer.js";
@@ -815,21 +837,37 @@ export const effects = {
   "transitions/shatter-wipe": transitions_shatter_wipe,
   "transitions/slash-wipe": transitions_slash_wipe,
   "transitions/star-iris": transitions_star_iris,
+  "critters/acorn-sprite": critters_acorn_sprite,
   "critters/bat": critters_bat,
   "critters/bird": critters_bird,
+  "critters/bone-viper": critters_bone_viper,
   "critters/butterfly": critters_butterfly,
   "critters/eyeball": critters_eyeball,
+  "critters/fireflies": critters_fireflies,
   "critters/fish-school": critters_fish_school,
   "critters/flying-skull": critters_flying_skull,
   "critters/frog": critters_frog,
+  "critters/frost-moth": critters_frost_moth,
   "critters/ghost": critters_ghost,
+  "critters/hyena-pup": critters_hyena_pup,
   "critters/jellyfish": critters_jellyfish,
+  "critters/penguin-chick": critters_penguin_chick,
+  "critters/sand-fox": critters_sand_fox,
+  "critters/scarab": critters_scarab,
+  "critters/scorpion": critters_scorpion,
+  "critters/shroomling": critters_shroomling,
   "critters/slime": critters_slime,
   "critters/snake": critters_snake,
+  "critters/snapjaw": critters_snapjaw,
+  "critters/snowmite": critters_snowmite,
+  "critters/tarantula": critters_tarantula,
+  "critters/tumble-imp": critters_tumble_imp,
   "critters/wisp": critters_wisp,
   "world/aurora-pass": world_aurora_pass,
   "world/crystal-hollow": world_crystal_hollow,
+  "world/ember-camp": world_ember_camp,
   "world/ember-depths": world_ember_depths,
+  "world/ember-town": world_ember_town,
   "world/hearth-town": world_hearth_town,
   "world/inkbound-shrine": world_inkbound_shrine,
   "world/mosswood-ruins": world_mosswood_ruins,
@@ -837,6 +875,12 @@ export const effects = {
   "world/starter-camp": world_starter_camp,
   "world/sunscar-temple": world_sunscar_temple,
   "world/wisp-marsh": world_wisp_marsh,
+  "mobs/cinder-brute": mobs_cinder_brute,
+  "mobs/cinder-brute-slam": mobs_cinder_brute_slam,
+  "mobs/cinder-spitter": mobs_cinder_spitter,
+  "mobs/cinder-spitter-spit": mobs_cinder_spitter_spit,
+  "mobs/ember-imp": mobs_ember_imp,
+  "mobs/ember-imp-rake": mobs_ember_imp_rake,
   "mobs/goblin-agile": mobs_goblin_agile,
   "mobs/goblin-agile-flurry": mobs_goblin_agile_flurry,
   "mobs/goblin-archer": mobs_goblin_archer,
@@ -1239,21 +1283,37 @@ export const provenance = {
   "transitions/shatter-wipe": "original",
   "transitions/slash-wipe": "original",
   "transitions/star-iris": "original",
+  "critters/acorn-sprite": "new",
   "critters/bat": "original",
   "critters/bird": "original",
+  "critters/bone-viper": "new",
   "critters/butterfly": "original",
   "critters/eyeball": "original",
+  "critters/fireflies": "new",
   "critters/fish-school": "original",
   "critters/flying-skull": "original",
   "critters/frog": "original",
+  "critters/frost-moth": "new",
   "critters/ghost": "original",
+  "critters/hyena-pup": "new",
   "critters/jellyfish": "original",
+  "critters/penguin-chick": "new",
+  "critters/sand-fox": "new",
+  "critters/scarab": "new",
+  "critters/scorpion": "new",
+  "critters/shroomling": "new",
   "critters/slime": "original",
   "critters/snake": "original",
+  "critters/snapjaw": "new",
+  "critters/snowmite": "new",
+  "critters/tarantula": "new",
+  "critters/tumble-imp": "new",
   "critters/wisp": "original",
   "world/aurora-pass": "new",
   "world/crystal-hollow": "new",
+  "world/ember-camp": "new",
   "world/ember-depths": "new",
+  "world/ember-town": "new",
   "world/hearth-town": "new",
   "world/inkbound-shrine": "new",
   "world/mosswood-ruins": "new",
@@ -1261,6 +1321,12 @@ export const provenance = {
   "world/starter-camp": "new",
   "world/sunscar-temple": "new",
   "world/wisp-marsh": "new",
+  "mobs/cinder-brute": "new",
+  "mobs/cinder-brute-slam": "new",
+  "mobs/cinder-spitter": "new",
+  "mobs/cinder-spitter-spit": "new",
+  "mobs/ember-imp": "new",
+  "mobs/ember-imp-rake": "new",
   "mobs/goblin-agile": "new",
   "mobs/goblin-agile-flurry": "new",
   "mobs/goblin-archer": "new",

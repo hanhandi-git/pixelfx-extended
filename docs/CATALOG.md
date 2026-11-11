@@ -1,6 +1,6 @@
 # Catalog
 
-421 effects in 33 categories: 244 original and 177 new. Every one is a file in
+443 effects in 33 categories: 244 original and 199 new. Every one is a file in
 `src/fx/<category>/<name>.js`; render any of them with `node tools/render.mjs <id> --gif`.
 
 ## moves
@@ -608,17 +608,31 @@ slimes, bats, ghosts, frogs.
 
 | effect | id | source | kind | play | size | what it does |
 |---|---|---|---|---|---|---|
+| Acorn sprite | `critters/acorn-sprite` | new | effect | loop 3s | 104×80 | A seed critter in an acorn-cap hat rocks, then rolls away in a full tumble and pops back upright; it shakes a little leaf loose that twirls down past it. |
 | Bat | `critters/bat` | original | effect | loop 2.4s | 112×80 | A bat flaps in four snappy wing frames along a figure-eight, its body lifting on each downbeat, moonlight on its wing bones, red eyes glowing and glinting. |
 | Bird | `critters/bird` | original | effect | loop 2.4s | 112×80 | A songbird flies in place: bursts of wingbeats that lift its body on each downstroke, a glide on spread wings, its tail fanning, a loose feather drifting away. |
+| Bone viper | `critters/bone-viper` | new | effect | loop 3.6s | 128×88 | A skeletal viper sways on a coil of vertebrae and ribs, skull raised on an S-neck with a forked shadow tongue; it draws back and strikes, jaws clamping, then settles. |
 | Butterfly | `critters/butterfly` | original | effect | loop 3.2s | 128×88 | An iridescent butterfly wanders a loop in bursts of quick wingbeats and open-winged glides, its veined, spotted wings shedding a twinkling trail of glowing dust. |
 | Eyeball | `critters/eyeball` | original | effect | loop 3.2s | 96×108 | A bloodshot eyeball floats in its fleshy lids: its glowing iris snaps from one look to the next, it blinks, and its nerve sways behind it as it bobs. |
+| Fireflies | `critters/fireflies` | new | effect | loop 4s | 128×96 | A knot of fireflies wanders the air over the floor: each drifts its own lazy path with a pulsing abdomen and a fading mote trail, then they chorus in one bright pulse. |
 | Fish school | `critters/fish-school` | original | effect | loop 4.8s | 136×80 | A school of fish holds station in two depth rows: bodies wag into swinging tails, one darts ahead now and then, bubbles rise and caustic light ripples over them. |
 | Flying skull | `critters/flying-skull` | original | effect | loop 2.4s | 96×132 | A cracked bone skull bobs in the air, jaw chattering, eyes burning, a fire roaring off its crown that sheds flame puffs, embers and smoke and throws warm light. |
 | Frog | `critters/frog` | original | effect | loop 2.6s | 112×88 | A frog puffs its throat, blinks, crouches and leaps to snap a buzzing fly out of the air, then lands with a squash and a puff of dust, gulps and settles. |
+| Frost moth | `critters/frost-moth` | new | effect | loop 3.6s | 112×104 | A frost moth circles a floating ice crystal in bursts of wingbeats and rimed-wing glides, sifting frost scales that twinkle as they settle. |
 | Ghost | `critters/ghost` | original | effect | loop 2.4s | 96×100 | A sheet ghost bobs over the floor: its scalloped hem ripples and trails its drift, little arms flutter, it glances about and blinks, motes trickle off its hem. |
+| Hyena pup | `critters/hyena-pup` | new | effect | loop 4.2s | 116×88 | A scrappy hyena pup slinks low, bristles its hackles into a snarling shake with bared teeth and flying drool, snaps two lunging bites, then slinks back. |
 | Jellyfish | `critters/jellyfish` | original | effect | loop 3.2s | 96×120 | A see-through jellyfish pulses: its bell squeezes to shove it up and relaxes as it sinks, frilled arms and long tentacles trailing, a glow inside, bubbles drifting by. |
+| Penguin chick | `critters/penguin-chick` | new | effect | loop 3.8s | 96×96 | A fluffy penguin chick rocks foot to foot, flaps its stubby flippers, tips onto its belly for a slide, then sits up and breathes little puffs of mist. |
+| Sand fox | `critters/sand-fox` | new | effect | loop 4.4s | 120×88 | A fennec kit digs a flurry of sand behind it, pricks its huge ears, pounces on a sand-hopper and lands in dust, then sits proud, tail sweeping. |
+| Scarab | `critters/scarab` | new | effect | loop 4s | 112×80 | A scarab pushes a ball of sand backwards in little trundles, pauses while a sun-glint sweeps its wing cases, buzzes its wings in a hop, then trundles back. |
+| Scorpion | `critters/scorpion` | new | effect | loop 3.8s | 112×80 | A scorpion snaps its claws, scuttles a step, then lunges: its tail whips over its head to stab the ground ahead, a bead of venom falling off the stinger. |
+| Shroomling | `critters/shroomling` | new | effect | loop 2.4s | 104×88 | A little mushroom sprite bounces in place: it squashes, hops with its cap trailing, lands wobbling, then shakes a puff of glowing spores loose that drift down around it. |
 | Slime | `critters/slime` | original | effect | loop 1.8s | 112×88 | A glossy slime hops in place: it squashes to wind up, stretches into the jump, rounds out in the air, splats down flinging droplets that creep back, then wobbles and blinks. |
 | Snake | `critters/snake` | original | effect | loop 2.4s | 136×56 | A snake slithers along the floor, head raised: humps rise and roll back down its patterned body to the tail, dust puffs where it touches down, its forked tongue flicks. |
+| Snapjaw | `critters/snapjaw` | new | effect | loop 3.4s | 112×104 | A carnivorous plant sways with its lure wiggling, winds back with jaws gaping, lunges and snaps shut, then recoils dripping sizzling drool. |
+| Snowmite | `critters/snowmite` | new | effect | loop 2.6s | 96×88 | A living snowball with coal eyes and twig arms squashes, hops, splats into powder and wobbles back together; snowflakes drift down and settle on its crown. |
+| Tarantula | `critters/tarantula` | new | effect | loop 3.6s | 112×88 | A tarantula skitters a few steps, freezes, rears up with front legs and fangs bared, lunges down snapping, then settles and skitters back. |
+| Tumble-imp | `critters/tumble-imp` | new | effect | loop 4s | 96×88 | A tumbleweed imp: a gust rolls it off with its twigs spinning round the little face inside; it rocks to a stop, then the wind turns and it tumbles back, shedding twigs and dust. |
 | Wisp | `critters/wisp` | original | effect | loop 3.2s | 128×104 | A will-o'-the-wisp loops a figure-eight over the floor: a little soul-flame with a face, its flame tail licking up and streaming behind, shedding puffs and sparks. |
 
 ## world
@@ -629,7 +643,9 @@ battle maps: moonlit ruins, lava caverns, arenas with a layout.
 |---|---|---|---|---|---|---|
 | Aurora Pass | `world/aurora-pass` | new | map | loop 12s | 320×180 | A frozen mountain pass beneath green aurora curtains: snow-bound massifs catch the sky, frosted conifers climb the shoulders and wind lifts loose snow across a quiet shelf. |
 | Crystal Hollow | `world/crystal-hollow` | new | map | loop 10s | 320×180 | An underground reservoir framed by violet crystal clusters: cyan facets breathe with light, a narrow waterfall feeds the pool and drops open small rings in the dark. |
+| Ember Camp | `world/ember-camp` | new | map | loop 12s | 320×180 | 余烬营地：暮色空谷中的营火、帆布帐篷、补给木箱与告示板，羽翼圣像守着符文传送门，萤火虫在林间起落。A firelit sanctuary of canvas, bronze and drifting woodland magic. |
 | Ember Depths | `world/ember-depths` | new | map | loop 9s | 320×180 | A basalt arena under a volcano: lava falls pour down both walls, a broken bridge smoulders in the dark, heat haze drifts over glowing fissures and ash falls. |
+| Ember Town | `world/ember-town` | new | map | loop 12s | 320×180 | 余烬镇：黄昏集市长街，条纹雨棚摊位、冒烟的铁匠铺、吊灯与水井，屋檐下晾着成排灯笼。A lantern-lit market street of striped awnings, a working forge and a central well. |
 | Hearth Town | `world/hearth-town` | new | map | loop 12s | 320×180 | 城镇：弧檐商店、巨炉铁匠铺、悬浮晶石合成台与巷口情报员。A richly layered fantasy street of rose slate, warm plaster, brass machinery and arcane light. |
 | Inkbound Shrine | `world/inkbound-shrine` | new | map | loop 8s | 320×180 | An abandoned eastern shrine: broken tiled eaves, a sealed altar, soul banners and low mist; phase two stains the stone and loosens the hanging paper wards. |
 | Mosswood Ruins | `world/mosswood-ruins` | new | map | loop 12s | 320×180 | A belt-scroll forest ruin: a wide mossy walkway under giant trunks and broken masonry, a hazy forest scrolling behind and dark leaves in front. Layered for parallax. |
@@ -644,6 +660,12 @@ minion loops and their attacks.
 
 | effect | id | source | kind | play | size | what it does |
 |---|---|---|---|---|---|---|
+| Cinder Brute | `mobs/cinder-brute` | new | mob | loop 3s | 96×96 | 熔岩巨魔：炉腹的重装魔物，肩扛熔岩砧锤，两脚砸地掀起炭尘与火环。A furnace-bellied brute that slams a lava anvil hammer. |
+| Anvil Slam | `mobs/cinder-brute-slam` | new | mob-attack | one-shot 1s | 128×96 | 熔岩巨魔的砧锤重击：锤身高举蓄焰，砸地激起一圈炭尘火环，命中点龟裂迸火. |
+| Cinder Spitter | `mobs/cinder-spitter` | new | mob | loop 2.6s | 72×84 | 熔吐者：鼓着熔核的矮小魔物，张嘴蓄焰，朝远处敌人喷吐一团火球。A coal-sac imp that inflates its maw and spits fire. |
+| Cinder Spit | `mobs/cinder-spitter-spit` | new | mob-attack | one-shot 0.78s | 112×72 | 熔吐者的火球：鼓腮蓄焰，吐出一颗拖着火尾的煤球，命中点炸开一团火星. |
+| Ember Imp | `mobs/ember-imp` | new | mob | loop 2.4s | 72×84 | 余烬小鬼：炉腹发光的矮小魔物，弯角与煤尾，双爪在身前连撕。A furnace-bellied imp with swept horns and ember claws. |
+| Ember Imp Rake | `mobs/ember-imp-rake` | new | mob-attack | one-shot 0.7s | 112×72 | 余烬小鬼的爪击：双爪后撩蓄势，两道火星爪痕交叉撕过，命中点迸出煤屑与火花. |
 | Goblin Agile | `mobs/goblin-agile` | new | mob | loop 2s | 88×104 | 敏捷哥布林：精瘦低伏的小哥布林，红布头带与腕踝绑带；踩着碎步连跳佯攻，双匕在胸前交错闪寒光. |
 | Goblin Agile Flurry | `mobs/goblin-agile-flurry` | new | mob-attack | one-shot 0.7s | 112×72 | 敏捷哥布林的双匕连刺：两下短促的寒光在胸前交叉成 X，第一刀轻、第二刀重，火星与残光收得很快. |
 | Goblin Archer | `mobs/goblin-archer` | new | mob | loop 2.8s | 104×108 | 哥布林弓箭手：皮帽红羽、独眼钩鼻，背箭囊挎短弓；拉弦半满、屏息瞄准，再松劲巡视. |

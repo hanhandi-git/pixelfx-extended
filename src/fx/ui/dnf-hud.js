@@ -4,8 +4,13 @@ import { clamp, hex } from "../../core/index.js";
 import { DNF, ORB_HP, ORB_MP, orb, skillSlot, layeredBar } from "./_dnf.js";
 
 export const SLOT = 15, GAP = 2, SLOT_X = -59, SLOT_Y = -23;
-/** The local rectangle of slot i, for hit-testing by the host. */
-export const slotRect = (i) => ({ x: SLOT_X + i * (SLOT + GAP), y: SLOT_Y, w: SLOT, h: SLOT });
+/** The local rectangle of slot i in an n-slot row (n defaults to the full seven). */
+export const slotRect = (i, n = 7) => {
+  const count = Math.max(1, Math.min(7, n));
+  const span = count * SLOT + (count - 1) * GAP;
+  const x0 = count === 7 ? SLOT_X : -span / 2;
+  return { x: x0 + i * (SLOT + GAP), y: SLOT_Y, w: SLOT, h: SLOT };
+};
 
 const SAMPLE = [
   { icon: "slash", key: "J" }, { icon: "fire", key: "K", cooldown: 0.6, cdText: "2" }, { icon: "frost", key: "L" },
@@ -42,11 +47,15 @@ export function draw(p, t, o) {
   if (o.mpText) p.text(String(o.mpText), 76, -14, hex("#e6f4ff"), { align: "center", outline: DNF.ink });
 
   const slots = Array.isArray(o.slots) ? o.slots : [];
-  for (let i = 0; i < 7; i++) {
+  // Hosts may pass fewer than seven slots; the row stays centred on the console.
+  const n = Math.max(1, Math.min(7, slots.length || 7));
+  const span = n * SLOT + (n - 1) * GAP;
+  const slotX = n === 7 ? SLOT_X : -span / 2;
+  for (let i = 0; i < n; i++) {
     const s = slots[i] ?? { icon: "none" };
-    skillSlot(p, SLOT_X + i * (SLOT + GAP), SLOT_Y, SLOT, o.locked ? { ...s, disabled: true, cooldown: 0, flash: false } : s);
+    skillSlot(p, slotX + i * (SLOT + GAP), SLOT_Y, SLOT, o.locked ? { ...s, disabled: true, cooldown: 0, flash: false } : s);
   }
-  const w = 7 * SLOT + 6 * GAP;
-  layeredBar(p, SLOT_X, -6, w, 1, clamp(o.ap ?? 1), 1, { colors: AP });
-  layeredBar(p, SLOT_X, -3, w, 2, clamp(o.xp ?? 0), 1, { colors: XP, cells: 10 });
+  const w = span;
+  layeredBar(p, slotX, -6, w, 1, clamp(o.ap ?? 1), 1, { colors: AP });
+  layeredBar(p, slotX, -3, w, 2, clamp(o.xp ?? 0), 1, { colors: XP, cells: 10 });
 }
